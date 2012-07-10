@@ -15,11 +15,8 @@ INSTALL
 -------
 
 Install Arch linux base (preferably core-remote)
-Then reboot then update (and reboot again if upgraded kernel)
+Then reboot then...
     
-    # pacman -Syu
-
-
 Install packages from my(your) git repo! :D
 -------------------------------------------
 
