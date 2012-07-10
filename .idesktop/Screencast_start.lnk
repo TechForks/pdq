@@ -1,0 +1,11 @@
+table Icon
+  Caption: Start
+  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/kazam.png
+  Width: 32
+  Height: 32
+  X: 101
+  Y: 761
+  Command[0]: ffcast
+  Command[1]: idesktool Screencast_start.lnk
+end
+

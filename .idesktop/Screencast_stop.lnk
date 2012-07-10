@@ -1,0 +1,11 @@
+table Icon
+  Caption: Stop
+  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/kazam.png
+  Width: 32
+  Height: 32
+  X: 31
+  Y: 761
+  Command[0]: killall ffmpeg
+  Command[1]: idesktool Screencast_stop.lnk
+end
+

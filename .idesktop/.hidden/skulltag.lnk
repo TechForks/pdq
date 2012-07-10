@@ -1,0 +1,11 @@
+table Icon
+  Caption: skulltag
+  ToolTip.Caption: skulltag
+  Icon: /home/pdq/.icons/icons/Doom-mooD.icon.gif
+  Width: 32
+  Height: 32
+  X: 101
+  Y: 821
+  Command[0]: skulltag
+end
+

@@ -1,0 +1,11 @@
+table Icon
+  Caption: updater
+  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/pacman.png
+  Width: 32
+  Height: 32
+  X: 171
+  Y: 629
+  Command[0]: urxvtc -e sh ~/bin/pacupdater
+  Command[1]: idesktool pacman_-Syu.lnk
+end
+

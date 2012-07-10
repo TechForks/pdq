@@ -1,0 +1,9 @@
+table Icon
+  Caption: Logs
+  Icon: /usr/share/idesk/icons/32x32/readme.png
+  X: 101
+  Y: 631
+  Command[0]: urxvtc -e multitail -ci white /var/log/kernel.log -cis yellow /var/log/pacman.log -ci red /var/log/boot -cis green /home/pdq/.xplanetFX/logs/xplanetFX.log -ci red /var/log/Xorg.0.log -cis green /var/log/httpd/access_log -ci red -I /var/log/httpd/error_log -cis red -I /var/log/httpd/error_log
+  Command[1]: idesktool Logs.lnk
+end
+

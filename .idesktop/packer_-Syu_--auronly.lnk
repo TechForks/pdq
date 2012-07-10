@@ -1,0 +1,11 @@
+table Icon
+  Caption:  AUR updater
+  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/pacman.png
+  Width: 32
+  Height: 32
+  X: 171
+  Y: 699
+  Command[0]: urxvtc -e sh ~/bin/packerupdater
+  Command[1]: idesktool packer_-Syu_--auronly.lnk
+end
+

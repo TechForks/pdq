@@ -1,0 +1,9 @@
+table Icon
+  Caption: Hedgewars
+  Icon: /home/pdq/.icons/Game-Icons/apps/32/hedgewars.png
+  X: 471
+  Y: 821
+  Command[0]: hedgewars
+  Command[1]: idesktool Hedgewars.lnk
+end
+

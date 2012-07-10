@@ -1,0 +1,16 @@
+#!/bin/bash
+# packer update
+echo ":: updating system..."
+echo "packer -Syu --auronly"
+yaourt -Syua
+echo " "
+echo ":: update complete..."
+echo " "
+sleep 2s
+echo ":: this window will automatically close after 15 minutes"
+echo ":: ctrl+c to manually exit"
+notify-send "packer" \
+            "Update complete" \
+            -i /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png
+sleep 15m
+exit

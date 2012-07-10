@@ -1,0 +1,9 @@
+table Icon
+  Caption: Wolfenstein
+  Icon: /usr/share/pixmaps/enemy-territory.png
+  X: 391
+  Y: 821
+  Command[0]: enemy-territory
+  Command[1]: idesktool Wolfenstein.lnk
+end
+

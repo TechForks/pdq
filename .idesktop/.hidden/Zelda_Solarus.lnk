@@ -1,0 +1,9 @@
+table Icon
+  Caption: Zelda Solarus
+  Icon: /home/pdq/.icons/icons/zelda.png
+  X: 551
+  Y: 821
+  Command[0]: solarus
+  Command[1]: idesktool Zelda_Solarus.lnk
+end
+

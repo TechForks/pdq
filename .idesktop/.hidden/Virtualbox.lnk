@@ -1,0 +1,11 @@
+table Icon
+  Caption: Virtualbox
+  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/indicator-virtualbox.png
+  Width: 32
+  Height: 32
+  X: 41
+  Y: 721
+  Command[0]: virtualbox
+  Command[1]: idesktool Virtualbox.lnk
+end
+

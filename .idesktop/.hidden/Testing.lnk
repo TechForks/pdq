@@ -1,0 +1,9 @@
+table Icon
+  Caption: Testing
+  Icon: /usr/share/icons/AwOken/32x32/categories/applications-toys.png
+  X: 101
+  Y: 701
+  Command[0]: dolphin /media/truecrypt1/PenTesting/
+  Command[1]: idesktool Testing.lnk
+end
+

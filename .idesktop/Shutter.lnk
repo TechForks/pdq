@@ -1,0 +1,11 @@
+table Icon
+  Caption: Shutter
+  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/shutter.png
+  Width: 32
+  Height: 32
+  X: 101
+  Y: 699
+  Command[0]: shutter
+  Command[1]: idesktool Shutter.lnk
+end
+

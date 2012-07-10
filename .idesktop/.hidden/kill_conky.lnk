@@ -1,0 +1,9 @@
+table Icon
+  Caption: Refresh
+  Icon: /usr/share/idesk/icons/32x32/penguin.png
+  X: 31
+  Y: 821
+  Command[0]: sh ~/bin/refreshconky.sh
+  Command[1]: idesktool kill_conky.lnk
+end
+
