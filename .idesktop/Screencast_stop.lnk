@@ -1,10 +1,10 @@
 table Icon
   Caption: Stop
-  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/kazam.png
+  Icon: /usr/share/icons/gnome/32x32/actions/gtk-media-stop.png
   Width: 32
   Height: 32
-  X: 31
-  Y: 761
+  X: 11
+  Y: 821
   Command[0]: killall ffmpeg
   Command[1]: idesktool Screencast_stop.lnk
 end

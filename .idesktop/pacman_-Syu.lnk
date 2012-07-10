@@ -1,10 +1,10 @@
 table Icon
   Caption: updater
-  Icon: /usr/share/icons/kAwOkenDark/clear/128x128/apps/pacman.png
+  Icon: /usr/share/icons/gnome/32x32/actions/stock_refresh.png
   Width: 32
   Height: 32
-  X: 171
-  Y: 629
+  X: 1311
+  Y: 821
   Command[0]: urxvtc -e sh ~/bin/pacupdater
   Command[1]: idesktool pacman_-Syu.lnk
 end

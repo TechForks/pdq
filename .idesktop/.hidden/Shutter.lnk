@@ -1,0 +1,11 @@
+table Icon
+  Caption: Shutter
+  Icon: /usr/share/icons/gnome/32x32/actions/insert-image.png
+  Width: 32
+  Height: 32
+  X: 121
+  Y: 691
+  Command[0]: shutter
+  Command[1]: idesktool Shutter.lnk
+end
+

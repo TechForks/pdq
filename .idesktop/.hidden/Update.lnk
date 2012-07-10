@@ -1,0 +1,8 @@
+table Icon
+  Caption: Update
+  Icon: /usr/share/idesk/icons/32x32/penguin.png
+  X: 981
+  Y: 751
+  Command[0]: urxvtc -e yaourt -Syua
+  Command[1]: idesktool Update.lnk
+end
