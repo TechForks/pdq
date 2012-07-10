@@ -1,5 +1,4 @@
 archey3
-armitage-svn
 awoken-icons
 cacheclean
 conky-lua
@@ -34,7 +33,6 @@ libzeitgeist
 logstalgia
 luainotify
 marples-black
-metasploit
 midori-git
 montecarlo-font
 mysqltcl
@@ -63,9 +61,7 @@ radiotray
 redshift-minimal
 rootactions-servicemenu-kde4
 ruby-mkrf
-ruby-msgpack
 ruby-opengl
-ruby-pg
 ruby1.8
 rubygems1.8
 rutorrent
