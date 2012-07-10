@@ -71,17 +71,17 @@ if [ `id -u` -eq 0 ]; then
       read root_choice
       # bash nested if/else
        if [ $root_choice -eq 1 ] ; then
-         echo "${bldgreen}pacman-key initialization starting ...${txtrst}"
-         pacman-key --init
+         echo "${bldgreen} ==> pacman-key initialization starting ...${txtrst}"
          echo "HINT: Mash on the keyboard keys and move mouse to make entropy process go faster! :D"
          sleep 5s
+         pacman-key --init
          pacman-key --populate archlinux
          echo "done ..."
          root_choice=$root_choice_count
          echo $done_format
          root_highlight=1
       elif [ $root_choice -eq 2 ] ; then
-         echo "${bldblue}Creating user...${txtrst}"
+         echo "${bldblue} ==> Creating user...${txtrst}"
          sleep 3s
          read -p "Enter username : " username
          read -s -p "Enter password : " password
@@ -99,7 +99,7 @@ if [ `id -u` -eq 0 ]; then
       elif [ $root_choice -eq 3 ] ; then
          echo "cp /etc/pacman.conf /etc/pacman.conf.orig"
          cp /etc/pacman.conf /etc/pacman.conf.orig
-         echo "${bldgreen}Adding repo to /etc/pacman.conf${txtrst}"
+         echo "${bldgreen} ==> Adding repo to /etc/pacman.conf${txtrst}"
          echo '[archlinuxfr]
 Server = http://repo.archlinux.fr/$arch' >> /etc/pacman.conf
          echo "
@@ -143,7 +143,7 @@ ${bldblue}% wheel ALL=(ALL) ALL${txtrst}
          echo $done_format
          sleep 2s
          root_highlight=6
-         echo "${bldgreen}Exiting root install script...${txtrst}"
+         echo "${bldgreen} ==> Exiting root install script...${txtrst}"
          sleep 3s
          echo "${bldgreen}To start Awesome as user type: 'startx' ...${txtrst}"
          sleep 3s
@@ -226,22 +226,22 @@ else
       read choice
       # bash nested if/else
       if [ $choice -eq 1 ] ; then
-         echo "${bldblue}Creating ${my_home}${dotfiles}${txtrst}"
+         echo "${bldblue} ==> Creating ${my_home}${dotfiles}${txtrst}"
          cd ${my_home}
          mkdir ${dev_directory}
          cd ${my_home}${dev_directory}
          pwd
-         echo "${bldblue}Creating ${my_home}vital/${txtrst}"
+         echo "${bldblue} ==> Creating ${my_home}vital/${txtrst}"
          cd ${my_home}
          mkdir vital
          cd ${my_home}vital
          pwd
-         echo "${bldblue}Creating ${my_home}vital/pkg/${txtrst}"
+         echo "${bldblue} ==> Creating ${my_home}vital/pkg/${txtrst}"
          cd ${my_home}vital
          mkdir pkg
          cd ${my_home}vital/pkg
          pwd
-         echo "${bldblue}Creating ${my_home}vital/tmp/${txtrst}"
+         echo "${bldblue} ==> Creating ${my_home}vital/tmp/${txtrst}"
          cd ${my_home}vital
          mkdir tmp
          cd ${my_home}vital/tmp
@@ -250,7 +250,7 @@ else
          highlight=1
          echo $done_format
       elif [ $choice -eq 2 ] ; then
-         echo "${bldgreen}Git clone backup to ${dotfiles}${txtrst}"
+         echo "${bldgreen} ==> Git clone backup to ${dotfiles}${txtrst}"
          ## my backups repo
          cd ${my_home}${dev_directory}
          git clone $dotfiles_repo
@@ -261,7 +261,7 @@ else
          echo $done_format
          highlight=2
       elif [ $choice -eq 3 ] ; then
-         echo "${bldgreen}Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
+         echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
          sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
          sudo cp ${my_home}${dotfiles}etc/mirrorlist /etc/pacman.d/mirrorlist
          echo "sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
@@ -270,7 +270,7 @@ else
          echo $done_format 
          highlight=3
       elif [ $choice -eq 4 ] ; then
-         echo "${bldgreen}Installing main packages${txtrst}"
+         echo "${bldgreen} ==> Installing main packages${txtrst}"
          ## Installing backups on guest
          ## Install offical packages
          sudo pacman -S --needed $(cat $dotfiles_main)
@@ -278,21 +278,21 @@ else
          echo $done_format
          highlight=4
       elif [ $choice -eq 5 ] ; then
-         echo "${bldgreen}Installing AUR packages${txtrst}"
+         echo "${bldgreen} ==> Installing AUR packages${txtrst}"
          ## Install non-official (local) packages
          yaourt --noconfirm -S $(cat $dotfiles_local | grep -vx "$(pacman -Qqm)")
          choice=$choice_count
          echo $done_format
          highlight=5
       elif [ $choice -eq 6 ] ; then
-         echo "${bldgreen}Installing AUR packages${txtrst}"
+         echo "${bldgreen} ==> Installing AUR packages${txtrst}"
          ## Install non-official (local) packages
          yaourt -S $(cat $dotfiles_local | grep -vx "$(pacman -Qqm)")
          choice=$choice_count
          echo $done_format
          highlight=6
       elif [ $choice -eq 7 ] ; then
-         echo "${bldgreen}Backing up and copying user configs${txtrst}"
+         echo "${bldgreen} ==> Backing up and copying user configs${txtrst}"
          mv ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
          cp ${my_home}${dotfiles}.gmail_symlink ${my_home}.gmail_symlink
          mv ${my_home}.gtkrc-2.0 ${my_home}.gtkrc-2.0.bak
@@ -327,7 +327,7 @@ else
          echo $done_format
          highlight=7
        elif [ $choice -eq 8 ] ; then
-         echo "${bldgreen}Backing up and copying root configs${txtrst}"
+         echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
          sudo mv /etc/rc.conf /etc/rc.conf.bak
          sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
          sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
@@ -349,7 +349,7 @@ else
          echo $done_format
          highlight=8
       elif [ $choice -eq 9 ] ; then
-         echo "${bldgreen}Git clone awesomewm-X and conky-X... Installing...${txtrst}"
+         echo "${bldgreen} ==> Git clone awesomewm-X and conky-X... Installing...${txtrst}"
          mkdir ${my_home}.config
          cd ${my_home}.config/
          git clone ${awesome_repo}
@@ -373,19 +373,19 @@ else
    ${bldgreen}vboxguest vboxsf vboxvideo${txtrst}"
 
          sleep 5s
-         echo "Opening file for edit in 5..."
+         echo " ==> Opening file for edit in 5..."
          sleep 1s
-         echo "4..."
+         echo " ==> 4..."
          sleep 1s
-         echo "3..."
+         echo " ==> 3..."
          sleep 1s
-         echo "2..."
+         echo " ==> 2..."
          sleep 1s
-         echo "1..."
+         echo " ==> 1..."
          highlight=10
          sleep 1s
          sudo nano -w /etc/rc.conf
-         echo "${bldgreen}Exiting install script...${txtrst}"
+         echo "${bldgreen} ==> Exiting install script...${txtrst}"
          sleep 3s
          echo "${bldgreen}To start Awesome as user type: 'startx' ...${txtrst}"
          sleep 3s
