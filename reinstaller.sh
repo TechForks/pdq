@@ -165,9 +165,9 @@ else
          echo "1. Create ${my_home}${dotfiles} and ${my_home}vital/"
       fi
       if [ $highlight -eq 2 ] ; then
-         echo "${bldgreen}2. Git clone backup to dotfiles -- done!${txtrst}"
+         echo "${bldgreen}2. Git clone backup to ${dotfiles}-- done!${txtrst}"
       else
-         echo "2. Git clone backup to dotfiles"
+         echo "2. Git clone backup to ${dotfiles}"
       fi
       if [ $highlight -eq 3 ] ; then
          echo "${bldgreen}3. Backup mirrorlist and write/rank/sort new mirrorlist -- done!${txtrst}"
@@ -250,7 +250,7 @@ else
          highlight=1
          echo $done_format
       elif [ $choice -eq 2 ] ; then
-         echo "${bldgreen}Git clone backup to dotfiles${txtrst}"
+         echo "${bldgreen}Git clone backup to ${dotfiles}${txtrst}"
          ## my backups repo
          cd ${my_home}${dev_directory}
          git clone $dotfiles_repo
