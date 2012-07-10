@@ -391,7 +391,13 @@ else
          sleep 3s
          echo "${bldgreen}Re-Run install script: 'sh reinstaller.sh'${txtrst} | ${bldred}Remove install script 'rm reinstaller.sh'${txtrst}"
          sleep 3s
-         exit
+         echo "${bldgreen}Rebooting ...
+
+
+Log back in as USER, then type: 'startx'${txtrst}"
+         sleep 3s
+         sudo reboot
+          sleep 60s
       else
          echo "${bldred}Please make a choice between 1-10! (HINT: start at 1)${txtrst}"
          highlight=${highlight}
