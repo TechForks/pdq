@@ -385,6 +385,9 @@ else
          highlight=10
          sleep 1s
          sudo nano -w /etc/rc.conf
+         echo "${bldgreen} ==> Installing VirtualBox guest additions...${txtrst}"
+         sleep 3s
+         sudo pacman -S virtualbox-archlinux-additions
          echo "${bldgreen} ==> Exiting install script...${txtrst}"
          sleep 3s
          echo "${bldgreen}To start Awesome as user type: 'startx' ...${txtrst}"
