@@ -77,6 +77,7 @@ cd ${my_home}${dotfiles}
 pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" > main.lst
 ## Create local.lst of local (includes AUR) packages installed
 pacman -Qqm > local.lst
+sleep 5s
 git add .
 git commit -m 'updated packages lists from source'
 git push origin master
