@@ -30,9 +30,9 @@ if [ `id -u` -eq 0 ]; then
          echo "1. Pacman-key initialization"
       fi
       if [ $root_highlight -eq 2 ] ; then
-         echo "${bldgreen}2. Create a USER and /home/USER -- done!${txtrst}"
+         echo "${bldgreen}2. Create a USER and /home/USER and generate locale -- done!${txtrst}"
       else
-         echo "2. Create a USER and /home/USER"
+         echo "2. Create a USER and /home/USER and generate locale"
       fi
       if [ $root_highlight -eq 3 ] ; then
          echo "${bldgreen}3. Edit /etc/pacman.conf${txtrst}"
