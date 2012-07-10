@@ -31,6 +31,8 @@ file-roller
 filezilla
 firefox
 flex
+fontconfig
+freetype2
 fuseiso
 gcc
 gcolor2
@@ -75,6 +77,7 @@ lib32-openal
 libcanberra-gstreamer
 libisoburn
 libtool
+libxft
 luafilesystem
 luasocket
 lxappearance
