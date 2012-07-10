@@ -15,12 +15,9 @@ flowblade
 fslint
 geany-themes
 gframecatcher
-glista
 gnome-connection-manager
 idesk-extras
 idesktools-xba
-kdesudo
-libjpeg6-turbo
 libpng12
 logstalgia
 luainotify
@@ -43,7 +40,6 @@ perl-proc-processtable
 perl-proc-simple
 perl-yaml-tiny
 pidgin-light
-python2-oauth2
 python3-aur
 python3-xynexdg
 pytransmissionrpc
@@ -58,7 +54,6 @@ rutorrent
 rxvt-unicode-patched
 secure-delete
 shutter
-solarus
 sublime-text
 teamviewer
 ttf-ms-fonts
@@ -67,6 +62,4 @@ vcp
 wicked-git
 xcompmgr-git
 xcursor-arch-simple
-xplanetfx
 yaourt
-zsdx
