@@ -31,7 +31,7 @@ git push origin master
 echo "
 
 
-${bldgreen}awesomewm-X repo pushed to github!${txtrst}
+${bldgreen} ==> awesomewm-X repo pushed to github!${txtrst}
 
 
 "
@@ -46,7 +46,7 @@ git push origin master
 echo "
 
 
-${bldgreen}conky-X repo pushed to github!${txtrst}
+${bldgreen} ==> conky-X repo pushed to github!${txtrst}
 
 
 "
@@ -66,7 +66,7 @@ ${txtrst}
 
 "
 
-echo "${bldgreen}Copied /etc/ files into repo${txtrst}"
+echo "${bldgreen} ==> copied /etc/ files into ${dotfiles}${txtrst}"
 
 
 sleep 5s
@@ -83,7 +83,7 @@ git push origin master
 echo "
 
 
-${bldgreen}dotfiles repo pushed to github!${txtrst}
+${bldgreen} ==> ${dotfiles} repo pushed to github!${txtrst}
 
 
 "
