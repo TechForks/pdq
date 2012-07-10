@@ -362,15 +362,18 @@ else
          highlight=9
       elif [ $choice -eq 10 ] ; then
          echo $done_format
+         echo "${bldgreen} ==> Installing VirtualBox guest additions...${txtrst}"
+         sleep 3s
+         sudo pacman -S virtualbox-archlinux-additions
          echo "${bldblue}edit /etc/rc.conf${txtrst}
-   add to DAEMONS array:
+add to DAEMONS array:
 
-   ${bldgreen}dbus${txtrst}
+${bldgreen}dbus${txtrst}
 
-   If running Archlinux as VirtualBox Guest
-   add to MODULES array:
+If running Archlinux as VirtualBox Guest
+add to MODULES array:
 
-   ${bldgreen}vboxguest vboxsf vboxvideo${txtrst}"
+${bldgreen}vboxguest vboxsf vboxvideo${txtrst}"
 
          sleep 5s
          echo " ==> Opening file for edit in 5..."
@@ -385,12 +388,7 @@ else
          highlight=10
          sleep 1s
          sudo nano -w /etc/rc.conf
-         echo "${bldgreen} ==> Installing VirtualBox guest additions...${txtrst}"
-         sleep 3s
-         sudo pacman -S virtualbox-archlinux-additions
          echo "${bldgreen} ==> Exiting install script...${txtrst}"
-         sleep 3s
-         echo "${bldgreen}To start Awesome as user type: 'startx' ...${txtrst}"
          sleep 3s
          echo "${bldgreen}Re-Run install script: 'sh reinstaller.sh'${txtrst} | ${bldred}Remove install script 'rm reinstaller.sh'${txtrst}"
          sleep 3s
@@ -400,7 +398,7 @@ else
 Log back in as USER, then type: 'startx'${txtrst}"
          sleep 3s
          sudo reboot
-          sleep 60s
+         sleep 60s
       else
          echo "${bldred}Please make a choice between 1-10! (HINT: start at 1)${txtrst}"
          highlight=${highlight}
@@ -409,6 +407,10 @@ Log back in as USER, then type: 'startx'${txtrst}"
       fi
    done
 fi
+
+## As root right after fresh install:
+# wget http://is.gd/reinstaller -O reinstaller.sh
+# sh reinstaller.sh
 
 ## Reinstalling backups on guest OS (Archlinux)
 # sh ~/Development/dotfiles/reinstaller.sh
