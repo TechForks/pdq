@@ -60,7 +60,6 @@ jre7-openjdk
 kdebase-dolphin
 kdebase-kdialog
 kdemultimedia-ffmpegthumbs
-kdenlive
 kdesdk-dolphin-plugins
 keepassx
 lib32-intel-dri
@@ -99,6 +98,7 @@ openssh
 p7zip
 parcellite
 patch
+pavucontrol
 perl-archive-zip
 perl-net-ssleay
 perl-xml-libxml
@@ -118,6 +118,7 @@ pkg-config
 pkgtools
 preload
 profont
+pulseaudio
 pyalpm
 rsync
 screen

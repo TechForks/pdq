@@ -18,6 +18,8 @@ gframecatcher
 gnome-connection-manager
 idesk-extras
 idesktools-xba
+kdenlive-git
+key-mon
 libpng12
 logstalgia
 luainotify
@@ -52,6 +54,7 @@ ruby1.8
 rubygems1.8
 rutorrent
 rxvt-unicode-patched
+screencastor
 secure-delete
 shutter
 sublime-text
