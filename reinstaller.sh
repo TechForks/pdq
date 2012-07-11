@@ -13,6 +13,10 @@
 ## Creating backups on host OS (Archlinux)
 # sh ~/Development/pdq/backup.sh
 
+
+
+## THERE SHOULD BE NO NEED TO EDIT THE FOLLOWING 
+
 my_home="$HOME/"
 #my_home="/home/pdq/test/"
 dev_directory="Development"
