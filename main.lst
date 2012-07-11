@@ -98,7 +98,6 @@ openssh
 p7zip
 parcellite
 patch
-pavucontrol
 perl-archive-zip
 perl-net-ssleay
 perl-xml-libxml
@@ -118,7 +117,6 @@ pkg-config
 pkgtools
 preload
 profont
-pulseaudio
 pyalpm
 rsync
 screen

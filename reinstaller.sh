@@ -3,6 +3,16 @@
 ## 03-22-2012 pdq
 ## 07-10-2012 pdq
 
+## As root right after fresh install:
+# wget http://is.gd/reinstaller -O reinstaller.sh
+# sh reinstaller.sh
+
+## Reinstalling backups on guest OS (Archlinux)
+# sh ~/Development/pdq/reinstaller.sh
+
+## Creating backups on host OS (Archlinux)
+# sh ~/Development/pdq/backup.sh
+
 my_home="$HOME/"
 #my_home="/home/pdq/test/"
 dev_directory="Development"
@@ -407,13 +417,3 @@ Log back in as USER, then type: 'startx'${txtrst}"
       fi
    done
 fi
-
-## As root right after fresh install:
-# wget http://is.gd/reinstaller -O reinstaller.sh
-# sh reinstaller.sh
-
-## Reinstalling backups on guest OS (Archlinux)
-# sh ~/Development/dotfiles/reinstaller.sh
-
-## Creating backups on host OS (Archlinux)
-# sh ~/Development/dotfiles/backup.sh
