@@ -118,7 +118,7 @@ if [ `id -u` -eq 0 ]; then
 Server = http://repo.archlinux.fr/$arch' >> /etc/pacman.conf
          echo "
 echo '[archlinuxfr]
-Server = http://repo.archlinux.fr/$arch >> /etc/pacman.conf"
+Server = http://repo.archlinux.fr/\$arch >> /etc/pacman.conf'"
          pacman -Syu
          pacman -S yaourt fakeroot git
          root_choice=$root_choice_count
@@ -144,9 +144,9 @@ ${bldblue}% wheel ALL=(ALL) ALL${txtrst}
             echo "mv /root/reinstaller.sh /home/$username/reinstaller.sh"
             mv /root/reinstaller.sh /home/$username/reinstaller.sh
             cd /home/$username
-            chown $username/reinstaller.sh
+            chown -v $username/reinstaller.sh
             pwd
-            echo "when script exits to prompt run: 'sh reinstaller.sh'"
+            echo "${bldgreen}when script exits to prompt run: 'sh reinstaller.sh'${txtrst}"
             sleep 5s
             su $username
             cd
@@ -406,14 +406,16 @@ ${bldgreen}vboxguest vboxsf vboxvideo${txtrst}"
          highlight=10
          sleep 1s
          sudo nano -w /etc/rc.conf
-         echo "${bldgreen} ==> Exiting install script...${txtrst}"
+         echo "${bldgreen} ==> Exiting install script...${txtrst}
+         "
          sleep 3s
-         echo "${bldgreen}Re-Run install script: 'sh reinstaller.sh'${txtrst} | ${bldred}Remove install script 'rm reinstaller.sh'${txtrst}"
+         echo "${bldgreen}Re-Run install script: 'sh reinstaller.sh'${txtrst} | ${bldred}Remove install script 'rm reinstaller.sh'${txtrst}
+         "
          sleep 3s
-         echo "${bldgreen}Rebooting ...
+         echo "${bldred}Rebooting ...${txtrst}
 
 
-Log back in as USER, then type: 'startx'${txtrst}"
+${bldgreen}Log back in as USER, then type: 'startx'${txtrst}"
          sleep 3s
          sudo reboot
          sleep 60s
