@@ -189,30 +189,31 @@ else
          echo "3. Backup mirrorlist and write/rank/sort new mirrorlist"
       fi
       if [ $highlight -eq 4 ] ; then
-         echo "${bldgreen}4. Install main packages -- done!${txtrst}" 
-      else
-         echo "4. Install main packages" 
-      fi
-      if [ $highlight -eq 5 ] ; then
-         echo "${bldgreen}5. Install AUR packages --noconfirm -- done!${txtrst}" 
-      else
-         echo "5. Install AUR packages --noconfirm" 
-      fi
-      if [ $highlight -eq 6 ] ; then
-         echo "${bldgreen}6. Install AUR packages  (If Step 5 fails) -- done!${txtrst}" 
-      else
-         echo "6. Install AUR packages  (If Step 5 fails)" 
-      fi
-      if [ $highlight -eq 7 ] ; then
-         echo "${bldgreen}7. Backup and copy user configs -- done!${txtrst}" 
-      else
-         echo "7. Backup and copy user configs" 
-      fi
-      if [ $highlight -eq 8 ] ; then
          echo "${bldgreen}8. Backup and copy root configs -- done!${txtrst}" 
       else
          echo "8. Backup and copy root configs" 
       fi
+      if [ $highlight -eq 5 ] ; then
+         echo "${bldgreen}4. Install main packages -- done!${txtrst}" 
+      else
+         echo "4. Install main packages" 
+      fi
+      if [ $highlight -eq 6 ] ; then
+         echo "${bldgreen}5. Install AUR packages --noconfirm -- done!${txtrst}" 
+      else
+         echo "5. Install AUR packages --noconfirm" 
+      fi
+      if [ $highlight -eq 7 ] ; then
+         echo "${bldgreen}6. Install AUR packages  (If Step 5 fails) -- done!${txtrst}" 
+      else
+         echo "6. Install AUR packages  (If Step 5 fails)" 
+      fi
+      if [ $highlight -eq 8 ] ; then
+         echo "${bldgreen}7. Backup and copy user configs -- done!${txtrst}" 
+      else
+         echo "7. Backup and copy user configs" 
+      fi
+
       if [ $highlight -eq 9 ] ; then
          echo "${bldgreen}9. Install Awesome Window Manager (awesomewm-X) and Conky (conky-X) -- done!${txtrst}" 
       else
@@ -284,28 +285,50 @@ else
          echo $done_format 
          highlight=3
       elif [ $choice -eq 4 ] ; then
+         echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
+         sudo mv /etc/rc.conf /etc/rc.conf.bak
+         sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
+         sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
+         ln -s /etc/mpd.conf ${my_home}.mpdconf
+         sudo mv /etc/pacman.conf /etc/pacman.conf.bak
+         sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
+         sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
+
+         echo "${bldblue}sudo mv /etc/rc.conf /etc/rc.conf.bak
+   sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
+   sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
+   ln -s /etc/mpd.conf ${my_home}.mpdconf
+   sudo mv /etc/pacman.conf /etc/pacman.conf.bak
+   sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
+   sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}"
+         cd /etc
+         pwd
+         choice=$choice_count
+         echo $done_format
+         highlight=4
+      elif [ $choice -eq 5 ] ; then
          echo "${bldgreen} ==> Installing main packages${txtrst}"
          ## Installing backups on guest
          ## Install offical packages
          sudo pacman -S --needed $(cat $dotfiles_main)
          choice=$choice_count
          echo $done_format
-         highlight=4
-      elif [ $choice -eq 5 ] ; then
+         highlight=5
+      elif [ $choice -eq 6 ] ; then
          echo "${bldgreen} ==> Installing AUR packages${txtrst}"
          ## Install non-official (local) packages
          yaourt --noconfirm -S $(cat $dotfiles_local | grep -vx "$(pacman -Qqm)")
          choice=$choice_count
          echo $done_format
-         highlight=5
-      elif [ $choice -eq 6 ] ; then
+         highlight=6
+      elif [ $choice -eq 7 ] ; then
          echo "${bldgreen} ==> Installing AUR packages${txtrst}"
          ## Install non-official (local) packages
          yaourt -S $(cat $dotfiles_local | grep -vx "$(pacman -Qqm)")
          choice=$choice_count
          echo $done_format
-         highlight=6
-      elif [ $choice -eq 7 ] ; then
+         highlight=7
+      elif [ $choice -eq 8 ] ; then
          echo "${bldgreen} ==> Backing up and copying user configs${txtrst}"
          mv ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
          cp ${my_home}${dotfiles}.gmail_symlink ${my_home}.gmail_symlink
@@ -337,28 +360,6 @@ else
          cd ${my_home}
          pwd
          ls --color=auto -a
-         choice=$choice_count
-         echo $done_format
-         highlight=7
-       elif [ $choice -eq 8 ] ; then
-         echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
-         sudo mv /etc/rc.conf /etc/rc.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
-         sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
-         ln -s /etc/mpd.conf ${my_home}.mpdconf
-         sudo mv /etc/pacman.conf /etc/pacman.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
-         sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
-
-         echo "${bldblue}sudo mv /etc/rc.conf /etc/rc.conf.bak
-   sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
-   sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
-   ln -s /etc/mpd.conf ${my_home}.mpdconf
-   sudo mv /etc/pacman.conf /etc/pacman.conf.bak
-   sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
-   sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}"
-         cd /etc
-         pwd
          choice=$choice_count
          echo $done_format
          highlight=8
