@@ -141,9 +141,10 @@ ${bldblue}% wheel ALL=(ALL) ALL${txtrst}
          read -p "Username : " username
          egrep "^$username" /etc/passwd >/dev/null
          if [ $? -eq 0 ]; then
-            echo "cp /root/reinstaller.sh /home/$username/reinstaller.sh"
-            cp /root/reinstaller.sh /home/$username/reinstaller.sh
+            echo "mv /root/reinstaller.sh /home/$username/reinstaller.sh"
+            mv /root/reinstaller.sh /home/$username/reinstaller.sh
             cd /home/$username
+            chown $username/reinstaller.sh
             pwd
             echo "when script exits to prompt run: 'sh reinstaller.sh'"
             sleep 5s
