@@ -189,29 +189,29 @@ else
          echo "3. Backup mirrorlist and write/rank/sort new mirrorlist"
       fi
       if [ $highlight -eq 4 ] ; then
-         echo "${bldgreen}8. Backup and copy root configs -- done!${txtrst}" 
+         echo "${bldgreen}4. Backup and copy root configs -- done!${txtrst}" 
       else
-         echo "8. Backup and copy root configs" 
+         echo "4. Backup and copy root configs" 
       fi
       if [ $highlight -eq 5 ] ; then
-         echo "${bldgreen}4. Install main packages -- done!${txtrst}" 
+         echo "${bldgreen}5. Install main packages -- done!${txtrst}" 
       else
-         echo "4. Install main packages" 
+         echo "5. Install main packages" 
       fi
       if [ $highlight -eq 6 ] ; then
-         echo "${bldgreen}5. Install AUR packages --noconfirm -- done!${txtrst}" 
+         echo "${bldgreen}6. Install AUR packages --noconfirm -- done!${txtrst}" 
       else
-         echo "5. Install AUR packages --noconfirm" 
+         echo "6. Install AUR packages --noconfirm" 
       fi
       if [ $highlight -eq 7 ] ; then
-         echo "${bldgreen}6. Install AUR packages  (If Step 5 fails) -- done!${txtrst}" 
+         echo "${bldgreen}7. Install AUR packages  (If Step 5 fails) -- done!${txtrst}" 
       else
-         echo "6. Install AUR packages  (If Step 5 fails)" 
+         echo "7. Install AUR packages  (If Step 5 fails)" 
       fi
       if [ $highlight -eq 8 ] ; then
-         echo "${bldgreen}7. Backup and copy user configs -- done!${txtrst}" 
+         echo "${bldgreen}8. Backup and copy user configs -- done!${txtrst}" 
       else
-         echo "7. Backup and copy user configs" 
+         echo "8. Backup and copy user configs" 
       fi
 
       if [ $highlight -eq 9 ] ; then
@@ -339,6 +339,8 @@ else
          cp ${my_home}${dotfiles}.colors ${my_home}.colors
          mv ${my_home}.bashrc ${my_home}.bashrc.bak
          cp ${my_home}${dotfiles}.bashrc ${my_home}.bashrc
+         mv ${my_home}.bash_profile ${my_home}.bash_profile.bak
+         cp ${my_home}${dotfiles}.bash_profile ${my_home}.bash_profile
          #mv ${my_home}.Xdefaults ${my_home}.Xdefaults.bak
          #cp ${my_home}${dotfiles}.Xdefaults ${my_home}.Xdefaults
          mv ${my_home}.xinitrc ${my_home}.xinitrc.bak
