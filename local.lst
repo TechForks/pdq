@@ -17,6 +17,9 @@ fslint
 geany-themes
 gframecatcher
 gnome-connection-manager
+gtk-murrina-black-theme
+gtk-murrine-arch-theme
+gtk-theme-beauty-in-black
 idesk-extras
 idesktools-xba
 kdenlive-git
@@ -25,6 +28,7 @@ libpng12
 logstalgia
 luainotify
 montecarlo-font
+murrine-themes-collection
 mysqltcl
 ncmpcpp-fftw
 package-query
