@@ -154,6 +154,7 @@ xf86-video-intel-uxa
 xf86-video-vesa
 xorg-server
 xorg-server-utils
+xorg-server-xephyr
 xorg-utils
 xorg-xinit
 xorg-xkill
