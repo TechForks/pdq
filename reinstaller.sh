@@ -373,6 +373,10 @@ else
          git clone ${awesome_repo}
          git clone ${conky_repo}
          sh awesomewm-X/install.sh
+         sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
+         sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
+         echo " sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
+         sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua"
          pwd
          ls --color=auto -a
          choice=$choice_count
