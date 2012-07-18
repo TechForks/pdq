@@ -45,7 +45,7 @@ cd ${my_home}.config
 cp -r conky/* ${my_home}${dev_directory}/conky-X
 cd ${my_home}${dev_directory}/conky-X
 git add .
-if [ "$commit_msg" == "" ]; then
+if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated awesomewm-X to current" ]; then
 	commit_msg='updated conky-X to current'
 fi
 git commit -m "$commit_msg"
@@ -63,7 +63,7 @@ cd ${my_home}.config
 cp -r luakit/* ${my_home}${dev_directory}/luakit-X
 cd ${my_home}${dev_directory}/luakit-X
 git add .
-if [ "$commit_msg" == "" ]; then
+if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated conky-X to current" ]; then
 	commit_msg='updated luakit-X to current'
 fi
 git commit -m "$commit_msg"
@@ -110,7 +110,7 @@ pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" > main.
 pacman -Qqm > local.lst
 sleep 5s
 git add .
-if [ "$commit_msg" == "" ]; then
+if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated luakit-X to current" ]; then
 	commit_msg='updated packages lists from source'
 fi
 git commit -m "$commit_msg"
