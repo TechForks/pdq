@@ -123,6 +123,6 @@ ${bldgreen} ==> ${dotfiles} repo pushed to github!${txtrst}
 
 "
 ## end
-sleep 5s
+sleep 2s
 
 echo "${bldgreen}Everything backed up to github! =)${txtrst}"
