@@ -34,10 +34,8 @@ packer
 packer-color
 pacman-color
 pacmanlog2gource
-perl-data-random
 perl-mouse
 perl-net-oauth
-perl-yaml-tiny
 python3-aur
 python3-xynexdg
 pytransmissionrpc
