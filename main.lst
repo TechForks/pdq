@@ -66,6 +66,7 @@ lib32-mpg123
 lib32-openal
 libisoburn
 libtool
+libunique
 libxft
 luafilesystem
 luasocket
@@ -120,6 +121,7 @@ profont
 pyalpm
 rsync
 screen
+scrot
 squashfs-tools
 sudo
 syslinux
@@ -142,6 +144,7 @@ wine_gecko
 wireshark-gtk
 xbindkeys
 xchat
+xclip
 xcursor-themes
 xdotool
 xf86-input-evdev
