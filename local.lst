@@ -34,6 +34,8 @@ packer
 packer-color
 pacman-color
 pacmanlog2gource
+python3-aur
+python3-xynexdg
 pytransmissionrpc
 radiotray
 redshift-minimal
