@@ -52,7 +52,6 @@ python3-xynexdg
 pytransmissionrpc
 radiotray
 redshift-minimal
-rootactions-servicemenu-kde4
 ruby-mkrf
 ruby-opengl
 ruby1.8
@@ -62,6 +61,7 @@ rxvt-unicode-patched
 screencastor
 secure-delete
 shutter
+spacefm-git
 sublime-text
 teamviewer
 ttf-envy-code-r
