@@ -56,6 +56,7 @@ hgsvn
 hicolor-icon-theme
 htop
 idesk
+jre7-openjdk-headless
 kdebase-dolphin
 kdebase-kdialog
 kdemultimedia-ffmpegthumbs
@@ -70,7 +71,6 @@ libisoburn
 libtool
 libxft
 luafilesystem
-luakit
 luasocket
 lxappearance
 lxtask
@@ -116,7 +116,9 @@ phpmyadmin
 pidgin
 pkg-config
 pkgtools
+polipo
 preload
+privoxy
 profont
 pyalpm
 rsync
@@ -129,6 +131,7 @@ systemd-tools
 tcpdump
 terminus-font
 tmux
+tor
 transmission-cli
 truecrypt
 unrar
