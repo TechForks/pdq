@@ -35,7 +35,6 @@ packer-color
 pacman-color
 pacmanlog2gource
 perl-data-random
-perl-gtk2-imageview
 perl-mouse
 perl-net-oauth
 perl-yaml-tiny
