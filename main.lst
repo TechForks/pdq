@@ -56,7 +56,6 @@ hgsvn
 hicolor-icon-theme
 htop
 idesk
-jre7-openjdk-headless
 kdebase-dolphin
 kdebase-kdialog
 kdemultimedia-ffmpegthumbs
@@ -154,7 +153,7 @@ xf86-input-mouse
 xf86-input-synaptics
 xf86-input-vmmouse
 xf86-input-void
-xf86-video-intel-uxa
+xf86-video-intel
 xf86-video-vesa
 xorg-server
 xorg-server-utils
