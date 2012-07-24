@@ -90,6 +90,7 @@ networkmanager
 nitrogen
 ntfs-3g
 ntfsprogs
+ntop
 ntp
 openssh
 p7zip
@@ -122,6 +123,7 @@ squashfs-tools
 sudo
 syslinux
 systemd-tools
+sysvbanner
 tcpdump
 terminus-font
 tmux
@@ -131,6 +133,7 @@ truecrypt
 unrar
 unzip
 upx
+vim
 virtualbox
 vlc
 vnstat

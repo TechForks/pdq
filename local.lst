@@ -1,4 +1,5 @@
 archey3
+arm
 cacheclean
 cairo-compmgr-git
 conky-lua
@@ -47,6 +48,7 @@ secure-delete
 spacefm-git
 sublime-text-dev
 teamviewer
+torsocks
 ttf-envy-code-r
 ttf-ms-fonts
 urxvt-perls-git
