@@ -23,6 +23,7 @@ mkdir ${my_home}${dev_directory}
 mkdir ${my_home}${dotfiles}
 
 # awesomewm-X repo
+cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
 cd ${my_home}.config
 cp -r awesome/* ${my_home}${dev_directory}/awesomewm-X
 cd ${my_home}${dev_directory}/awesomewm-X
@@ -75,7 +76,6 @@ ${bldgreen} ==> luakit-X repo pushed to github!${txtrst}
 
 
 "
-
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
