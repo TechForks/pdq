@@ -1,7 +1,8 @@
 #
 # ~/.bash_profile
 #
-
+export EDITOR="nano"
+export PATH=$PATH:/usr/local/bin
 #export WEBKIT_IGNORE_SSL_ERRORS="1" midori
 export MOZ_PLUGIN_PATH="/usr/lib/mozilla/plugins"
 export XDG_CACHE_HOME=/dev/shm/$HOME/.cache
