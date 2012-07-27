@@ -1,0 +1,2 @@
+#!/bin/bash
+IMAGEPATH=Dropbox/Public/$(date +%m%d%S)-${USER}.png && scrot $IMAGEPATH && dropbox puburl $IMAGEPATH | xclip

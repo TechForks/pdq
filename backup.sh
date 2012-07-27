@@ -76,13 +76,17 @@ ${bldgreen} ==> luakit-X repo pushed to github!${txtrst}
 
 
 "
+cp -r ${my_home}bin/* ${my_home}${dotfiles}/bin
+cp -r ${my_home}php/* ${my_home}${dotfiles}/php
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
 cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
 
-echo "${bldblue}cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
+echo "${bldblue}cp -r ${my_home}bin/* ${my_home}${dotfiles}/bin
+cp -r ${my_home}php/* ${my_home}${dotfiles}/php
+cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
@@ -91,7 +95,7 @@ ${txtrst}
 
 "
 
-echo "${bldgreen} ==> copied /etc/ files into ${dotfiles}${txtrst}
+echo "${bldgreen} ==> copied files into ${dotfiles}${txtrst}
 
 "
 
@@ -108,7 +112,7 @@ cd ${my_home}${dotfiles}
 pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" > main.lst
 ## Create local.lst of local (includes AUR) packages installed
 pacman -Qqm > local.lst
-sleep 5s
+sleep 3s
 git add .
 if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated luakit-X to current" ]; then
 	commit_msg='updated packages lists from source'
