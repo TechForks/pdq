@@ -23,6 +23,7 @@ function ii()   # Get current host related info.
 }
 alias ls='ls --color=auto'
 alias ping='ping -c 5'
+alias pong='tsocks ping -c 5'
 # safety features
 alias cp='cp -i'
 alias mv='mv -i'
