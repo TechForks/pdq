@@ -76,16 +76,30 @@ ${bldgreen} ==> luakit-X repo pushed to github!${txtrst}
 
 
 "
-cp -r ${my_home}bin/* ${my_home}${dotfiles}/bin
-cp -r ${my_home}php/* ${my_home}${dotfiles}/php
+cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
+cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
+cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
+cp ${my_home}.colors ${my_home}${dotfiles}.colors
+cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
+cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
+cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
+cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
+cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
 cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
 
-echo "${bldblue}cp -r ${my_home}bin/* ${my_home}${dotfiles}/bin
-cp -r ${my_home}php/* ${my_home}${dotfiles}/php
+echo "${bldblue}cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
+cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
+cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
+cp ${my_home}.colors ${my_home}${dotfiles}.colors
+cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
+cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
+cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
+cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
+cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf

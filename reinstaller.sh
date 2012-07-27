@@ -16,6 +16,30 @@
 
 
 ## THERE SHOULD BE NO NEED TO EDIT THE FOLLOWING 
+exit
+## this script is now deprectaed do not use till it has been updated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 my_home="$HOME/"
 #my_home="/home/pdq/test/"

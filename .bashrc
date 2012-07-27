@@ -3,7 +3,7 @@
 #command cowsay $(fortune)
 #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
 PS1="\n${DGRAY}╭─[${LBLUE}\w${DGRAY}]\n${DGRAY}╰─[${WHITE}\T${DGRAY}]${DGRAY}>${BLUE}>${LBLUE}> ${RESET_COLOR}"
-export EDITOR="nano"
+export EDITOR="subl"
 export PATH=$PATH:/usr/local/bin
 #complete -cf sudo
 #complete -cf man
@@ -32,13 +32,14 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 #fun stuffs
+alias bender='cowsay -f bender $(fortune -so)'
 alias matrix='cmatrix -C magenta'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias builds='cd ~/builds'
 alias dotfiles='cd ~/Development/dotfiles'
 alias dev='cd ~/Development'
-alias backup=' sh ~/Development/dotfiles/backup.sh'
+alias backup=' sh ~/Development/pdq/backup.sh'
 alias pkgs='sudo pacman -Qq > ~/Development/dotfiles/installed-packages'
 alias nc='ncmpcpp'
 #alias clock='sudo ntpd -qg'
@@ -46,14 +47,14 @@ alias grep='grep --color=auto'
 alias mounthdd='sudo udisks --mount /dev/sdb4'
 alias mounthdd3='sudo udisks --mount /dev/sdb3'
 #alias sploit='/opt/metasploit-4.2.0/msfconsole'
-alias kdeicons='rm ~/.kde4/cache-linux/icon-cache.kcache'
+alias kdeicons='rm /home/pdq/.kde4/cache-linux/icon-cache.kcache'
 alias deltrash1='sudo rm -rv /media/truecrypt1/.Trash-1000/'
 alias deltrash2='sudo rm -rv /media/truecrypt2/.Trash-1000/'
-alias deltrash='rm -rv ~/.local/share/Trash/'
+alias deltrash='rm -rv /home/pdq/.local/share/Trash/'
 alias sdeltrash1='sudo srm -rv /media/truecrypt1/.Trash-1000/'
 alias sdeltrash2='sudo srm -rv /media/truecrypt2/.Trash-1000/'
-alias sdeltrash='srm -rv ~/.local/share/Trash/'
-alias delthumbs='srm -rv ~/.thumbnails/'
+alias sdeltrash='srm -rv /home/pdq/.local/share/Trash/'
+alias delthumbs='srm -rv /home/pdq/.thumbnails/'
 alias reload='source ~/.bashrc'
 alias xdef='xrdb -merge ~/.Xdefaults' 
 alias flushdns="sudo /etc/rc.d/nscd restart"
@@ -62,8 +63,8 @@ alias cclean='sudo cacheclean -v 1'
 #alias irssi='urxvt -e irssi &'
 #alias finch='urxvt -e finch &'
 alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
-alias tor='~/.tor-browser_en-US/start-tor-browser'
-#alias scripts='cd ~/scripts'
+alias tor='/home/pdq/.tor-browser_en-US/start-tor-browser'
+#alias scripts='cd /home/pdq/scripts'
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
@@ -85,6 +86,7 @@ alias home='cd ~'
 # local server
 #alias counter='ssh 192.168.2.107 -l root'
 # scripts and folders
+alias conk='sh ~/.config/conky/archconky.sh'
 # pacman aur stuffs
 alias update='sudo pacman-color -Syu'
 alias supdate='sudo powerpill-light -yu'

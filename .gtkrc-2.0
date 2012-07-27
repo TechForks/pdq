@@ -1,10 +1,10 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="Zukitwo"
+gtk-theme-name="H2O-gtk2-Emerald"
 gtk-icon-theme-name="Humanity-Colors-Dark-Graphite"
-gtk-font-name="Envy Code R 10"
-gtk-cursor-theme-name="Shere_Khan_X"
+gtk-font-name="Terminus 10"
+gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
 gtk-toolbar-icon-size=GTK_ICON_SIZE_SMALL_TOOLBAR
