@@ -16,30 +16,6 @@
 
 
 ## THERE SHOULD BE NO NEED TO EDIT THE FOLLOWING 
-exit
-## this script is now deprectaed do not use till it has been updated.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 my_home="$HOME/"
 #my_home="/home/pdq/test/"
@@ -109,11 +85,11 @@ if [ `id -u` -eq 0 ]; then
       read root_choice
       # bash nested if/else
        if [ $root_choice -eq 1 ] ; then
-         echo "${bldgreen} ==> pacman-key initialization starting ...${txtrst}"
-         echo "HINT: Mash on the keyboard keys and move mouse to make entropy process go faster! :D"
-         sleep 5s
-         pacman-key --init
-         pacman-key --populate archlinux
+         # echo "${bldgreen} ==> pacman-key initialization starting ...${txtrst}"
+         # echo "HINT: Mash on the keyboard keys and move mouse to make entropy process go faster! :D"
+         # sleep 5s
+         # pacman-key --init
+         # pacman-key --populate archlinux
          echo "done ..."
          root_choice=$root_choice_count
          echo $done_format
