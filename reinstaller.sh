@@ -103,7 +103,7 @@ if [ `id -u` -eq 0 ]; then
          if [ $? -eq 0 ]; then
             echo "$username exists already!"
          else
-            pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+            pass=$(perl -e 'print crypt($ARGV[0], "password")' $pbaassword)
             useradd -m -p $pass -g users -G audio,video,wheel,storage,optical,power,games,network,log -s /bin/bash $username
             [ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
          fi
@@ -304,6 +304,7 @@ else
    sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}"
          cd /etc
          pwd
+         sudo pacman -Syy
          choice=$choice_count
          echo $done_format
          highlight=4
