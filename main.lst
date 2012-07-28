@@ -126,6 +126,7 @@ systemd-tools
 sysvbanner
 tcpdump
 terminus-font
+tig
 tmux
 tor
 transmission-cli
