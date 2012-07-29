@@ -126,7 +126,6 @@ echo "## Create main.lst remove local, base
 ## Create local.lst of local (includes AUR) packages installed
 "
 
-sleep 2s
 # dotfiles repo
 cd ${my_home}${dotfiles}
 ## Create main.lst remove local, base
