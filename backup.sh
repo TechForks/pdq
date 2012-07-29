@@ -90,8 +90,8 @@ cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
-sudo cp /etc/privoxy/config ${my_home}${dotfiles}etc/privoxy_config
-sudo chown $me:users ${my_home}${dotfiles}etc/privoxy_config
+# sudo cp /etc/privoxy/config ${my_home}${dotfiles}etc/privoxy_config
+# sudo chown $me:users ${my_home}${dotfiles}etc/privoxy_config
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
 cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
@@ -109,7 +109,6 @@ cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
-sudo cp /etc/privoxy/config ${my_home}${dotfiles}etc/privoxy_config
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
 cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
