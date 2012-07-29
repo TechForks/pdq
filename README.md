@@ -122,11 +122,11 @@ LAMP
 
 If you want to change/update the above root password, then you need to use the following command:
 
-	$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere
+	$ mysqladmin -u root -p'oldpassword' password newpasswordhere
 
 For example, you can set the new password to 123456, enter:
 
-	$ mysqladmin -u root -p'$USER-$rand' password '123456'"
+	$ mysqladmin -u root -p'oldpassword' password '123456'"
 
 
 INCLUDES
