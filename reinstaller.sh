@@ -842,7 +842,7 @@ chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
          echo "Ok... starting MySQL and setting a root password for MySQL...."
          rand=$RANDOM
          mysqladmin -u root password $USER-$rand
-         echo "You're mysql root password is $USER-$rand Write this down before proceeding...
+         echo "${bldred}You're mysql root password is $USER-$rand Write this down before proceeding...${txtrst}
          "
          sleep 5s
          echo "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:
