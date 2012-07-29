@@ -30,12 +30,9 @@ DONE! :D
 --------
 
 
-FEATURES
---------
-
-
 PRIVACY FEATURES
 ----------------
+
 
 Web browsing
 ------------
@@ -120,3 +117,21 @@ Torify will not, however, perform DNS lookups through the Tor network. A workaro
 https://trac.torproject.org/projects/tor/wiki/doc/SupportPrograms
 
 
+LAMP
+----
+
+If you want to change/update the above root password, then you need to use the following command:
+
+	$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere
+
+For example, you can set the new password to 123456, enter:
+
+	$ mysqladmin -u root -p'$USER-$rand' password '123456'"
+
+
+INCLUDES
+--------
+
+For a full list of packages view main.lst and local.lst.
+
+=)
