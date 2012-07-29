@@ -376,11 +376,51 @@ else
          git clone ${awesome_repo}
          git clone ${conky_repo}
          git clone ${luakit_repo}
-         sh awesomewm-X/install.sh
+         #sh awesomewm-X/install.sh
+         mv ${my_home}.config/conky ${my_home}.config/conky.original
+         cp -r ${my_home}.config/conky-X ${my_home}.config/conky
+         mv ${my_home}.config/awesome ${my_home}.config/awesome.original
+         cp -r ${my_home}.config/awesomewm-X ${my_home}.config/awesome
+         mv ${my_home}.config/luakit ${my_home}.config/luakit.original
+         cp -r ${my_home}.config/luakit-X ${my_home}.config/luakit
+         mkdir ${my_home}.config/awesome/Xdefaults/$USER
+         mv ${my_home}.Xdefaults ${my_home}.config/awesome/Xdefaults/$USER/.Xdefaults
+         ln -sfn ${my_home}.config/awesome/Xdefaults/default/.Xdefaults ${my_home}.Xdefaults
+         ln -sfn ${my_home}.config/awesome/themes/pdq ${my_home}.config/awesome/themes/current
+         ln -sfn ${my_home}.config/awesome/icons/AwesomeLight.png ${my_home}.config/awesome/icons/menu_icon.png
+         ln -sfn ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
+         mkdir ${my_home}.cache
+         mkdir ${my_home}.cache/awesome
+         touch ${my_home}.cache/awesome/stderr
+         touch ${my_home}.cache/awesome/stdout
+         mkdir ${my_home}.config/conky/arch/.cache
+         mv ${my_home}.xinitrc ${my_home}.xinitrc.original
+         cp ${my_home}.config/awesomewm-X/skel/.xinitrc ${my_home}.xinitrc
          sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
          sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
-         echo " sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
+         echo "
+         mv ${my_home}.config/conky ${my_home}.config/conky.original
+         cp -r ${my_home}.config/conky-X ${my_home}.config/conky
+         mv ${my_home}.config/awesome ${my_home}.config/awesome.original
+         cp -r ${my_home}.config/awesomewm-X ${my_home}.config/awesome
+         mv ${my_home}.config/luakit ${my_home}.config/luakit.original
+         cp -r ${my_home}.config/luakit-X ${my_home}.config/luakit
+         mkdir ${my_home}.config/awesome/Xdefaults/$USER
+         mv ${my_home}.Xdefaults ${my_home}.config/awesome/Xdefaults/$USER/.Xdefaults
+         ln -sfn ${my_home}.config/awesome/Xdefaults/default/.Xdefaults ${my_home}.Xdefaults
+         ln -sfn ${my_home}.config/awesome/themes/pdq ${my_home}.config/awesome/themes/current
+         ln -sfn ${my_home}.config/awesome/icons/AwesomeLight.png ${my_home}.config/awesome/icons/menu_icon.png
+         ln -sfn ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
+         mkdir ${my_home}.cache
+         mkdir ${my_home}.cache/awesome
+         touch ${my_home}.cache/awesome/stderr
+         touch ${my_home}.cache/awesome/stdout
+         mkdir ${my_home}.config/conky/arch/.cache
+         mv ${my_home}.xinitrc ${my_home}.xinitrc.original
+         cp ${my_home}.config/awesomewm-X/skel/.xinitrc ${my_home}.xinitrc
+         sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
          sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
+         "
          pwd
          ls --color=auto -a
          choice=$choice_count
