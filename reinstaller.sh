@@ -797,8 +797,6 @@ NameVirtualHost *:444
          mkdir -p /srv/http/mail.$USER.c0m/public_html
          chmod g+xr-w /srv/http/mail.$USER.c0m
          chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
-         rc.d restart httpd
-         exit
 echo "mkdir -p /srv/http/root/public_html
 chmod g+xr-w /srv/http/root
 chmod -R g+xr-w /srv/http/root/public_html
@@ -838,6 +836,33 @@ chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
          echo "rah rah $USER rah rah $USER!!!"
          sleep 1s
          echo "Ok let's continue on with this...."
+         rc.d start mysqld
+         rc.d restart httpd
+         sleep 1s
+         echo "Ok start MySQL and set a root password...."
+         rand=$RANDOM
+         mysqladmin -u root password $USER-$rand
+         echo "You're mysql root password is $USER-$rand Write this down before proceeding...
+         "
+         sleep 3s
+         echo "If you want to change/update the above root password, then you need to use the following command:
+$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere
+
+For example, you can set the new password to 123456, enter:
+
+$ mysqladmin -u root -p'$USER-$rand' password '123456'"
+         sleep 3s 
+         echo "Ok, trying to login to mysql and make sure it works..."
+         sleep 2s 
+         mysql -u root -p
+         # exit from the CLI MySQL client
+         exit
+         echo "If it logged in then exited, it worked! En guarde! Touche! And all that :Please
+
+Cool, well we are still root so let's drop down to $USER"
+         # exit from root back to user
+         exit
+         echo "w00t success!"
          choice=$choice_count
          echo $done_format
          highlight=10
