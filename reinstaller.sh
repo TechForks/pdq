@@ -389,6 +389,14 @@ else
          ln -sfn ${my_home}.config/awesome/themes/pdq ${my_home}.config/awesome/themes/current
          ln -sfn ${my_home}.config/awesome/icons/AwesomeLight.png ${my_home}.config/awesome/icons/menu_icon.png
          ln -sfn ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
+         cd ${my_home}Development
+         git clone git://github.com/LokiChaos/luakit-plugins.git LokiChaos-luakit-plugins
+         git clone git://github.com/mason-larobina/luakit-plugins.git
+         mkdir ${my_home}.config/luakit/plugins
+         cp -r luakit-plugins/adblock ${my_home}.config/luakit/plugins/adblock
+         cp -r LokiChaos-luakit-plugins/plugins/* ${my_home}.config/luakit/plugins/
+         cd ${my_home}.local/share/luakit/adblock
+         wget https://easylist-downloads.adblockplus.org/easylist.txt
          mkdir ${my_home}.cache
          mkdir ${my_home}.cache/awesome
          touch ${my_home}.cache/awesome/stderr
@@ -398,6 +406,7 @@ else
          cp ${my_home}.config/awesomewm-X/skel/.xinitrc ${my_home}.xinitrc
          sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
          sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
+         cd
          echo "
          mv ${my_home}.config/conky ${my_home}.config/conky.original
          cp -r ${my_home}.config/conky-X ${my_home}.config/conky
@@ -411,6 +420,14 @@ else
          ln -sfn ${my_home}.config/awesome/themes/pdq ${my_home}.config/awesome/themes/current
          ln -sfn ${my_home}.config/awesome/icons/AwesomeLight.png ${my_home}.config/awesome/icons/menu_icon.png
          ln -sfn ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
+         cd ${my_home}Development
+         git clone git://github.com/LokiChaos/luakit-plugins.git LokiChaos-luakit-plugins
+         git clone git://github.com/mason-larobina/luakit-plugins.git
+         mkdir ${my_home}.config/luakit/plugins
+         cp -r luakit-plugins/adblock ${my_home}.config/luakit/plugins/adblock
+         cp -r LokiChaos-luakit-plugins/plugins/* ${my_home}.config/luakit/plugins/
+         cd ${my_home}.local/share/luakit/adblock
+         wget https://easylist-downloads.adblockplus.org/easylist.txt
          mkdir ${my_home}.cache
          mkdir ${my_home}.cache/awesome
          touch ${my_home}.cache/awesome/stderr
