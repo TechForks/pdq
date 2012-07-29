@@ -835,17 +835,17 @@ chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
          sleep 1s
          echo "rah rah $USER rah rah $USER!!!"
          sleep 1s
-         echo "Ok let's continue on with this...."
+         echo "Ok... let's continue on with this..."
          rc.d start mysqld
          rc.d restart httpd
          sleep 1s
-         echo "Ok start MySQL and set a root password...."
+         echo "Ok... starting MySQL and setting a root password for MySQL...."
          rand=$RANDOM
          mysqladmin -u root password $USER-$rand
          echo "You're mysql root password is $USER-$rand Write this down before proceeding...
          "
-         sleep 3s
-         echo "If you want to change/update the above root password, then you need to use the following command:
+         sleep 5s
+         echo "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:
 $ mysqladmin -u root -p'$USER-$rand' password newpasswordhere
 
 For example, you can set the new password to 123456, enter:
