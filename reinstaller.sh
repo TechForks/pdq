@@ -293,7 +293,7 @@ else
          sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
          ln -s /etc/mpd.conf ${my_home}.mpdconf
          sudo mv /etc/rc.conf /etc/rc.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/tor/torrc /etc/tor/torrc
+         sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
          sudo mv /etc/pacman.conf /etc/pacman.conf.bak
          sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
          sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
@@ -302,7 +302,7 @@ else
    sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
    sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
    ln -s /etc/mpd.conf ${my_home}.mpdconf
-   sudo cp ${my_home}${dotfiles}etc/tor/torrc /etc/tor/torrc
+   sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
    sudo mv /etc/pacman.conf /etc/pacman.conf.bak
    sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
    sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}"
