@@ -592,10 +592,10 @@ NameVirtualHost *:444
 
 <VirtualHost *:80>
     ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/phpmyadmin.$USER.c0m/public_html\"
+    DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
     ServerName phpmyadmin.$USER.c0m
     ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-    <Directory /srv/http/phpmyadmin.$USER.c0m/public_html/>
+    <Directory /usr/share/webapps/phpMyAdmin/>
           DirectoryIndex index.htm index.html
           AddHandler cgi-script .cgi .pl
           Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
@@ -607,10 +607,10 @@ NameVirtualHost *:444
 
 <VirtualHost *:444>
     ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/phpmyadmin.$USER.c0m/public_html\"
+    DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
     ServerName phpmyadmin.$USER.c0m
     ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-    <Directory /srv/http/phpmyadmin.$USER.c0m/public_html/>
+    <Directory /usr/share/webapps/phpMyAdmin/>
           DirectoryIndex index.htm index.html
           AddHandler cgi-script .cgi .pl
           Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
