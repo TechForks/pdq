@@ -778,6 +778,15 @@ NameVirtualHost *:444
          mkdir -p /srv/http/mail.$USER.c0m/public_html
          chmod g+xr-w /srv/http/mail.$USER.c0m
          chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
+
+
+# Take Screenshot of entire Screen
+if [ "$1" == "scr" ]; then scrot "${NAME}" || wput -m 644 -u :${name} "blah blah blah" || echo -n "{URL}" | xclip -selection c; fi
+
+
+
+
+
 echo "mkdir -p /srv/http/root/public_html
 chmod g+xr-w /srv/http/root
 chmod -R g+xr-w /srv/http/root/public_html
@@ -845,6 +854,7 @@ Cool, well we are still root so let's drop down to $USER"
          exit
          echo "w00t success!"
          sleep 1s
+         ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
          ln -s /srv/http ${my_home}localhost
          cd ${my_home}localhost
          pwd
