@@ -33,7 +33,28 @@ DONE! :D
 FEATURES
 --------
 
+
+PRIVACY FEATURES
+----------------
+
+Web browsing
+------------
+
+Tor primarily supports Firefox, but can also be used with Chromium.
+
+`Firefox`
+
+In Preferences > Advanced > Network tab > Settings manually set Firefox to use the SOCKS proxy localhost with port 9050.
+
+`Chromium`
+
+You can simply run:
+
+	$ chromium --proxy-server="socks://localhost:9050"
+
+
 Instant Messaging
+-----------------
 
 `Pidgin`
 
@@ -59,8 +80,6 @@ Then:
 
 	 $ cd ~/.irssi/scripts/
 	 $ wget http://www.freenode.net/sasl/cap_sasl.pl
-
-
 	$ packer -S perl-crypt-openssl-bignum perl-crypt-blowfish perl-crypt-dh
 
 `Start irssi`
@@ -78,3 +97,26 @@ Set your identification to nickserv, which will be read when connecting. Support
 Connect to network:
 
 	/connect -network <network> 10.40.40.40
+
+`Torify`
+
+torify will allow you use an application via the Tor network without the need to make configuration changes to the application involved. From the man page:
+torify is a simple wrapper that calls tsocks with a tor specific configuration file. tsocks itself is a wrapper between the tsocks library and the application that you would like to run socksified
+
+Usage example:
+
+	$ torify elinks checkip.dyndns.org
+	$ torify wget -qO- https://check.torproject.org/ | grep -i congratulations
+
+Torify will not, however, perform DNS lookups through the Tor network. A workaround is to use it in conjunction with tor-resolve (described above). In this case, the procedure for the first of the above examples would look like this:
+
+	$ tor-resolve checkip.dyndns.org
+
+208.78.69.70
+	
+	$ torify elinks 208.78.69.70
+
+
+https://trac.torproject.org/projects/tor/wiki/doc/SupportPrograms
+
+

@@ -292,8 +292,9 @@ else
          sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
          sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
          ln -s /etc/mpd.conf ${my_home}.mpdconf
-         sudo mv /etc/rc.conf /etc/rc.conf.bak
+         sudo mv /etc/tor/torrc /etc/tor/torrc.bak
          sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
+         sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
          sudo mv /etc/pacman.conf /etc/pacman.conf.bak
          sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
          sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
@@ -302,7 +303,9 @@ else
    sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
    sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
    ln -s /etc/mpd.conf ${my_home}.mpdconf
+   sudo mv /etc/tor/torrc /etc/tor/torrc.bak
    sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
+   sudo echo forward-socks5 / localhost:9050 . >> /etc/privoxy/config
    sudo mv /etc/pacman.conf /etc/pacman.conf.bak
    sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
    sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}"
