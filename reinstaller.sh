@@ -282,7 +282,7 @@ else
          sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
          sudo cp ${my_home}${dotfiles}etc/mirrorlist /etc/pacman.d/mirrorlist
          echo "sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-   sudo cp ${my_home}${dotfiles}etc/mirrorlist /etc/pacman.d/mirrorlist"
+sudo cp ${my_home}${dotfiles}etc/mirrorlist /etc/pacman.d/mirrorlist"
          choice=$choice_count
          echo $done_format 
          highlight=3
@@ -295,20 +295,68 @@ else
          sudo mv /etc/tor/torrc /etc/tor/torrc.bak
          sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
          sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
+         sudo mv /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
+         sudo cp ${my_home}${dotfiles}etc/httpd.conf /etc/httpd/conf/httpd.conf
+         sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
+         sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
          sudo mv /etc/pacman.conf /etc/pacman.conf.bak
          sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
          sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
+         sudo echo "#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>  <hostname.domain.org>   <hostname>
+127.0.0.1   localhost.localdomain   localhost $HOSTNAME
+::1      localhost.localdomain   localhost
+127.0.0.1 $USER.c0m www.$USER.c0m
+127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
+127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
+127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
+127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
+
+# End of file" > /etc/hosts
 
          echo "${bldblue}sudo mv /etc/rc.conf /etc/rc.conf.bak
-   sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
-   sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
-   ln -s /etc/mpd.conf ${my_home}.mpdconf
-   sudo mv /etc/tor/torrc /etc/tor/torrc.bak
-   sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
-   sudo echo forward-socks5 / localhost:9050 . >> /etc/privoxy/config
-   sudo mv /etc/pacman.conf /etc/pacman.conf.bak
-   sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
-   sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}"
+sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
+sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
+ln -s /etc/mpd.conf ${my_home}.mpdconf
+sudo mv /etc/tor/torrc /etc/tor/torrc.bak
+sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
+sudo echo forward-socks5 / localhost:9050 . >> /etc/privoxy/config
+sudo mv /etc/pacman.conf /etc/pacman.conf.bak
+sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
+sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf${txtrst}
+sudo echo #
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>  <hostname.domain.org>   <hostname>
+127.0.0.1   localhost.localdomain   localhost $HOSTNAME
+::1      localhost.localdomain   localhost
+127.0.0.1 $USER.c0m www.$USER.c0m
+127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
+127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
+127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
+127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
+
+# End of file > /etc/hosts
+   "
+         sleep 2s
+         echo "Creating self-signed certificate (you can change key size and days of validity)"
+         su
+         cd /etc/httpd/conf
+         openssl genrsa -des3 -out server.key 1024
+         openssl req -new -key server.key -out server.csr
+         cp server.key server.key.org
+         openssl rsa -in server.key.org -out server.key
+         openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+         
+         exit
          cd /etc
          pwd
          sudo pacman -Syy
