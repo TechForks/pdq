@@ -28,7 +28,7 @@ awesome_repo="git://github.com/idk/awesomewm-X.git"
 conky_repo="git://github.com/idk/conky-X.git"
 luakit_repo="git://github.com/idk/luakit-X.git"
 done_format="========================================="
-choice_count=10
+choice_count=11
 root_choice_count=6
 txtbld=$(tput bold)             # Bold
 bldred=${txtbld}$(tput setaf 1) # Red Colored
@@ -222,18 +222,23 @@ else
          echo "9. Install Awesome Window Manager (awesomewm-X), luakit-X and Conky (conky-X)" 
       fi
       if [ $highlight -eq 10 ] ; then
-         echo "${bldred}10. Exit Installer${txtrst}"
+         echo "${bldgreen}10. Install LAMPP (Apache/MySQL/PHP/PHPMyAdmin) -- done!${txtrst}" 
       else
-         echo "10. Exit Installer"
+         echo "10. Install LAMPP (Apache/MySQL/PHP/PHPMyAdmin)" 
       fi
-   echo -n "${bldred}Please choose [1,2,3,4,5,7,8,9 or 10] ? (HINT: start at 1)${txtrst}"
+      if [ $highlight -eq 11 ] ; then
+         echo "${bldred}11. Exit Installer${txtrst}"
+      else
+         echo "11. Exit Installer"
+      fi
+   echo -n "${bldred}Please choose [1,2,3,4,5,7,8,9,10 or 11] ? (HINT: start at 1)${txtrst}"
 
       # Loop while the variable choice is equal $choice_count
    }
 
    # Declare variable choice and assign value $choice_count
    choice=$choice_count
-   highlight=11
+   highlight=12
    # Print to stdout
    #menulist
    # bash while loop
@@ -288,332 +293,20 @@ sudo cp ${my_home}${dotfiles}etc/mirrorlist /etc/pacman.d/mirrorlist"
          highlight=3
       elif [ $choice -eq 4 ] ; then
          echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
+         sleep 2s
          sudo mv /etc/rc.conf /etc/rc.conf.bak
          sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
-         sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
-         ln -s /etc/mpd.conf ${my_home}.mpdconf
-         sudo mv /etc/tor/torrc /etc/tor/torrc.bak
-         sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
-         sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
-         sudo mv /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/httpd.conf /etc/httpd/conf/httpd.conf
-         sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
          sudo mv /etc/pacman.conf /etc/pacman.conf.bak
          sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
          sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
-         sudo echo "#
-# /etc/hosts: static lookup table for host names
-#
-
-#<ip-address>  <hostname.domain.org>   <hostname>
-127.0.0.1   localhost.localdomain   localhost $HOSTNAME
-::1      localhost.localdomain   localhost
-127.0.0.1 $USER.c0m www.$USER.c0m
-127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
-127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
-127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
-127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
-
-# End of file" > /etc/hosts
-
-echo "NameVirtualHost *:80
-NameVirtualHost *:444
-
-#this first virtualhost enables: http://127.0.0.1, or: http://localhost, 
-#to still go to /srv/http/*index.html(otherwise it will 404_error).
-#the reason for this: once you tell httpd.conf to include extra/httpd-vhosts.conf, 
-#ALL vhosts are handled in httpd-vhosts.conf(including the default one),
-# E.G. the default virtualhost in httpd.conf is not used and must be included here, 
-#otherwise, only domainname1.dom & domainname2.dom will be accessible
-#from your web browser and NOT http://127.0.0.1, or: http://localhost, etc.
-#
-
-<VirtualHost *:80>
-    DocumentRoot \"/srv/http/root\"
-    ServerAdmin root@localhost
-    #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
-    #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
-    <Directory /srv/http/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    DocumentRoot \"/srv/http/root\"
-    ServerAdmin root@localhost
-    #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
-    #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
-    <Directory /srv/http/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/$USER.c0m/www\"
-    ServerName $USER.c0m
-    ServerAlias $USER.c0m www.$USER.c0m
-    <Directory /srv/http/$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/$USER.c0m/www\"
-    ServerName $USER.c0m
-    ServerAlias $USER.c0m www.$USER.c0m
-    <Directory /srv/http/$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/www\"
-    ServerName $USER.$HOSTNAME.c0m
-    ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-    <Directory /srv/http/$USER.$HOSTNAME.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/www\"
-    ServerName $USER.$HOSTNAME.c0m
-    ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-    <Directory /srv/http/$USER.$HOSTNAME.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/phpmyadmin.$USER.c0m/www\"
-    ServerName phpmyadmin.$USER.c0m
-    ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-    <Directory /srv/http/phpmyadmin.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/phpmyadmin.$USER.c0m/www\"
-    ServerName phpmyadmin.$USER.c0m
-    ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-    <Directory /srv/http/phpmyadmin.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/torrent.$USER.c0m/www\"
-    ServerName torrent.$USER.c0m
-    ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
-    <Directory /srv/http/torrent.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/torrent.$USER.c0m/www\"
-    ServerName torrent.$USER.c0m
-    ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
-    <Directory /srv/http/torrent.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/admin.$USER.c0m/www\"
-    ServerName admin.$USER.c0m
-    ServerAlias admin.$USER.c0m www.admin.$USER.c0m
-    <Directory /srv/http/admin.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/admin.$USER.c0m/www\"
-    ServerName admin.$USER.c0m
-    ServerAlias admin.$USER.c0m www.admin.$USER.c0m
-    <Directory /srv/http/admin.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/stats.$USER.c0m/www\"
-    ServerName stats.$USER.c0m
-    ServerAlias stats.$USER.c0m www.stats.$USER.c0m
-    <Directory /srv/http/stats.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/stats.$USER.c0m/www\"
-    ServerName stats.$USER.c0m
-    ServerAlias stats.$USER.c0m www.stats.$USER.c0m
-    <Directory /srv/http/stats.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/mail.$USER.c0m/www\"
-    ServerName mail.$USER.c0m
-    ServerAlias mail.$USER.c0m www.mail.$USER.c0m
-    <Directory /srv/http/mail.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>
-
-<VirtualHost *:444>
-    ServerAdmin $USER@$HOSTNAME
-    DocumentRoot \"/srv/http/mail.$USER.c0m/www\"
-    ServerName mail.$USER.c0m
-    ServerAlias mail.$USER.c0m www.mail.$USER.c0m
-    <Directory /srv/http/mail.$USER.c0m/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          allow from all
-   </Directory>
-</VirtualHost>" > /etc/httpd/conf/extra/httpd-vhosts.conf
          echo "
-         sudo mv /etc/rc.conf /etc/rc.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
-         sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
-         ln -s /etc/mpd.conf ${my_home}.mpdconf
-         sudo mv /etc/tor/torrc /etc/tor/torrc.bak
-         sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
-         sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
-         sudo mv /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/httpd.conf /etc/httpd/conf/httpd.conf
-         sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
-         sudo mv /etc/pacman.conf /etc/pacman.conf.bak
-         sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
-         sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
-
-sudo echo #
-# /etc/hosts: static lookup table for host names
-#
-
-#<ip-address>  <hostname.domain.org>   <hostname>
-127.0.0.1   localhost.localdomain   localhost $HOSTNAME
-::1      localhost.localdomain   localhost
-127.0.0.1 $USER.c0m www.$USER.c0m
-127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
-127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
-127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
-127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
-
-# End of file > /etc/hosts
+sudo mv /etc/rc.conf /etc/rc.conf.bak
+sudo cp ${my_home}${dotfiles}etc/rc.conf /etc/rc.conf
+sudo mv /etc/pacman.conf /etc/pacman.conf.bak
+sudo cp ${my_home}${dotfiles}etc/pacman.conf /etc/pacman.conf
+sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
    "
          sleep 2s
-         echo "Creating self-signed certificate (you can change key size and days of validity)"
-         su
-         cd /etc/httpd/conf
-         openssl genrsa -des3 -out server.key 1024
-         openssl req -new -key server.key -out server.csr
-         cp server.key server.key.org
-         openssl rsa -in server.key.org -out server.key
-         openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-         
-         exit
          cd /etc
          pwd
          sudo pacman -Syy
@@ -755,6 +448,388 @@ sudo echo #
          echo $done_format
          highlight=9
       elif [ $choice -eq 10 ] ; then
+         echo "${bldgreen} ==> Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files${txtrst}"
+         sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
+         ln -s /etc/mpd.conf ${my_home}.mpdconf
+         sudo mv /etc/tor/torrc /etc/tor/torrc.bak
+         sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
+         sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
+         sudo mv /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
+         sudo cp ${my_home}${dotfiles}etc/httpd.conf /etc/httpd/conf/httpd.conf
+         sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
+         sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
+
+ sudo echo "#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>  <hostname.domain.org>   <hostname>
+127.0.0.1   localhost.localdomain   localhost $HOSTNAME
+::1      localhost.localdomain   localhost
+127.0.0.1 $USER.c0m www.$USER.c0m
+127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
+127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
+127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
+127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
+
+# End of file" > /etc/hosts
+
+sudo echo "NameVirtualHost *:80
+NameVirtualHost *:444
+
+#this first virtualhost enables: http://127.0.0.1, or: http://localhost, 
+#to still go to /srv/http/*index.html(otherwise it will 404_error).
+#the reason for this: once you tell httpd.conf to include extra/httpd-vhosts.conf, 
+#ALL vhosts are handled in httpd-vhosts.conf(including the default one),
+# E.G. the default virtualhost in httpd.conf is not used and must be included here, 
+#otherwise, only domainname1.dom & domainname2.dom will be accessible
+#from your web browser and NOT http://127.0.0.1, or: http://localhost, etc.
+#
+
+<VirtualHost *:80>
+    DocumentRoot \"/srv/http/root\"
+    ServerAdmin root@localhost
+    #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
+    #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
+    <Directory /srv/http/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    DocumentRoot \"/srv/http/root\"
+    ServerAdmin root@localhost
+    #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
+    #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
+    <Directory /srv/http/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/$USER.c0m/public_html\"
+    ServerName $USER.c0m
+    ServerAlias $USER.c0m www.$USER.c0m
+    <Directory /srv/http/$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/$USER.c0m/public_html\"
+    ServerName $USER.c0m
+    ServerAlias $USER.c0m www.$USER.c0m
+    <Directory /srv/http/$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
+    ServerName $USER.$HOSTNAME.c0m
+    ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+    <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
+    ServerName $USER.$HOSTNAME.c0m
+    ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+    <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/phpmyadmin.$USER.c0m/public_html\"
+    ServerName phpmyadmin.$USER.c0m
+    ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+    <Directory /srv/http/phpmyadmin.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/phpmyadmin.$USER.c0m/public_html\"
+    ServerName phpmyadmin.$USER.c0m
+    ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+    <Directory /srv/http/phpmyadmin.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
+    ServerName torrent.$USER.c0m
+    ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
+    <Directory /srv/http/torrent.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
+    ServerName torrent.$USER.c0m
+    ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
+    <Directory /srv/http/torrent.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
+    ServerName admin.$USER.c0m
+    ServerAlias admin.$USER.c0m www.admin.$USER.c0m
+    <Directory /srv/http/admin.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
+    ServerName admin.$USER.c0m
+    ServerAlias admin.$USER.c0m www.admin.$USER.c0m
+    <Directory /srv/http/admin.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
+    ServerName stats.$USER.c0m
+    ServerAlias stats.$USER.c0m www.stats.$USER.c0m
+    <Directory /srv/http/stats.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
+    ServerName stats.$USER.c0m
+    ServerAlias stats.$USER.c0m www.stats.$USER.c0m
+    <Directory /srv/http/stats.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
+    ServerName mail.$USER.c0m
+    ServerAlias mail.$USER.c0m www.mail.$USER.c0m
+    <Directory /srv/http/mail.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>
+
+<VirtualHost *:444>
+    ServerAdmin $USER@$HOSTNAME
+    DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
+    ServerName mail.$USER.c0m
+    ServerAlias mail.$USER.c0m www.mail.$USER.c0m
+    <Directory /srv/http/mail.$USER.c0m/public_html/>
+          DirectoryIndex index.htm index.html
+          AddHandler cgi-script .cgi .pl
+          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+          AllowOverride None
+          Order allow,deny
+          allow from all
+   </Directory>
+</VirtualHost>" > /etc/httpd/conf/extra/httpd-vhosts.conf
+
+         echo "sudo echo #
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>  <hostname.domain.org>   <hostname>
+127.0.0.1   localhost.localdomain   localhost $HOSTNAME
+::1      localhost.localdomain   localhost
+127.0.0.1 $USER.c0m www.$USER.c0m
+127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
+127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
+127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
+127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
+
+# End of file > /etc/hosts"
+         sleep 2s
+         echo "Creating self-signed certificate (you can change key size and days of validity)"
+         su
+         cd /etc/httpd/conf
+         openssl genrsa -des3 -out server.key 1024
+         openssl req -new -key server.key -out server.csr
+         cp server.key server.key.org
+         openssl rsa -in server.key.org -out server.key
+         openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+         #
+         mkdir -p /srv/http/root/public_html
+         chmod g+xr-w /srv/http/root
+         chmod -R g+xr-w /srv/http/root/public_html
+         #
+         mkdir -p /srv/http/$USER.c0m/public_html
+         chmod g+xr-w /srv/http/$USER.c0m
+         chmod -R g+xr-w /srv/http/$USER.c0m/public_html
+         #
+         mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
+         chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
+         chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
+         #
+         mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
+         chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
+         chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
+         #
+         mkdir -p /srv/http/torrent.$USER.c0m/public_html
+         chmod g+xr-w /srv/http/torrent.$USER.c0m
+         chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
+         #
+         mkdir -p /srv/http/admin.$USER.c0m/public_html
+         chmod g+xr-w /srv/http/admin.$USER.c0m
+         chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
+         #
+         mkdir -p /srv/http/stats.$USER.c0m/public_html
+         chmod g+xr-w /srv/http/stats.$USER.c0m
+         chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
+         #
+         mkdir -p /srv/http/mail.$USER.c0m/public_html
+         chmod g+xr-w /srv/http/mail.$USER.c0m
+         chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
+         rc.d restart httpd
+         exit
+echo "mkdir -p /srv/http/root/public_html
+chmod g+xr-w /srv/http/root
+chmod -R g+xr-w /srv/http/root/public_html
+#
+mkdir -p /srv/http/$USER.c0m/public_html
+chmod g+xr-w /srv/http/$USER.c0m
+chmod -R g+xr-w /srv/http/$USER.c0m/public_html
+#
+mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
+chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
+chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
+#
+mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
+chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
+chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
+#
+mkdir -p /srv/http/torrent.$USER.c0m/public_html
+chmod g+xr-w /srv/http/torrent.$USER.c0m
+chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
+#
+mkdir -p /srv/http/admin.$USER.c0m/public_html
+chmod g+xr-w /srv/http/admin.$USER.c0m
+chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
+#
+mkdir -p /srv/http/stats.$USER.c0m/public_html
+chmod g+xr-w /srv/http/stats.$USER.c0m
+chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
+#
+mkdir -p /srv/http/mail.$USER.c0m/public_html
+chmod g+xr-w /srv/http/mail.$USER.c0m
+chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
+
+"
+         sleep 2s
+         echo "w00t!! You're just flying through this stuff you hacker you!! :p"
+         sleep 1s
+         echo "rah rah $USER rah rah $USER!!!"
+         sleep 1s
+         echo "Ok let's continue on with this...."
+         choice=$choice_count
+         echo $done_format
+         highlight=10
+      elif [ $choice -eq 11 ] ; then
          echo $done_format
          echo "${bldgreen} ==> Installing VirtualBox guest additions...${txtrst}"
          sleep 3s
@@ -796,7 +871,7 @@ ${bldgreen}Log back in as USER, then type: 'startx'${txtrst}"
          sudo reboot
          sleep 60s
       else
-         echo "${bldred}Please make a choice between 1-10! (HINT: start at 1)${txtrst}"
+         echo "${bldred}Please make a choice between 1-11! (HINT: start at 1)${txtrst}"
          highlight=${highlight}
          menulist
          choice=$choice_count
