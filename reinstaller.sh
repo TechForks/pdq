@@ -26,6 +26,7 @@ dotfiles_local="${my_home}${dotfiles}local.lst"
 dotfiles_repo="git://github.com/idk/pdq.git"
 awesome_repo="git://github.com/idk/awesomewm-X.git"
 conky_repo="git://github.com/idk/conky-X.git"
+luakit_repo="git://github.com/idk/luakit-X.git"
 done_format="========================================="
 choice_count=10
 root_choice_count=6
@@ -216,9 +217,9 @@ else
       fi
 
       if [ $highlight -eq 9 ] ; then
-         echo "${bldgreen}9. Install Awesome Window Manager (awesomewm-X) and Conky (conky-X) -- done!${txtrst}" 
+         echo "${bldgreen}9. Install Awesome Window Manager (awesomewm-X), luakit-X and Conky (conky-X) -- done!${txtrst}" 
       else
-         echo "9. Install Awesome Window Manager (awesomewm-X) and Conky (conky-X)" 
+         echo "9. Install Awesome Window Manager (awesomewm-X), luakit-X and Conky (conky-X)" 
       fi
       if [ $highlight -eq 10 ] ; then
          echo "${bldred}10. Exit Installer${txtrst}"
@@ -368,16 +369,22 @@ else
          echo $done_format
          highlight=8
       elif [ $choice -eq 9 ] ; then
-         echo "${bldgreen} ==> Git clone awesomewm-X and conky-X... Installing...${txtrst}"
+         echo "${bldgreen} ==> Git clone awesomewm-X, luakit-X and conky-X... Installing...${txtrst}"
+         packer -S luakit
          mkdir ${my_home}.config
          cd ${my_home}.config/
          git clone ${awesome_repo}
          git clone ${conky_repo}
+         git clone ${luakit_repo}
          sh awesomewm-X/install.sh
          sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
          sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
+         ln -s ${my_home}.config/awesome/themes/zenburn-custom ${my_home}.config/awesome/themes/current
+         ln -s ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
          echo " sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
-         sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua"
+         sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
+         ln -s ${my_home}.config/awesome/themes/zenburn-custom ${my_home}.config/awesome/themes/current
+         ln -s ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua"
          pwd
          ls --color=auto -a
          choice=$choice_count
