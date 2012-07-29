@@ -379,12 +379,8 @@ else
          sh awesomewm-X/install.sh
          sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
          sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
-         ln -s ${my_home}.config/awesome/themes/zenburn-custom ${my_home}.config/awesome/themes/current
-         ln -s ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
          echo " sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
          sudo ln -s ${my_home}.config/awesome/default.rc.lua /etc/xdg/awesome/rc.lua
-         ln -s ${my_home}.config/awesome/themes/zenburn-custom ${my_home}.config/awesome/themes/current
-         ln -s ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua"
          pwd
          ls --color=auto -a
          choice=$choice_count
