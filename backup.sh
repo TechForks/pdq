@@ -87,6 +87,7 @@ cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
+cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
 cp /etc/privoxy/config ${my_home}${dotfiles}etc/privoxy_config
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
@@ -104,6 +105,7 @@ cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
+cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist

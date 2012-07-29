@@ -458,7 +458,19 @@ sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
          sudo cp ${my_home}${dotfiles}etc/httpd.conf /etc/httpd/conf/httpd.conf
          sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
          sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
-
+         sudo mv /etc/php/php.ini /etc/php/php.ini.bak
+         sudo cp ${my_home}${dotfiles}etc/php.ini /etc/php/php.ini
+         echo "sudo cp ${my_home}${dotfiles}etc/mpd.conf /etc/mpd.conf
+ln -s /etc/mpd.conf ${my_home}.mpdconf
+sudo mv /etc/tor/torrc /etc/tor/torrc.bak
+sudo cp ${my_home}${dotfiles}etc/torrc /etc/tor/torrc
+sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
+sudo mv /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
+sudo cp ${my_home}${dotfiles}etc/httpd.conf /etc/httpd/conf/httpd.conf
+sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
+sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
+sudo mv /etc/php/php.ini /etc/php/php.ini.bak
+sudo cp ${my_home}${dotfiles}etc/php.ini /etc/php/php.ini"
  sudo echo "#
 # /etc/hosts: static lookup table for host names
 #
@@ -866,7 +878,7 @@ ${bldgreen}vboxguest vboxsf vboxvideo${txtrst}"
          echo "${bldred}Rebooting ...${txtrst}
 
 
-${bldgreen}Log back in as USER, then type: 'startx'${txtrst}"
+${bldgreen}Log back in as $USER, then type: 'startx'${txtrst}"
          sleep 3s
          sudo reboot
          sleep 60s
