@@ -448,7 +448,7 @@ sudo mv /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhos
 sudo cp ${my_home}${dotfiles}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
 sudo mv /etc/php/php.ini /etc/php/php.ini.bak
 sudo cp ${my_home}${dotfiles}etc/php.ini /etc/php/php.ini"
- sudo echo "#
+           sudo echo "#
 # /etc/hosts: static lookup table for host names
 #
 
@@ -735,6 +735,10 @@ NameVirtualHost *:444
 # End of file > /etc/hosts"
          sleep 2s
          echo "Creating self-signed certificate (you can change key size and days of validity)"
+         mkdir -p ${my_home}music
+         sudo mkdir -p /var/lib/mpd/music
+         ln -s ${my_home}music /var/lib/mpd/music
+         sudo rc.d restart mpd
          su
          cd /etc/httpd/conf
          openssl genrsa -des3 -out server.key 1024
