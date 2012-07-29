@@ -863,6 +863,16 @@ Cool, well we are still root so let's drop down to $USER"
          # exit from root back to user
          exit
          echo "w00t success!"
+         sleep 1s
+         ln -s /srv/http ${my_home}localhost
+         cd ${my_home}localhost
+         pwd
+         echo "These are your localhost domains:"
+         sleep 1s
+         ls --color=auto -a
+         sleep 3s
+         echo "You can access the files from this shortcut in your home folder and through web server in your favorite web browser. ie: http://$USER.c0m, http://phpmyadmin.$USER.c0m, etc."
+         sleep 3s
          choice=$choice_count
          echo $done_format
          highlight=10
