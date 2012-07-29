@@ -2,7 +2,7 @@
 ## 07-10-2012 pdq, 07-18-2012
 
 my_home="$HOME/"
-me=$USER
+#me=$USER
 #my_home="/home/pdq/test/"
 dev_directory="Development"
 dotfiles="${dev_directory}/pdq/"
@@ -86,6 +86,7 @@ cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/book
 cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
+cp /etc/modules-load.d/my_modules.conf ${my_home}${dotfiles}etc/my_modules.conf
 cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
