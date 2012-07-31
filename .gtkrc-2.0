@@ -1,7 +1,7 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="H2O-gtk2-Emerald"
+gtk-theme-name="Crux"
 gtk-icon-theme-name="Humanity-Colors-Dark-Graphite"
 gtk-font-name="Terminus 10"
 gtk-cursor-theme-name="Adwaita"
