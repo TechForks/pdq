@@ -1,6 +1,7 @@
 #
 # ~/.bash_profile
 #
+LANG=en_US.UTF-8
 export EDITOR="nano"
 export PATH=$PATH:/usr/local/bin
 #export WEBKIT_IGNORE_SSL_ERRORS="1" midori

@@ -50,6 +50,7 @@ gstreamer0.10-ffmpeg
 gstreamer0.10-good-plugins
 gstreamer0.10-ugly-plugins
 gtk-engines
+gtk-vnc
 hardinfo
 hgsvn
 hicolor-icon-theme
@@ -127,6 +128,7 @@ sysvbanner
 tcpdump
 terminus-font
 tig
+tightvnc
 tmux
 tor
 transmission-cli
