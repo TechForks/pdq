@@ -13,8 +13,6 @@
 ## Creating backups on host OS (Archlinux)
 # sh ~/Development/pdq/backup.sh
 
-
-
 ## THERE SHOULD BE NO NEED TO EDIT THE FOLLOWING 
 
 my_home="$HOME/"
@@ -214,7 +212,7 @@ else
       else
          echo "8. Install LAMPP (Apache/MySQL/PHP/PHPMyAdmin)" 
       fi
-      if [ $highlight -eq 9] ; then
+      if [ $highlight -eq 9 ] ; then
          echo "${bldred}9. Exit Installer${txtrst}"
       else
          echo "9. Exit Installer"
