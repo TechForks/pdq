@@ -778,12 +778,6 @@ NameVirtualHost *:444
          chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
 
 
-# Take Screenshot of entire Screen
-if [ "$1" == "scr" ]; then scrot "${NAME}" || wput -m 644 -u :${name} "blah blah blah" || echo -n "{URL}" | xclip -selection c; fi
-
-
-
-
 
 echo "mkdir -p /srv/http/root/public_html
 chmod g+xr-w /srv/http/root
