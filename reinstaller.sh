@@ -380,7 +380,7 @@ sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
          mkdir -p ${my_home}.cache/awesome
          touch ${my_home}.cache/awesome/stderr
          touch ${my_home}.cache/awesome/stdout
-         mkdir ${my_home}.config/conky/arch/.cache
+         mkdir -p ${my_home}.config/conky/arch/.cache
          mv ${my_home}.xinitrc ${my_home}.xinitrc.original
          cp ${my_home}.config/awesomewm-X/skel/.xinitrc ${my_home}.xinitrc
          sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
@@ -411,7 +411,7 @@ sudo cp ${my_home}${dotfiles}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
          mkdir -p ${my_home}.cache/awesome
          touch ${my_home}.cache/awesome/stderr
          touch ${my_home}.cache/awesome/stdout
-         mkdir ${my_home}.config/conky/arch/.cache
+         mkdir -p ${my_home}.config/conky/arch/.cache
          mv ${my_home}.xinitrc ${my_home}.xinitrc.original
          cp ${my_home}.config/awesomewm-X/skel/.xinitrc ${my_home}.xinitrc
          sudo mv /etc/xdg/awesome/rc.lua /etc/xdg/awesome/rc.lua.bak
@@ -776,8 +776,6 @@ NameVirtualHost *:444
          mkdir -p /srv/http/mail.$USER.c0m/public_html
          chmod g+xr-w /srv/http/mail.$USER.c0m
          chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
-
-
 
 echo "mkdir -p /srv/http/root/public_html
 chmod g+xr-w /srv/http/root
