@@ -1,5 +1,6 @@
 archey3
 arm
+bashish
 cacheclean
 cairo-compmgr-git
 conky-lua
@@ -25,12 +26,14 @@ gtk-murrine-arch-theme
 gtk-theme-beauty-in-black
 kdenlive-git
 libpng12
+libyahoo2
 logstalgia
 luainotify
 montecarlo-font
 murrine-themes-collection
 mysqltcl
 ncmpcpp-fftw
+nitroshare
 package-query
 packer
 packer-color

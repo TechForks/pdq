@@ -11,6 +11,7 @@ automake
 awesome
 bash-completion
 binutils
+bitlbee
 bleachbit
 blender
 cairo
@@ -35,8 +36,6 @@ fuseiso
 gcc
 gcolor2
 gdb
-geany
-geany-plugins
 git
 gnome-disk-utility
 gnome-icon-theme
@@ -57,6 +56,7 @@ hicolor-icon-theme
 htop
 idesk
 kdebase-dolphin
+kdebase-konsole
 kdemultimedia-ffmpegthumbs
 keepassx
 lib32-intel-dri
@@ -65,8 +65,10 @@ lib32-libxft
 lib32-mpg123
 lib32-openal
 libisoburn
+libotr
 libtool
 libunique
+libwebkit
 libxft
 luafilesystem
 luasocket
@@ -109,7 +111,6 @@ php-memcache
 php-memcached
 php-pear
 phpmyadmin
-pidgin
 pkg-config
 pkgtools
 polipo
@@ -141,6 +142,7 @@ virtualbox
 vlc
 vnstat
 weechat
+wget
 wireshark-cli
 xbindkeys
 xchat
