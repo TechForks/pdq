@@ -54,9 +54,7 @@ hardinfo
 hgsvn
 hicolor-icon-theme
 htop
-idesk
 kdebase-dolphin
-kdebase-konsole
 kdemultimedia-ffmpegthumbs
 keepassx
 lib32-intel-dri
@@ -96,7 +94,6 @@ ntfsprogs
 ntop
 ntp
 openssh
-p7zip
 parcellite
 patch
 perl-net-ssleay
@@ -125,11 +122,9 @@ squashfs-tools
 sudo
 syslinux
 systemd-tools
-sysvbanner
 tcpdump
 terminus-font
 tig
-tightvnc
 tmux
 tor
 transmission-cli
@@ -137,7 +132,6 @@ truecrypt
 unrar
 unzip
 upx
-vim
 virtualbox
 vlc
 vnstat
