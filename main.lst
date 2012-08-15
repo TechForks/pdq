@@ -49,7 +49,6 @@ gstreamer0.10-ffmpeg
 gstreamer0.10-good-plugins
 gstreamer0.10-ugly-plugins
 gtk-engines
-gtk-vnc
 hardinfo
 hgsvn
 hicolor-icon-theme
@@ -91,7 +90,6 @@ networkmanager
 nitrogen
 ntfs-3g
 ntfsprogs
-ntop
 ntp
 openssh
 parcellite
