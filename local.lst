@@ -13,8 +13,11 @@ downgrade
 dropbox
 dropbox-cli
 eggdrop
+fbsplash
+fbsplash-themes-arch-banner
 ffpoth
 flashplugin-beta
+flexget
 fslint
 gnome-connection-manager
 grub
@@ -26,6 +29,7 @@ kdenlive-git
 libpng12
 logstalgia
 luainotify
+miscsplashutils
 montecarlo-font
 murrine-themes-collection
 mysqltcl
@@ -35,10 +39,13 @@ packer
 packer-color
 pacman-color
 pacmanlog2gource
+pyrss2gen
+python2-certifi
+python2-pynzb
+python2-requests-0.10.0
 python3-aur
 python3-xynexdg
 pytransmissionrpc
-radiotray
 redshift-minimal
 rxvt-unicode-patched
 screencastor
@@ -47,6 +54,7 @@ spacefm-git
 sublime-text-dev
 teamviewer
 torsocks
+transcoder
 ttf-envy-code-r
 ttf-ms-fonts
 urxvt-perls-git
