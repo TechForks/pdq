@@ -3,7 +3,6 @@ arm
 cacheclean
 cairo-compmgr-git
 conky-lua
-conkytransmission-bzr
 cower
 ctris
 cutycapt-svn
@@ -45,7 +44,6 @@ python2-pynzb
 python2-requests-0.10.0
 python3-aur
 python3-xynexdg
-pytransmissionrpc
 redshift-minimal
 rxvt-unicode-patched
 screencastor

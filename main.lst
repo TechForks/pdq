@@ -18,7 +18,6 @@ cairo
 cclive
 cdrdao
 chromium
-claws-mail
 cmatrix
 consolekit
 devede
@@ -35,7 +34,6 @@ flex
 fontconfig
 freetype2
 fuseiso
-gaupol
 gcc
 gcolor2
 gdb
@@ -46,11 +44,8 @@ gnome-themes-extras
 gnome-themes-standard
 gnunet-gtk
 gpicview
-gstreamer0.10-bad
-gstreamer0.10-bad-plugins
 gstreamer0.10-base-plugins
 gstreamer0.10-ffmpeg
-gstreamer0.10-ugly-plugins
 gtk-engines
 hardinfo
 hgsvn
@@ -130,7 +125,6 @@ systemd
 tcpdump
 terminus-font
 tig
-tmux
 tor
 transmission-gtk
 truecrypt
