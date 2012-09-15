@@ -9,6 +9,7 @@ artwiz-fonts
 autoconf
 automake
 awesome
+baobab
 bash-completion
 binutils
 bitlbee
@@ -45,7 +46,6 @@ gnome-themes-standard
 gnunet-gtk
 gpicview
 gstreamer0.10-base-plugins
-gstreamer0.10-ffmpeg
 gtk-engines
 hardinfo
 hgsvn
@@ -124,7 +124,6 @@ syslinux
 systemd
 tcpdump
 terminus-font
-tig
 tor
 transmission-gtk
 truecrypt
