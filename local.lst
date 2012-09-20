@@ -24,7 +24,10 @@ kalu
 kdenlive-git
 libpng12
 logstalgia
+lpeg
+lua-cjson
 luainotify
+luajson
 montecarlo-font
 mysqltcl
 ncmpcpp-fftw
