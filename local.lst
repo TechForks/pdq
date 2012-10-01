@@ -19,6 +19,7 @@ flexget
 fslint
 gnome-connection-manager
 google-image-downloader
+grake
 grub
 kalu
 kdenlive-git
@@ -26,8 +27,10 @@ libpng12
 logstalgia
 lpeg
 lua-cjson
+lua-sqlite3
 luainotify
 luajson
+mlt-git
 montecarlo-font
 mysqltcl
 ncmpcpp-fftw
@@ -48,6 +51,7 @@ screencastor
 secure-delete
 spacefm-git
 sublime-text-dev
+syncbackup
 teamviewer
 torsocks
 ttf-envy-code-r

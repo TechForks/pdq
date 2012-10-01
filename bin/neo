@@ -54,11 +54,11 @@ do
    echo -e;ip addr
    sleep 3
    echo -e;clear
-   echo -e;netstat --tcp
+   echo -e;  
    sleep 2
-   echo -e;netstat --tcp --numeric
+   echo -e;ss --tcp --numeric
    sleep 2
-   echo -e;netstat --tcp --listening
+   echo -e;ss --tcp --listening
    sleep 4
    echo -e;clear
    echo -n '┌─=[' $(whoami) ']=─┐'
@@ -71,10 +71,7 @@ do
    sleep 8
    echo -e;clear
    echo -e;ps x
-   sleep 4
-   echo -e;clear
-   echo -e;cat './todo'
-   sleep 5
+   sleep 7
    echo -e;clear
    echo -e;cal -3
    sleep 5
@@ -105,10 +102,6 @@ do
    echo -e;clear
    sleep 2
    echo "FOLLOW PDQ @ 127.0.0.1 "
-   sleep 5
-   echo -e;clear
-   sleep 2
-   echo -e;ifconfig
    sleep 3
    echo -e;clear
    echo -e ;elinks -dump "http://m.youtube.com/user/TheAlexJonesChannel?gl=US&hl=en&client=mv-google"

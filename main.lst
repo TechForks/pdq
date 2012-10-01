@@ -84,6 +84,7 @@ libtool
 libunique
 libwebkit
 libxft
+liferea
 luafilesystem
 luasocket
 lxappearance
@@ -124,6 +125,7 @@ php-mcrypt
 php-memcache
 php-memcached
 php-pear
+php-sqlite
 phpmyadmin
 pinta
 pkg-config
