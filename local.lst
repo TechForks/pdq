@@ -1,6 +1,5 @@
 archey3
 arm
-backintime
 bcrypt
 cacheclean
 cairo-compmgr-git
@@ -40,6 +39,7 @@ packer-color
 pacman-color
 pacmanlog2gource
 pyrss2gen
+python-pyalsaaudio
 python2-certifi
 python2-pynzb
 python2-requests-0.10.0
