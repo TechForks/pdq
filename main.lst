@@ -32,7 +32,6 @@ elinks
 epdfview
 fakeroot
 filezilla
-firefox
 flex
 fontconfig
 freetype2
@@ -61,18 +60,11 @@ kde-l10n-en_gb
 kde-wallpapers
 kdeaccessibility-jovie
 kdebase-dolphin
-kdebase-kdepasswd
 kdebase-kdialog
-kdebase-keditbookmarks
-kdebase-kfind
-kdebase-konsole
 kdebase-plasma
-kdegraphics-gwenview
-kdegraphics-ksnapshot
 kdemultimedia-ffmpegthumbs
 kdeutils-ark
 keepassx
-konversation
 lib32-intel-dri
 lib32-libldap
 lib32-libxft
@@ -104,7 +96,6 @@ multitail
 mumble
 mysql
 nethogs
-network-manager-applet
 networkmanager
 nitrogen
 ntfs-3g
@@ -163,7 +154,6 @@ wget
 wireshark-cli
 wmctrl
 xbindkeys
-xchat
 xclip
 xcursor-themes
 xdotool
