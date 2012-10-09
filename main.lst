@@ -139,6 +139,7 @@ pyalpm
 python-beautifulsoup4
 python2-beautifulsoup4
 rsync
+ruby
 screen
 scrot
 source-highlight
@@ -157,8 +158,10 @@ upx
 virtualbox
 vlc
 vnstat
+weechat
 wget
 wireshark-cli
+wmctrl
 xbindkeys
 xchat
 xclip

@@ -2,7 +2,7 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 gtk-theme-name="Khali"
-gtk-icon-theme-name="Bespin-Black"
+gtk-icon-theme-name="Humanity-Colors-Dark-Yellow"
 gtk-font-name="Sans 10"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
