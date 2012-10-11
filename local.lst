@@ -23,7 +23,6 @@ kdenlive-git
 keepassc
 libpng12
 logstalgia
-loliclip
 lpeg
 lua-cjson
 lua-sqlite3
@@ -40,7 +39,6 @@ pacman-color
 pacmanlog2gource
 pyrss2gen
 python-kppy
-python-pyalsaaudio
 python2-certifi
 python2-pynzb
 python2-requests-0.10.0

@@ -56,9 +56,7 @@ hgsvn
 hicolor-icon-theme
 htop
 k3b
-kde-l10n-en_gb
 kdebase-dolphin
-kdebase-kdialog
 kdebase-plasma
 kdemultimedia-ffmpegthumbs
 kdeutils-ark
@@ -75,7 +73,6 @@ libunique
 libwebkit
 libxft
 liferea
-luaexpat
 luafilesystem
 luasocket
 lxappearance
