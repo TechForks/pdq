@@ -75,6 +75,7 @@ libunique
 libwebkit
 libxft
 liferea
+luaexpat
 luafilesystem
 luasocket
 lxappearance
@@ -139,6 +140,7 @@ systemd
 tcpdump
 terminus-font
 tor
+transmission-cli
 transmission-qt
 truecrypt
 unrar

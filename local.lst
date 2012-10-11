@@ -4,7 +4,7 @@ bcrypt
 cacheclean
 cairo-compmgr-git
 conky-lua
-cower
+conkywx
 cutycapt-svn
 detox
 dolphin-box-plugin-git
@@ -20,8 +20,10 @@ google-image-downloader
 grake
 grub
 kdenlive-git
+keepassc
 libpng12
 logstalgia
+loliclip
 lpeg
 lua-cjson
 lua-sqlite3
@@ -37,6 +39,7 @@ packer-color
 pacman-color
 pacmanlog2gource
 pyrss2gen
+python-kppy
 python-pyalsaaudio
 python2-certifi
 python2-pynzb
