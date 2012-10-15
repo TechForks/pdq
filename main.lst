@@ -55,12 +55,14 @@ hardinfo
 hgsvn
 hicolor-icon-theme
 htop
+initscripts
 k3b
 kdebase-dolphin
 kdebase-plasma
 kdemultimedia-ffmpegthumbs
 kdeutils-ark
 keepassx
+konversation
 lib32-intel-dri
 lib32-libldap
 lib32-libxft
@@ -131,9 +133,11 @@ screen
 scrot
 source-highlight
 squashfs-tools
+stalonetray
 sudo
 syslinux
 systemd
+sysvinit
 tcpdump
 terminus-font
 tor
