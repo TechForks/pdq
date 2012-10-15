@@ -44,7 +44,7 @@ ${bldgreen} ==> awesomewm-X repo pushed to github!${txtrst}
 
 # conky-X repo
 cd ${my_home}.config
-cp -r conky/* ${my_home}${dev_directory}/conky-X
+cp -r conky ${my_home}${dev_directory}/conky-X
 cd ${my_home}${dev_directory}/conky-X
 git add .
 if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated awesomewm-X to current" ]; then

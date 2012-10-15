@@ -154,6 +154,7 @@ weechat
 wget
 wireshark-cli
 wmctrl
+wpa_supplicant
 xbindkeys
 xclip
 xcursor-themes
