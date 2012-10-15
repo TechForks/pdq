@@ -26,7 +26,7 @@ mkdir ${my_home}${dotfiles}
 # awesomewm-X repo
 cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
 cd ${my_home}.config
-cp -r awesome/* ${my_home}${dev_directory}/awesomewm-X
+cp -r awesome/. ${my_home}${dev_directory}/awesomewm-X
 cd ${my_home}${dev_directory}/awesomewm-X
 git add .
 if [ "$commit_msg" == "" ]; then
@@ -44,7 +44,7 @@ ${bldgreen} ==> awesomewm-X repo pushed to github!${txtrst}
 
 # conky-X repo
 cd ${my_home}.config
-cp -r conky ${my_home}${dev_directory}/conky-X
+cp -r conky/. ${my_home}${dev_directory}/conky-X
 cd ${my_home}${dev_directory}/conky-X
 git add .
 if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated awesomewm-X to current" ]; then
@@ -62,7 +62,7 @@ ${bldgreen} ==> conky-X repo pushed to github!${txtrst}
 
 # luakit-X repo
 cd ${my_home}.config
-cp -r luakit/* ${my_home}${dev_directory}/luakit-X
+cp -r luakit/. ${my_home}${dev_directory}/luakit-X
 cd ${my_home}${dev_directory}/luakit-X
 git add .
 if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated conky-X to current" ]; then
