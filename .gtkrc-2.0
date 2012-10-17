@@ -1,8 +1,8 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="Khali"
-gtk-icon-theme-name="Humanity-Colors-Dark-Yellow"
+gtk-theme-name="WoW-Light"
+gtk-icon-theme-name="oxygen.kawoken"
 gtk-font-name="Envy Code R 10"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0

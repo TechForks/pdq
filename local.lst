@@ -15,6 +15,7 @@ ffpoth
 flashplugin-beta
 flexget
 fslint
+gentoo
 gnome-connection-manager
 google-image-downloader
 google-talkplugin
@@ -45,6 +46,7 @@ python2-pynzb
 python2-requests-0.10.0
 python3-aur
 python3-xynexdg
+razor-qt
 redshift-minimal
 rxvt-unicode-patched
 screencastor
@@ -56,7 +58,6 @@ teamviewer
 torsocks
 ttf-envy-code-r
 ttf-ms-fonts
-twmn
 urxvt-perls-git
 vcp
 wicked-git

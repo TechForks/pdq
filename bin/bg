@@ -1,0 +1,8 @@
+#!/bin/bash
+for file in ~/Videos/vids/*; do
+	echo "$file"
+done
+echo "Pick a background"
+read bg
+killall mplayer
+mplayer ~/Videos/vids/$bg.wmv -rootwin -vf scale=1440:900 -noconsolecontrols -loop 0
