@@ -51,3 +51,4 @@ convert $dest -resize 256x`expr 256 \* $deskn` `echo $dest | cut -d. -f1`.thumb.
 #thunar $dest || xdg-open $dest || gnome-open $dest || gpicview $dest || feh $dest || true >/dev/null 2>/dev/null
 
 mv $dest $HOME/Dropbox/Public/$dest && dropbox puburl $HOME/Dropbox/Public/$dest | xclip
+notify-send "Screenshot Done" "URL copied to clipboard"

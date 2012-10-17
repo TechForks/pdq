@@ -27,7 +27,6 @@ dialog
 dmenu
 dnsutils
 dosfstools
-dunst
 dvd+rw-tools
 elinks
 epdfview
@@ -141,6 +140,7 @@ systemd
 sysvinit
 tcpdump
 terminus-font
+tig
 tor
 transmission-cli
 transmission-qt

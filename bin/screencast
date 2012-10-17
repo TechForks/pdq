@@ -1,0 +1,4 @@
+#!/bin/bash
+filename="$HOME"/Videos/screencasts/pdq-$(date +%m%d%S).mkv
+ffmpeg -f x11grab -s 1440x900 -i :0.0 -c:v libx264 -preset ultrafast -crf 0 $filename
+notify-send "Screencast Done" "File located at $filename"
