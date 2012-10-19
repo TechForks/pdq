@@ -11,7 +11,7 @@ dolphin-box-plugin-git
 downgrade
 dropbox
 dropbox-cli
-ffcast
+eggdrop
 ffpoth
 flashplugin-beta
 flexget
@@ -21,6 +21,7 @@ google-image-downloader
 google-talkplugin
 grake
 grub
+hardened-cc
 kdenlive-git
 keepassc
 libpng12
