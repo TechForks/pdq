@@ -1,6 +1,5 @@
 archey3
 arm
-bcrypt
 cacheclean
 cairo-compmgr-git
 conky-lua
@@ -21,16 +20,13 @@ google-image-downloader
 google-talkplugin
 grake
 grub
-hardened-cc
 kdenlive-git
 keepassc
 libpng12
 logstalgia
-lpeg
 lua-cjson
 lua-sqlite3
 luainotify
-luajson
 mlt-git
 montecarlo-font
 mysqltcl
@@ -50,7 +46,6 @@ python3-xynexdg
 razor-qt
 redshift-minimal
 rxvt-unicode-patched
-screencastor
 secure-delete
 spacefm-git
 sublime-text-dev
