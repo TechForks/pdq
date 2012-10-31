@@ -56,6 +56,7 @@ alias xdef='xrdb -merge ~/.Xdefaults'
 alias flushdns="sudo /etc/rc.d/nscd restart"
 alias delfonts='fc-cache -vf'
 alias cclean='sudo cacheclean -v 1'
+#alias startx='startx &> ~/.xlog'
 #alias irssi='urxvt -e irssi &'
 #alias finch='urxvt -e finch &'
 alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
