@@ -18,7 +18,6 @@ cclive
 cdrdao
 chromium
 cmatrix
-consolekit
 devede
 dialog
 dmenu
@@ -47,6 +46,7 @@ gstreamer0.10-bad
 gstreamer0.10-base-plugins
 gstreamer0.10-good
 gstreamer0.10-ugly
+gtk-engine-murrine
 gtk-engines
 hardinfo
 hgsvn
@@ -95,6 +95,7 @@ nitrogen
 ntfs-3g
 ntfsprogs
 ntp
+openshot
 openssh
 parcellite
 patch
@@ -131,8 +132,8 @@ source-highlight
 squashfs-tools
 sudo
 syslinux
+syslog-ng
 systemd
-sysvinit
 tcpdump
 terminus-font
 tig
@@ -143,6 +144,7 @@ truecrypt
 unrar
 unzip
 upx
+vim
 virtualbox
 vlc
 vnstat
@@ -170,5 +172,6 @@ xorg-utils
 xorg-xinit
 xorg-xkill
 xterm
+xvkbd
 zenity
 zip

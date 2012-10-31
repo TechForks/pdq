@@ -4,6 +4,7 @@ cacheclean
 cairo-compmgr-git
 conky-lua
 conkywx
+consolekit
 cutycapt-svn
 detox
 dolphin-box-plugin-git
@@ -17,7 +18,6 @@ flexget
 fslint
 gnome-connection-manager
 google-image-downloader
-google-talkplugin
 grake
 grub
 kdenlive-git
@@ -50,6 +50,7 @@ secure-delete
 spacefm-git
 sublime-text-dev
 syncbackup
+systemd-ui-git
 teamviewer
 torsocks
 ttf-envy-code-r
