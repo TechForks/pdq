@@ -52,7 +52,6 @@ hardinfo
 hgsvn
 hicolor-icon-theme
 htop
-initscripts
 k3b
 kdebase-dolphin
 kdebase-plasma
@@ -69,7 +68,6 @@ libisoburn
 libotr
 libtool
 libunique
-libwebkit
 libxft
 luafilesystem
 luasocket
@@ -148,6 +146,7 @@ vim
 virtualbox
 vlc
 vnstat
+webkitgtk2
 weechat
 wget
 wireshark-cli
