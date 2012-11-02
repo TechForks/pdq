@@ -11,6 +11,7 @@ awesome
 baobab
 bash-completion
 binutils
+bison
 bitlbee
 blender
 cairo
@@ -130,7 +131,6 @@ source-highlight
 squashfs-tools
 sudo
 syslinux
-syslog-ng
 systemd
 tcpdump
 terminus-font

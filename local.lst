@@ -35,6 +35,7 @@ packer
 packer-color
 pacman-color
 pacmanlog2gource
+pkgbrowser
 pyrss2gen
 python-kppy
 python2-certifi
@@ -55,6 +56,7 @@ torsocks
 ttf-envy-code-r
 ttf-ms-fonts
 urxvt-perls-git
+vala-git
 vcp
 wicked-git
 xcursor-arch-simple
