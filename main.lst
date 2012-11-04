@@ -14,6 +14,7 @@ binutils
 bison
 bitlbee
 blender
+bluefish
 cairo
 cclive
 cdrdao
@@ -83,6 +84,7 @@ memcached
 memtest86+
 mesa
 mlocate
+moc
 mpc
 mpd
 multitail
