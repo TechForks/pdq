@@ -102,17 +102,22 @@ cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
 cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
 cp ${my_home}.colors ${my_home}${dotfiles}.colors
 cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
+cp ${my_home}.moc/config ${my_home}${dotfiles}moc.config
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
 cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
-cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
+#cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
+cp /etc/locale.gen ${my_home}${dotfiles}etc/locale.gen
+cp /etc/locale.conf ${my_home}${dotfiles}etc/locale.conf
 cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
 cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
+cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
+cp /etc/systemd/system/autologin\@.service ${my_home}${dotfiles}etc/autologin\@.service
 ${txtrst}
 
 "

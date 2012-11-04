@@ -28,6 +28,7 @@ logstalgia
 lua-cjson
 lua-sqlite3
 luainotify
+luakit-git
 mlt-git
 montecarlo-font
 mysqltcl
