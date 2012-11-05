@@ -54,6 +54,12 @@ else
 	luakit > /dev/null 2>&1 &
 	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
 fi
+if [ "$(pidof dolphin)" ] ; then
+	echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting file manager...${txtrst}"
+	dolphin > /dev/null 2>&1 & 
+fi
 if [ "$(pidof bitlbee)" ] ; then
 	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
 else
@@ -84,7 +90,7 @@ if [ "$(pidof vlc)" ] ; then
 	echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
-	vlc ~/Videos/tempvideo > /dev/null 2>&1 &
+	vlc ~/Videos/tv/big\ bang\ theory > /dev/null 2>&1 &
 
 fi
 if [ "$(pidof transmission-qt)" ] ; then
@@ -106,12 +112,6 @@ sleep 1s
 urxvtc -name logging -e sudo journalctl -f &
 urxvtc -name arm -e arm &
 urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
-if [ "$(pidof dolphin)" ] ; then
-	echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
-else
-	echo "${bldgreen}[OK] Starting file manager...${txtrst}"
-	dolphin > /dev/null 2>&1 & 
-fi
 if [ "$(pidof keepassx)" ] ; then
 	echo "${bldblue}Password manager already running, skipping${txtrst}"
 else
@@ -127,23 +127,23 @@ else
 	echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
 	urxvtc -e mocp &
 fi
+wmctrl -s 7
+sleep 3s
 wmctrl -r "tail" -t 2
 wmctrl -r "arm" -t 2
 wmctrl -r "sudo" -t 2
 wmctrl -r "moc" -t 6
 wmctrl -r "weechat" -t 1
+sleep 2s
 wmctrl -r "vlc" -t 5
 wmctrl -r "playlist" -t 5
 wmctrl -r "/home/pdq/pdq-db.kdb" -t 5
 wmctrl -r "dolphin" -t 5
-sleep 1s
 wmctrl -r "playlist" -b toggle,hidden
 wmctrl -r "dolphin" -b toggle,hidden
-wmctrl -s 5
-urxvtc &
+wmctrl -s 7
 echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 #sleep 2s
 echo "${bldgreen}[EXITING]${txtrst}"
 #sleep 2s
 ./motd.tcl
-
