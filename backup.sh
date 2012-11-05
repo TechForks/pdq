@@ -83,6 +83,7 @@ cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
 cp ${my_home}.colors ${my_home}${dotfiles}.colors
 cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
 cp ${my_home}run ${my_home}${dotfiles}run
+cp ${my_home}motd.tcl ${my_home}${dotfiles}motd.tcl
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
 cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
@@ -104,6 +105,8 @@ cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
 cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
 cp ${my_home}.colors ${my_home}${dotfiles}.colors
 cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
+cp ${my_home}run ${my_home}${dotfiles}run
+cp ${my_home}motd.tcl ${my_home}${dotfiles}motd.tcl
 cp ${my_home}.moc/config ${my_home}${dotfiles}moc.config
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
 cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
