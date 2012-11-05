@@ -1,0 +1,157 @@
+#!/bin/bash
+## start up workflow! =)
+## 11-04-2012 pdq
+
+# truecrypt mounted success file
+filea="/media/truecrypt1/test"
+fileb="/media/truecrypt2/test"
+
+# formatting
+txtbld=$(tput bold)             # Bold
+bldred=${txtbld}$(tput setaf 1) # Red Colored
+bldgreen=${txtbld}$(tput setaf 2) # Green Colored
+bldblue=${txtbld}$(tput setaf 6) # Blue Colored
+bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
+txtrst=$(tput sgr0)             # Reset
+
+if [ -f "$filea" ] ; then
+	echo "${bldblue}[SKIP] It appears your primary data is already mounted, proceeding to secondary data...${txtrst}"
+else
+	echo "${bldred}[WAIT] Decrypt primary data and proceed to desktop session${txtrst}"
+	truecrypt /home/pdq/vital/hiddenfiles /media/truecrypt1
+	if [ -f "$filea" ] ; then
+		echo "${bldgreen}mounted /media/truecrypt1${txtrst}"
+	else
+	    echo "${bldred}Incorrect passphrase...exiting${txtrst}"
+		exit
+	fi
+fi
+sleep 2s
+if ps ax | grep -v grep | grep xbindkeys > /dev/null ; then
+    echo "${bldblue}[SKIP] xbindkeys already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting xbindkeys (custom keyboard shortcuts)...${txtrst}"
+	xbindkeys
+fi
+sleep 1s
+if [ -f "$fileb" ] ; then
+	echo "${bldblue}[SKIP] It appears your secondary data is already mounted, proceeding to desktop session...${txtrst}"
+else
+	echo "${bldred}[WAIT] Decrypt secondary data and proceed to desktop session${txtrst}"
+	truecrypt /media/HDD2p/pdq/vital/hiddenfiles2 /media/truecrypt2
+	if [ -f "$fileb" ] ; then
+		echo "${bldgreen}mounted /media/truecrypt2${txtrst}"
+	else
+		echo "${bldred}Incorrect passphrase...exiting${txtrst}"
+		sleep 2s
+		exit
+	fi
+fi
+sleep 1s
+echo "${bldgreen}[OK] Starting pdq desktop session...${txtrst}"
+wmctrl -s 0
+sleep 1s
+if ps ax | grep -v grep | grep luakit > /dev/null ; then
+    echo "${bldblue}[SKIP] Web browsers already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting web browsers...${txtrst}"
+	luakit > /dev/null 2>&1 &
+	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
+fi
+sleep 1s
+if ps ax | grep -v grep | grep bitlbee > /dev/null ; then
+    echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
+	sudo bitlbee -D
+fi
+sleep 1s
+if ps ax | grep -v grep | grep httpd > /dev/null ; then
+    echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
+    sudo lamp restart
+else
+	echo "${bldgreen}[OK] Starting LAMP server...${txtrst}"
+	sudo lamp start
+fi
+echo "${bldgreen}[OK] Restoring desktop wallpaper and system information display...${txtrst}"
+nitrogen --restore &
+if ps ax | grep -v grep | grep conky > /dev/null ; then
+	killall conky
+fi
+sleep 1s
+sh ~/.config/awesome/global_script.sh > /dev/null 2>&1
+sleep 1s
+if ps ax | grep -v grep | grep weechat-curses > /dev/null ; then
+    echo "${bldblue}[SKIP] IRC clients already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
+	wmctrl -s 1
+	urxvtc -e weechat-curses &
+	urxvtc -e weechat-curses -d ~/.weechat-priv &
+	sleep 2s
+	wmctrl -r "weechat 0.3.9" -e '1,18,0,1040,708'
+fi
+if ps ax | grep -v grep | grep vlc > /dev/null ; then
+    echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
+	wmctrl -s 4
+	vlc ~/Videos/tempvideo > /dev/null 2>&1 &
+fi
+sleep 1s
+if ps ax | grep -v grep | grep transmission-qt > /dev/null ; then
+    echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
+	wmctrl -s 3
+	transmission-qt &
+fi
+sleep 1s
+if ps ax | grep -v grep | grep mocp > /dev/null ; then
+    echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
+	wmctrl -s 6
+	killall mocp
+	urxvtc -e mocp &
+	sleep 2s
+	wmctrl -r "mocp" -e '6,18,0,1040,708'
+else
+	echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
+	wmctrl -s 6
+	urxvtc -e mocp &
+	sleep 2s
+	wmctrl -r "mocp" -e '6,18,0,1040,708'
+fi
+if ps ax | grep -v grep | grep sublime_text > /dev/null ; then
+    echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting text editors...${txtrst}"
+    subl
+    sudo subl
+fi
+sleep 1s
+echo "${bldgreen}[OK] Rearranging clients...${txtrst}"
+wmctrl -r "VLC" -e '5,18,0,1040,708'
+sleep 1s
+echo "${bldgreen}[OK] Starting terminals...${txtrst}"
+wmctrl -s 2
+sleep 2s
+urxvtc -name logging -e sudo journalctl -f &
+urxvtc -name arm -e arm &
+urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
+urxvtc &
+sleep 1s
+wmctrl -s 5
+sleep 2s
+dolphin > /dev/null 2>&1 & 
+urxvtc &
+sleep 1s
+if ps ax | grep -v grep | grep keepassx > /dev/null ; then
+    echo "${bldblue}Password manager already running, skipping${txtrst}"
+else
+	keepassx &
+fi
+echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
+sleep 2s
+echo "${bldgreen}[EXITING]${txtrst}"
+sleep 2s
+exit
