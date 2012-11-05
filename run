@@ -58,14 +58,14 @@ else
 	luakit > /dev/null 2>&1 &
 	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
 fi
-sleep 1s
+#sleep 1s
 if [ "$(pidof bitlbee)" ] ; then
 	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
 	sudo bitlbee -D
 fi
-sleep 1s
+#sleep 1s
 if [ "$(pidof httpd)" ] ; then
 	echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
 	sudo lamp restart
@@ -78,14 +78,15 @@ nitrogen --restore &
 if [ "$(pidof conky)" ] ; then
 	killall conky
 fi
-sleep 1s
+#sleep 1s
 sh ~/.config/awesome/global_script.sh > /dev/null 2>&1
-sleep 1s
+#sleep 1s
 if [ "$(pidof weechat-curses)" ] ; then
 	echo "${bldblue}[SKIP] IRC clients already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
 	wmctrl -s 1
+	sleep 1s
 	urxvtc -e weechat-curses &
 	urxvtc -e weechat-curses -d ~/.weechat-priv &
 	sleep 2s
@@ -96,29 +97,30 @@ if [ "$(pidof vlc)" ] ; then
 else
 	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
 	wmctrl -s 4
+	sleep 1s
 	vlc ~/Videos/tempvideo > /dev/null 2>&1 &
 fi
-sleep 1s
+#sleep 1s
 if [ "$(pidof transmission-qt)" ] ; then
 	echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
-	wmctrl -s 3
-	transmission-qt &
+	#wmctrl -s 3
+	transmission-qt > /dev/null 2>&1 &
 fi
-sleep 1s
+#sleep 1s
 if [ "$(pidof mocp)" ] ; then
 	echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
 	wmctrl -s 6
+	sleep 1s
 	killall mocp
 	urxvtc -e mocp &
-	sleep 2s
 	wmctrl -r "mocp" -e '6,18,0,1040,708'
 else
 	echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
 	wmctrl -s 6
+	sleep 1s
 	urxvtc -e mocp &
-	sleep 2s
 	wmctrl -r "mocp" -e '6,18,0,1040,708'
 fi
 if [ "$(pidof sublime_text)" ] ; then
@@ -128,30 +130,30 @@ else
 	subl
 	sudo subl
 fi
-sleep 1s
+#sleep 1s
 echo "${bldgreen}[OK] Rearranging clients...${txtrst}"
 wmctrl -r "VLC" -e '5,18,0,1040,708'
-sleep 1s
+#sleep 1s
 echo "${bldgreen}[OK] Starting terminals...${txtrst}"
 wmctrl -s 2
-sleep 2s
+sleep 1s
 urxvtc -name logging -e sudo journalctl -f &
 urxvtc -name arm -e arm &
 urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
 urxvtc &
 sleep 1s
 wmctrl -s 5
-sleep 2s
+sleep 1s
 dolphin > /dev/null 2>&1 & 
 urxvtc &
-sleep 1s
+#sleep 1s
 if [ "$(pidof keepassx)" ] ; then
 	echo "${bldblue}Password manager already running, skipping${txtrst}"
 else
 	keepassx &
 fi
 echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
-sleep 2s
+#sleep 2s
 echo "${bldgreen}[EXITING]${txtrst}"
-sleep 2s
+#sleep 2s
 exit
