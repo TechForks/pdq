@@ -26,14 +26,12 @@ else
 		exit
 	fi
 fi
-sleep 2s
 if [ "$(pidof xbindkeys)" ] ; then
 	echo "${bldblue}[SKIP] xbindkeys already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting xbindkeys (custom keyboard shortcuts)...${txtrst}"
 	xbindkeys
 fi
-sleep 1s
 if [ -f "$fileb" ] ; then
 	echo "${bldblue}[SKIP] It appears your secondary data is already mounted, proceeding to desktop session...${txtrst}"
 else
@@ -43,11 +41,9 @@ else
 		echo "${bldgreen}mounted /media/truecrypt2${txtrst}"
 	else
 		echo "${bldred}Incorrect passphrase...exiting${txtrst}"
-		sleep 2s
 		exit
 	fi
 fi
-sleep 1s
 echo "${bldgreen}[OK] Starting pdq desktop session...${txtrst}"
 wmctrl -s 0
 sleep 1s
@@ -58,14 +54,12 @@ else
 	luakit > /dev/null 2>&1 &
 	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
 fi
-#sleep 1s
 if [ "$(pidof bitlbee)" ] ; then
 	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
 	sudo bitlbee -D
 fi
-#sleep 1s
 if [ "$(pidof httpd)" ] ; then
 	echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
 	sudo lamp restart
@@ -78,50 +72,26 @@ nitrogen --restore &
 if [ "$(pidof conky)" ] ; then
 	killall conky
 fi
-#sleep 1s
 sh ~/.config/awesome/global_script.sh > /dev/null 2>&1
-#sleep 1s
 if [ "$(pidof weechat-curses)" ] ; then
 	echo "${bldblue}[SKIP] IRC clients already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
-	wmctrl -s 1
-	sleep 1s
 	urxvtc -e weechat-curses &
 	urxvtc -e weechat-curses -d ~/.weechat-priv &
-	sleep 2s
-	wmctrl -r "weechat 0.3.9" -e '1,22,0,1040,708'
 fi
 if [ "$(pidof vlc)" ] ; then
 	echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
-	wmctrl -s 4
-	sleep 1s
 	vlc ~/Videos/tempvideo > /dev/null 2>&1 &
+
 fi
-#sleep 1s
 if [ "$(pidof transmission-qt)" ] ; then
 	echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
-	#wmctrl -s 3
 	transmission-qt > /dev/null 2>&1 &
-fi
-#sleep 1s
-if [ "$(pidof mocp)" ] ; then
-	echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
-	wmctrl -s 6
-	sleep 1s
-	killall mocp
-	urxvtc -e mocp &
-	wmctrl -r "mocp" -e '6,22,0,1040,708'
-else
-	echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
-	wmctrl -s 6
-	sleep 1s
-	urxvtc -e mocp &
-	wmctrl -r "mocp" -e '6,22,0,1040,708'
 fi
 if [ "$(pidof sublime_text)" ] ; then
 	echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
@@ -130,28 +100,47 @@ else
 	subl
 	sudo subl
 fi
-#sleep 1s
-echo "${bldgreen}[OK] Rearranging clients...${txtrst}"
-wmctrl -r "VLC" -e '5,22,0,1040,708'
-#sleep 1s
 echo "${bldgreen}[OK] Starting terminals...${txtrst}"
 wmctrl -s 2
 sleep 1s
 urxvtc -name logging -e sudo journalctl -f &
 urxvtc -name arm -e arm &
 urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
-urxvtc &
-sleep 1s
-wmctrl -s 5
-sleep 1s
-dolphin > /dev/null 2>&1 & 
-urxvtc &
-#sleep 1s
+if [ "$(pidof dolphin)" ] ; then
+	echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
+else
+	echo "${bldgreen}[OK] Starting file manager...${txtrst}"
+	dolphin > /dev/null 2>&1 & 
+fi
 if [ "$(pidof keepassx)" ] ; then
 	echo "${bldblue}Password manager already running, skipping${txtrst}"
 else
 	keepassx &
 fi
+wmctrl -s 6
+sleep 1s
+if [ "$(pidof mocp)" ] ; then
+	echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
+	killall mocp
+	urxvtc -e mocp &
+else
+	echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
+	urxvtc -e mocp &
+fi
+wmctrl -r "tail" -t 2
+wmctrl -r "arm" -t 2
+wmctrl -r "sudo" -t 2
+wmctrl -r "moc" -t 6
+wmctrl -r "weechat" -t 1
+wmctrl -r "vlc" -t 5
+wmctrl -r "playlist" -t 5
+wmctrl -r "/home/pdq/pdq-db.kdb" -t 5
+wmctrl -r "dolphin" -t 5
+sleep 1s
+wmctrl -r "playlist" -b toggle,hidden
+wmctrl -r "dolphin" -b toggle,hidden
+wmctrl -s 5
+urxvtc &
 echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 #sleep 2s
 echo "${bldgreen}[EXITING]${txtrst}"
