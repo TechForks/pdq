@@ -22,13 +22,13 @@ else
 	if [ -f "$filea" ] ; then
 		echo "${bldgreen}mounted /media/truecrypt1${txtrst}"
 	else
-	    echo "${bldred}Incorrect passphrase...exiting${txtrst}"
+		echo "${bldred}Incorrect passphrase...exiting${txtrst}"
 		exit
 	fi
 fi
 sleep 2s
 if ps ax | grep -v grep | grep xbindkeys > /dev/null ; then
-    echo "${bldblue}[SKIP] xbindkeys already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP] xbindkeys already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting xbindkeys (custom keyboard shortcuts)...${txtrst}"
 	xbindkeys
@@ -52,7 +52,7 @@ echo "${bldgreen}[OK] Starting pdq desktop session...${txtrst}"
 wmctrl -s 0
 sleep 1s
 if ps ax | grep -v grep | grep luakit > /dev/null ; then
-    echo "${bldblue}[SKIP] Web browsers already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP] Web browsers already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting web browsers...${txtrst}"
 	luakit > /dev/null 2>&1 &
@@ -60,15 +60,15 @@ else
 fi
 sleep 1s
 if ps ax | grep -v grep | grep bitlbee > /dev/null ; then
-    echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
 	sudo bitlbee -D
 fi
 sleep 1s
 if ps ax | grep -v grep | grep httpd > /dev/null ; then
-    echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
-    sudo lamp restart
+	echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
+	sudo lamp restart
 else
 	echo "${bldgreen}[OK] Starting LAMP server...${txtrst}"
 	sudo lamp start
@@ -82,7 +82,7 @@ sleep 1s
 sh ~/.config/awesome/global_script.sh > /dev/null 2>&1
 sleep 1s
 if ps ax | grep -v grep | grep weechat-curses > /dev/null ; then
-    echo "${bldblue}[SKIP] IRC clients already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP] IRC clients already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
 	wmctrl -s 1
@@ -92,7 +92,7 @@ else
 	wmctrl -r "weechat 0.3.9" -e '1,18,0,1040,708'
 fi
 if ps ax | grep -v grep | grep vlc > /dev/null ; then
-    echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
 	wmctrl -s 4
@@ -100,7 +100,7 @@ else
 fi
 sleep 1s
 if ps ax | grep -v grep | grep transmission-qt > /dev/null ; then
-    echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
 	wmctrl -s 3
@@ -108,7 +108,7 @@ else
 fi
 sleep 1s
 if ps ax | grep -v grep | grep mocp > /dev/null ; then
-    echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
+	echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
 	wmctrl -s 6
 	killall mocp
 	urxvtc -e mocp &
@@ -122,11 +122,11 @@ else
 	wmctrl -r "mocp" -e '6,18,0,1040,708'
 fi
 if ps ax | grep -v grep | grep sublime_text > /dev/null ; then
-    echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
+	echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting text editors...${txtrst}"
-    subl
-    sudo subl
+	subl
+	sudo subl
 fi
 sleep 1s
 echo "${bldgreen}[OK] Rearranging clients...${txtrst}"
@@ -146,7 +146,7 @@ dolphin > /dev/null 2>&1 &
 urxvtc &
 sleep 1s
 if ps ax | grep -v grep | grep keepassx > /dev/null ; then
-    echo "${bldblue}Password manager already running, skipping${txtrst}"
+	echo "${bldblue}Password manager already running, skipping${txtrst}"
 else
 	keepassx &
 fi
