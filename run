@@ -145,4 +145,5 @@ echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 #sleep 2s
 echo "${bldgreen}[EXITING]${txtrst}"
 #sleep 2s
-exit
+./motd.tcl
+

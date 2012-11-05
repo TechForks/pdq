@@ -95,7 +95,3 @@ if {[file exists /etc/changelog]&&[file readable /etc/changelog]} {
   close $fp
   puts ""
 }
-
-puts "To start desktopsession execute:
-./run
-"

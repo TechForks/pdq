@@ -89,7 +89,7 @@ cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/modules-load.d/my_modules.conf ${my_home}${dotfiles}etc/my_modules.conf
-cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
+#cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
