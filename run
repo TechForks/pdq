@@ -90,7 +90,7 @@ else
 	urxvtc -e weechat-curses &
 	urxvtc -e weechat-curses -d ~/.weechat-priv &
 	sleep 2s
-	wmctrl -r "weechat 0.3.9" -e '1,18,0,1040,708'
+	wmctrl -r "weechat 0.3.9" -e '1,22,0,1040,708'
 fi
 if [ "$(pidof vlc)" ] ; then
 	echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
@@ -115,13 +115,13 @@ if [ "$(pidof mocp)" ] ; then
 	sleep 1s
 	killall mocp
 	urxvtc -e mocp &
-	wmctrl -r "mocp" -e '6,18,0,1040,708'
+	wmctrl -r "mocp" -e '6,22,0,1040,708'
 else
 	echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
 	wmctrl -s 6
 	sleep 1s
 	urxvtc -e mocp &
-	wmctrl -r "mocp" -e '6,18,0,1040,708'
+	wmctrl -r "mocp" -e '6,22,0,1040,708'
 fi
 if [ "$(pidof sublime_text)" ] ; then
 	echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
@@ -132,7 +132,7 @@ else
 fi
 #sleep 1s
 echo "${bldgreen}[OK] Rearranging clients...${txtrst}"
-wmctrl -r "VLC" -e '5,18,0,1040,708'
+wmctrl -r "VLC" -e '5,22,0,1040,708'
 #sleep 1s
 echo "${bldgreen}[OK] Starting terminals...${txtrst}"
 wmctrl -s 2
