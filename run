@@ -3,8 +3,8 @@
 ## 11-04-2012 pdq
 
 # truecrypt mounted success file
-filea="/media/truecrypt1/test"
-fileb="/media/truecrypt2/test"
+tc1="/media/truecrypt1/test"
+tc2="/media/truecrypt2/test"
 
 # formatting
 txtbld=$(tput bold)             # Bold
@@ -14,12 +14,12 @@ bldblue=${txtbld}$(tput setaf 6) # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
 txtrst=$(tput sgr0)             # Reset
 
-if [ -f "$filea" ] ; then
+if [ -f "$tc1" ] ; then
 	echo "${bldblue}[SKIP] It appears your primary data is already mounted, proceeding to secondary data...${txtrst}"
 else
 	echo "${bldred}[WAIT] Decrypt primary data and proceed to desktop session${txtrst}"
 	truecrypt /home/pdq/vital/hiddenfiles /media/truecrypt1
-	if [ -f "$filea" ] ; then
+	if [ -f "$tc1" ] ; then
 		echo "${bldgreen}mounted /media/truecrypt1${txtrst}"
 	else
 		echo "${bldred}Incorrect passphrase...exiting${txtrst}"
@@ -32,12 +32,12 @@ else
 	echo "${bldgreen}[OK] Starting xbindkeys (custom keyboard shortcuts)...${txtrst}"
 	xbindkeys
 fi
-if [ -f "$fileb" ] ; then
+if [ -f "$tc2" ] ; then
 	echo "${bldblue}[SKIP] It appears your secondary data is already mounted, proceeding to desktop session...${txtrst}"
 else
 	echo "${bldred}[WAIT] Decrypt secondary data and proceed to desktop session${txtrst}"
 	truecrypt /media/HDD2p/pdq/vital/hiddenfiles2 /media/truecrypt2
-	if [ -f "$fileb" ] ; then
+	if [ -f "$tc2" ] ; then
 		echo "${bldgreen}mounted /media/truecrypt2${txtrst}"
 	else
 		echo "${bldred}Incorrect passphrase...exiting${txtrst}"
