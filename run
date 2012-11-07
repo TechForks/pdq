@@ -64,7 +64,7 @@ if [ "$(pidof bitlbee)" ] ; then
 	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
-	sudo bitlbee -D
+	#sudo bitlbee -D
 fi
 if [ "$(pidof httpd)" ] ; then
 	echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
@@ -73,6 +73,7 @@ else
 	echo "${bldgreen}[OK] Starting LAMP server...${txtrst}"
 	sudo lamp start
 fi
+wmctrl -s 1
 echo "${bldgreen}[OK] Restoring desktop wallpaper and system information display...${txtrst}"
 nitrogen --restore &
 if [ "$(pidof conky)" ] ; then
@@ -84,7 +85,7 @@ if [ "$(pidof weechat-curses)" ] ; then
 else
 	echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
 	urxvtc -e weechat-curses &
-	urxvtc -e weechat-curses -d ~/.weechat-priv &
+	#urxvtc -e weechat-curses -d ~/.weechat-priv &
 fi
 if [ "$(pidof vlc)" ] ; then
 	echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
@@ -97,7 +98,7 @@ if [ "$(pidof transmission-qt)" ] ; then
 	echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
-	transmission-qt > /dev/null 2>&1 &
+	#transmission-qt > /dev/null 2>&1 &
 fi
 if [ "$(pidof sublime_text)" ] ; then
 	echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
@@ -112,6 +113,7 @@ sleep 1s
 urxvtc -name logging -e sudo journalctl -f &
 urxvtc -name arm -e arm &
 urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
+sleep 1s
 if [ "$(pidof keepassx)" ] ; then
 	echo "${bldblue}Password manager already running, skipping${txtrst}"
 else
@@ -128,13 +130,12 @@ else
 	urxvtc -e mocp &
 fi
 wmctrl -s 7
-sleep 3s
+sleep 1s
 wmctrl -r "tail" -t 2
 wmctrl -r "arm" -t 2
 wmctrl -r "sudo" -t 2
 wmctrl -r "moc" -t 6
 wmctrl -r "weechat" -t 1
-sleep 2s
 wmctrl -r "vlc" -t 5
 wmctrl -r "playlist" -t 5
 wmctrl -r "/home/pdq/pdq-db.kdb" -t 5
@@ -144,6 +145,6 @@ wmctrl -r "dolphin" -b toggle,hidden
 wmctrl -s 7
 echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 #sleep 2s
-echo "${bldgreen}[EXITING]${txtrst}"
+echo "${bldgreen}[LOADING] System information...${txtrst}"
 #sleep 2s
 ./motd.tcl

@@ -1,3 +1,4 @@
 #!/bin/bash
+sleep 2s
 IMAGEPATH=Dropbox/Public/$(date +%m%d%S)-${USER}.png && scrot $IMAGEPATH && dropbox puburl $IMAGEPATH | xclip
 notify-send "Screenshot Done" "URL copied to clipboard"

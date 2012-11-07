@@ -1,0 +1,33 @@
+#!/bin/bash
+## 11-05-2012 pdq ##
+
+my_home="$HOME/"
+
+# formatting
+txtbld=$(tput bold)             # Bold
+bldred=${txtbld}$(tput setaf 1) # Red Colored
+bldgreen=${txtbld}$(tput setaf 2) # Green Colored
+bldblue=${txtbld}$(tput setaf 6) # Blue Colored
+bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
+txtrst=$(tput sgr0)             # Reset
+
+echo "${bldgreen}[LOADING] Generating Archlinux base packages list${txtrst}"
+base_count=`pacman -Qqg base | wc -l`
+echo "${bldgreen}COUNT: ${base_count}${txtrst}"
+base=`pacman -Qqg base`
+echo "${base}"
+echo "${bldblue}[LOADING] Generating Archlinux base-devel packages list${txtrst}"
+base_devel_count=`pacman -Qqg base-devel | wc -l`
+echo "${bldblue}COUNT: ${base_devel_count}${txtrst}"
+base_devel=`pacman -Qqg base-devel`
+echo "${base_devel}"
+echo "${bldyellow}[LOADING] Generating Archlinux installed packages list${txtrst}"
+main_count=`pacman -Qqe | grep -vx "$(pacman -Qqg base base-devel)" | grep -vx "$(pacman -Qqm)" | wc -l`
+echo "${bldyellow}COUNT: ${main_count}${txtrst}"
+main=`pacman -Qqe | grep -vx "$(pacman -Qqg base base-devel)" | grep -vx "$(pacman -Qqm)"`
+echo "${main}"
+echo "${bldred}[LOADING] Generating Archlinux installed AUR packages list${txtrst}"
+llocal_count=`pacman -Qqm | wc -l`
+echo "${bldred}COUNT: ${llocal_count}${txtrst}"
+llocal=`pacman -Qqm`
+echo "${llocal}"
