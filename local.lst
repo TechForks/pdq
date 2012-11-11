@@ -21,8 +21,8 @@ gnome-connection-manager
 google-image-downloader
 grake
 grub
+hardened-cc
 kdenlive-git
-keepassc
 lib32-curl
 lib32-google-breakpad-svn
 lib32-libpng12
@@ -46,10 +46,9 @@ pacman-color
 pacmanlog2gource
 pkgbrowser
 pyrss2gen
-python-kppy
 python2-certifi
 python2-pynzb
-python2-requests-0.10.0
+python2-requests
 python3-aur
 python3-xynexdg
 razor-qt

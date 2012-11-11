@@ -23,6 +23,24 @@ fi
 mkdir ${my_home}${dev_directory}
 mkdir ${my_home}${dotfiles}
 
+# eggdrop-scripts repo
+cd ${my_home}.eggdrop/scripts
+cp -r custom/. ${my_home}${dev_directory}/eggdrop-scripts
+cd ${my_home}${dev_directory}/eggdrop-scripts
+git add .
+if [ "$commit_msg" == "" ]; then
+	commit_msg='updated eggdrop-scripts to current'
+fi
+git commit -m "$commit_msg"
+git push origin master
+echo "
+
+
+${bldgreen} ==> eggdrop-scripts repo pushed to github!${txtrst}
+
+
+"
+
 # awesomewm-X repo
 cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
 cd ${my_home}.config
