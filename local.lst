@@ -23,6 +23,12 @@ grake
 grub
 kdenlive-git
 keepassc
+lib32-curl
+lib32-google-breakpad-svn
+lib32-libpng12
+lib32-libtxc_dxtn
+lib32-nspr
+lib32-nss
 libpng12
 logstalgia
 lua-cjson
@@ -52,6 +58,7 @@ rxvt-unicode-patched
 secure-delete
 simpleswitcher-git
 spacefm-git
+steam
 sublime-text-dev
 syncbackup
 systemd-ui-git
@@ -61,6 +68,7 @@ transcoder
 ttf-envy-code-r
 ttf-ms-fonts
 tv-maxe
+unigine-heaven
 urxvt-perls-git
 vala-git
 vcp

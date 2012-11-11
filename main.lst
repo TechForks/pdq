@@ -10,7 +10,7 @@ automake
 awesome
 baobab
 bash-completion
-binutils
+binutils-multilib
 bison
 bitlbee
 blender
@@ -34,12 +34,15 @@ flex
 fontconfig
 freetype2
 fuseiso
-gcc
+gcc-libs-multilib
+gcc-multilib
 gcolor2
 gdb
 git
+gksu
 gnome-disk-utility
 gnome-icon-theme
+gnome-mplayer
 gnome-themes-extras
 gnome-themes-standard
 gnunet-gtk
@@ -152,6 +155,8 @@ vnstat
 webkitgtk2
 weechat
 wget
+wine
+wine_gecko
 wireshark-cli
 wmctrl
 wpa_supplicant
