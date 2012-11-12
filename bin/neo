@@ -84,10 +84,6 @@ do
    sleep 5
    echo -e;clear
    sleep 2
-   echo -e ;elinks -dump "http://ptfiles.net/rss.php?passkey=b77273f9881c8ce81283c671071a8a7b&feed=dl&user=pdq"
-   sleep 5
-   echo -e;clear
-   sleep 2
    echo "ALL SYSTEMS CHECKED..."
    sleep 2
    echo -e;clear
@@ -97,11 +93,11 @@ do
    echo -e;who
    sleep 2
    echo -e;clear
-   echo "FOLLOW PDQ "
+   echo "FOLLOW NEO "
    sleep 2
    echo -e;clear
    sleep 2
-   echo "FOLLOW PDQ @ 127.0.0.1 "
+   echo "FOLLOW NEO @ 127.0.0.1 "
    sleep 3
    echo -e;clear
    echo -e ;elinks -dump "http://m.youtube.com/user/TheAlexJonesChannel?gl=US&hl=en&client=mv-google"
