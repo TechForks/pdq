@@ -46,7 +46,7 @@ else
 fi
 echo "${bldgreen}[OK] Starting pdq desktop session...${txtrst}"
 wmctrl -s 0
-sleep 1s
+#sleep 1s
 if [ "$(pidof luakit)" ] ; then
 	echo "${bldblue}[SKIP] Web browsers already running, skipping${txtrst}"
 else
@@ -54,17 +54,17 @@ else
 	luakit > /dev/null 2>&1 &
 	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
 fi
-if [ "$(pidof dolphin)" ] ; then
+if [ "$(pidof spacefm)" ] ; then
 	echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting file manager...${txtrst}"
-	dolphin > /dev/null 2>&1 & 
+	spacefm > /dev/null 2>&1 & 
 fi
 if [ "$(pidof bitlbee)" ] ; then
 	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
-	#sudo bitlbee -D
+	sudo bitlbee -D
 fi
 if [ "$(pidof httpd)" ] ; then
 	echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
@@ -85,20 +85,21 @@ if [ "$(pidof weechat-curses)" ] ; then
 else
 	echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
 	urxvtc -e weechat-curses &
-	#urxvtc -e weechat-curses -d ~/.weechat-priv &
+	urxvtc -e weechat-curses -d ~/.weechat-priv &
 fi
-if [ "$(pidof vlc)" ] ; then
+if [ "$(pidof cvlc)" ] ; then
 	echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
-	vlc ~/Videos/tv/big\ bang\ theory > /dev/null 2>&1 &
-
+	#vlc ~/Videos/tv/big\ bang\ theory > /dev/null 2>&1 &
+	cvlc ~/Videos/tv/tempvideo > /dev/null 2>&1 &
 fi
-if [ "$(pidof transmission-qt)" ] ; then
+if [ "$(pidof transmission-daemon)" ] ; then
 	echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
 	#transmission-qt > /dev/null 2>&1 &
+	sudo systemctl start transmission.service
 fi
 if [ "$(pidof sublime_text)" ] ; then
 	echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
@@ -111,16 +112,16 @@ echo "${bldgreen}[OK] Starting terminals...${txtrst}"
 wmctrl -s 2
 sleep 1s
 urxvtc -name logging -e sudo journalctl -f &
-urxvtc -name arm -e arm &
+#urxvtc -name arm -e arm &
 urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
-sleep 1s
+#sleep 1s
 if [ "$(pidof keepassx)" ] ; then
 	echo "${bldblue}Password manager already running, skipping${txtrst}"
 else
 	keepassx &
 fi
 wmctrl -s 6
-sleep 1s
+#sleep 1s
 if [ "$(pidof mocp)" ] ; then
 	echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
 	killall mocp
@@ -130,7 +131,7 @@ else
 	urxvtc -e mocp &
 fi
 wmctrl -s 7
-sleep 1s
+#sleep 1s
 wmctrl -r "tail" -t 2
 wmctrl -r "arm" -t 2
 wmctrl -r "sudo" -t 2

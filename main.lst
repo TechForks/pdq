@@ -39,7 +39,6 @@ gcc-multilib
 gcolor2
 gdb
 git
-gksu
 gnome-disk-utility
 gnome-icon-theme
 gnome-mplayer
@@ -100,7 +99,6 @@ nitrogen
 ntfs-3g
 ntfsprogs
 ntp
-openshot
 openssh
 parcellite
 patch
