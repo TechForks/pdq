@@ -1,7 +1,7 @@
 #! /bin/bash
 {
   # Log file, file where we tell what events have been processed.
-  LOG_FILE=/var/log/posttorrent.log
+  LOG_FILE=~/.config/transmission-daemon/posttorrent.log
   # Username for transmission remote.
 #  TR_USERNAME="username"
   # Password for transmission remote.
