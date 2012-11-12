@@ -44,7 +44,6 @@ ${bldgreen} ==> eggdrop-scripts repo pushed to github!${txtrst}
 # zsh repo
 cp ${my_home}.zshrc ${my_home}${dev_directory}/zsh/.zshrc
 cp ${my_home}.zprofile ${my_home}${dev_directory}/zsh/.zprofile
-cd ${my_home}.zsh
 cp -r .zsh/. ${my_home}${dev_directory}/zsh
 cd ${my_home}${dev_directory}/zsh
 git add .
