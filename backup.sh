@@ -41,6 +41,26 @@ ${bldgreen} ==> eggdrop-scripts repo pushed to github!${txtrst}
 
 "
 
+# zsh repo
+cp ${my_home}.zshrc ${my_home}${dev_directory}/zsh/.zshrc
+cp ${my_home}.zprofile ${my_home}${dev_directory}/zsh/.zprofile
+cd ${my_home}.zsh
+cp -r .zsh/. ${my_home}${dev_directory}/zsh
+cd ${my_home}${dev_directory}/zsh
+git add .
+if [ "$commit_msg" == "" ]; then
+	commit_msg='updated zsh to current'
+fi
+git commit -m "$commit_msg"
+git push origin master
+echo "
+
+
+${bldgreen} ==> zsh repo pushed to github!${txtrst}
+
+
+"
+
 # awesomewm-X repo
 cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
 cd ${my_home}.config

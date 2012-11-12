@@ -2,6 +2,7 @@ archey3
 arm
 cacheclean
 cairo-compmgr-git
+command-not-found
 conky-lua
 conkywx
 cutycapt-svn
@@ -74,3 +75,6 @@ vlc-ncurses
 wicked-git
 xcursor-arch-simple
 yaourt
+zsh-completions
+zsh-packer
+zsh-syntax-highlighting
