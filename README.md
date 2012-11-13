@@ -1,8 +1,5 @@
 https://github.com/idk/pdq
 
-https://www.youtube.com/watch?v=Cbl0vinkg2A&hd=1
-
-
 Includes
 --------
 
