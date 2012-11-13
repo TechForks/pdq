@@ -1,6 +1,7 @@
-[ ! "$UID" = "0" ] && archey3 -c blue
-[  "$UID" = "0" ] && archey3 -c red
+# [ ! "$UID" = "0" ] && archey3 -c blue
+# [  "$UID" = "0" ] && archey3 -c red
 #command cowsay $(fortune)
+screenfetch
 #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
 PS1="\n${DGRAY}╭─[${LBLUE}\w${DGRAY}]\n${DGRAY}╰─[${WHITE}\T${DGRAY}]${DGRAY}>${BLUE}>${LBLUE}> ${RESET_COLOR}"
 #complete -cf sudo
@@ -37,7 +38,7 @@ alias matrix='cmatrix -C magenta'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias dev='cd ~/Development'
-alias backup=' sh ~/Development/pdq/backup.sh'
+alias backup=' sh ~/github/pdq/backup.sh'
 alias nc='ncmpcpp'
 alias grep='grep --color=auto'
 alias mounthdd='sudo udisks --mount /dev/sdb4'
