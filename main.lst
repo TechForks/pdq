@@ -57,6 +57,7 @@ hddtemp
 hgsvn
 hicolor-icon-theme
 htop
+hub
 k3b
 kdebase-dolphin
 kdebase-plasma
@@ -150,8 +151,6 @@ vnstat
 webkitgtk2
 weechat
 wget
-wine
-wine_gecko
 wireshark-cli
 wmctrl
 wpa_supplicant

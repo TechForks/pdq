@@ -47,13 +47,13 @@ fi
 echo "${bldgreen}[OK] Starting pdq desktop session...${txtrst}"
 wmctrl -s 0
 #sleep 1s
-if [ "$(pidof luakit)" ] ; then
-	echo "${bldblue}[SKIP] Web browsers already running, skipping${txtrst}"
-else
-	echo "${bldgreen}[OK] Starting web browsers...${txtrst}"
-	luakit > /dev/null 2>&1 &
-	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
-fi
+# if [ "$(pidof luakit)" ] ; then
+# 	echo "${bldblue}[SKIP] Web browsers already running, skipping${txtrst}"
+# else
+# 	echo "${bldgreen}[OK] Starting web browsers...${txtrst}"
+# 	luakit > /dev/null 2>&1 &
+# 	luakit -c ~/.config/luakit/rc-proxy.lua > /dev/null 2>&1 &
+# fi
 if [ "$(pidof spacefm)" ] ; then
 	echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
 else
@@ -92,7 +92,8 @@ if [ "$(pidof vlc)" ] ; then
 else
 	echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
 	#vlc ~/Videos/tv/big\ bang\ theory > /dev/null 2>&1 &
-	vlc -I ncurses --browse-dir ~/Videos/tv/tempvideo
+	#vlc -I ncurses --browse-dir ~/Videos/tv/tempvideo
+    vlc ~/Videos/tv/tempvideo > /dev/null 2>&1 &
 fi
 if [ "$(pidof transmission-daemon)" ] ; then
 	echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
@@ -137,12 +138,12 @@ wmctrl -r "arm" -t 2
 wmctrl -r "sudo" -t 2
 wmctrl -r "moc" -t 6
 wmctrl -r "weechat" -t 1
-wmctrl -r "vlc" -t 5
-wmctrl -r "playlist" -t 5
-wmctrl -r "/home/pdq/pdq-db.kdb" -t 5
-wmctrl -r "dolphin" -t 5
-wmctrl -r "playlist" -b toggle,hidden
-wmctrl -r "dolphin" -b toggle,hidden
+# wmctrl -r "vlc" -t 5
+# wmctrl -r "playlist" -t 5
+# wmctrl -r "/home/pdq/pdq-db.kdb" -t 5
+# wmctrl -r "dolphin" -t 5
+# wmctrl -r "playlist" -b toggle,hidden
+#wmctrl -r "dolphin" -b toggle,hidden
 wmctrl -s 7
 echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 #sleep 2s
