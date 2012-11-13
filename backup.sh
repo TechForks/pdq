@@ -29,7 +29,7 @@ cd ${my_home}.eggdrop/scripts
 cp -r custom/. ${my_home}${dev_directory}/eggdrop-scripts
 echo "cp -r custom/. ${my_home}${dev_directory}/eggdrop-scripts"
 cd ${my_home}${dev_directory}/eggdrop-scripts
-git add .;
+git add -A
 if [ "$commit_msg" == "" ]; then
 	commit_msg='updated eggdrop-scripts to current'
 fi
@@ -47,7 +47,7 @@ echo "cp ${my_home}.zshrc ${my_home}${dev_directory}/zsh/.zshrc
 cp ${my_home}.zprofile ${my_home}${dev_directory}/zsh/.zprofile
 cp -r .zsh ${my_home}${dev_directory}/zsh/"
 cd ${my_home}${dev_directory}/zsh
-git add .;
+git add -A
 if [ "$commit_msg" == "" ]; then
 	commit_msg='updated zsh to current'
 fi
@@ -63,7 +63,7 @@ cp -r awesome/. ${my_home}${dev_directory}/awesomewm-X
 echo "cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
 cp -r ${my_home}.config/awesome/. ${my_home}${dev_directory}/awesomewm-X"
 cd ${my_home}${dev_directory}/awesomewm-X
-git add .;
+git add -A
 if [ "$commit_msg" == "" ]; then
 	commit_msg='updated awesomewm-X to current'
 fi
@@ -77,7 +77,7 @@ cd ${my_home}.config
 cp -r conky/. ${my_home}${dev_directory}/conky-X
 echo "cp -r conky/. ${my_home}${dev_directory}/conky-X"
 cd ${my_home}${dev_directory}/conky-X
-git add .;
+git add -A
 if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated awesomewm-X to current" ]; then
 	commit_msg='updated conky-X to current'
 fi
@@ -155,7 +155,7 @@ cd ${my_home}${dotfiles}
 pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" > main.lst
 ## Create local.lst of local (includes AUR) packages installed
 pacman -Qqm > local.lst
-git add .;
+git add -A
 if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated luakit-X to current" ]; then
 	commit_msg='updated packages lists from source'
 fi
