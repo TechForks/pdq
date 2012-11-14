@@ -26,7 +26,7 @@ mkdir ${my_home}${dotfiles}
 # eggdrop-scripts repo
 echo "${bldblue} ==> Analyzing eggdrop-scripts repo!${txtrst}"
 cd ${my_home}.eggdrop/scripts
-cp -r custom/. ${my_home}${dev_directory}/eggdrop-scripts
+cp -r custom/ ${my_home}${dev_directory}/eggdrop-scripts
 echo "cp -r custom/. ${my_home}${dev_directory}/eggdrop-scripts"
 cd ${my_home}${dev_directory}/eggdrop-scripts
 git add -A
@@ -35,6 +35,9 @@ if [ "$commit_msg" == "" ]; then
 fi
 git commit -m "$commit_msg"
 git push origin master
+if [ "$commit_msg" == "updated eggdrop-scripts to current'" ]; then
+	commit_msg=''
+fi
 echo "${bldgreen} ==> eggdrop-scripts repo pushed to github!${txtrst}"
 
 # zsh repo
@@ -53,6 +56,9 @@ if [ "$commit_msg" == "" ]; then
 fi
 git commit -m "$commit_msg"
 git push origin master
+if [ "$commit_msg" == "updated zsh to current'" ]; then
+	commit_msg=''
+fi
 echo "${bldgreen} ==> zsh repo pushed to github!${txtrst}"
 
 # awesomewm-X repo
@@ -69,6 +75,9 @@ if [ "$commit_msg" == "" ]; then
 fi
 git commit -m "$commit_msg"
 git push origin master
+if [ "$commit_msg" == "updated awesomewm-X to current" ]; then
+	commit_msg=''
+fi
 echo "${bldgreen} ==> awesomewm-X repo pushed to github!${txtrst}"
 
 # conky-X repo
@@ -78,11 +87,14 @@ cp -r conky/. ${my_home}${dev_directory}/conky-X
 echo "cp -r conky/. ${my_home}${dev_directory}/conky-X"
 cd ${my_home}${dev_directory}/conky-X
 git add -A
-if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated awesomewm-X to current" ]; then
+if [ "$commit_msg" == "" ]; then
 	commit_msg='updated conky-X to current'
 fi
 git commit -m "$commit_msg"
 git push origin master
+if [ "$commit_msg" == "updated conky-X to current" ]; then
+	commit_msg=''
+fi
 echo "${bldgreen} ==> conky-X repo pushed to github!${txtrst}"
 
 # luakit-X repo
@@ -161,6 +173,9 @@ if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated luakit-X to current" ]
 fi
 git commit -m "$commit_msg"
 git push origin master
+if [ "$commit_msg" == "updated packages lists from source" ]; then
+	commit_msg=''
+fi
 echo "${bldgreen} ==> ${dotfiles} repo pushed to github!${txtrst}"
 ## end
 echo "${bldgreen}Everything backed up to github! =)${txtrst}"
