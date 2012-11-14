@@ -35,7 +35,7 @@ if [ "$commit_msg" == "" ]; then
 fi
 git commit -m "$commit_msg"
 git push origin master
-if [ "$commit_msg" == "updated eggdrop-scripts to current'" ]; then
+if [ "$commit_msg" == "updated eggdrop-scripts to current" ]; then
 	commit_msg=''
 fi
 echo "${bldgreen} ==> eggdrop-scripts repo pushed to github!${txtrst}"
@@ -56,7 +56,7 @@ if [ "$commit_msg" == "" ]; then
 fi
 git commit -m "$commit_msg"
 git push origin master
-if [ "$commit_msg" == "updated zsh to current'" ]; then
+if [ "$commit_msg" == "updated zsh to current" ]; then
 	commit_msg=''
 fi
 echo "${bldgreen} ==> zsh repo pushed to github!${txtrst}"
