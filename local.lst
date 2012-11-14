@@ -1,3 +1,4 @@
+aarchup
 arm
 cacheclean
 cairo-compmgr-git
@@ -34,7 +35,6 @@ lib32-libpng12
 lib32-libtxc_dxtn
 lib32-nspr
 lib32-nss
-libpng12
 logstalgia
 lua-cjson
 lua-sqlite3

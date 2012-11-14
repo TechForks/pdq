@@ -67,8 +67,8 @@ else
 	sudo bitlbee -D
 fi
 if [ "$(pidof httpd)" ] ; then
-	echo "${bldblue}[SKIP] LAMP may already be running, restarting${txtrst}"
-	sudo lamp restart
+	echo "${bldblue}[SKIP] LAMP may already be running, skipping${txtrst}"
+	#sudo lamp restart
 else
 	echo "${bldgreen}[OK] Starting LAMP server...${txtrst}"
 	sudo lamp start
@@ -145,6 +145,14 @@ wmctrl -r "weechat" -t 1
 # wmctrl -r "playlist" -b toggle,hidden
 #wmctrl -r "dolphin" -b toggle,hidden
 wmctrl -s 7
+if [ "$(pidof aarchup)" ] ; then
+	echo "${bldblue}[SKIP] Update notifier already running, restarting${txtrst}"
+	#killall aarchup
+	#/usr/bin/aarchup --loop-time 30 --aur --icon /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png &
+else
+	echo "${bldgreen}[OK] Starting update notifier...${txtrst}"
+	/usr/bin/aarchup --loop-time 30 --aur --icon /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png &
+fi
 echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 #sleep 2s
 echo "${bldgreen}[LOADING] System information...${txtrst}"

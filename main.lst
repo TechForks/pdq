@@ -52,6 +52,7 @@ gstreamer0.10-good
 gstreamer0.10-ugly
 gtk-engine-murrine
 gtk-engines
+gvim
 hardinfo
 hddtemp
 hgsvn
@@ -72,6 +73,7 @@ lib32-mpg123
 lib32-openal
 libisoburn
 libotr
+libpng12
 libtool
 libunique
 libxft
@@ -145,7 +147,6 @@ truecrypt
 unrar
 unzip
 upx
-vim
 virtualbox
 vnstat
 webkitgtk2
