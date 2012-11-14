@@ -4,6 +4,7 @@ cairo-compmgr-git
 command-not-found
 conky-lua
 conkywx
+cower
 cutycapt-svn
 detox
 dmenu-path-c
@@ -13,11 +14,15 @@ downgrade
 dropbox
 dropbox-cli
 eggdrop
+elementary-icons
 ffpoth
 flashplugin-beta
 flexget
 fslint
+gnome-colors-icon-theme
+gnome-colors-icon-theme-extras
 gnome-connection-manager
+gnomish-dark-theme
 google-image-downloader
 grake
 grub
@@ -75,6 +80,8 @@ vcp
 vlc-ncurses
 wicked-git
 xcursor-arch-simple
+xfce-theme-bluebird
+xfce-theme-greybird
 yaourt
 zsh-completions
 zsh-packer
