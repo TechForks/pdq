@@ -1,3 +1,6 @@
 [submodule "zsh"]
 	path = zsh
 	url = git@github.com:idk/zsh.git
+[submodule ".config/conky"]
+	path = .config/conky
+	url = git@github.com:idk/conky-X.git
