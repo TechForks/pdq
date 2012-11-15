@@ -4,3 +4,9 @@
 [submodule ".config/conky"]
 	path = .config/conky
 	url = git@github.com:idk/conky-X.git
+[submodule ".config/awesome"]
+	path = .config/awesome
+	url = git@github.com:idk/awesomewm-X.git
+[submodule ".config/luakit"]
+	path = .config/luakit
+	url = git@github.com:idk/luakit-X.git
