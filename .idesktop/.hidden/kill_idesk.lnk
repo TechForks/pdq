@@ -1,9 +1,0 @@
-table Icon
-  Caption: kill idesk
-  Icon: /usr/share/idesk/icons/32x32/penguin.png
-  X: 31
-  Y: 811
-  Command[0]: urxvtc -e sh ~/bin/refreshidesk.sh
-  Command[1]: idesktool kill_idesk.lnk
-end
-

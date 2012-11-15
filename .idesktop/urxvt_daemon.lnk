@@ -1,9 +1,0 @@
-table Icon
-  Caption: urxvt
-  Icon: /usr/share/idesk/icons/32x32/dice.png
-  X: 11
-  Y: 621
-  Command[0]: urxvtd -q -o -f
-  Command[1]: idesktool urxvt_daemon.lnk
-end
-

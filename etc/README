@@ -2,23 +2,3 @@
 # nano /etc/pacman.conf
 // line 15
 CacheDir     = /home/pdq/vital/pkg/
-
-// mpd.conf - symlink or create music directory
-# nano /etc/mpd.conf
-// line 37
-music_directory       "/var/lib/mpd/music"
-
-Music directory
-MPD needs to have +x permissions on all parent directories to the music collection (ie. if it's located outside of "mpd" home directory /var/lib/mpd). By default useradd sets permissions on home directories to 1700 drwx------. Thus users will most likely need to remount the music directory under a directory that mpd has access to -- this only applies if running as the 'mpd' user. 
-
-# mkdir /var/lib/mpd/music
-# echo "/home/$USER/music /var/lib/mpd/music none bind" >> /etc/fstab
-# mount -a
-# rc.d restart mpd
-
-Another simpler solution would be to just create a symbolic link into /var/lib/mpd/music. 
-
-# mkdir /var/lib/mpd/music
-# ln -s MUSIC_FOLDER /var/lib/mpd/music/
-# rc.d restart mpd
-

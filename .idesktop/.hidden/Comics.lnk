@@ -1,9 +1,0 @@
-table Icon
-  Caption: Comics
-  Icon: /usr/share/icons/hicolor/32x32/apps/mcomix.png
-  X: 991
-  Y: 751
-  Command[0]: mcomix
-  Command[1]: idesktool Comics.lnk
-end
-

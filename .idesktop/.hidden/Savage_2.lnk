@@ -1,9 +1,0 @@
-table Icon
-  Caption: Savage 2
-  Icon: /home/pdq/.icons/icons/s2icon.png
-  X: 619
-  Y: 809
-  Command[0]: /media/truecrypt1/games/common/savage-2-a-tortured-soul/savage2.sh
-  Command[1]: idesktool Savage_2.lnk
-end
-

@@ -1,9 +1,0 @@
-table Icon
-  Caption: tmux
-  Icon: /usr/share/idesk/icons/32x32/gnome-terminal.png
-  X: 11
-  Y: 691
-  Command[0]: urxvtc -e "echo 'weee'"
-  Command[1]: idesktool tmux.lnk
-end
-
