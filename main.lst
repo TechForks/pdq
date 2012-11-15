@@ -18,6 +18,7 @@ cclive
 cdrdao
 chromium
 cmatrix
+curlftpfs
 devede
 dialog
 dmenu
@@ -39,7 +40,6 @@ gdb
 git
 gnome-disk-utility
 gnome-icon-theme
-gnome-mplayer
 gnome-themes-extras
 gnome-themes-standard
 gnunet-gtk
@@ -119,12 +119,14 @@ polipo
 preload
 privoxy
 profont
+pyalpm
 python2-beautifulsoup4
 rsync
 ruby
 screen
 scrot
 squashfs-tools
+sshfs
 steam
 sudo
 syslinux
@@ -135,6 +137,7 @@ tig
 tor
 transmission-cli
 truecrypt
+udevil
 unrar
 unzip
 upx

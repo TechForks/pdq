@@ -1,8 +1,9 @@
 #!/bin/bash
 # packer update
 echo ":: updating system..."
-echo "packer-color -Syu --auronly"
-packer-color -Syu --auronly
+echo "pacaur -Syua"
+#packer-color -Syu --auronly
+pacaur -Syua
 #yaourt -Syua
 echo " "
 echo ":: update complete..."

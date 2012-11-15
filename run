@@ -58,7 +58,7 @@ if [ "$(pidof spacefm)" ] ; then
 	echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
 else
 	echo "${bldgreen}[OK] Starting file manager...${txtrst}"
-	spacefm > /dev/null 2>&1 & 
+	spacefm -d > /dev/null 2>&1 & 
 fi
 if [ "$(pidof bitlbee)" ] ; then
 	echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
@@ -109,6 +109,8 @@ else
 	subl
 	sudo subl
 fi
+
+
 echo "${bldgreen}[OK] Starting terminals...${txtrst}"
 wmctrl -s 2
 sleep 1s
@@ -158,3 +160,4 @@ echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 echo "${bldgreen}[LOADING] System information...${txtrst}"
 #sleep 2s
 ./motd.tcl
+/usr/bin/aarchup --debug --loop-time 60 --icon /usr/share/aarchup/archlogo.svg
