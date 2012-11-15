@@ -43,8 +43,7 @@ mlt-git
 montecarlo-font
 mysqltcl
 ncmpcpp-fftw
-package-query
-packer
+pacaur
 packer-color
 pacman-color
 pacmanlog2gource
@@ -63,7 +62,6 @@ screenfetch-git
 secure-delete
 simpleswitcher-git
 spacefm-git
-steam
 sublime-text-dev
 syncbackup
 systemd-ui-git
@@ -82,7 +80,6 @@ wicked-git
 xcursor-arch-simple
 xfce-theme-bluebird
 xfce-theme-greybird
-yaourt
 zsh-completions
 zsh-packer
 zsh-syntax-highlighting

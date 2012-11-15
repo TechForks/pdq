@@ -122,6 +122,7 @@ cp ${my_home}motd.tcl ${my_home}${dotfiles}motd.tcl
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
 cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
 cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
+cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
 cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
 #cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
@@ -153,6 +154,7 @@ cp ${my_home}.moc/config ${my_home}${dotfiles}moc.config
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
 cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
 cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
+cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
 cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
