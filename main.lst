@@ -9,11 +9,9 @@ autoconf
 automake
 awesome
 baobab
-bash-completion
 binutils-multilib
 bison
 bitlbee
-blender
 bluefish
 cairo
 cclive
@@ -52,7 +50,6 @@ gstreamer0.10-good
 gstreamer0.10-ugly
 gtk-engine-murrine
 gtk-engines
-gvim
 hardinfo
 hddtemp
 hgsvn
@@ -61,11 +58,9 @@ htop
 hub
 k3b
 kdebase-dolphin
-kdebase-plasma
 kdemultimedia-ffmpegthumbs
 kdeutils-ark
 keepassx
-konversation
 lib32-intel-dri
 lib32-libldap
 lib32-libxft
@@ -77,6 +72,7 @@ libpng12
 libtool
 libunique
 libxft
+lm_sensors
 luafilesystem
 luasocket
 lxappearance
@@ -91,8 +87,6 @@ memtest86+
 mesa
 mlocate
 moc
-mpc
-mpd
 multitail
 mumble
 mysql
@@ -105,7 +99,6 @@ ntp
 openssh
 parcellite
 patch
-perl-net-ssleay
 php
 php-apache
 php-apc
@@ -126,14 +119,11 @@ polipo
 preload
 privoxy
 profont
-pyalpm
-python-beautifulsoup4
 python2-beautifulsoup4
 rsync
 ruby
 screen
 scrot
-source-highlight
 squashfs-tools
 steam
 sudo
@@ -148,6 +138,7 @@ truecrypt
 unrar
 unzip
 upx
+vim
 virtualbox
 vnstat
 webkitgtk2
