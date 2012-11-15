@@ -9,6 +9,8 @@ User=pdq
 Type=forking
 PIDFile=/run/transmission/transmission.pid
 ExecStart=/usr/bin/transmission-daemon --pid-file /run/transmission/transmission.pid
+StandardOutput=null
+StandardError=null
 
 [Install]
 WantedBy=multi-user.target

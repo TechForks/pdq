@@ -4,6 +4,8 @@ cacheclean
 cairo-compmgr-git
 command-not-found
 conky-lua
+conkyswitcher
+conkytransmission-bzr
 conkywx
 cower
 cutycapt-svn
@@ -31,10 +33,7 @@ hardened-cc
 kdenlive-git
 lib32-curl
 lib32-google-breakpad-svn
-lib32-libpng12
 lib32-libtxc_dxtn
-lib32-nspr
-lib32-nss
 logstalgia
 lua-cjson
 lua-sqlite3
@@ -56,6 +55,7 @@ python2-pynzb
 python2-requests
 python3-aur
 python3-xynexdg
+pytransmissionrpc
 razor-qt
 redshift-minimal
 rxvt-unicode-patched

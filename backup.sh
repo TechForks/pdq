@@ -114,10 +114,16 @@ cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
 cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
 cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
 cp ${my_home}.colors ${my_home}${dotfiles}.colors
+cp ${my_home}.dmenu_cache ${my_home}${dotfiles}.dmenu_cache
+cp ${my_home}.nanorc ${my_home}${dotfiles}.nanorc
 cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
 cp ${my_home}run ${my_home}${dotfiles}run
 cp ${my_home}motd.tcl ${my_home}${dotfiles}motd.tcl
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
+cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
+cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
+cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
+cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
 #cp ${my_home}.config/archey3.cfg ${my_home}${dotfiles}archey3.cfg
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
@@ -138,11 +144,17 @@ echo "${bldblue}cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
 cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
 cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
 cp ${my_home}.colors ${my_home}${dotfiles}.colors
+cp ${my_home}.dmenu_cache ${my_home}${dotfiles}.dmenu_cache
+cp ${my_home}.nanorc ${my_home}${dotfiles}.nanorc
 cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
 cp ${my_home}run ${my_home}${dotfiles}run
 cp ${my_home}motd.tcl ${my_home}${dotfiles}motd.tcl
 cp ${my_home}.moc/config ${my_home}${dotfiles}moc.config
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
+cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
+cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
+cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
+cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
