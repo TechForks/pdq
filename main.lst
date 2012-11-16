@@ -39,17 +39,12 @@ gcolor2
 gdb
 git
 gnome-disk-utility
-gnome-icon-theme
-gnome-themes-extras
-gnome-themes-standard
 gnunet-gtk
 gpicview
 gstreamer0.10-bad
 gstreamer0.10-base-plugins
 gstreamer0.10-good
 gstreamer0.10-ugly
-gtk-engine-murrine
-gtk-engines
 hardinfo
 hddtemp
 hgsvn
@@ -114,7 +109,6 @@ phpmyadmin
 pinta
 pkg-config
 pkgfile
-pkgtools
 polipo
 preload
 privoxy

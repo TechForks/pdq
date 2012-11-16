@@ -2,7 +2,6 @@ aarchup
 arm
 cacheclean
 cairo-compmgr-git
-command-not-found
 conky-lua
 conkytransmission-bzr
 conkywx
@@ -24,10 +23,11 @@ fslint
 gnome-colors-icon-theme
 gnome-colors-icon-theme-extras
 gnome-connection-manager
-gnomish-dark-theme
 google-image-downloader
 grake
 grub
+gtk-engine-equinox
+gtk-theme-equinox
 kdenlive-git
 lib32-curl
 lib32-google-breakpad-svn
