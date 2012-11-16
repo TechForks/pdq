@@ -160,4 +160,3 @@ echo "${bldblue}[ACTIVE] Workflow restoration completed... SEE YA!${txtrst}"
 echo "${bldgreen}[LOADING] System information...${txtrst}"
 #sleep 2s
 ./motd.tcl
-/usr/bin/aarchup --debug --loop-time 60 --icon /usr/share/aarchup/archlogo.svg
