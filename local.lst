@@ -15,7 +15,6 @@ downgrade
 dropbox
 dropbox-cli
 eggdrop
-elementary-icons
 ffpoth
 flashplugin-beta
 flexget
@@ -26,8 +25,6 @@ gnome-connection-manager
 google-image-downloader
 grake
 grub
-gtk-engine-equinox
-gtk-theme-equinox
 kdenlive-git
 lib32-curl
 lib32-google-breakpad-svn

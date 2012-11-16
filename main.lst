@@ -4,7 +4,6 @@ alsa-oss
 alsa-plugins
 alsa-utils
 apache
-artwiz-fonts
 autoconf
 automake
 awesome
@@ -45,6 +44,7 @@ gstreamer0.10-bad
 gstreamer0.10-base-plugins
 gstreamer0.10-good
 gstreamer0.10-ugly
+gtk-engine-murrine
 hardinfo
 hddtemp
 hgsvn
@@ -112,7 +112,6 @@ pkgfile
 polipo
 preload
 privoxy
-profont
 pyalpm
 python2-beautifulsoup4
 rsync
