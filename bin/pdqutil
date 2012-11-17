@@ -48,19 +48,17 @@ what_do() {
 }
 
 check_pkg_mgr() {
-	if [ -f /usr/bin/pacaur ]; then
-	echo "${bldyellow}(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
-	else
+	if [ ! -f /usr/bin/pacaur ]; then
 		echo "FATAL ERROR: install pacaur' from the AUR"
 		exit
 	fi
 
-	if [ -f /usr/bin/pacman-color ]; then
-	echo "${bldyellow}(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
-	else
+	if [ ! -f /usr/bin/pacman-color ]; then
 		echo "FATAL ERROR: install pacman-color' from the AUR"
 		exit
 	fi
+
+	echo "${bldyellow}(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
 }
 
 load_motd() {
