@@ -15,6 +15,9 @@ clr="\Zb\Z0"
 # video directory
 video_playlist=$HOME/Videos/tv/tempvideo
 
+# pacman icon
+pac_icon=/home/pdq/.kde4/share/icons/K-Web0/22x22/apps/pacman.png
+
 # temporary file
 TEMP=/tmp/answer$$
 
@@ -349,8 +352,6 @@ ddaemons() {
 	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 2 ] ; then
 		if [ "$(pidof urxvtd)" ] ; then
 			echo "${bldblue}[SKIP] Urxvt daemon already running, restarting${txtrst}"
-			killall mocp
-			urxvtd &
 		else
 			echo "${bldgreen}[OK] Starting Urxvt daemon...${txtrst}"
 			urxvtd &
@@ -419,7 +420,7 @@ ddaemons() {
 			echo "${bldblue}[SKIP] Update notifier already running${txtrst}"
 		else
 			echo "${bldgreen}[OK] Starting update notifier...${txtrst}"
-			/usr/bin/aarchup --loop-time 30 --aur --icon /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png &
+			/usr/bin/aarchup --loop-time 30 --aur --icon pac_icon &
 		fi
 	fi
 
@@ -437,7 +438,7 @@ update_pkgs() {
 	echo " "
 	notify-send "pacman" \
             "Update complete" \
-            -i /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png
+            -i pac_icon
 
 	what_do
 }
@@ -454,7 +455,7 @@ update_aur() {
 	echo " "
 	notify-send "packer" \
             "Update complete" \
-            -i /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png
+            -i pac_icon
 
 	what_do
 }
