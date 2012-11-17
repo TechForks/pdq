@@ -69,7 +69,7 @@ main_menu() {
 		1 $clr"Update packages" \
 		2 $clr"Update AUR packages" \
 		3 $clr"Search for a package" \
-		4 $clr"Search for a package" \
+		4 $clr"Install package" \
 		5 $clr"Mount data" \
 		6 $clr"Terminal applications" \
 		7 $clr"GUI applications" \
