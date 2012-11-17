@@ -7,6 +7,9 @@
 this_file="$(dirname "$(realpath "$BASH_SOURCE")")"
 
 # dialog text colors
+# 0 through 7: black, red, green, yellow, blue, magenta, cyan and white respectively. 
+# Bold is set by 'b', reset by 'B'. Underline is set by 'u', reset by 'U'.
+# Restore normal settings with "\Zn".
 clr="\Zb\Z0"
 
 # video directory
@@ -15,20 +18,18 @@ video_playlist=$HOME/Videos/tv/tempvideo
 # temporary file
 TEMP=$HOME/bin/answers/answer$$
 
-welcome="Welcome $USER!"
-
 # formatting
-txtbld=$(tput bold)             # Bold
-bldred=${txtbld}$(tput setaf 1) # Red Colored
-bldgreen=${txtbld}$(tput setaf 2) # Green Colored
-bldblue=${txtbld}$(tput setaf 6) # Blue Colored
+txtbld=$(tput bold)                # Bold
+bldred=${txtbld}$(tput setaf 1)    # Red Colored
+bldgreen=${txtbld}$(tput setaf 2)  # Green Colored
+bldblue=${txtbld}$(tput setaf 6)   # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
-txtrst=$(tput sgr0)             # Reset
+txtrst=$(tput sgr0)                # Reset
 
 # default values
 MOUNT_DATA=0 ; START_TERM=0 ; START_GUI=0 ; START_DAEMON=0 ; UPDATE_MAIN=0 ; UPDATE_AUR=0
 
-# functionsn
+# functions
 exiting() {
 	clear
 	rm -f $TEMP
@@ -44,6 +45,21 @@ what_do() {
 		exiting             
 		exit
 	fi
+}
+
+check_pkg_mgr() {
+	if [ -f /usr/bin/pacaur ]; then
+	echo "${bldyellow}(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
+	else
+		echo "FATAL ERROR: install pacaur' from the AUR"
+		exit
+	fi
+}
+
+load_motd() {
+	echo "...loading"
+	$HOME/motd.tcl
+	what_do
 }
 
 main_menu() {
@@ -464,21 +480,7 @@ install_pkg() {
 	what_do
 }
 
-check_pkg_mgr() {
-	if [ -f /usr/bin/pacaur ]; then
-	echo "${bldyellow}I(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
-	else
-		echo "FATAL ERROR: install pacaur' from the AUR"
-		exit
-	fi
-}
-
-load_motd() {
-	echo "...loading"
-	$HOME/motd.tcl
-	what_do
-}
-
+# execution
 while true
 do
 	main_menu
