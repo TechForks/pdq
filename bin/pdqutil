@@ -56,6 +56,13 @@ check_pkg_mgr() {
 		echo "FATAL ERROR: install pacaur' from the AUR"
 		exit
 	fi
+
+	if [ -f /usr/bin/pacman-color ]; then
+	echo "${bldyellow}(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
+	else
+		echo "FATAL ERROR: install pacman-color' from the AUR"
+		exit
+	fi
 }
 
 load_motd() {
