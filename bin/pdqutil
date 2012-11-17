@@ -3,6 +3,12 @@
 # author pdq  11-11-2012
 # PDQ Utility for Archlinux
 
+#DIALOGRC=$HOME/.pdqutils/pdq.rc
+#DIALOGRC=$HOME/.pdqutils/slackware.rc
+#DIALOGRC=$HOME/.pdqutils/debian.rc
+#DIALOGRC=$HOME/.pdqutils/sourcemage.rc
+#DIALOGRC=$HOME/.pdqutils/suse.rc
+
 # this files name
 this_file="$(dirname "$(realpath "$BASH_SOURCE")")"
 
@@ -39,15 +45,15 @@ exiting() {
 	exit
 }
 
-source_sh() {
-	if [ $SHELL = "/bin/zsh"] && [ -f $HOME/.zshrc ]; then
-		source $HOME/.zshrc
-	elif [ $SHELL = "/bin/bash"] && [ -f $HOME/.bashrc ]; then
-		source $HOME/.bashrc
-	else
-		echo "FAIL"
-	fi
-}
+# source_sh() {
+# 	if [ $SHELL = "/bin/zsh"] && [ -f $HOME/.zshrc ]; then
+# 		source $HOME/.zshrc
+# 	elif [ $SHELL = "/bin/bash"] && [ -f $HOME/.bashrc ]; then
+# 		source $HOME/.bashrc
+# 	else
+# 		echo "FAIL"
+# 	fi
+# }
 
 what_do() {
 	echo -n "${bldblue}Go back to utility menu?${txtrst} ${bldred}y/n:${txtrst} "
@@ -82,32 +88,34 @@ load_motd() {
 main_menu() {
 	dialog \
 		--colors --title "PDQ Utility" \
-		--menu "\ZbSelect action:" 20 60 11 \
+		--menu "\ZbSelect action:" 20 60 12 \
 		1 $clr"Update packages" \
 		2 $clr"Update AUR packages" \
-		3 $clr"Search for a package" \
-		4 $clr"Install package" \
-		5 $clr"Mount data" \
-		6 $clr"Terminal applications" \
-		7 $clr"GUI applications" \
-		8 $clr"Daemons" \
-		9 $clr"Load all (4, 5, 6, 7)" \
-		10 $clr"Message of the Day" \
-		11 $clr"Exit" 2>$TEMP
+		3 $clr"Update devel packages" \
+		4 $clr"Search for a package" \
+		5 $clr"Install package" \
+		6 $clr"Mount data" \
+		7 $clr"Terminal applications" \
+		8 $clr"GUI applications" \
+		9 $clr"Daemons" \
+		10 $clr"Load all (4, 5, 6, 7)" \
+		11 $clr"Message of the Day" \
+		12 $clr"Exit" 2>$TEMP
 
 	choice=`cat $TEMP`
 	case $choice in
 		1) update_pkgs;;
 		2) update_aur;;
-		3) search_pkgs;;
-		4) install_pkg;;
-		5) mount_tcdata;;
-		6) term_apps;;
-		7) gui_apps;;
-		8) ddaemons;;
-		9) load_session;;
-		10) load_motd;;
-		11) exiting;;
+		3) update_devel;;
+		4) search_pkgs;;
+		5) install_pkg;;
+		6) mount_tcdata;;
+		7) term_apps;;
+		8) gui_apps;;
+		9) ddaemons;;
+		10) load_session;;
+		11) load_motd;;
+		12) exiting;;
 	esac
 }
 
@@ -462,7 +470,24 @@ update_aur() {
 	echo " "
 	echo ":: Update complete..."
 	echo " "
-	notify-send "packer" \
+	notify-send "pacaur" \
+            "Update complete" \
+            -i pac_icon
+
+	what_do
+}
+
+update_devel() {
+	check_pkg_mgr
+	#zsh $HOME/bin/packerupdater
+	echo ":: Updating system..."
+	echo "pacaur -Syua --devel"
+	#packer-color -Syu --auronly
+	pacaur -Syua --devel
+	echo " "
+	echo ":: Update complete..."
+	echo " "
+	notify-send "pacaur" \
             "Update complete" \
             -i pac_icon
 
