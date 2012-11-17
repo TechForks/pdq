@@ -64,6 +64,7 @@ lib32-openal
 libisoburn
 libotr
 libpng12
+libstatgrab
 libtool
 libunique
 libxft
@@ -113,6 +114,7 @@ polipo
 preload
 privoxy
 pyalpm
+pystatgrab
 python2-beautifulsoup4
 rsync
 ruby

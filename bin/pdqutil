@@ -1,0 +1,442 @@
+#!/bin/bash
+
+# author pdq  11-11-2012
+# PDQ Utility for Archlinux
+
+# this files name
+this_file="$(dirname "$(realpath "$BASH_SOURCE")")"
+
+# temporary file
+TEMP=$HOME/bin/answers/answer$$
+
+welcome="Welcome $USER!"
+
+# formatting
+txtbld=$(tput bold)             # Bold
+bldred=${txtbld}$(tput setaf 1) # Red Colored
+bldgreen=${txtbld}$(tput setaf 2) # Green Colored
+bldblue=${txtbld}$(tput setaf 6) # Blue Colored
+bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
+txtrst=$(tput sgr0)             # Reset
+
+# default values
+MOUNT_DATA=0 ; START_TERM=0 ; START_GUI=0 ; START_DAEMON=0 ; UPDATE_MAIN=0 ; UPDATE_AUR=0
+
+# functionsn
+exiting() {
+	clear
+	rm -f $TEMP
+	exit
+}
+
+what_do() {
+	echo -n "${bldblue}Go back to utility menu?${txtrst} ${bldred}y/n:${txtrst} "
+	read choice
+	if [ $choice = "y" ] ; then
+		sh $HOME/$this_file
+	else                   
+		exit
+	fi
+}
+
+main_menu() {
+	dialog \
+		--title "PDQ Utility" \
+		--menu "Select action:" 20 60 9 \
+		1 "Update packages" \
+		2 "Update AUR packages" \
+		3 "Search for a package" \
+		4 "Mount data" \
+		5 "Terminal applications" \
+		6 "GUI applications" \
+		7 "Daemons" \
+		8 "Load all (4, 5, 6, 7)" \
+		9 "Exit" 2>$TEMP
+
+	choice=`cat $TEMP`
+	case $choice in
+		1) update_pkgs;;
+		2) update_aur;;
+		3) search_pkgs;;
+		4) mount_tcdata;;
+		5) term_apps;;
+		6) gui_apps;;
+		7) ddaemons;;
+		8) load_session;;
+		9) exiting;;
+	esac
+}
+
+mount_tcdata() {
+	dialog --checklist "Choose action:" 10 40 4 \
+	1 "Mount truecrypt1 and truecrypt2" on \
+	2 "Mount truecrypt1" off \
+	3 "Mount truecrypt2" off 2>$TEMP
+
+	if [ "$?" != "0" ] ; then
+		return
+	fi
+
+	choice=`cat $TEMP`
+	case $choice in
+		1) MOUNT_DATA=1;;
+		2) MOUNT_DATA=2;;
+		3) MOUNT_DATA=3;;
+	esac
+
+	# truecrypt mounted success file
+	tc1="/media/truecrypt1/test"
+	tc2="/media/truecrypt2/test"
+	if [ $MOUNT_DATA -eq 1 ] || [ $MOUNT_DATA -eq 2 ] ; then
+		if [ -f "$tc1" ] ; then
+			echo "${bldblue}[SKIP] It appears your primary data is already mounted, proceeding to secondary data...${txtrst}"
+		else
+			echo "${bldred}[WAIT] Decrypt primary data and proceed to desktop session${txtrst}"
+			truecrypt /home/pdq/vital/hiddenfiles /media/truecrypt1
+			if [ -f "$tc1" ] ; then
+				echo "${bldgreen}mounted /media/truecrypt1${txtrst}"
+				if [ "$(pidof xbindkeys)" ] ; then
+					echo "${bldblue}[SKIP] xbindkeys already running, skipping${txtrst}"
+				else
+					echo "${bldgreen}[OK] Starting xbindkeys (custom keyboard shortcuts)...${txtrst}"
+					xbindkeys
+				fi
+			else
+				echo "${bldred}Incorrect passphrase...exiting${txtrst}"
+				exit
+			fi
+		fi
+	fi
+
+	if [ $MOUNT_DATA -eq 1 ] || [ $MOUNT_DATA -eq 3 ] ; then
+		if [ -f "$tc2" ] ; then
+			echo "${bldblue}[SKIP] It appears your secondary data is already mounted, proceeding to desktop session...${txtrst}"
+		else
+			echo "${bldred}[WAIT] Decrypt secondary data and proceed to desktop session${txtrst}"
+			truecrypt /media/HDD2p/pdq/vital/hiddenfiles2 /media/truecrypt2
+			if [ -f "$tc2" ] ; then
+				echo "${bldgreen}mounted /media/truecrypt2${txtrst}"
+			else
+				echo "${bldred}Incorrect passphrase...exiting${txtrst}"
+				exit
+			fi
+		fi
+	fi
+
+	what_do
+}
+
+term_apps() {
+	dialog --checklist 'Choose action:' 20 40 9 \
+	1 "All" on \
+	2 "Weechats" off  \
+	3 "Htop" off  \
+	4 "Saidar" off  \
+	5 "TTYload" off  \
+	6 "Journalctl" off  \
+    7 "Tail stderr" off  \
+	8 "ARM" off 2>$TEMP
+
+	if [ "$?" != "0" ] ; then
+		return
+	fi
+
+	choice=`cat $TEMP`
+	case $choice in
+		1) START_TERM=1;;
+		2) START_TERM=2;;
+		3) START_TERM=3;;
+		4) START_TERM=4;;
+		5) START_TERM=5;;
+		6) START_TERM=6;;
+	    7) START_TERM=7;;
+		8) START_TERM=8;;
+	esac
+
+	if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 2 ] ; then
+		if [ "$(pidof weechat-curses)" ] ; then
+			echo "${bldblue}[SKIP] IRC clients already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting IRC clients...${txtrst}"
+			urxvtc -e weechat-curses &
+			urxvtc -e weechat-curses -d ~/.weechat-priv &
+		fi
+    fi
+
+	if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 3 ] ; then
+		if [ "$(pidof htop)" ] ; then
+			echo "${bldblue}[SKIP] htop already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting htop...${txtrst}"
+			urxvtc -e htop &
+		fi
+    fi
+
+	if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 4 ] ; then
+		if [ "$(pidof saidar)" ] ; then
+			echo "${bldblue}[SKIP] saidar already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting saidar...${txtrst}"
+			urxvtc -e saidar &
+		fi
+    fi
+
+    if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 5 ] ; then
+		if [ "$(pidof ttyload)" ] ; then
+			echo "${bldblue}[SKIP] ttyload already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting ttyload...${txtrst}"
+			urxvtc -e ttyload &
+		fi
+    fi
+
+    if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 6 ] ; then
+		echo "${bldgreen}[OK] Starting journalctl 'tail -f'...${txtrst}"
+		urxvtc -name logging -e sudo journalctl -f &
+    fi
+
+    if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 7 ] ; then
+		echo "${bldgreen}[OK] Starting stderr 'tail -f'...${txtrst}"
+		urxvtc -name debug -e tail -f ~/.cache/awesome/stderr &
+    fi
+
+    if [ $START_TERM -eq 1 ] || [ $START_TERM -eq 8 ] ; then
+		if [ "$(pidof arm)" ] ; then
+			echo "${bldblue}[SKIP] arm already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting arm...${txtrst}"
+			urxvtc -name arm -e arm &
+		fi
+    fi
+	what_do
+}
+
+gui_apps() {
+	dialog --checklist "Choose action:" 20 40 7 \
+	1 "All" on \
+	2 "Spacefm" off  \
+	3 "VLC" off  \
+	4 "Sublime Text" off  \
+	5 "Chromium" off  \
+	6 "Keepassx" off 2>$TEMP
+
+	if [ "$?" != "0" ] ; then
+		return
+	fi
+
+	choice=`cat $TEMP`
+	case $choice in
+		1) START_GUI=1;;
+		2) START_GUI=2;;
+		3) START_GUI=3;;
+		4) START_GUI=4;;
+		5) START_GUI=5;;
+		6) START_GUI=6;;
+	esac
+
+	if [ $START_GUI -eq 1 ] || [ $START_GUI -eq 2 ] ; then
+		if [ "$(pidof spacefm)" ] ; then
+		echo "${bldblue}[SKIP]File manager already running, skipping${txtrst}"
+	else
+		echo "${bldgreen}[OK] Starting file manager...${txtrst}"
+		spacefm -d > /dev/null 2>&1 & 
+	fi
+
+	fi
+
+	if [ $START_GUI -eq 1 ] || [ $START_GUI -eq 3 ] ; then
+		if [ "$(pidof vlc)" ] ; then
+			echo "${bldblue}[SKIP] Video player already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting video player and playing playlist...${txtrst}"
+			#vlc ~/Videos/tv/big\ bang\ theory > /dev/null 2>&1 &
+			#vlc -I ncurses --browse-dir ~/Videos/tv/tempvideo
+		    vlc ~/Videos/tv/tempvideo > /dev/null 2>&1 &
+		fi
+	fi
+
+	if [ $START_GUI -eq 1 ] || [ $START_GUI -eq 4 ] ; then
+		if [ "$(pidof sublime_text)" ] ; then
+			echo "${bldblue}[SKIP] Text editors already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting text editors...${txtrst}"
+			subl
+			sudo subl
+		fi
+	fi
+
+	if [ $START_GUI -eq 1 ] || [ $START_GUI -eq 5 ] ; then
+		if [ "$(pidof chromium)" ] ; then
+			echo "${bldblue}[SKIP] Chromium already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting Chromium...${txtrst}"
+			chromium &
+		fi
+	fi
+
+	if [ $START_GUI -eq 1 ] || [ $START_GUI -eq 6 ] ; then
+		if [ "$(pidof keepassx)" ] ; then
+			echo "${bldblue}Password manager already running, skipping${txtrst}"
+		else
+			keepassx &
+		fi
+	fi
+
+	what_do
+}
+
+ddaemons() {
+	dialog --checklist "Choose action:" 20 40 9 \
+	1 "All" on \
+	2 "Urxvt" off  \
+	3 "Xbindkeys" off  \
+	4 "Bitlbee" off  \
+	5 "Transmission" off  \
+	6 "MOCP" off  \
+    7 "Conky" off  \
+	8 "LAMP" off \
+    9 "Update Notifier" off 2>$TEMP
+
+	if [ "$?" != "0" ] ; then
+		return
+	fi
+
+	choice=`cat $TEMP`
+	case $choice in
+		1) START_DAEMON=1;;
+		2) START_DAEMON=2;;
+		3) START_DAEMON=3;;
+		4) START_DAEMON=4;;
+		5) START_DAEMON=5;;
+		6) START_DAEMON=6;;
+	    7) START_DAEMON=7;;
+		8) START_DAEMON=8;;
+        9) START_DAEMON=9;;
+	esac
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 2 ] ; then
+		if [ "$(pidof urxvtd)" ] ; then
+			echo "${bldblue}[SKIP] Urxvt daemon already running, restarting${txtrst}"
+			killall mocp
+			urxvtd &
+		else
+			echo "${bldgreen}[OK] Starting Urxvt daemon...${txtrst}"
+			urxvtd &
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 3 ] ; then
+		if [ "$(pidof xbindkeys)" ] ; then
+			echo "${bldblue}[SKIP] xbindkeys already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting xbindkeys (custom keyboard shortcuts)...${txtrst}"
+			xbindkeys
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 4 ] ; then
+		if [ "$(pidof bitlbee)" ] ; then
+			echo "${bldblue}[SKIP] bitlbee already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting Instant Messaging server...${txtrst}"
+			sudo bitlbee -D
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 5 ] ; then
+		if [ "$(pidof transmission-daemon)" ] ; then
+			echo "${bldblue}[SKIP]Torrent client already running, skipping${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting torrent client...${txtrst}"
+			#transmission-qt > /dev/null 2>&1 &
+			sudo systemctl start transmission.service
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 6 ] ; then
+		if [ "$(pidof mocp)" ] ; then
+			echo "${bldblue}[SKIP] Music server and client already running, restarting${txtrst}"
+			killall mocp
+			urxvtc -e mocp &
+		else
+			echo "${bldgreen}[OK] Starting music server and client...${txtrst}"
+			urxvtc -e mocp &
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 7 ] ; then
+		if [ "$(pidof conky)" ] ; then
+			killall conky
+		else
+			sh ~/.config/awesome/global_script.sh > /dev/null 2>&1
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 8 ] ; then
+		if [ "$(pidof httpd)" ] ; then
+			echo "${bldblue}[SKIP] LAMP may already be running, skipping${txtrst}"
+			#sudo lamp restart
+		else
+			echo "${bldgreen}[OK] Starting LAMP server...${txtrst}"
+			sudo lamp start
+		fi
+	fi
+
+	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 9 ] ; then
+		if [ "$(pidof aarchup)" ] ; then
+			echo "${bldblue}[SKIP] Update notifier already running, restarting${txtrst}"
+		else
+			echo "${bldgreen}[OK] Starting update notifier...${txtrst}"
+			/usr/bin/aarchup --loop-time 30 --aur --icon /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png &
+		fi
+	fi
+
+	what_do
+}
+
+update_pkgs() {
+	#zsh $HOME/bin/pacupdater
+	echo ":: Updating system..."
+	echo "sudo pacman-color -Syu"
+	sudo pacman-color -Syu
+	echo " "
+	echo ":: Update complete..."
+	echo " "
+	notify-send "pacman" \
+            "Update complete" \
+            -i /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png
+
+	what_do
+}
+
+update_aur() {
+	#zsh $HOME/bin/packerupdater
+	echo ":: Updating system..."
+	echo "pacaur -Syua"
+	#packer-color -Syu --auronly
+	pacaur -Syua
+	echo " "
+	echo ":: Update complete..."
+	echo " "
+	notify-send "packer" \
+            "Update complete" \
+            -i /usr/share/icons/kAwOkenDark/clear/22x22/apps/pacman.png
+
+	what_do
+}
+
+load_session() {
+
+	what_do
+}
+
+load_motd() {
+	cd
+	./motd.tcl
+	what_do
+}
+
+while true
+do
+	main_menu
+done
