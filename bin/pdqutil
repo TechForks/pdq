@@ -16,9 +16,7 @@ clr="\Zb\Z0"
 video_playlist=$HOME/Videos/tv/tempvideo
 
 # temporary file
-#TEMP=$HOME/bin/answers/answer$$
 TEMP=/tmp/answer$$
-
 
 # formatting
 txtbld=$(tput bold)                # Bold
