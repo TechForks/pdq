@@ -1,7 +1,26 @@
 #!/bin/bash
-
 # author pdq  11-11-2012
 # PDQ Utility for Archlinux
+# depends on pacaur
+
+# CONFIGURATION START
+
+#github backup script - https://github.com/idk/pdq/blob/master/backup.sh
+github_script=$HOME/github/pdq/backup.sh 
+
+# dialog text colors
+# 0 through 7: black, red, green, yellow, blue, magenta, cyan and white respectively. 
+# Bold is set by 'b', reset by 'B'. Underline is set by 'u', reset by 'U'.
+# Restore normal settings with "\Zn".
+clr="\Zb\Z0"
+
+# video directory - for vlc
+video_playlist=$HOME/Videos/tv/tempvideo
+
+# pacman icon
+pac_icon=/home/pdq/.kde4/share/icons/K-Web0/22x22/apps/pacman.png
+
+# CONFIGURATION END
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
@@ -19,18 +38,6 @@
 # this files name
 this_file="$(dirname "$(realpath "$BASH_SOURCE")")"
 
-# dialog text colors
-# 0 through 7: black, red, green, yellow, blue, magenta, cyan and white respectively. 
-# Bold is set by 'b', reset by 'B'. Underline is set by 'u', reset by 'U'.
-# Restore normal settings with "\Zn".
-clr="\Zb\Z0"
-
-# video directory
-video_playlist=$HOME/Videos/tv/tempvideo
-
-# pacman icon
-pac_icon=/home/pdq/.kde4/share/icons/K-Web0/22x22/apps/pacman.png
-
 # temporary file
 TEMP=/tmp/answer$$
 
@@ -45,7 +52,8 @@ txtrst=$(tput sgr0)                # Reset
 # default values
 MOUNT_DATA=0 ; START_TERM=0 ; START_GUI=0 ; START_DAEMON=0 ; UPDATE_MAIN=0 ; UPDATE_AUR=0
 
-# functions
+
+# FUNCTIONS
 exiting() {
 	clear
 	rm -f $TEMP
@@ -84,12 +92,6 @@ check_pkg_mgr() {
 	fi
 
 	echo "${bldyellow}(-’๏_๏’-)(◐ o ◑ )(⊙…⊙ )๏[-ิ_•ิ]๏(•ิ_•ิ)\(•ิ_•ิ\) (/•ิ_•ิ)${txtrst} "
-}
-
-load_motd() {
-	echo "...loading"
-	$HOME/motd.tcl
-	what_do
 }
 
 main_menu() {
@@ -331,7 +333,7 @@ gui_apps() {
 			echo "${bldblue}[SKIP] Chromium already running, skipping${txtrst}"
 		else
 			echo "${bldgreen}[OK] Starting Chromium...${txtrst}"
-			chromium &
+			chromium > /dev/null 2>&1 &
 		fi
 	fi
 
@@ -530,35 +532,37 @@ install_pkg() {
 }
 
 github_backup() {
-	dialog --title "Commit message" --clear "$@" \
-        --inputbox "Enter message below:" 16 51 2>$TEMP
+	dialog --title "Github" --clear "$@" \
+		--inputbox "Enter commit message:" 16 51 2>$TEMP
 
 	retval=$?
 	COMMIT_MSG=""
 	case $retval in
-	  $DIALOG_OK)
-	    COMMIT_MSG=`cat $TEMP`;;
-	  $DIALOG_CANCEL)
-	    echo "Cancel pressed.";;
-	  $DIALOG_HELP)
-	    echo "Help pressed.";;
-	  $DIALOG_EXTRA)
-	    echo "Extra button pressed.";;
-	  $DIALOG_ITEM_HELP)
-	    echo "Item-help button pressed.";;
-	  $DIALOG_ESC)
-	    if test -s $TEMP ; then
-	      cat $tempfile
-	    else
-	      echo "ESC pressed."
-	    fi
-	    ;;
+		$DIALOG_OK)
+			COMMIT_MSG=`cat $TEMP`;;
+		$DIALOG_CANCEL)
+			return;;
+		$DIALOG_HELP)
+			echo "Help pressed.";;
+		$DIALOG_EXTRA)
+			echo "Extra button pressed.";;
+		$DIALOG_ITEM_HELP)
+			echo "Item-help button pressed.";;
+		$DIALOG_ESC)
+			return;;
 	esac
-	sh ~/github/pdq/backup.sh "$COMMIT_MSG"
+
+	sh $github_script "$COMMIT_MSG"
 	what_do
 }
 
-# execution
+load_motd() {
+	echo "...loading"
+	$HOME/motd.tcl
+	what_do
+}
+
+# utility execution
 while true
 do
 	main_menu
