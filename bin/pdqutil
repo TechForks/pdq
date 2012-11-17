@@ -88,7 +88,7 @@ load_motd() {
 main_menu() {
 	dialog \
 		--colors --title "PDQ Utility" \
-		--menu "\ZbSelect action:" 20 60 12 \
+		--menu "\ZbSelect action:" 20 60 13 \
 		1 $clr"Update packages" \
 		2 $clr"Update AUR packages" \
 		3 $clr"Update devel packages" \
@@ -99,8 +99,9 @@ main_menu() {
 		8 $clr"GUI applications" \
 		9 $clr"Daemons" \
 		10 $clr"Load all (4, 5, 6, 7)" \
-		11 $clr"Message of the Day" \
-		12 $clr"Exit" 2>$TEMP
+		11 $clr"Backup files to Github" \
+		12 $clr"Message of the Day" \
+		13 $clr"Exit" 2>$TEMP
 
 	choice=`cat $TEMP`
 	case $choice in
@@ -114,8 +115,9 @@ main_menu() {
 		8) gui_apps;;
 		9) ddaemons;;
 		10) load_session;;
-		11) load_motd;;
-		12) exiting;;
+		11) github_backup;;
+		12) load_motd;;
+		13) exiting;;
 	esac
 }
 
@@ -517,6 +519,11 @@ install_pkg() {
 		pacaur -S $choice
 	fi
 
+	what_do
+}
+
+github_backup() {
+	sh ~/github/pdq/backup.sh
 	what_do
 }
 
