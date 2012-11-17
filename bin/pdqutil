@@ -100,7 +100,7 @@ main_menu() {
 		1) update_pkgs;;
 		2) update_aur;;
 		3) search_pkgs;;
-        4) install_pkg;;
+		4) install_pkg;;
 		5) mount_tcdata;;
 		6) term_apps;;
 		7) gui_apps;;
@@ -178,7 +178,7 @@ term_apps() {
 	4 $clr"Saidar" off  \
 	5 $clr"TTYload" off  \
 	6 $clr"Journalctl" off  \
-    7 $clr"Tail stderr" off  \
+	7 $clr"Tail stderr" off  \
 	8 $clr"ARM" off 2>$TEMP
 
 	if [ "$?" != "0" ] ; then
@@ -193,7 +193,7 @@ term_apps() {
 		4) START_TERM=4;;
 		5) START_TERM=5;;
 		6) START_TERM=6;;
-	    7) START_TERM=7;;
+		7) START_TERM=7;;
 		8) START_TERM=8;;
 	esac
 
@@ -337,9 +337,9 @@ ddaemons() {
 	4 $clr"Bitlbee" off  \
 	5 $clr"Transmission" off  \
 	6 $clr"MOCP" off  \
-    7 $clr"Conky" off  \
+	7 $clr"Conky" off  \
 	8 $clr"LAMP" off \
-    9 $clr"Update Notifier" off 2>$TEMP
+	9 $clr"Update Notifier" off 2>$TEMP
 
 	if [ "$?" != "0" ] ; then
 		return
@@ -353,9 +353,9 @@ ddaemons() {
 		4) START_DAEMON=4;;
 		5) START_DAEMON=5;;
 		6) START_DAEMON=6;;
-	    7) START_DAEMON=7;;
+		7) START_DAEMON=7;;
 		8) START_DAEMON=8;;
-        9) START_DAEMON=9;;
+		9) START_DAEMON=9;;
 	esac
 
 	if [ $START_DAEMON -eq 1 ] || [ $START_DAEMON -eq 2 ] ; then
