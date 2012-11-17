@@ -42,7 +42,7 @@ what_do() {
 main_menu() {
 	dialog \
 		--title "PDQ Utility" \
-		--menu "Select action:" 20 60 9 \
+		--menu "Select action:" 20 60 10 \
 		1 "Update packages" \
 		2 "Update AUR packages" \
 		3 "Search for a package" \
@@ -50,8 +50,9 @@ main_menu() {
 		5 "Terminal applications" \
 		6 "GUI applications" \
 		7 "Daemons" \
-		8 "Load all (4, 5, 6, 7)" \
-		9 "Exit" 2>$TEMP
+		8 "Load all (4, 5 6, 7)" \
+		9 "Message of the Day" \
+		10 "Exit" 2>$TEMP
 
 	choice=`cat $TEMP`
 	case $choice in
@@ -63,7 +64,8 @@ main_menu() {
 		6) gui_apps;;
 		7) ddaemons;;
 		8) load_session;;
-		9) exiting;;
+		9) load_motd;;
+		10) exiting;;
 	esac
 }
 
@@ -425,14 +427,10 @@ update_aur() {
 	what_do
 }
 
-load_session() {
-
-	what_do
-}
-
 load_motd() {
+	...loading
 	cd
-	./motd.tcl
+	$HOME/motd.tcl
 	what_do
 }
 
