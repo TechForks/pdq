@@ -3,6 +3,13 @@
 # author pdq  11-11-2012
 # PDQ Utility for Archlinux
 
+: ${DIALOG_OK=0}
+: ${DIALOG_CANCEL=1}
+: ${DIALOG_HELP=2}
+: ${DIALOG_EXTRA=3}
+: ${DIALOG_ITEM_HELP=4}
+: ${DIALOG_ESC=255}
+
 #DIALOGRC=$HOME/.pdqutils/pdq.rc
 #DIALOGRC=$HOME/.pdqutils/slackware.rc
 #DIALOGRC=$HOME/.pdqutils/debian.rc
@@ -94,7 +101,7 @@ main_menu() {
 		3 $clr"Update devel packages" \
 		4 $clr"Search for a package" \
 		5 $clr"Install package" \
-		6 $clr"Mount data" \
+		6 $clr"Mount truecrypt data" \
 		7 $clr"Terminal applications" \
 		8 $clr"GUI applications" \
 		9 $clr"Daemons" \
@@ -523,7 +530,31 @@ install_pkg() {
 }
 
 github_backup() {
-	sh ~/github/pdq/backup.sh
+	dialog --title "Commit message" --clear "$@" \
+        --inputbox "Enter message below:" 16 51 2>$TEMP
+
+	retval=$?
+	COMMIT_MSG=""
+	case $retval in
+	  $DIALOG_OK)
+	    COMMIT_MSG=`cat $TEMP`;;
+	  $DIALOG_CANCEL)
+	    echo "Cancel pressed.";;
+	  $DIALOG_HELP)
+	    echo "Help pressed.";;
+	  $DIALOG_EXTRA)
+	    echo "Extra button pressed.";;
+	  $DIALOG_ITEM_HELP)
+	    echo "Item-help button pressed.";;
+	  $DIALOG_ESC)
+	    if test -s $TEMP ; then
+	      cat $tempfile
+	    else
+	      echo "ESC pressed."
+	    fi
+	    ;;
+	esac
+	sh ~/github/pdq/backup.sh "$COMMIT_MSG"
 	what_do
 }
 
