@@ -2,6 +2,7 @@ aarchup
 arm
 cacheclean
 cairo-compmgr-git
+checkbashisms
 conky-lua
 conkytransmission-bzr
 conkywx
@@ -40,7 +41,7 @@ mysqltcl
 pacaur
 pacman-color
 pacmanlog2gource
-pdq-utils-git
+pdq-utils
 pkgbrowser
 pyrss2gen
 python2-certifi
