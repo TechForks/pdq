@@ -33,7 +33,6 @@ lib32-google-breakpad-svn
 lib32-libtxc_dxtn
 logstalgia
 lua-sqlite3
-luainotify
 luakit-git
 mlt-git
 montecarlo-font
@@ -44,9 +43,7 @@ pacmanlog2gource
 pdq-utils
 pkgbrowser
 pyrss2gen
-python2-certifi
 python2-pynzb
-python2-requests
 python3-aur
 python3-xynexdg
 pytransmissionrpc

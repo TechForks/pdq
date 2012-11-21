@@ -23,6 +23,7 @@ dialog
 dmenu
 dnsutils
 dosfstools
+driconf
 dvd+rw-tools
 elinks
 epdfview
@@ -37,6 +38,7 @@ gcc-multilib
 gcolor2
 gdb
 git
+gksu
 gnome-disk-utility
 gnunet-gtk
 gpicview
@@ -70,6 +72,7 @@ libunique
 libxft
 lm_sensors
 luafilesystem
+luarocks
 luasocket
 lxappearance
 lxtask
