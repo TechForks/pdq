@@ -11,7 +11,6 @@ baobab
 binutils-multilib
 bison
 bitlbee
-bluefish
 cairo
 cclive
 cdrdao
@@ -127,7 +126,6 @@ screen
 scrot
 squashfs-tools
 sshfs
-sshpass
 sudo
 syslinux
 systemd

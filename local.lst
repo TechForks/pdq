@@ -23,7 +23,6 @@ flexget
 fslint
 gnome-colors-icon-theme
 gnome-colors-icon-theme-extras
-gnome-connection-manager
 google-image-downloader
 grake
 grub
@@ -38,7 +37,6 @@ mlt-git
 montecarlo-font
 mysqltcl
 pacaur
-packer
 pacman-color
 pacmanlog2gource
 pdq-utils
@@ -71,5 +69,4 @@ wicked-git
 xcursor-arch-simple
 xcursor-dmz
 zsh-completions
-zsh-packer
 zsh-syntax-highlighting
