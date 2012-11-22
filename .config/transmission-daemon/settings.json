@@ -42,7 +42,7 @@
     "rename-partial-files": true, 
     "rpc-authentication-required": false, 
     "rpc-bind-address": "0.0.0.0", 
-    "rpc-enabled": false, 
+    "rpc-enabled": true, 
     "rpc-password": "{bafcf030b02325f2f44a4e2b43e9083a36944085j58Te9N5", 
     "rpc-port": 9091, 
     "rpc-url": "/transmission/", 

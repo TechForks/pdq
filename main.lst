@@ -58,6 +58,7 @@ kdebase-dolphin
 kdemultimedia-ffmpegthumbs
 kdeutils-ark
 keepassx
+keychain
 lib32-intel-dri
 lib32-libldap
 lib32-libxft
@@ -126,6 +127,7 @@ screen
 scrot
 squashfs-tools
 sshfs
+sshpass
 sudo
 syslinux
 systemd
