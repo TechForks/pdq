@@ -84,13 +84,21 @@ alias home='cd ~'
 #alias counter='ssh 192.168.2.107 -l root'
 # scripts and folders
 # alias conk='sh ~/.config/conky/.conkyrc'
-# pacman aur stuffs
-alias update='sudo pacman-color -Syu'
-#alias supdate='sudo powerpill-light -yu'
-alias pacinstall="sudo pacman-color -S"      # default action     - install one or more packages
-alias pacsearch="pacman-color -Ss"           # '[s]earch'         - search for a package using one or more keywords
-alias pacupdate="sudo pacman-color -Syu"     # '[u]pdate'         - upgrade all packages to their newest version
+# pacman
+alias p="sudo pacman-color -S"      # default action     - install one or more packages
+alias pp="pacman-color -Ss"           # '[s]earch'         - search for a package using one or more keywords
+alias syu="sudo pacman-color -Syu"     # '[u]pdate'         - upgrade all packages to their newest version
 alias pacremove="sudo pacman-color -R"       # '[r]emove'         - uninstall one or more packages
-alias pacdremove="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or more packages and its dependencies 
-# remote server
-source ~/.bash_ssh
+alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or more packages and its dependencies 
+# packer
+# alias a="packer-color"
+# alias sa="packer-color -S"
+# alias syua="packer-color -Syu --auronly"
+alias a="pacaur -S"    # search packages
+alias aa="pacaur -s"   # install package
+alias syua="pacaur -Syua" #update aur packages
+alias syud="pacaur -Syua --devel" #update devel packages
+# cower
+alias cow="cower -u -v"
+# git hub
+alias git=hub
