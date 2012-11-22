@@ -14,3 +14,4 @@ fi
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
