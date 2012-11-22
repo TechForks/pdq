@@ -1,3 +1,0 @@
-alias server1='ssh server1.net -l root -p 22'
-alias server2='ssh server2.net -l root -p 22'
-alias server3='ssh server3.net -l root -p 1234'

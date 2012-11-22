@@ -63,11 +63,9 @@ echo "${bldgreen} ==> zsh repo pushed to github!${txtrst}"
 
 # awesomewm-X repo
 echo "${bldblue} ==> Analyzing awesomewm-X repo!${txtrst}"
-cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
 cd ${my_home}.config
 cp -r awesome/. ${my_home}${dev_directory}/awesomewm-X
-echo "cp ${my_home}.xinitrc ${my_home}${dev_directory}/awesomewm-X/skel/.xinitrc
-cp -r ${my_home}.config/awesome/. ${my_home}${dev_directory}/awesomewm-X"
+echo "cp -r ${my_home}.config/awesome/. ${my_home}${dev_directory}/awesomewm-X"
 cd ${my_home}${dev_directory}/awesomewm-X
 git add -A
 if [ "$commit_msg" == "" ]; then
@@ -130,7 +128,8 @@ cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
 cp /etc/modules-load.d/my_modules.conf ${my_home}${dotfiles}etc/my_modules.conf
 #cp /etc/rc.conf ${my_home}${dotfiles}etc/rc.conf
-cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
+
+#cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
 cp /usr/bin/screenfetch ${my_home}${dotfiles}bin/screenfetch
@@ -159,7 +158,6 @@ cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcel
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
 cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
-cp /etc/mpd.conf ${my_home}${dotfiles}etc/mpd.conf
 cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
 cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
 cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
