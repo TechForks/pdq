@@ -52,6 +52,7 @@
           #transmission-remote -n $TR_USERNAME:$TR_PASSWORD -t$TR_TORRENT_ID --remove-and-delete
         fi
         echo $NOW "Unrarred $TR_TORRENT_NAME" >> $LOG_FILE
+        notify-send "Unrarred $TR_TORRENT_NAME"
       fi
     fi
   fi
