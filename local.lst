@@ -20,6 +20,7 @@ ffcast
 ffpoth
 flashplugin-beta
 flexget
+freetuxtv
 fslint
 gnome-colors-icon-theme
 gnome-colors-icon-theme-extras
@@ -36,9 +37,11 @@ luakit-git
 mlt-git
 montecarlo-font
 mysqltcl
+neuropolitical_font
 pacaur
 pacman-color
 pacmanlog2gource
+pdq-utils
 pkgbrowser
 pyrss2gen
 python2-pynzb
@@ -59,11 +62,13 @@ torsocks
 transcoder
 ttf-envy-code-r
 ttf-ms-fonts
+ttf-openlogos
+ttf-pizzadude-bullets
+ttf-stylebats
 ttyload
 urxvt-perls-git
 vala-git
 vcp
-vlc-ncurses
 wicked-git
 xcursor-arch-simple
 xcursor-dmz
