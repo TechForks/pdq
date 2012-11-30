@@ -25,6 +25,8 @@
 #   echo "Choose a window manager $USER"
 # fi
 urxvtd -q -o -f
-export BROWSER=luakit
+export BROWSER=firefox
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+ogg123 -q "${HOME}/.config/awesome/sounds/voice-system-activated.ogg"
+ogg123 -q "${HOME}/.config/awesome/sounds/desktop-login.ogg"
 exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr

@@ -4,6 +4,7 @@ alsa-oss
 alsa-plugins
 alsa-utils
 apache
+audio-convert
 autoconf
 automake
 awesome
@@ -15,6 +16,7 @@ cclive
 cdrdao
 chromium
 cmatrix
+cowsay
 curlftpfs
 devede
 dialog
@@ -28,8 +30,10 @@ elinks
 epdfview
 fakeroot
 filezilla
+firefox
 flex
 fontconfig
+fortune-mod
 freetype2
 fuseiso
 gcc-libs-multilib
@@ -146,6 +150,7 @@ vim
 virtualbox
 vlc
 vnstat
+vorbis-tools
 wavpack
 webkitgtk2
 weechat
