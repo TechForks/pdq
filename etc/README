@@ -1,4 +1,0 @@
-// pacman.conf - change path to home directory
-# nano /etc/pacman.conf
-// line 15
-CacheDir     = /home/pdq/vital/pkg/

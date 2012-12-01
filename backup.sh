@@ -99,7 +99,9 @@ echo "${bldgreen} ==> conky-X repo pushed to github!${txtrst}"
 echo "${bldblue} ==> Analyzing bin repo!${txtrst}"
 cd ${my_home}
 cp -r bin/. ${my_home}${dev_directory}/bin
-echo "cp -r bin/. ${my_home}${dev_directory}/bin"
+cp /usr/bin/screenfetch ${my_home}${dotfiles}bin/screenfetch
+echo "cp -r bin/. ${my_home}${dev_directory}/bin
+cp /usr/bin/screenfetch ${my_home}${dotfiles}bin/screenfetch"
 cd ${my_home}${dev_directory}/bin
 git add -A
 if [ "$commit_msg" == "" ]; then
@@ -111,6 +113,26 @@ if [ "$commit_msg" == "updated bin to current" ]; then
 	commit_msg=''
 fi
 echo "${bldgreen} ==> bin repo pushed to github!${txtrst}"
+
+#etc repo
+echo "${bldblue} ==> Analyzing etc repo!${txtrst}"
+cp /etc/modules-load.d/my_modules.conf ${my_home}${dotfiles}etc/my_modules.conf
+cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
+cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
+cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
+cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
+cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
+cd ${my_home}${dev_directory}/etc
+git add -A
+if [ "$commit_msg" == "" ]; then
+	commit_msg='updated etc to current'
+fi
+git commit -m "$commit_msg"
+git push origin master
+if [ "$commit_msg" == "updated etc to current" ]; then
+	commit_msg=''
+fi
+echo "${bldgreen} ==> etc repo pushed to github!${txtrst}"
 
 # luakit-X repo
 #echo "${bldblue} ==> Analyzing luakit-X repo!${txtrst}"
@@ -138,15 +160,7 @@ cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
 cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
 cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
-cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
-cp /etc/modules-load.d/my_modules.conf ${my_home}${dotfiles}etc/my_modules.conf
-cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
-cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
-cp /usr/bin/screenfetch ${my_home}${dotfiles}bin/screenfetch
-cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
-cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
-cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
 cp -r /etc/systemd/system/* ${my_home}${dotfiles}systemd
 
 echo "${bldblue}cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
@@ -155,23 +169,13 @@ cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
 cp ${my_home}.dmenu_cache ${my_home}${dotfiles}.dmenu_cache
 cp ${my_home}.nanorc ${my_home}${dotfiles}.nanorc
 cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
-cp ${my_home}.moc/config ${my_home}${dotfiles}moc.config
 cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
 cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
 cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
 cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
 cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
-cp -r ${my_home}bin/* ${my_home}${dotfiles}bin
 cp -r ${my_home}php/* ${my_home}${dotfiles}php
-cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
-cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
-cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
-cp /etc/locale.gen ${my_home}${dotfiles}etc/locale.gen
-cp /etc/locale.conf ${my_home}${dotfiles}etc/locale.conf
-cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
-cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
-cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
 cp -r /etc/systemd/system/* ${my_home}${dotfiles}systemd/
 ${txtrst}"
 echo "${bldgreen} ==> copied files into ${dotfiles}${txtrst}"

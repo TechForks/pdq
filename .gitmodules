@@ -13,3 +13,6 @@
 [submodule "bin"]
 	path = bin
 	url = git://github.com/idk/bin.git
+[submodule "etc"]
+	path = etc
+	url = git://github.com/idk/etc.git
