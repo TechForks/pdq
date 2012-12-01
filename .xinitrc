@@ -28,5 +28,8 @@ urxvtd -q -o -f
 export BROWSER=firefox
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 ogg123 -q "${HOME}/.config/awesome/sounds/voice-system-activated.ogg"
-ogg123 -q "${HOME}/.config/awesome/sounds/desktop-login.ogg"
+# truecrypt mounted success file
+if [ -f "/media/truecrypt1/test" ] ; then
+	ogg123 -q "${HOME}/.config/awesome/sounds/desktop-login.ogg"
+fi
 exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
