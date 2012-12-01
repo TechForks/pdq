@@ -149,6 +149,22 @@ if [ "$commit_msg" == "updated systemd to current" ]; then
 	commit_msg=''
 fi
 echo "${bldgreen} ==> systemd repo pushed to github!${txtrst}"
+
+#php repo
+echo "${bldblue} ==> Analyzing php repo!${txtrst}"
+cp -r ${my_home}php/* ${my_home}${dotfiles}php
+echo "cp -r ${my_home}php/* ${my_home}${dotfiles}php"
+cd ${my_home}${dev_directory}/php
+git add -A
+if [ "$commit_msg" == "" ]; then
+	commit_msg='updated php to current'
+fi
+git commit -m "$commit_msg"
+git push origin master
+if [ "$commit_msg" == "updated php to current" ]; then
+	commit_msg=''
+fi
+echo "${bldgreen} ==> php repo pushed to github!${txtrst}"
 # luakit-X repo
 #echo "${bldblue} ==> Analyzing luakit-X repo!${txtrst}"
 # cd ${my_home}.config
@@ -175,7 +191,6 @@ cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
 cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
 cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
-cp -r ${my_home}php/* ${my_home}${dotfiles}php
 
 echo "${bldblue}cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
 cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
@@ -189,7 +204,6 @@ cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
 cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
 cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
 cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
-cp -r ${my_home}php/* ${my_home}${dotfiles}php
 ${txtrst}"
 echo "${bldgreen} ==> copied files into ${dotfiles}${txtrst}"
 echo "## Create main.lst remove local, base
