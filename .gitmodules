@@ -16,3 +16,6 @@
 [submodule "etc"]
 	path = etc
 	url = git://github.com/idk/etc.git
+[submodule "systemd"]
+	path = systemd
+	url = git://github.com/idk/systemd.git
