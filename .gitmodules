@@ -10,3 +10,6 @@
 [submodule ".config/luakit"]
 	path = .config/luakit
 	url = git@github.com:idk/luakit-X.git
+[submodule "bin"]
+	path = bin
+	url = git://github.com/idk/bin.git

@@ -1,4 +1,0 @@
-#!/bin/bash
-filename="$HOME"/pdq-$(date +%m%d%S).avi
-ffmpeg -f x11grab -s 1440x900 -i :0.0 -acodec pcm_s16le -vcodec huffyuv -preset ultrafast -crf 0 $filename
-notify-send "Screencast Done" "File located at $filename"
