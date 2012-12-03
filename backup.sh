@@ -1,230 +1,174 @@
 #!/bin/bash
 ## 07-10-2012 pdq, 07-18-2012
 
-my_home="$HOME/"
-#me=$USER
-#my_home="/home/pdq/test/"
-dev_directory="github"
-dotfiles="${dev_directory}/pdq/"
-txtbld=$(tput bold)             # Bold
-bldred=${txtbld}$(tput setaf 1) # Red Colored
-bldgreen=${txtbld}$(tput setaf 2) # Green Colored
-bldblue=${txtbld}$(tput setaf 6) # Blue Colored
+# -V print version number
+# -b backup [-b]
+# -c clone github repo [-c user/repo]
+# -r create github repo [-r user/repo]
+# -s create submodule [-s user/submodule -r /user/repo]
+# -q quiet backup
+
+dev_directory="$HOME/github/"       # $HOME/github
+
+# color formatting
+txtbld=$(tput bold)                # Bold
+bldred=${txtbld}$(tput setaf 1)    # Red Colored
+bldgreen=${txtbld}$(tput setaf 2)  # Green Colored
+bldblue=${txtbld}$(tput setaf 6)   # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
-txtrst=$(tput sgr0)             # Reset
+txtrst=$(tput sgr0)                # Reset
+
+# commit message arg
 commit_msg=$1
 
+# sanity check
 if [ `id -u` -eq 0 ]; then
    echo "${bldred}Do not run me as root!${txtrst} =)"
-   exit
+   exit 1
 fi
 
-## Creating backups on host
-mkdir ${my_home}${dev_directory}
-mkdir ${my_home}${dotfiles}
+## Creating backups/github directory on host
+mkdir -p ${dev_directory}
 
-# eggdrop-scripts repo
-echo "${bldblue} ==> Analyzing eggdrop-scripts repo!${txtrst}"
-cd ${my_home}.eggdrop/scripts
-cp -r custom/ ${my_home}${dev_directory}/eggdrop-scripts
-echo "cp -r custom/. ${my_home}${dev_directory}/eggdrop-scripts"
-cd ${my_home}${dev_directory}/eggdrop-scripts
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated eggdrop-scripts to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated eggdrop-scripts to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> eggdrop-scripts repo pushed to github!${txtrst}"
+# number of your github repos (default 9)
+_repo_count=9
 
-# zsh repo
-echo "${bldblue} ==> Analyzing zsh repo!${txtrst}"
-cp ${my_home}.zshrc ${my_home}${dev_directory}/zsh/.zshrc
-cp ${my_home}.zprofile ${my_home}${dev_directory}/zsh/.zprofile
-cd
-cp -r .zsh ${my_home}${dev_directory}/zsh/
-echo "cp ${my_home}.zshrc ${my_home}${dev_directory}/zsh/.zshrc
-cp ${my_home}.zprofile ${my_home}${dev_directory}/zsh/.zprofile
-cp -r .zsh ${my_home}${dev_directory}/zsh/"
-cd ${my_home}${dev_directory}/zsh
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated zsh to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated zsh to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> zsh repo pushed to github!${txtrst}"
+# github repo Number 1
+_repo1[1]="idk"  # user
+_repo1[2]="pdq"  # repository
+# custom commands
+_repo1[3]="$(cp $HOME/.xinitrc ${dev_directory}${_repo1[2]}/.xinitrc;cp $HOME/.bashrc ${dev_directory}${_repo1[2]}/.bashrc;cp $HOME/.bash_profile ${dev_directory}${_repo1[2]}/.bash_profile;cp $HOME/.dmenu_cache ${dev_directory}${_repo1[2]}/.dmenu_cache;cp $HOME/.nanorc ${dev_directory}${_repo1[2]}/.nanorc;cp $HOME/.gtkrc-2.0 ${dev_directory}${_repo1[2]}/.gtkrc-2.0;cp $HOME/.config/spacefm/bookmarks ${dev_directory}${_repo1[2]}/.config/spacefm/bookmarks;cp $HOME/.config/fontconfig/fonts.conf ${dev_directory}${_repo1[2]}/.config/fontconfig/fonts.conf;cp $HOME/.config/htop/htoprc ${dev_directory}${_repo1[2]}/.config/htop/htoprc;cp $HOME/.config/pacaur/config ${dev_directory}${_repo1[2]}/.config/pacaur/config;cp $HOME/.config/parcellite/parcelliterc ${dev_directory}${_repo1[2]}/.config/parcellite/parcelliterc;cp $HOME/.config/transmission-daemon/settings.json ${dev_directory}${_repo1[2]}/.config/transmission-daemon/settings.json;pacman -Qqe | grep -vx \"$(pacman -Qqg base)\" | grep -vx \"$(pacman -Qqm)\" > ${dev_directory}${_repo1[2]}/main.lst;pacman -Qqm > ${dev_directory}${_repo1[2]}/local.lst)"
 
-# awesomewm-X repo
-echo "${bldblue} ==> Analyzing awesomewm-X repo!${txtrst}"
-cd ${my_home}.config
-cp -r awesome/. ${my_home}${dev_directory}/awesomewm-X
-echo "cp -r ${my_home}.config/awesome/. ${my_home}${dev_directory}/awesomewm-X"
-cd ${my_home}${dev_directory}/awesomewm-X
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated awesomewm-X to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated awesomewm-X to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> awesomewm-X repo pushed to github!${txtrst}"
+# github repo Number 2
+_repo2[1]="idk"  # user
+_repo2[2]="eggdrop-scripts"  # repository
+# custom commands
+_repo2[3]="$(cp -r $HOME/.eggdrop/scripts/custom/ ${dev_directory}${_repo2[2]})"
 
-# conky-X repo
-echo "${bldblue} ==> Analyzing conky-X repo!${txtrst}"
-cd ${my_home}.config
-cp -r conky/. ${my_home}${dev_directory}/conky-X
-echo "cp -r conky/. ${my_home}${dev_directory}/conky-X"
-cd ${my_home}${dev_directory}/conky-X
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated conky-X to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated conky-X to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> conky-X repo pushed to github!${txtrst}"
+# github repo Number 3
+_repo3[1]="idk"  # user
+_repo3[2]="zsh"  # repository
+# custom commands
+_repo3[3]="$(cp $HOME/.zshrc ${dev_directory}${_repo3[2]}/.zshrc;cp $HOME/.zprofile ${dev_directory}${_repo3[2]}/.zprofile;cp -r $HOME/.zsh ${dev_directory}${_repo3[2]})"
 
-#bin repo
-echo "${bldblue} ==> Analyzing bin repo!${txtrst}"
-cd ${my_home}
-cp -r bin/. ${my_home}${dev_directory}/bin
-cp /usr/bin/screenfetch ${my_home}${dotfiles}bin/screenfetch
-echo "cp -r bin/. ${my_home}${dev_directory}/bin
-cp /usr/bin/screenfetch ${my_home}${dotfiles}bin/screenfetch"
-cd ${my_home}${dev_directory}/bin
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated bin to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated bin to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> bin repo pushed to github!${txtrst}"
+# github repo Number 4
+_repo4[1]="idk"  # user
+_repo4[2]="awesomewm-X"  # repository
+# custom commands
+_repo4[3]="$(cp -r $HOME/.config/awesome/. ${dev_directory}${_repo4[2]})"
 
-#etc repo
-echo "${bldblue} ==> Analyzing etc repo!${txtrst}"
-cp /etc/modules-load.d/my_modules.conf ${my_home}${dotfiles}etc/my_modules.conf
-cp /etc/php/php.ini ${my_home}${dotfiles}etc/php.ini
-cp /etc/tor/torrc ${my_home}${dotfiles}etc/torrc
-cp /etc/pacman.conf ${my_home}${dotfiles}etc/pacman.conf
-cp /etc/pacman.d/mirrorlist ${my_home}${dotfiles}etc/mirrorlist
-cp /etc/X11/xorg.conf.d/custom.conf ${my_home}${dotfiles}etc/custom.conf
-cd ${my_home}${dev_directory}/etc
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated etc to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated etc to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> etc repo pushed to github!${txtrst}"
+# github repo Number 5
+_repo5[1]="idk"  # user
+_repo5[2]="conky-X"  # repository
+# custom commands
+_repo5[3]="$(cp -r $HOME/.config/conky/. ${dev_directory}${_repo5[2]})"
 
-#systemd repo
-echo "${bldblue} ==> Analyzing systemd repo!${txtrst}"
-cp -r /etc/systemd/system/* ${my_home}${dotfiles}systemd
-echo "cp -r /etc/systemd/system/* ${my_home}${dotfiles}systemd"
-cd ${my_home}${dev_directory}/systemd
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated systemd to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated systemd to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> systemd repo pushed to github!${txtrst}"
+# github repo Number 6
+_repo6[1]="idk"  # user
+_repo6[2]="bin"  # repository
+# custom commands
+_repo6[3]="$(cp -r $HOME/bin/. ${dev_directory}${_repo6[2]};cp /usr/bin/screenfetch ${dev_directory}${_repo6[2]}/screenfetch)"
 
-#php repo
-echo "${bldblue} ==> Analyzing php repo!${txtrst}"
-cp -r ${my_home}php/* ${my_home}${dotfiles}php
-echo "cp -r ${my_home}php/* ${my_home}${dotfiles}php"
-cd ${my_home}${dev_directory}/php
-git add -A
-if [ "$commit_msg" == "" ]; then
-	commit_msg='updated php to current'
-fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated php to current" ]; then
-	commit_msg=''
-fi
-echo "${bldgreen} ==> php repo pushed to github!${txtrst}"
-# luakit-X repo
-#echo "${bldblue} ==> Analyzing luakit-X repo!${txtrst}"
-# cd ${my_home}.config
-# cp -r luakit/. ${my_home}${dev_directory}/luakit-X
-# cd ${my_home}${dev_directory}/luakit-X
-# git add .
-# if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated conky-X to current" ]; then
-# 	commit_msg='updated luakit-X to current'
-# fi
-# git commit -m "$commit_msg"
-# git push origin master
-# echo "${bldgreen} ==> luakit-X repo pushed to github!${txtrst}"
+# github repo Number 7
+_repo7[1]="idk"  # user
+_repo7[2]="etc"  # repository
+# custom commands
+_repo7[3]="$(cp /etc/modules-load.d/my_modules.conf ${dev_directory}${_repo7[2]}/my_modules.conf;cp /etc/php/php.ini ${dev_directory}${_repo7[2]}/php.ini;cp /etc/tor/torrc ${dev_directory}${_repo7[2]}/torrc;cp /etc/pacman.conf ${dev_directory}${_repo7[2]}/pacman.conf;cp /etc/pacman.d/mirrorlist ${dev_directory}${_repo7[2]}/mirrorlist;cp /etc/X11/xorg.conf.d/custom.conf ${dev_directory}${_repo7[2]}/custom.conf)"
 
-echo "${bldblue} ==> Analyzing ${dotfiles} files!${txtrst}"
-cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
-cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
-cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
-cp ${my_home}.dmenu_cache ${my_home}${dotfiles}.dmenu_cache
-cp ${my_home}.nanorc ${my_home}${dotfiles}.nanorc
-cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
-cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
-cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
-cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
-cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
-cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
-cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
+# github repo Number 8
+_repo8[1]="idk"  # user
+_repo8[2]="systemd"  # repository
+# custom commands
+_repo8[3]="$(cp -r /etc/systemd/system/* ${dev_directory}${_repo8[2]})"
 
-echo "${bldblue}cp ${my_home}.xinitrc ${my_home}${dotfiles}.xinitrc
-cp ${my_home}.bashrc ${my_home}${dotfiles}.bashrc
-cp ${my_home}.bash_profile ${my_home}${dotfiles}.bash_profile
-cp ${my_home}.dmenu_cache ${my_home}${dotfiles}.dmenu_cache
-cp ${my_home}.nanorc ${my_home}${dotfiles}.nanorc
-cp ${my_home}.gtkrc-2.0 ${my_home}${dotfiles}.gtkrc-2.0
-cp ${my_home}.config/spacefm/bookmarks ${my_home}${dotfiles}.config/spacefm/bookmarks
-cp ${my_home}.config/fontconfig/fonts.conf ${my_home}${dotfiles}.config/fontconfig/fonts.conf
-cp ${my_home}.config/htop/htoprc ${my_home}${dotfiles}.config/htop/htoprc
-cp ${my_home}.config/pacaur/config ${my_home}${dotfiles}.config/pacaur/config
-cp ${my_home}.config/parcellite/parcelliterc ${my_home}${dotfiles}.config/parcellite/parcelliterc
-cp ${my_home}.config/transmission-daemon/settings.json ${my_home}${dotfiles}.config/transmission-daemon/settings.json
-${txtrst}"
-echo "${bldgreen} ==> copied files into ${dotfiles}${txtrst}"
-echo "## Create main.lst remove local, base
-## Create local.lst of local (includes AUR) packages installed"
+# github repo Number 9
+_repo9[1]="idk"  # user
+_repo9[2]="php"  # repository
+# custom commands
+_repo9[3]="$(cp -r $HOME/php/* ${dev_directory}${_repo9[2]})"
 
-# dotfiles repo
-echo "${bldblue} ==> Analyzing ${dotfiles} repo!${txtrst}"
-cd ${my_home}${dotfiles}
-## Create main.lst remove local, base
-pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" > main.lst
-## Create local.lst of local (includes AUR) packages installed
-pacman -Qqm > local.lst
-git add -A
-if [ "$commit_msg" == "" ] || [ "$commit_msg" == "updated luakit-X to current" ]; then
-	commit_msg='updated packages lists from source'
+# github repo Number 10
+#_repo10[1]="idk"  # user
+#_repo10[2]="luakit-X"  # repository
+# custom commands
+#_repo10[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo10[2]})"
+
+
+### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
+
+
+## initalize options
+backup=no; clone=; create_repo=; create_submodule=; quiet=
+
+## functions
+git_installed_check() {
+	if [ ! -f /usr/bin/git ]; then
+		echo "FATAL ERROR - git is not installed";
+		exit 0
+	fi
+	if [ ! -f /usr/bin/hub ]; then
+		echo "FATAL ERROR: hub is not installed"
+		exit 0
+	fi
+}
+
+git_backup(){
+	for i in $(eval echo {1..$_repo_count})
+	do
+		__user=$(eval echo $(echo '${'_repo$i[1]'}'))
+		__repo=$(eval echo $(echo '{'_repo$i[2]'}'))
+		#docommands=$(eval echo $(echo '${'_repo$i[3]'}'))
+		#$docommands
+		cd ${dev_directory}${__repo}
+		#git add -A
+		if [ "$commit_msg" == "" ]; then
+			_commit_msg="updated ${__repo} to current working copy"
+		fi
+		#git commit -m "${_commit_msg}"
+		#git push origin master
+		_commit_msg=""
+		echo "${bldgreen} ==> ${__repo} repo pushed to Github.${txtrst}"
+	done
+	echo "${bldgreen} ==> All repos pushed to Github. Goodbye!${txtrst}"
+}
+
+## start script execution
+git_installed_check
+
+while getopts ":b:c:r:s:q:V:" opt
+do
+    case $opt in
+    V)  echo "`basename $0 `: gh Version $Revision: 0.1 $ ($Date: 2012/12/02 #Author: pdq)"
+        exit 0;;
+    b)  _backup=yes;;
+    c)  _clone=$OPTARG;;
+    r)  _create_repo=$OPTARG;;
+    s)  _create_submodule=$OPTARG;;
+    q)  _quiet=-q;;
+    *)  echo "Usage: `basename $0 ` [-{b|V|q}][-{c|r|s}] [user/{repo|submodule}]" 1>&2
+        exit 1;;
+    esac
+done
+
+# getopts
+if [ ! -n "${_create_submodule}" ]; then
+	git submodule add ${_create_submodule} ${_quiet}
 fi
-git commit -m "$commit_msg"
-git push origin master
-if [ "$commit_msg" == "updated packages lists from source" ]; then
-	commit_msg=''
+
+if [ ! -n "${_create_repo}" ]; then
+	git create "${_create_repo}" ${_quiet}
 fi
-echo "${bldgreen} ==> ${dotfiles} repo pushed to github!${txtrst}"
-## end
-echo "${bldgreen}Everything backed up to github! =)${txtrst}"
+
+if [ ! -n "${_clone}" ]; then
+	git create "${_clone}" ${_quiet}
+fi
+
+if [ ! -n "${_backup}" ]; then
+	git_backup
+fi
+
+if [ ! -n "${_clone}" ]; then
+	hub clone $_clone ${_quiet}
+fi
+
+exit 1
