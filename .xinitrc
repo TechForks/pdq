@@ -1,35 +1,29 @@
 #!/bin/bash
 
-# if [[ $1 == "razor" ]]
-# then
-#   urxvtd -q -o -f
-#   export BROWSER=luakit
-#   export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-#   #exec ck-launch-session razor-session
-#   exec razor-session
-# elif [[ $1 == "kde" ]]
-# then
-#   urxvtd -q -o -f
-#   export BROWSER=luakit
-#   export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-#   #exec ck-launch-session startkde
-#   exec startkde
-# elif [[ $1 == "awesome" ]]
-# then
-#   urxvtd -q -o -f
-#   export BROWSER=luakit
-#   export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-#   #exec ck-launch-session dbus-launch awesome  >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
-#   exec awesome  >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
-# else
-#   echo "Choose a window manager $USER"
-# fi
+## start urxvt daemon
 urxvtd -q -o -f
+
+## start clipboard manager
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
+## export some variables
 export BROWSER=firefox
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+## login sound
 ogg123 -q "${HOME}/.config/awesome/sounds/voice-system-activated.ogg"
-# truecrypt mounted success file
+
+## truecrypt mounted success file
 if [ -f "/media/truecrypt1/test" ] ; then
 	ogg123 -q "${HOME}/.config/awesome/sounds/desktop-login.ogg"
 fi
-exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
+
+## start Desktop Environment/Window Manager
+if [ $1 = "razor" ]; then
+	exec razor-session
+elif [ $1 = "kde" ]; then
+	exec startkde
+else
+	exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
+fi

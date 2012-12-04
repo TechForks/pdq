@@ -8,6 +8,7 @@ apache
 arm
 audio-convert
 autoconf
+autocutsel
 automake
 awesome
 bash
@@ -17,12 +18,12 @@ bitlbee
 bzip2
 cacheclean
 cairo
-cairo-compmgr-git
 cclive
 cdrdao
 checkbashisms
 chromium
 cmatrix
+compton-git
 conky-lua
 conkytransmission-bzr
 conkywx
@@ -103,6 +104,7 @@ hddtemp
 heirloom-mailx
 hgsvn
 hicolor-icon-theme
+hsetroot
 htop
 hub
 inetutils
@@ -176,7 +178,6 @@ pacaur
 pacman
 pacman-color
 pacmanlog2gource
-parcellite
 patch
 pciutils
 pcmciautils
