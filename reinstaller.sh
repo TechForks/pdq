@@ -223,31 +223,29 @@ if ask_something; then
     cp -rv ${dev_directory}php ${my_home}php
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
 
-    sudo systemctl enable dhcpcd@eth0.service
-    sudo systemctl enable NetworkManager.service
-    sudo systemctl enable ntpd.service
-    sudo systemctl enable tor.service
-    sudo systemctl enable privoxy.service
-    sudo systemctl enable preload.service
-    sudo systemctl enable polipo.service
-    sudo systemctl enable vnstat.sevice
-    sudo systemctl enable cronie.service
+    systemctl enable dhcpcd@eth0.service
+    systemctl enable NetworkManager.service
+    systemctl enable ntpd.service
+    systemctl enable tor.service
+    systemctl enable privoxy.service
+    systemctl enable preload.service
+    systemctl enable polipo.service
+    systemctl enable vnstat.sevice
+    systemctl enable cronie.service
 
     echo "${bldgreen} ==> Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files${txtrst}"
-    sudo cp -v ${dev_directory}etc/autologin\@.service /etc/systemd/system/autologin\@.service
     sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
     sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
+    sudo mkdir -p /etc/privoxy
     sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
     sudo mv -v /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
     sudo cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
-    sudo mv -v /etc/httpd/conf/extra/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf.bak
-    sudo cp -v ${dev_directory}etc/httpd-vhosts.conf /etc/httpd/conf/extra/httpd-vhosts.conf
     sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
     sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
-    sudo systemctl daemon-reload
-    sudo systemctl disable getty@tty1
-    sudo systemctl enable autologin@tty1
-    sudo systemctl start autologin@tty1
+    systemctl daemon-reload
+    systemctl disable getty@tty1
+    systemctl enable autologin@tty1
+    systemctl start autologin@tty1
 
     sudo echo "#
     # /etc/hosts: static lookup table for host names
