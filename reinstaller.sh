@@ -23,8 +23,7 @@
         # ### chroot into /mnt
         # arch-chroot /mnt
         # nano /etc/locale.gen 
-        # echo LANG=en_US.UTF-8 > /etc/locale.conf
-        # export LANG=en_US.UTF-8                   
+        # locale-gen                 
         # ln -s /usr/share/zoneinfo/America/Winnipeg /etc/localtime
         # echo archusb > /etc/hostname
         # systemctl enable dhcpcd@eth0.service
@@ -46,6 +45,9 @@
         # cd
 
         # wget http://is.gd/reinstaller -O installer.sh
+
+        # ### remove some packages (ffpoth, checkbashisms, gh, grub, pdq-utils)
+        # nano ~/github/pdq/local.lst
 
         # ### run all options except final option
         # sh installer.sh
@@ -157,7 +159,7 @@ fi
 
 question="Clone all repos (Y/N)?\n"
 if ask_something; then
-    hub clone idk/awesome-X
+    hub clone idk/awesomewm-X
     hub clone idk/conky-X
     hub clone idk/zsh
     hub clone idk/bin
@@ -185,9 +187,6 @@ if ask_something; then
     cp -v ${dev_directory}pdq/.gmail_symlink ${my_home}.gmail_symlink
     mv -v ${my_home}.gtkrc-2.0 ${my_home}.gtkrc-2.0.bak
     cp -v ${dev_directory}pdq/.gtkrc-2.0 ${my_home}.gtkrc-2.0
-    mv -v ${my_home}.ideskrc ${my_home}.ideskrc.bak
-    cp -v ${dev_directory}pdq/.ideskrc ${my_home}.ideskrc
-    cp -v ${dev_directory}pdq/.colors ${my_home}.colors
     mv -v ${my_home}.bashrc ${my_home}.bashrc.bak
     cp -v ${dev_directory}pdq/.bashrc ${my_home}.bashrc
     mv -v ${my_home}.bash_profile ${my_home}.bash_profile.bak
@@ -218,8 +217,11 @@ if ask_something; then
     touch ${my_home}.cache/awesome/stderr
     touch ${my_home}.cache/awesome/stdout
     mkdir -p ${my_home}.config/conky/arch/.cache
-    mv ${my_home}.xinitrc ${my_home}.xinitrc.original
-    cp ${dev_directory}awesomewm-X/skel/.xinitrc ${my_home}.xinitrc
+    cp -rv ${dev_directory}zsh/.zsh ${my_home}.zsh
+    cp -v ${dev_directory}zsh/.zshrc ${my_home}.zshrc
+    cp -v ${dev_directory}zsh/.zprofile ${my_home}.zprofile
+    cp -rv ${dev_directory}php ${my_home}php
+    sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
 
     sudo systemctl enable dhcpcd@eth0.service
     sudo systemctl enable NetworkManager.service
@@ -232,7 +234,7 @@ if ask_something; then
     sudo systemctl enable cronie.service
 
     echo "${bldgreen} ==> Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files${txtrst}"
-    sudo cp -v${dev_directory}etc/autologin\@.service /etc/systemd/system/autologin\@.service
+    sudo cp -v ${dev_directory}etc/autologin\@.service /etc/systemd/system/autologin\@.service
     sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
     sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
     sudo echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config
@@ -602,7 +604,7 @@ if ask_something; then
     mysql -u root -p
     # exit from the CLI MySQL client
     exit
-    echo "If it logged in then exited, it worked! En guarde! Touche! And all that :Please
+    echo "If it logged in then exited, it worked! En guarde! Touche! And all that :P
 
     Cool, well we are still root so let's drop down to $USER"
     # exit from root back to user
@@ -613,6 +615,8 @@ if ask_something; then
     ln -s /srv/http ${my_home}localhost
     cd ${my_home}localhost
     pwd
+    chsh -s $(which zsh)
+    cd
     echo "${bldgreen} ==> Exiting install script...${txtrst}"
     echo "${bldgreen}If complete, reboot and log back in as $USER, then type: 'startx'${txtrst}"
 fi
