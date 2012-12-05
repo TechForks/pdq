@@ -133,10 +133,19 @@ if ask_something; then
     echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
     packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
+
 if [ $? -ne 0 ]; then
-    sudo pacman -Syy
-    echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
-    packer -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+    rm -r ${my_home}vital/tmp/packerbuild-1000/
+    rm -r ${my_home}vital/tmp/packertmp-1000/  
+    echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
+    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+fi
+
+if [ $? -ne 0 ]; then
+    rm -r ${my_home}vital/tmp/packerbuild-1000/
+    rm -r ${my_home}vital/tmp/packertmp-1000/  
+    echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
+    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 question="Install AUR packages (with confirm) (Y/N)?\n"
