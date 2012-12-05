@@ -28,9 +28,9 @@ cd ${dev_directory}
 ask_something() {
     echo -ne $question
     while read -r -n 1 -s yn; do
-        if [ $yn = [YyNn] ]; then
-            [ $yn = [Yy] ] && return=0
-            [ $yn = [Nn] ] && return=1
+        if [[ $yn = [YyNn] ]]; then
+           [[ $yn = [Yy] ]] && return=0
+            [[ $yn = [Nn] ]] && return=1
             break
         fi
     done
