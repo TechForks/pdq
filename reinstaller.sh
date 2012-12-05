@@ -14,7 +14,10 @@
 my_home="$HOME/"
 #my_home="/home/pdq/test/"
 dev_directory="${my_home}github/"
-
+mkdir -p ${my_home}vital/pkg
+mkdir -p ${my_home}vital/tmp
+TMPDIR=${my_home}vital/tmp
+    
 txtbld=$(tput bold)             # Bold
 bldred=${txtbld}$(tput setaf 1) # Red Colored
 bldgreen=${txtbld}$(tput setaf 2) # Green Colored
@@ -100,8 +103,6 @@ fi
 
 question="Install all repos (Y/N) [Cannot do in chroot]?\n"
 if ask_something; then
-    mkdir -p ${my_home}vital/pkg
-    mkdir -p ${my_home}vital/tmp
     echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
     sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     sudo cp -v ${dev_directory}pdq/etc/mirrorlist /etc/pacman.d/mirrorlist
