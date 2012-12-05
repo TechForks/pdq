@@ -3,21 +3,79 @@
 ## 03-22-2012 pdq
 ## 07-10-2012 pdq
 ## 11-04-2012 pdq
+## 12-05-2012 pdq
 
-## As root right after fresh install:
-# wget http://is.gd/reinstaller -O installer.sh
-# sh reinstaller.sh
+## Instructions
+## from within existing arch linux
+        # sudo pacman -S arch-install-scripts
 
-## Reinstalling backups on guest OS (Archlinux)
-# sh ~/Development/pdq/reinstaller.sh
+        # ### change sde to what's required (be careful to chose installation drive as will erase it!)
+        # sudo mount /dev/sde1 /mnt
+        # sudo mkdir /mnt/home
+        # sudo mount /dev/sde2 /mnt/home
+        # sudo pacstrap /mnt base base-devel sudo wget rxvt-unicode
+
+        # ### become root
+        # su -l
+        # genfstab -U -p /mnt >> /mnt/etc/fstab
+        # nano /mnt/etc/fstab
+
+        # ### chroot into /mnt
+        # arch-chroot /mnt
+        # nano /etc/locale.gen 
+        # echo LANG=en_US.UTF-8 > /etc/locale.conf
+        # export LANG=en_US.UTF-8                   
+        # ln -s /usr/share/zoneinfo/America/Winnipeg /etc/localtime
+        # echo archusb > /etc/hostname
+        # systemctl enable dhcpcd@eth0.service
+
+        # ### enable multilib if needed
+        # nano /etc/pacman.conf 
+        # passwd
+        # adduser
+        # pacman -S grub-bios
+        # grub-install --target=i386-pc --recheck /dev/sde
+        # cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+        # grub-mkconfig -o /boot/grub/grub.cfg
+
+        # ### add YOURUSER to sudoers
+        # EDITOR=nano visudo
+
+        # ### become YOURUSER and change directory to your home
+        # su YOURUSER
+        # cd
+
+        # wget http://is.gd/reinstaller -O installer.sh
+
+        # ### run all options except final option
+        # sh installer.sh
+
+        # ### exit chroot
+        # exit
+
+        # umount /mnt/home
+        # umount /mnt
+
+        # ### done!
+
+        # ### reboot into usb
+
+        # ### run final option
+        # sh installer.sh
+
+        # ### reboot into usb
+        # sudo reboot
 
 my_home="$HOME/"
 #my_home="/home/pdq/test/"
 dev_directory="${my_home}github/"
+
+## create pacman pkg dir and packer tmp dir
 mkdir -p ${my_home}vital/pkg
 mkdir -p ${my_home}vital/tmp
 export TMPDIR=${my_home}vital/tmp
 
+## color formatting
 txtbld=$(tput bold)             # Bold
 bldred=${txtbld}$(tput setaf 1) # Red Colored
 bldgreen=${txtbld}$(tput setaf 2) # Green Colored
