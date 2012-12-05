@@ -5,7 +5,7 @@
 ## 11-04-2012 pdq
 
 ## As root right after fresh install:
-# wget http://is.gd/reinstaller -O reinstaller.sh
+# wget http://is.gd/reinstaller -O installer.sh
 # sh reinstaller.sh
 
 ## Reinstalling backups on guest OS (Archlinux)
@@ -42,9 +42,12 @@ if [ $(id -u) -eq 0 ]; then
     exit 1
 fi
 
-if [ ! -f /usr/bin/git ] || [ ! -f /usr/bin/hub ]; then
-    echo "Install git and hub..."
-    exit 0
+if [ ! -f /usr/bin/git ]; then
+    sudo pacman -S git
+fi
+
+if [ ! -f /usr/bin/hub ]; then
+    sudo pacman -S hub
 fi
 
 if [ ! -f /usr/bin/packer ]; then
