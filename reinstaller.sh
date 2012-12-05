@@ -16,8 +16,8 @@ my_home="$HOME/"
 dev_directory="${my_home}github/"
 mkdir -p ${my_home}vital/pkg
 mkdir -p ${my_home}vital/tmp
-TMPDIR=${my_home}vital/tmp
-    
+export TMPDIR=${my_home}vital/tmp
+
 txtbld=$(tput bold)             # Bold
 bldred=${txtbld}$(tput setaf 1) # Red Colored
 bldgreen=${txtbld}$(tput setaf 2) # Green Colored
