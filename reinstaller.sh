@@ -98,7 +98,7 @@ if ask_something; then
     hub clone idk/gh
 fi
 
-question="Install all repos (Y/N)?\n"
+question="Install all repos (Y/N) [Cannot do in chroot]?\n"
 if ask_something; then
     mkdir -p ${my_home}vital/pkg
     mkdir -p ${my_home}vital/tmp
