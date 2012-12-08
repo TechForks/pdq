@@ -1,4 +1,5 @@
 aarchup
+archiso-git
 arm
 cacheclean
 checkbashisms
@@ -34,12 +35,12 @@ lib32-google-breakpad-svn
 lib32-libtxc_dxtn
 logstalgia
 lua-sqlite3
-luakit-git
 mlt-git
 montecarlo-font
 mysqltcl
 neuropolitical_font
 pacaur
+packer
 pacman-color
 pacmanlog2gource
 pdq-utils

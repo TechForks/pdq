@@ -28,6 +28,10 @@
         # echo archusb > /etc/hostname
         # systemctl enable dhcpcd@eth0.service
 
+        # ### add usb to HOOKS is needed
+        # nano etc/mkinitcpio.conf
+        # mkinitcpio -p linux
+
         # ### enable multilib if needed
         # nano /etc/pacman.conf 
         # passwd
