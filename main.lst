@@ -63,6 +63,7 @@ hicolor-icon-theme
 hsetroot
 htop
 hub
+iotop
 k3b
 kdebase-dolphin
 kdemultimedia-ffmpegthumbs
@@ -109,6 +110,9 @@ ntfs-3g
 ntfsprogs
 ntp
 openssh
+openttd
+openttd-opengfx
+openttd-opensfx
 patch
 php
 php-apache
