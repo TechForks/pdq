@@ -28,7 +28,7 @@
         # echo archusb > /etc/hostname
         # systemctl enable dhcpcd@eth0.service
 
-        # ### add usb to HOOKS is needed
+        # ### add usb to HOOKS if needed
         # nano etc/mkinitcpio.conf
         # mkinitcpio -p linux
 
@@ -49,9 +49,6 @@
         # cd
 
         # wget http://is.gd/reinstaller -O installer.sh
-
-        # ### remove some packages (ffpoth, checkbashisms, gh, grub, pdq-utils)
-        # nano ~/github/pdq/local.lst
 
         # ### run all options except final option
         # sh installer.sh
@@ -144,7 +141,7 @@ if [ $? -ne 0 ]; then
     rm -r ${my_home}vital/tmp/packerbuild-1000/
     rm -r ${my_home}vital/tmp/packertmp-1000/  
     echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
-    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+    packer -G $(cat ~/github/pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 if [ $? -ne 0 ]; then
