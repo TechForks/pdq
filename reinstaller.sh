@@ -137,20 +137,6 @@ if ask_something; then
     packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
-if [ $? -ne 0 ]; then
-    rm -r ${my_home}vital/tmp/packerbuild-1000/
-    rm -r ${my_home}vital/tmp/packertmp-1000/  
-    echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
-    packer -G $(cat ~/github/pdq/local.lst | grep -vx "$(pacman -Qqm)")
-fi
-
-if [ $? -ne 0 ]; then
-    rm -r ${my_home}vital/tmp/packerbuild-1000/
-    rm -r ${my_home}vital/tmp/packertmp-1000/  
-    echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
-    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
-fi
-
 question="Install AUR packages (with confirm) (Y/N)?\n"
 if ask_something; then
     sudo pacman -Syy
@@ -175,11 +161,11 @@ question="Install all repos (Y/N) [Cannot do in chroot]?\n"
 if ask_something; then
     echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
     sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-    sudo cp -v ${dev_directory}pdq/etc/mirrorlist /etc/pacman.d/mirrorlist
+    sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
     echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
     sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
-    sudo cp -v ${dev_directory}pdq/etc/pacman.conf /etc/pacman.conf
-    sudo cp -v ${dev_directory}pdq/etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
+    sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
+    sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
 
     sudo pacman -Syy
 
@@ -224,15 +210,15 @@ if ask_something; then
     cp -rv ${dev_directory}php ${my_home}php
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
 
-    systemctl enable dhcpcd@eth0.service
-    systemctl enable NetworkManager.service
-    systemctl enable ntpd.service
-    systemctl enable tor.service
-    systemctl enable privoxy.service
-    systemctl enable preload.service
-    systemctl enable polipo.service
-    systemctl enable vnstat.sevice
-    systemctl enable cronie.service
+    sudo systemctl enable dhcpcd@eth0.service
+    sudo systemctl enable NetworkManager.service
+    sudo systemctl enable ntpd.service
+    sudo systemctl enable tor.service
+    sudo systemctl enable privoxy.service
+    sudo systemctl enable preload.service
+    sudo systemctl enable polipo.service
+    sudo systemctl enable vnstat.sevice
+    sudo systemctl enable cronie.service
 
     echo "${bldgreen} ==> Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files${txtrst}"
     sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
@@ -243,10 +229,10 @@ if ask_something; then
     sudo cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
     sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
     sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
-    systemctl daemon-reload
-    systemctl disable getty@tty1
-    systemctl enable autologin@tty1
-    systemctl start autologin@tty1
+    sudo systemctl daemon-reload
+    sudo systemctl disable getty@tty1
+    sudo systemctl enable autologin@tty1
+    sudo systemctl start autologin@tty1
 
     sudo echo "#
     # /etc/hosts: static lookup table for host names
@@ -582,8 +568,8 @@ if ask_something; then
     echo "rah rah $USER rah rah $USER!!!"
     sleep 1s
     echo "Ok... let's continue on with this..."
-    systemctl start httpd
-    systemctl start mysqld
+    sudo systemctl start httpd
+    sudo systemctl start mysqld
     sleep 1s
     echo "Ok... starting MySQL and setting a root password for MySQL...."
     rand=$RANDOM
