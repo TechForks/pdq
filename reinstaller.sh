@@ -197,7 +197,7 @@ if ask_something; then
     mkdir -p ${my_home}.config/awesome/Xdefaults/$USER
     mv -v ${my_home}.Xdefaults ${my_home}.config/awesome/Xdefaults/$USER/.Xdefaults
     ln -sfn ${my_home}.config/awesome/Xdefaults/default/.Xdefaults ${my_home}.Xdefaults
-    ln -sfn ${my_home}.config/awesome/themes/pdq ${my_home}.config/awesome/themes/current
+    ln -sfn ${my_home}.config/awesome/themes/dunzor ${my_home}.config/awesome/themes/current
     ln -sfn ${my_home}.config/awesome/icons/AwesomeLight.png ${my_home}.config/awesome/icons/menu_icon.png
     ln -sfn ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
     mkdir -p ${my_home}.cache/awesome
