@@ -209,6 +209,7 @@ if ask_something; then
     cp -v ${dev_directory}zsh/.zprofile ${my_home}.zprofile
     cp -rv ${dev_directory}php ${my_home}php
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
+    sudo nano /etc/systemd/system/autologin@.service
 
     sudo systemctl enable dhcpcd@eth0.service
     sudo systemctl enable NetworkManager.service
@@ -521,47 +522,44 @@ if ask_something; then
     # End of file' > /etc/hosts"
 
     echo "Creating self-signed certificate (you can change key size and days of validity)"
-    echo "Enter root password to create ssl cert"
-    su
-    if [ $(id -u) -eq 0 ]; then
         cd /etc/httpd/conf
-        openssl genrsa -des3 -out server.key 1024
-        openssl req -new -key server.key -out server.csr
-        cp -v server.key server.key.org
-        openssl rsa -in server.key.org -out server.key
-        openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+        sudo openssl genrsa -des3 -out server.key 1024
+        sudo openssl req -new -key server.key -out server.csr
+        sudo cp -v server.key server.key.org
+        sudo openssl rsa -in server.key.org -out server.key
+        sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-        mkdir -p /srv/http/root/public_html
-        chmod g+xr-w /srv/http/root
-        chmod -R g+xr-w /srv/http/root/public_html
+        sudo mkdir -p /srv/http/root/public_html
+        sudo chmod g+xr-w /srv/http/root
+        sudo chmod -R g+xr-w /srv/http/root/public_html
 
-        mkdir -p /srv/http/$USER.c0m/public_html
-        chmod g+xr-w /srv/http/$USER.c0m
-        chmod -R g+xr-w /srv/http/$USER.c0m/public_html
+        sudo mkdir -p /srv/http/$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/$USER.c0m/public_html
 
-        mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
-        chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
-        chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
+        sudo mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
+        sudo chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
+        sudo chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
 
-        mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
-        chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
-        chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
 
-        mkdir -p /srv/http/torrent.$USER.c0m/public_html
-        chmod g+xr-w /srv/http/torrent.$USER.c0m
-        chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/torrent.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/torrent.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
 
-        mkdir -p /srv/http/admin.$USER.c0m/public_html
-        chmod g+xr-w /srv/http/admin.$USER.c0m
-        chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/admin.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/admin.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
 
-        mkdir -p /srv/http/stats.$USER.c0m/public_html
-        chmod g+xr-w /srv/http/stats.$USER.c0m
-        chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/stats.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/stats.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
 
-        mkdir -p /srv/http/mail.$USER.c0m/public_html
-        chmod g+xr-w /srv/http/mail.$USER.c0m
-        chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/mail.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/mail.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
 
         sleep 2s
         echo "w00t!! You're just flying through this stuff you hacker you!! :p"
@@ -569,12 +567,12 @@ if ask_something; then
         echo "rah rah $USER rah rah $USER!!!"
         sleep 1s
         echo "Ok... let's continue on with this..."
-        systemctl start httpd
-        systemctl start mysqld
+        sudo systemctl start httpd
+        sudo systemctl start mysqld
         sleep 1s
         echo "Ok... starting MySQL and setting a root password for MySQL...."
         rand=$RANDOM
-        mysqladmin -u root password $USER-$rand
+        sudo mysqladmin -u root password $USER-$rand
         echo "${bldred}You're mysql root password is $USER-$rand Write this down before proceeding...${txtrst}
         "
         sleep 5s
@@ -585,25 +583,12 @@ if ask_something; then
 
         $ mysqladmin -u root -p'$USER-$rand' password '123456'"
         sleep 3s 
-        echo "Ok, trying to login to mysql and make sure it works..."
-        sleep 2s 
-        mysql -u root -p
-        # exit from the CLI MySQL client
-        exit
-        echo "If it logged in then exited, it worked! En guarde! Touche! And all that :P
-
-        Cool, well we are still root so let's drop down to $USER"
-        # exit from root back to user
-        exit
-        echo "w00t success!"
-    fi
-    sleep 1s
-    ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
-    ln -s /srv/http ${my_home}localhost
+    sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
+    sudo ln -s /srv/http ${my_home}localhost
     cd ${my_home}localhost
     pwd
     chsh -s $(which zsh)
     cd
     echo "${bldgreen} ==> Exiting install script...${txtrst}"
-    echo "${bldgreen}If complete, reboot and log back in as $USER, then type: 'startx'${txtrst}"
+    echo "${bldgreen}If complete, reboot!"
 fi
