@@ -171,7 +171,7 @@ if ask_something; then
     echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
     sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
     sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
-    sed -i "s/pdq/$USER/g" /etc/pacman.conf
+    sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
     sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
 
     sudo pacman -Syy
@@ -217,7 +217,7 @@ if ask_something; then
     nano ${my_home}.zprofile
     cp -rv ${dev_directory}php ${my_home}php
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
-    sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
+    sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
 
     sudo systemctl enable dhcpcd@eth0.service
     sudo systemctl enable NetworkManager.service
