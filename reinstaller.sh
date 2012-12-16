@@ -128,6 +128,7 @@ fi
 if [ ! -d "${dev_directory}pdq" ]; then
     echo "${bldgreen} ==> Cloning initial repo to ${dev_directory}pdq/${txtrst}"
     hub clone idk/pdq
+    hub clone idk/etc
     sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
     sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
     sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
@@ -159,7 +160,6 @@ if ask_something; then
     hub clone idk/conky-X
     hub clone idk/zsh
     hub clone idk/bin
-    hub clone idk/etc
     hub clone idk/php
     hub clone idk/systemd
     hub clone idk/eggdrop-scripts
