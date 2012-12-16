@@ -28,6 +28,7 @@ lib32-curl
 lib32-google-breakpad-svn
 lib32-libtxc_dxtn
 logstalgia
+lua-socket
 lua-sqlite3
 montecarlo-font
 mysqltcl

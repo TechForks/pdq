@@ -9,6 +9,7 @@ audio-convert
 autoconf
 autocutsel
 automake
+avidemux-qt
 awesome
 binutils-multilib
 bison
@@ -84,9 +85,10 @@ libtool
 libunique
 libxft
 lm_sensors
-luafilesystem
+lua-filesystem
+lua51-filesystem
+lua51-socket
 luarocks
-luasocket
 lxappearance
 lxtask
 lzop
@@ -164,6 +166,7 @@ wavpack
 webkitgtk2
 weechat
 wget
+wine
 wireshark-cli
 wmctrl
 wpa_supplicant
