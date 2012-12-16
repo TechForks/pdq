@@ -101,6 +101,12 @@ ask_something() {
     return $return
 }
 
+grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
+if [ "$archtype" = "no" ]; then
+    echo "Sorry this is for x86_64 only! =)"
+    exit 1
+fi
+
 if [ $(id -u) -eq 0 ]; then
     echo "Do not run me as root! =)"
     exit 1
