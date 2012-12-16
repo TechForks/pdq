@@ -128,6 +128,9 @@ fi
 if [ ! -d "${dev_directory}pdq" ]; then
     echo "${bldgreen} ==> Cloning initial repo to ${dev_directory}pdq/${txtrst}"
     hub clone idk/pdq
+    sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
+    sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
+    sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
 fi
 
 question="Install main packages (Y/N)?\n"
@@ -169,9 +172,9 @@ if ask_something; then
     sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
     echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
-    sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
-    sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
-    sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
+    # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
+    # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
+    # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
     sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
 
     sudo pacman -Syy
