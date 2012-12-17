@@ -152,11 +152,11 @@ fi
 question="${bldgreen}Install AUR packages (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
-    echo "${bldgreen} ==> Installing AUR packages (no confirm) [Use this option if the prior one failed, otherwise skip it]${txtrst}"
+    echo "${bldgreen} ==> Installing AUR packages (no confirm)${txtrst}"
     packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
-question="${bldgreen}Install AUR packages (with confirm) (Y/N)${txtrst}?\n"
+question="${bldgreen}Install AUR packages (with confirm) [Use this option if the prior one failed, otherwise skip it] (Y/N)${txtrst}?\n"
 if ask_something; then
     sudo pacman -Syy
     echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
