@@ -228,8 +228,13 @@ if ask_something; then
     cp -v ${dev_directory}zsh/.zshrc ${my_home}.zshrc
     cp -v ${dev_directory}zsh/.zprofile ${my_home}.zprofile
     cp -rv ${dev_directory}php ${my_home}php
+    mkdir -p ${my_home}Down
+    mkdir -p ${my_home}Downloads/.torrents
+    sed -i "s/pdq/$USER/g" ${my_home}.config/transmission-daemon/settings.json
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
+    sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/transmission.service
+    sudo chmod -R 777 /run/transmission
     sudo mkdir -p /usr/share/tor/hidden_service1
     sudo mkdir -p /usr/share/tor/hidden_service2
     sudo mkdir -p /usr/share/tor/hidden_service3
