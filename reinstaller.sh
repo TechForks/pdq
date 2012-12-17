@@ -203,6 +203,7 @@ if ask_something; then
     cp -v ${dev_directory}pdq/moc.config ${my_home}.moc/config
     cp -v ${dev_directory}pdq/.excludes-usb ${my_home}.excludes-usb
     cp -v ${dev_directory}pdq/.excludes-crypt ${my_home}.excludes-crypt
+    cp -rv ${dev_directory}bin ${my_home}bin
 
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
 
@@ -229,7 +230,14 @@ if ask_something; then
     cp -rv ${dev_directory}php ${my_home}php
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
-
+    sudo mkdir -p /usr/share/tor/hidden_service1
+    sudo mkdir -p /usr/share/tor/hidden_service2
+    sudo mkdir -p /usr/share/tor/hidden_service3
+    sudo mkdir -p /usr/share/tor/hidden_service4
+    sudo chown -R tor:tor /usr/share/tor/hidden_service1
+    sudo chown -R tor:tor /usr/share/tor/hidden_service2
+    sudo chown -R tor:tor /usr/share/tor/hidden_service3
+    sudo chown -R tor:tor /usr/share/tor/hidden_service4
     sudo systemctl enable dhcpcd@eth0.service
     sudo systemctl enable NetworkManager.service
     sudo systemctl enable ntpd.service
