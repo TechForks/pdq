@@ -12,67 +12,7 @@
 ## https://gist.github.com/4311373
 
 ## from within existing arch linux
-        # sudo pacman -S arch-install-scripts
-
-        # ### change sde to what's required (be careful to chose installation drive as will erase it!)
-        # sudo mount /dev/sde1 /mnt
-        # sudo mkdir /mnt/home
-        # sudo mount /dev/sde2 /mnt/home
-        # sudo pacstrap /mnt base base-devel sudo wget rxvt-unicode
-
-        # ### become root
-        # su -l
-        # genfstab -U -p /mnt >> /mnt/etc/fstab
-        # nano /mnt/etc/fstab
-
-        # ### chroot into /mnt
-        # arch-chroot /mnt
-        # nano /etc/locale.gen 
-        # locale-gen                 
-        # ln -s /usr/share/zoneinfo/America/Winnipeg /etc/localtime
-        # echo archusb > /etc/hostname
-        # systemctl enable dhcpcd@eth0.service
-
-        # ### add usb to HOOKS if needed
-        # nano etc/mkinitcpio.conf
-        # mkinitcpio -p linux
-
-        # ### enable multilib if needed
-        # nano /etc/pacman.conf 
-        # passwd
-        # adduser
-        # pacman -S grub-bios
-        # grub-install --target=i386-pc --recheck /dev/sde
-        # cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-        # grub-mkconfig -o /boot/grub/grub.cfg
-
-        # ### add YOURUSER to sudoers
-        # EDITOR=nano visudo
-
-        # ### become YOURUSER and change directory to your home
-        # su YOURUSER
-        # cd
-
-        # wget http://is.gd/reinstaller -O installer.sh
-
-        # ### run all options except final option
-        # sh installer.sh
-
-        # ### exit chroot
-        # exit
-
-        # umount /mnt/home
-        # umount /mnt
-
-        # ### done!
-
-        # ### reboot into usb
-
-        # ### run final option
-        # sh installer.sh
-
-        # ### reboot into usb
-        # sudo reboot
+## https://gist.github.com/4316973
 
 my_home="$HOME/"
 #my_home="/home/pdq/test/"
