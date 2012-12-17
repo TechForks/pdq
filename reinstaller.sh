@@ -4,8 +4,13 @@
 ## 07-10-2012 pdq
 ## 11-04-2012 pdq
 ## 12-05-2012 pdq
+## 12-15-2012 pdq
 
 ## Instructions
+
+## from livecd/liveusb
+## https://gist.github.com/4311373
+
 ## from within existing arch linux
         # sudo pacman -S arch-install-scripts
 
