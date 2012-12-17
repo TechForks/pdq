@@ -134,6 +134,15 @@ if [ ! -d "${dev_directory}pdq" ]; then
     sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
 fi
 
+question="Is this a VirtualBox install (Y/N)?\n"
+if ask_something; then
+    sudo pacman -Syy
+    sudo pacman -S virtualbox-guest-utils
+    sudo sh -c "echo 'vboxguest
+vboxsf
+vboxvideo' > /etc/modules-load.d/virtualbox.conf"
+fi
+
 question="Install main packages (Y/N)?\n"
 if ask_something; then
     sudo pacman -Syy
