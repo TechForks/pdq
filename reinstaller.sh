@@ -204,6 +204,8 @@ if ask_something; then
     cp -v ${dev_directory}pdq/.excludes-usb ${my_home}.excludes-usb
     cp -v ${dev_directory}pdq/.excludes-crypt ${my_home}.excludes-crypt
     cp -rv ${dev_directory}bin ${my_home}bin
+    mkdir -p ${my_home}.vimperator
+    cp -rv ${dev_directory}pdq/.vimperator/plugin ${my_home}.vimperator/plugin
 
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
 
