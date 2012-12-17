@@ -569,5 +569,5 @@ if ask_something; then
     chsh -s $(which zsh)
     cd
     echo "${bldgreen} ==> Exiting install script...${txtrst}"
-    echo "${bldgreen}If complete, type: sudo reboot!${txtrst}"
+    echo "${bldgreen}If complete, type: sudo reboot (you may also want to install video driver now, ie: sudo pacman -S xf86-video-intel lib32-intel-dri [replacing 'intel' with your graphics card type])${txtrst}"
 fi
