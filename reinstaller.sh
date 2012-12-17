@@ -134,7 +134,7 @@ if [ ! -d "${dev_directory}pdq" ]; then
     sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
 fi
 
-question="Is this a VirtualBox install (Y/N)?\n"
+question="${bldgreen}Is this a VirtualBox install (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
     sudo pacman -S virtualbox-guest-utils
@@ -143,27 +143,27 @@ vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 fi
 
-question="Install main packages (Y/N)?\n"
+question="${bldgreen}Install main packages (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
     sudo pacman -S --needed $(cat ${dev_directory}pdq/main.lst)
 fi
 
-question="Install AUR packages (Y/N)?\n"
+question="${bldgreen}Install AUR packages (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
     echo "${bldgreen} ==> Installing AUR packages (no confirm) [Use this option if the prior one failed, otherwise skip it]${txtrst}"
     packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
-question="Install AUR packages (with confirm) (Y/N)?\n"
+question="${bldgreen}Install AUR packages (with confirm) (Y/N)${txtrst}?\n"
 if ask_something; then
     sudo pacman -Syy
     echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
     packer -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
-question="Clone all repos (Y/N)?\n"
+question="${bldgreen}Clone all repos (Y/N)?${txtrst}\n"
 if ask_something; then
     hub clone idk/awesomewm-X
     hub clone idk/conky-X
@@ -175,7 +175,7 @@ if ask_something; then
     hub clone idk/gh
 fi
 
-question="Install all repos (Y/N) [Cannot do in chroot]?\n"
+question="${bldgreen}Install all repos (Y/N) [Cannot do in chroot]?${txtrst}\n"
 if ask_something; then
     echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
     sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
