@@ -226,7 +226,6 @@ if ask_something; then
     cp -rv ${dev_directory}zsh/.zsh ${my_home}.zsh
     cp -v ${dev_directory}zsh/.zshrc ${my_home}.zshrc
     cp -v ${dev_directory}zsh/.zprofile ${my_home}.zprofile
-    nano ${my_home}.zprofile
     cp -rv ${dev_directory}php ${my_home}php
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
@@ -610,5 +609,5 @@ if ask_something; then
     chsh -s $(which zsh)
     cd
     echo "${bldgreen} ==> Exiting install script...${txtrst}"
-    echo "${bldgreen}If complete, reboot!"
+    echo "${bldgreen}If complete, type: sudo reboot!${txtrst}"
 fi
