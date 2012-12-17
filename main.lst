@@ -85,7 +85,6 @@ libtool
 libunique
 libxft
 lm_sensors
-lua-filesystem
 lua51-filesystem
 lua51-socket
 luarocks
