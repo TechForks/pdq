@@ -206,7 +206,7 @@ if ask_something; then
     cp -rv ${dev_directory}bin ${my_home}bin
     mkdir -p ${my_home}.vimperator
     cp -rv ${dev_directory}pdq/.vimperator/plugin ${my_home}.vimperator/plugin
-
+    cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
 
     mkdir -p ${my_home}.config

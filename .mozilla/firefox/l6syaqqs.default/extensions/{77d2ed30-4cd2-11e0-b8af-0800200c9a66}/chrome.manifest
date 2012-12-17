@@ -1,0 +1,12 @@
+skin    browser         ftdeepdark jar:chrome/ft_deepdark.jar!/browser/
+skin    global          ftdeepdark jar:chrome/ft_deepdark.jar!/global/
+skin    mozapps         ftdeepdark jar:chrome/ft_deepdark.jar!/mozapps/
+
+skin   	os_target       ftdeepdark    jar:chrome/ft_deepdark.jar!/os_target/common/
+skin   	os_target       ftdeepdark    jar:chrome/ft_deepdark.jar!/os_target/linux/ os=Linux
+skin   	os_target       ftdeepdark    jar:chrome/ft_deepdark.jar!/os_target/winXP/ os=WINNT osversion<6
+skin   	os_target       ftdeepdark    jar:chrome/ft_deepdark.jar!/os_target/win7/ os=WINNT osversion>=6
+
+skin    app_version     ftdeepdark    jar:chrome/ft_deepdark.jar!/app_version/17/ appversion<18.0a2
+skin    app_version     ftdeepdark    jar:chrome/ft_deepdark.jar!/app_version/aurora/ appversion>=18.0a2
+skin    app_version     ftdeepdark    jar:chrome/ft_deepdark.jar!/app_version/nightly/ appversion>=20.0a1
