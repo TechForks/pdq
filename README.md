@@ -59,7 +59,7 @@ Tor primarily supports Firefox, but can also be used with Chromium.
 
 `Firefox`
 
-1. Enable auto proxy addon in the Addons tab                                                                                                                                                        and use per-site settings from toolbar icon.
+1. Enable auto proxy addon in the Addons tab and use per-site settings from toolbar icon.
 
 
 2. In Preferences > Advanced > Network tab > Settings manually set Firefox to use the SOCKS proxy localhost with port 9050.
