@@ -592,5 +592,6 @@ systemctl enable memcached.service"
     chsh -s $(which zsh)
     cd
     echo "${bldgreen} ==> Exiting install script...${txtrst}"
-    echo "${bldgreen}If complete, type: sudo reboot (you may also want to install video driver now, ie: sudo pacman -S xf86-video-intel lib32-intel-dri [replacing 'intel' with your graphics card type])${txtrst}"
+    echo "${bldgreen}If complete, type: sudo reboot (you may also want to search, chose and install a video driver now, ie:${txtrst}"
+    echo "${bldgreen}packer intel [replacing 'intel' with your graphics card type])${txtrst}"
 fi
