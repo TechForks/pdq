@@ -18,7 +18,8 @@ my_home="$HOME/"
 #my_home="/home/pdq/test/"
 dev_directory="${my_home}github/"
 
-## create pacman pkg dir and packer tmp dir
+## create dev directory, pacman pkg dir and pacaur tmp dir
+mkdir -p ${dev_directory}
 mkdir -p ${my_home}vital/pkg
 mkdir -p ${my_home}vital/tmp
 export TMPDIR=${my_home}vital/tmp
@@ -30,9 +31,6 @@ bldgreen=${txtbld}$(tput setaf 2) # Green Colored
 bldblue=${txtbld}$(tput setaf 6) # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
 txtrst=$(tput sgr0)             # Reset
-
-mkdir -p ${dev_directory}
-cd ${dev_directory}
 
 ask_something() {
     echo -ne $question
@@ -62,12 +60,12 @@ if [ ! -f /usr/bin/git ]; then
 fi
 
 if [ ! -f /usr/bin/hub ]; then
-    sudo pacman -S --noconfirm hub
+    sudo pacman -S --noconfirm --needed hub
 fi
 
-if [ ! -f /usr/bin/packer ]; then
-    echo "${bldblue} ==> Installing packer${txtrst}"
-    wget https://aur.archlinux.org/packages/pa/packer/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm packer* && cd
+if [ ! -f /usr/bin/pacaur ]; then
+    echo "${bldblue} ==> Installing pacaur${txtrst}"
+    wget https://aur.archlinux.org/packages/pa/pacaur/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm pacaur* && cd
 fi
 
 if [ ! -d "${dev_directory}pdq" ]; then
@@ -77,12 +75,12 @@ if [ ! -d "${dev_directory}pdq" ]; then
     sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
     sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
     sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
+    sudo pacman -Syy
 fi
 
 question="${bldgreen}Is this a VirtualBox install (Y/N)?${txtrst}\n"
 if ask_something; then
-    sudo pacman -Syy
-    sudo pacman -S --noconfirm virtualbox-guest-utils
+    sudo pacman -S --noconfirm --needed virtualbox-guest-utils
     sudo sh -c "echo 'vboxguest
 vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
@@ -98,14 +96,14 @@ question="${bldgreen}Install AUR packages (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
     echo "${bldgreen} ==> Installing AUR packages (no confirm) [This may take a while]${txtrst}"
-    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+    pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 question="${bldgreen}Install AUR packages (with confirm) [Use this option if the prior one failed, otherwise skip it] (Y/N)${txtrst}?\n"
 if ask_something; then
     sudo pacman -Syy
     echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
-    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+    pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 question="${bldgreen}Clone all repos (Y/N)?${txtrst}\n"
@@ -125,10 +123,10 @@ if ask_something; then
 
     wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
     wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
-    mkdir -p ~/.config/gh && cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
     echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
     sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
+    
     echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
     # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
     # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
@@ -160,9 +158,10 @@ if ask_something; then
 
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
     mkdir -p ${my_home}.config
-    cd ${my_home}.config/
+    mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
     mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
     cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
+    cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
     mv -v ${my_home}.config/conky ${my_home}.config/conky.original
     cp -rv ${dev_directory}conky-X ${my_home}.config/conky
     mv -v ${my_home}.config/awesome ${my_home}.config/awesome.original
@@ -211,7 +210,7 @@ if ask_something; then
     sudo systemctl enable vnstat.sevice
     sudo systemctl enable cronie.service
 
-    question="${bldgreen}Download Wallpapers (Y/N) [size: 270 MB]?${txtrst}\n"
+    question="${bldgreen}Download Wallpapers (Y/N) [size: 260 MB]?${txtrst}\n"
     if ask_something; then
         mkdir -p ${my_home}Pictures
         cd ${my_home}Pictures
@@ -609,5 +608,5 @@ systemctl enable memcached.service"
     cd
     echo "${bldgreen} ==> Exiting install script...${txtrst}"
     echo "${bldgreen}If complete, type: sudo reboot (you may also want to search, chose and install a video driver now, ie:${txtrst}"
-    echo "${bldgreen}packer intel [replacing 'intel' with your graphics card type])${txtrst}"
+    echo "${bldgreen}pacaur intel [replacing 'intel' with your graphics card type])${txtrst}"
 fi

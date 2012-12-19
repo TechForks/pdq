@@ -25,6 +25,7 @@ fslint
 gnomish-dark-theme
 google-image-downloader
 grake
+hardened-cc
 lib32-curl
 lib32-google-breakpad-svn
 lib32-libtxc_dxtn
