@@ -130,7 +130,6 @@ if ask_something; then
     # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
     # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
     sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
-
     sudo pacman -Syy
 
     echo "${bldgreen} ==> Backing up and copying user configs${txtrst}"
@@ -144,19 +143,19 @@ if ask_something; then
     cp -v ${dev_directory}pdq/.bash_profile ${my_home}.bash_profile
     mv -v ${my_home}.xinitrc ${my_home}.xinitrc.bak
     cp -v ${dev_directory}pdq/.xinitrc ${my_home}.xinitrc
-    mkdir -p .moc
-    cp -v ${dev_directory}pdq/moc.config ${my_home}.moc/config
     cp -v ${dev_directory}pdq/.excludes-usb ${my_home}.excludes-usb
     cp -v ${dev_directory}pdq/.excludes-crypt ${my_home}.excludes-crypt
     cp -rv ${dev_directory}bin ${my_home}bin
     mkdir -p ${my_home}.vimperator
     cp -rv ${dev_directory}pdq/.vimperator/plugin ${my_home}.vimperator/plugin
+    mkdir -p ${my_home}.moc
+    cp -rv ${dev_directory}pdq/.moc/themes ${my_home}.moc/themes
+    cp -v ${dev_directory}pdq/.moc/config ${my_home}.moc/config
     cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
-    echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
 
+    echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
     mkdir -p ${my_home}.config
     cd ${my_home}.config/
-
     mv -v ${my_home}.config/conky ${my_home}.config/conky.original
     cp -rv ${dev_directory}conky-X ${my_home}.config/conky
     mv -v ${my_home}.config/awesome ${my_home}.config/awesome.original
@@ -178,6 +177,7 @@ if ask_something; then
     mkdir -p ${my_home}Down
     mkdir -p ${my_home}Downloads/.torrents
     sed -i "s/pdq/$USER/g" ${my_home}.config/transmission-daemon/settings.json
+    sed -i "s/pdq/$USER/g" ${my_home}.moc/config
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/transmission.service
@@ -566,6 +566,7 @@ if ask_something; then
         sleep 3s 
     sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
     sudo ln -s /srv/http ${my_home}localhost
+    sudo chown -R $USER /srv/http
     cd ${my_home}localhost
     pwd
     chsh -s $(which zsh)
