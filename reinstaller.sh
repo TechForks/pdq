@@ -182,6 +182,7 @@ if ask_something; then
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/transmission.service
     sudo chmod -R 777 /run/transmission
+    sudo chown -R $USER /run/transmission
     sudo mkdir -p /usr/share/tor/hidden_service1
     sudo mkdir -p /usr/share/tor/hidden_service2
     sudo mkdir -p /usr/share/tor/hidden_service3
@@ -207,6 +208,7 @@ if ask_something; then
     sudo sh -c "echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config"
     sudo mv -v /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
     sudo cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
+    sudo cp -v ${dev_directory}etc/httpd-phpmyadmin.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
     sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
     sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
     sudo systemctl daemon-reload
