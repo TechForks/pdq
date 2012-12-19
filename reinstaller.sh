@@ -18,7 +18,8 @@ my_home="$HOME/"
 #my_home="/home/pdq/test/"
 dev_directory="${my_home}github/"
 
-## create dev directory, pacman pkg dir and pacaur tmp dir
+## create config, dev directory, pacman pkg dir and pacaur tmp dir
+mkdir -p ${my_home}.config
 mkdir -p ${dev_directory}
 mkdir -p ${my_home}vital/pkg
 mkdir -p ${my_home}vital/tmp
@@ -75,6 +76,7 @@ if [ ! -d "${dev_directory}pdq" ]; then
     sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
     sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
     sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
+    cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
     sudo pacman -Syy
 fi
 
@@ -157,11 +159,9 @@ if ask_something; then
     cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
-    mkdir -p ${my_home}.config
     mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
     mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
     cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
-    cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
     mv -v ${my_home}.config/conky ${my_home}.config/conky.original
     cp -rv ${dev_directory}conky-X ${my_home}.config/conky
     mv -v ${my_home}.config/awesome ${my_home}.config/awesome.original
