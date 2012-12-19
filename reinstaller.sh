@@ -156,6 +156,8 @@ if ask_something; then
     cp -v ${dev_directory}pdq/.moc/config ${my_home}.moc/config
     mkdir -p ${my_home}.kde4/share/config
     cp -v ${dev_directory}pdq/.kde4/dolphinrc ${my_home}.kde4/share/config/dolphinrc
+    mkdir -p ${my_home}.kde4/share/apps/dolphin
+    cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
     cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
