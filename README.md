@@ -6,13 +6,21 @@ Includes
 --------
 
 https://github.com/idk/awesomewm-X
+
 https://github.com/idk/conky-X
+
 https://github.com/idk/pdq-utils
+
 https://github.com/idk/php
+
 https://github.com/idk/etc
+
 https://github.com/idk/systemd
+
 https://github.com/idk/eggdrop-scripts
+
 https://github.com/idk/zsh
+
 https://github.com/idk/gh
 
 
@@ -51,7 +59,7 @@ Tor primarily supports Firefox, but can also be used with Chromium.
 
 `Firefox`
 
-1. Enable auto proxy addon in the Addons tab and use per-site settings from toolbar icon.
+1. Enable auto proxy addon in the Addons tab                                                                                                                                                        and use per-site settings from toolbar icon.
 
 
 2. In Preferences > Advanced > Network tab > Settings manually set Firefox to use the SOCKS proxy localhost with port 9050.
