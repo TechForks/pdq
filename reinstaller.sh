@@ -575,6 +575,18 @@ if ask_something; then
     sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
     sudo ln -s /srv/http ${my_home}localhost
     sudo chown -R $USER /srv/http
+    echo "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
+    sleep 2s
+    echo "If you want LAMP to start at boot, run these commands ay any time as root user:
+systemctl enable httpd.service
+systemctl enable mysqld.service
+systemctl enable memcached.service"
+    question="${bldgreen}Do you want this to be done now? (Y/N) [default=N]?${txtrst}\n"
+    if ask_something; then
+        sudo systemctl enable httpd.service
+        sudo systemctl enable mysqld.service
+        sudo systemctl enable memcached.service
+    fi
     cd ${my_home}localhost
     pwd
     chsh -s $(which zsh)
