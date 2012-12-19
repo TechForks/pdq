@@ -56,17 +56,19 @@ if [ $(id -u) -eq 0 ]; then
     exit 1
 fi
 
-if [ ! -f /usr/bin/git ]; then
-    sudo pacman -S --noconfirm git
-fi
-
-if [ ! -f /usr/bin/hub ]; then
-    sudo pacman -S --noconfirm --needed hub
-fi
-
 if [ ! -f /usr/bin/pacaur ]; then
     echo "${bldblue} ==> Installing pacaur${txtrst}"
     wget https://aur.archlinux.org/packages/pa/pacaur/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm pacaur* && cd
+fi
+
+if [ ! -f /usr/bin/pacman-color ]; then
+    echo "${bldblue} ==> Installing pacman-color${txtrst}"
+    wget https://aur.archlinux.org/packages/pa/pacman-color/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm pacman-color* && cd
+fi
+
+if [ ! -f /usr/bin/powerpill ]; then
+    echo "${bldblue} ==> Installing powerpill${txtrst}"
+    wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm powerpill* && cd
 fi
 
 if [ ! -d "${dev_directory}pdq" ]; then
@@ -76,13 +78,27 @@ if [ ! -d "${dev_directory}pdq" ]; then
     sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
     sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
     sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
+    sudo mv -v /etc/powerpill/powerpill.json /etc/powerpill/powerpill.json.bak
+    sudo cp -v ${dev_directory}etc/powerpill.json /etc/powerpill/powerpill.json
     cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
-    sudo pacman -Syy
+    sudo pacman-color -Syy
+fi
+
+if [ ! -f /usr/bin/rsync ]; then
+    sudo powerpill -S --noconfirm rsync
+fi
+
+if [ ! -f /usr/bin/git ]; then
+    sudo powerpill -S --noconfirm git
+fi
+
+if [ ! -f /usr/bin/hub ]; then
+    sudo powerpill -S --noconfirm --needed hub
 fi
 
 question="${bldgreen}Is this a VirtualBox install (Y/N)?${txtrst}\n"
 if ask_something; then
-    sudo pacman -S --noconfirm --needed virtualbox-guest-utils
+    sudo powerpill -S --noconfirm --needed virtualbox-guest-utils
     sudo sh -c "echo 'vboxguest
 vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
@@ -90,20 +106,20 @@ fi
 
 question="${bldgreen}Install main packages (Y/N)?${txtrst}\n"
 if ask_something; then
-    sudo pacman -Syy
-    sudo pacman -S --noconfirm --needed $(cat ${dev_directory}pdq/main.lst)
+    sudo powerpill -Syy
+    sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
 fi
 
 question="${bldgreen}Install AUR packages (Y/N)?${txtrst}\n"
 if ask_something; then
-    sudo pacman -Syy
+    sudo powerpill -Syy
     echo "${bldgreen} ==> Installing AUR packages (no confirm) [This may take a while]${txtrst}"
     pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 question="${bldgreen}Install AUR packages (with confirm) [Use this option if the prior one failed, otherwise skip it] (Y/N)${txtrst}?\n"
 if ask_something; then
-    sudo pacman -Syy
+    sudo powerpill -Syy
     echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
     pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
