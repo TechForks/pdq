@@ -7,7 +7,7 @@
 # The following options are commented out with their default values listed.
 # If you wish to use different values, uncomment and update the values.
 #builddir="${BUILDDIR:-$tmpdir}"	# build directory
-#editor="${EDITOR:-vi}"          	# PKGBUILD editor
+editor="${EDITOR:-nano}"          	# PKGBUILD editor
 #editpkgbuild=true               	# edit PKGBUILD script
 #editinstall=true                	# edit install script
 #fallback=true                   	# pacman fallback to the AUR
