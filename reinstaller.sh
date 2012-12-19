@@ -58,16 +58,16 @@ if [ $(id -u) -eq 0 ]; then
 fi
 
 if [ ! -f /usr/bin/git ]; then
-    sudo pacman -S git
+    sudo pacman -S --noconfirm git
 fi
 
 if [ ! -f /usr/bin/hub ]; then
-    sudo pacman -S hub
+    sudo pacman -S --noconfirm hub
 fi
 
 if [ ! -f /usr/bin/packer ]; then
     echo "${bldblue} ==> Installing packer${txtrst}"
-    wget https://aur.archlinux.org/packages/pa/packer/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U packer* && cd ${dev_directory} && sudo pacman -S hub
+    wget https://aur.archlinux.org/packages/pa/packer/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm packer* && cd
 fi
 
 if [ ! -d "${dev_directory}pdq" ]; then
@@ -82,7 +82,7 @@ fi
 question="${bldgreen}Is this a VirtualBox install (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
-    sudo pacman -S virtualbox-guest-utils
+    sudo pacman -S --noconfirm virtualbox-guest-utils
     sudo sh -c "echo 'vboxguest
 vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
@@ -91,7 +91,7 @@ fi
 question="${bldgreen}Install main packages (Y/N)?${txtrst}\n"
 if ask_something; then
     sudo pacman -Syy
-    sudo pacman -S --needed $(cat ${dev_directory}pdq/main.lst)
+    sudo pacman -S --noconfirm --needed $(cat ${dev_directory}pdq/main.lst)
 fi
 
 question="${bldgreen}Install AUR packages (Y/N)?${txtrst}\n"
@@ -105,7 +105,7 @@ question="${bldgreen}Install AUR packages (with confirm) [Use this option if the
 if ask_something; then
     sudo pacman -Syy
     echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
-    packer -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+    packer --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 question="${bldgreen}Clone all repos (Y/N)?${txtrst}\n"
@@ -122,6 +122,10 @@ fi
 
 question="${bldgreen}Install all repos (Y/N) [Cannot do in chroot]?${txtrst}\n"
 if ask_something; then
+
+    wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
+    wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
+    mkdir -p ~/.config/gh && cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
     echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
     sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
@@ -130,7 +134,6 @@ if ask_something; then
     # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
     # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
     sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
-    sudo pacman -Syy
 
     echo "${bldgreen} ==> Backing up and copying user configs${txtrst}"
     mv -v ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
@@ -207,7 +210,6 @@ if ask_something; then
     sudo systemctl enable polipo.service
     sudo systemctl enable vnstat.sevice
     sudo systemctl enable cronie.service
-
 
     question="${bldgreen}Download Wallpapers (Y/N) [size: 270 MB]?${txtrst}\n"
     if ask_something; then
