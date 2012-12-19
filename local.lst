@@ -1,6 +1,7 @@
 aarchup
 archiso-git
 arm
+bespin-black-icons
 cacheclean
 compton-git
 conkytransmission-bzr
@@ -21,6 +22,7 @@ flashplugin-beta
 flexget
 freetuxtv
 fslint
+gnomish-dark-theme
 google-image-downloader
 grake
 lib32-curl
@@ -64,5 +66,6 @@ vcp
 wicked-git
 xcursor-arch-simple
 xcursor-dmz
+xcursor-shere-khan-x
 zsh-completions
 zsh-syntax-highlighting

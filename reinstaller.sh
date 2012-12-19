@@ -151,6 +151,8 @@ if ask_something; then
     mkdir -p ${my_home}.moc
     cp -rv ${dev_directory}pdq/.moc/themes ${my_home}.moc/themes
     cp -v ${dev_directory}pdq/.moc/config ${my_home}.moc/config
+    mkdir -p ${my_home}.kde4/share/config
+    cp -v ${dev_directory}pdq/.kde4/dolphinrc ${my_home}.kde4/share/config/dolphinrc
     cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
@@ -178,6 +180,7 @@ if ask_something; then
     mkdir -p ${my_home}Downloads/.torrents
     sed -i "s/pdq/$USER/g" ${my_home}.config/transmission-daemon/settings.json
     sed -i "s/pdq/$USER/g" ${my_home}.moc/config
+    sed -i "s/pdq/$USER/g" ${my_home}.kde4/share/config/dolphinrc
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/transmission.service

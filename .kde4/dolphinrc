@@ -1,0 +1,111 @@
+Height 768=749
+Height 900=884
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAwAAAAAAAABHAAADVPwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAADVAAAAD0A////AAAAAQAAALQAAAM6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAM6AAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAQA////AAAChAAAA1QAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+Width 1024=903
+Width 1360=694
+Width 1376=688
+Width 1440=721
+
+[AdditionalInfoDialog]
+Height 900=299
+Width 1440=265
+
+[CompactMode]
+FontWeight=50
+PreviewSize=16
+
+[Desktop Entry]
+DefaultProfile=Shell.profile
+
+[DetailsMode]
+FontWeight=50
+PreviewSize=256
+
+[DownloadDialog Settings]
+Height 768=400
+Height 900=400
+Width 1024=700
+Width 1440=700
+
+[Favorite Profiles]
+Favorites=
+
+[General]
+ConfirmClosingMultipleTabs=false
+HomeUrl=file:///home/pdq
+ShowCopyMoveMenu=true
+ShowSpaceInfo=true
+Version=200
+ViewPropsTimestamp=2012,11,20,9,11,26
+
+[IconsMode]
+FontWeight=50
+IconSize=112
+PreviewSize=48
+TextWidthIndex=0
+
+[KFileDialog Settings]
+Autoplay sounds=true
+
+[KPropertiesDialog]
+Height 768=448
+Height 900=448
+Width 1024=474
+Width 1360=489
+Width 1440=718
+
+[MainWindow]
+Height 480=864
+Height 768=563
+Height 900=440
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAwAAAAAAAAA5AAABmPwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAABmAAAAD0A////AAAAAQAAALQAAAM6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAM6AAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAQA////AAACjwAAAZgAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+Width 1024=512
+Width 1280=452
+Width 1360=678
+Width 1368=684
+Width 1376=688
+Width 1440=718
+Width 640=720
+
+[MainWindow][Toolbar mainToolBar]
+ToolButtonStyle=IconOnly
+
+[Notification Messages]
+ShowVcsRestartInformation=false
+
+[Open-with settings]
+CompletionMode=5
+History=avidemux2_qt4,/usr/bin/vlc %U,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U,geany %F,/usr/bin/opera %U,urxvt,leafpad %f,wine,umplayer %f
+
+[PreviewSettings]
+Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
+
+[Search]
+Location=Everywhere
+
+[SettingsDialog]
+Height 768=414
+Height 900=428
+Width 1024=524
+Width 1360=517
+Width 1376=517
+Width 1440=548
+
+[Shortcut Schemes]
+Current Scheme=Default
+
+[Toolbar mainToolBar]
+ToolButtonStyle=IconOnly
+
+[VersionControl]
+enabledPlugins=Dropbox
+
+[ViewPropertiesDialog]
+Height 900=450
+Width 1440=428
+
+[kuick-copy]
+Paths[$e]=$HOME
