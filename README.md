@@ -1,28 +1,41 @@
 https://github.com/idk/pdq
 
+pdqOS - Script for Arch Linux x86_64 to reinstall pdqOS from github repos
+
 Includes
 --------
 
 https://github.com/idk/awesomewm-X
-
 https://github.com/idk/conky-X
+https://github.com/idk/pdq-utils
+https://github.com/idk/php
+https://github.com/idk/etc
+https://github.com/idk/systemd
+https://github.com/idk/eggdrop-scripts
+https://github.com/idk/zsh
+https://github.com/idk/gh
 
 
 INSTALL
 -------
 
-Install Arch linux base (preferably core-remote)
-Then reboot then...
+from livecd/liveusb
+https://gist.github.com/4311373
+
+from within existing arch linux
+https://gist.github.com/4316973
+
+
+
+SUMMARY
+-------
+
+
+In Arch Linux as YOURUSER right after fresh install:
+
+	# wget http://is.gd/reinstaller -O rs.sh
+	# sh rs.sh
     
-Install packages from my(your) git repo! :D
--------------------------------------------
-
-As root right after fresh install:
-
-	# wget http://is.gd/reinstaller -O reinstaller.sh
-	# sh reinstaller.sh
-
-
 DONE! :D
 --------
 
@@ -38,7 +51,10 @@ Tor primarily supports Firefox, but can also be used with Chromium.
 
 `Firefox`
 
-In Preferences > Advanced > Network tab > Settings manually set Firefox to use the SOCKS proxy localhost with port 9050.
+1. Enable auto proxy addon in the Addons tab and use per-site settings from toolbar icon.
+
+
+2. In Preferences > Advanced > Network tab > Settings manually set Firefox to use the SOCKS proxy localhost with port 9050.
 
 `Chromium`
 
