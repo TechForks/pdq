@@ -41,8 +41,8 @@ SUMMARY
 
 In Arch Linux as YOURUSER right after fresh install:
 
-	# wget http://is.gd/reinstaller -O rs.sh
-	# sh rs.sh
+	$ wget http://is.gd/reinstaller -O rs.sh
+	$ sh rs.sh
     
 DONE! :D
 --------
@@ -96,8 +96,8 @@ Append the line:
 
 Then:
 
-	 $ cd ~/.irssi/scripts/
-	 $ wget http://www.freenode.net/sasl/cap_sasl.pl
+	$ cd ~/.irssi/scripts/
+	$ wget http://www.freenode.net/sasl/cap_sasl.pl
 	$ packer -S perl-crypt-openssl-bignum perl-crypt-blowfish perl-crypt-dh
 
 `Start irssi`
