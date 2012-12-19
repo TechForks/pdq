@@ -5,6 +5,7 @@ alsa-plugins
 alsa-utils
 apache
 arch-install-scripts
+archlinux-wallpaper
 audio-convert
 autoconf
 autocutsel
@@ -148,6 +149,7 @@ sshfs
 sudo
 syslinux
 systemd
+tangerine-icon-theme
 tcpdump
 terminus-font
 tig

@@ -158,6 +158,8 @@ if ask_something; then
     echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
     mkdir -p ${my_home}.config
     cd ${my_home}.config/
+    mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
+    cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
     mv -v ${my_home}.config/conky ${my_home}.config/conky.original
     cp -rv ${dev_directory}conky-X ${my_home}.config/conky
     mv -v ${my_home}.config/awesome ${my_home}.config/awesome.original
@@ -181,6 +183,8 @@ if ask_something; then
     sed -i "s/pdq/$USER/g" ${my_home}.config/transmission-daemon/settings.json
     sed -i "s/pdq/$USER/g" ${my_home}.moc/config
     sed -i "s/pdq/$USER/g" ${my_home}.kde4/share/config/dolphinrc
+    sed -i "s/pdq/$USER/g" ${my_home}.config/nitrogen/nitrogen.cfg
+    sed -i "s/pdq/$USER/g" ${my_home}.config/nitrogen/bg-saved.cfg
     sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
     sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/transmission.service
@@ -203,6 +207,16 @@ if ask_something; then
     sudo systemctl enable polipo.service
     sudo systemctl enable vnstat.sevice
     sudo systemctl enable cronie.service
+
+
+    question="${bldgreen}Download Wallpapers (Y/N) [size: 270 MB]?${txtrst}\n"
+    if ask_something; then
+        mkdir -p ${my_home}Pictures
+        cd ${my_home}Pictures
+        wget https://dl.dropbox.com/u/9702684/wallpaper.tar.gz
+        rm -v wallpaper.tar.gz
+        cd
+    fi
 
     echo "${bldgreen} ==> Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files${txtrst}"
     sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
