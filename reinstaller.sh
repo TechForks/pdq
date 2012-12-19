@@ -559,7 +559,12 @@ if ask_something; then
         sudo mysqladmin -u root password $USER-$rand
         echo "${bldred}You're mysql root password is $USER-$rand Write this down before proceeding...${txtrst}
         "
-        sleep 5s
+        question="${bldgreen}Written it down (Y/N)?${txtrst}\n"
+        if ask_something; then
+            echo ":]"
+        else
+            echo ":O"
+        fi
         echo "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:
         $ mysqladmin -u root -p'$USER-$rand' password newpasswordhere
 
