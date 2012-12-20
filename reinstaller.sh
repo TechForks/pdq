@@ -6,24 +6,18 @@
 ## 12-05-2012 pdq
 ## 12-15-2012 pdq
 
+exit 1
+
 ## Instructions
 
 ## from livecd/liveusb
-## https://gist.github.com/4311373
+# wget http://is.gd/reinstaller -O rs.sh
+# sh rs.sh
 
-## from within existing arch linux
-## https://gist.github.com/4316973
+## when it askes if install 1) phonon-gstreamer or 2) phonon-vlc
+## chose 2
+## when it asks if replace foo with bar chose y for everyone
 
-my_home="$HOME/"
-#my_home="/home/pdq/test/"
-dev_directory="${my_home}github/"
-
-## create config, dev directory, pacman pkg dir and pacaur tmp dir
-mkdir -p ${my_home}.config
-mkdir -p ${dev_directory}
-mkdir -p ${my_home}vital/pkg
-mkdir -p ${my_home}vital/tmp
-export TMPDIR=${my_home}vital/tmp
 
 ## color formatting
 txtbld=$(tput bold)             # Bold
@@ -32,6 +26,15 @@ bldgreen=${txtbld}$(tput setaf 2) # Green Colored
 bldblue=${txtbld}$(tput setaf 6) # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
 txtrst=$(tput sgr0)             # Reset
+
+MOUNT_POINT="/mnt"
+
+: ${DIALOG_OK=0}
+: ${DIALOG_CANCEL=1}
+: ${DIALOG_HELP=2}
+: ${DIALOG_EXTRA=3}
+: ${DIALOG_ITEM_HELP=4}
+: ${DIALOG_ESC=255}
 
 ask_something() {
     echo -ne $question
@@ -45,6 +48,185 @@ ask_something() {
     return $return
 }
 
+if [ $(id -u) -eq 0 ]; then
+
+    clr="\Zb\Z0"
+
+    # temporary file
+    _TEMP=/tmp/answer$$
+
+    _PROCEED=0
+
+    # FUNCTIONS
+    exiting() {
+        clear
+        rm -f $_TEMP
+        exit
+    }
+
+    what_do() {
+        if [ ! $_PROCEED -eq 1 ] ; then
+            echo -n "${bldblue}Go back to main menu?${txtrst} ${bldgreen}<Enter>${txtrst} ${bldblue}or hit${txtrst} ${bldred}n${txtrst} ${bldblue}to EXIT:${txtrst} "
+            read choice
+            if [ $choice = "n" ] ; then
+                exiting
+            else
+                initialize_start
+                main_menu
+            fi
+        else
+            echo "${bldgreen}[GO] Proceeding...${txtrst}"
+        fi
+    }
+
+    main_menu() {
+        dialog \
+            --colors --title "pdqOS Installer for Arch Linux x86_64" \
+            --menu "\ZbSelect action: (Do them in order)" 20 60 12 \
+            1 $clr"List linux partitions" \
+            2 $clr"Partition editor (cfdisk)" \
+            3 $clr"Create filesystems" \
+            4 $clr"Create internet connection" \
+            5 $clr"Mount root partition" \
+            6 $clr"Mount home partition" \
+            7 $clr"Initial install" \
+            8 $clr"Generate fstab" \
+            9 $clr"Configure" \
+            10 $clr"Unmount install partitions" \
+            11 $clr"Finish up and reboot to complete. (remove livecd after poweroff)" \
+            12 $clr"Exit" 2>$_TEMP
+
+        choice=$(cat $_TEMP)
+        case $choice in
+            1) list_partitions;;
+            2) part_editor;;
+            3) make_fs;;
+            4) make_internet;;
+            5) mount_root;;
+            6) mount_home;;
+            7) init_install;;
+            8) gen_fstab;;
+            9) chroot_conf;;
+            10) unmount_part;;
+            11) finish_up;;
+            12) exiting;;
+        esac
+    }
+
+    list_partitions() {
+        partition_list=`blkid | grep -i 'TYPE="ext[234]"' | cut -d ' ' -f 1 | grep -i '^/dev/' | grep -v '/dev/loop' | sed "s/://g"`
+        if [ "$partition_list" = "" ] ; then
+            echo "It appears you have no linux partitions yet."
+        else
+            echo "$partition_list"
+        fi
+    }
+
+    part_editor() {
+        echo "${bldblue}Create a / (primary, bootable and recommended 6GB in size) and a /home (primary and remaining size) partition${txtrst}"
+        cfdisk
+        what_do
+    }
+
+    make_fs() {
+        mkfs -t ext4 /dev/sda1
+        mkfs -t ext4 /dev/sda2
+        what_do
+    }
+
+    make_internet() {
+        ping -c 3 www.google.com
+        what_do
+    }
+
+    mount_root() {
+        error=0
+        MOUNT_DEV="$1"
+
+        [[  $# =  1  ]] || {  echo "no device added. Rerun" ;  error=1 ; }
+        [[ -b $1 ]] ||  { echo "not a valid block device. Rerun " ;  error=1 ; }
+        [[ -d "$MOUNT_POINT" ]] || { echo "no $MOUNT_POINT ?" ; error=1 ; }
+        echo
+
+        { mount "$MOUNT_DEV" "$MOUNT_POINT" && echo "root successfully mounted at $MOUNT_POINT" ;  } || { echo "mounting of root failed. Exit" ; error=1 ; }
+
+        echo "here is the actual content of the mounted device $MOUNT_DEV on $MOUNT_POINT"
+        ls "$MOUNT_POINT"
+        what_do
+    }
+
+    mount_home() {
+        error=0
+        MOUNT_DEV="$1"
+        mkdir -p $MOUNT_POINT/home
+        [[  $# =  1  ]] || {  echo "no device added. Rerun" ;  error=1 ; }
+        [[ -b $1 ]] ||  { echo "not a valid block device. Rerun " ;  error=1 ; }
+        [[ -d "$MOUNT_POINT/home" ]] || { echo "no $MOUNT_POINT/home ?" ; error=1 ; }
+        echo
+
+        { mount  "$MOUNT_DEV" "$MOUNT_POINT/home" && echo "home successfully mounted at $MOUNT_POINT/home" ;  } || { echo "mounting of home failed. Exit" ; error=1 ; }
+
+        if [ $error -eq 1 ] ; then
+            exit 1
+        else
+            echo "here is the actual content of the mounted device $MOUNT_DEV on $MOUNT_POINT"
+            ls "$MOUNT_POINT/home"
+        fi
+        what_do
+    }
+
+    init_install() {
+        pacstrap -i /mnt base base-devel sudo git hub rsync wget
+        what_do
+    }
+
+    chroot_conf() {
+        wget https://github.com/idk/pdq/blob/master/chroot-rs.sh -O chroot-rs.sh
+        chmod +x chroot-rs.sh
+        arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
+        what_do
+    }
+
+    gen_fstab() {
+        genfstab -U -p /mnt >> /mnt/etc/fstab
+        nano /mnt/etc/fstab
+        what_do
+    }
+
+    unmount_part() {
+        umount /mnt/home
+        umount /mnt
+        what_do
+    }
+
+    finish_up() {
+        systemctl enable dhcpcd@eth0.service
+        pacman -Syy
+        reboot
+        what_do
+    }
+
+    # utility execution
+    while true
+    do
+        main_menu
+    done
+fi
+
+## user script
+
+my_home="$HOME/"
+#my_home="/home/pdq/test/"
+dev_directory="${my_home}github/"
+
+## create config, dev directory, pacman pkg dir and pacaur tmp dir
+mkdir -p ${my_home}.config
+mkdir -p ${dev_directory}
+mkdir -p ${my_home}vital/pkg
+mkdir -p ${my_home}vital/tmp
+export TMPDIR=${my_home}vital/tmp
+
+## code be `ere! ##
 grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
 if [ "$archtype" = "no" ]; then
     echo "Sorry this is for x86_64 only! =)"
@@ -55,6 +237,8 @@ if [ $(id -u) -eq 0 ]; then
     echo "Do not run me as root! =)"
     exit 1
 fi
+
+sudo locale-gen
 
 if [ ! -f /usr/bin/pacaur ]; then
     echo "${bldblue} ==> Installing pacaur${txtrst}"
@@ -69,6 +253,14 @@ fi
 if [ ! -f /usr/bin/powerpill ]; then
     echo "${bldblue} ==> Installing powerpill${txtrst}"
     wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm powerpill* && cd
+fi
+
+if [ ! -f /usr/bin/git ]; then
+    sudo pacman -S --noconfirm git
+fi
+
+if [ ! -f /usr/bin/hub ]; then
+    sudo pacman -S --noconfirm --needed hub
 fi
 
 if [ ! -d "${dev_directory}pdq" ]; then
@@ -86,14 +278,6 @@ fi
 
 if [ ! -f /usr/bin/rsync ]; then
     sudo powerpill -S --noconfirm rsync
-fi
-
-if [ ! -f /usr/bin/git ]; then
-    sudo powerpill -S --noconfirm git
-fi
-
-if [ ! -f /usr/bin/hub ]; then
-    sudo powerpill -S --noconfirm --needed hub
 fi
 
 question="${bldgreen}Is this a VirtualBox install (Y/N)?${txtrst}\n"
@@ -121,7 +305,7 @@ question="${bldgreen}Install AUR packages (with confirm) [Use this option if the
 if ask_something; then
     sudo powerpill -Syy
     echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
-    pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+    pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
 fi
 
 question="${bldgreen}Clone all repos (Y/N)?${txtrst}\n"
@@ -138,7 +322,6 @@ fi
 
 question="${bldgreen}Install all repos (Y/N) [Cannot do in chroot]?${txtrst}\n"
 if ask_something; then
-
     wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
     wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
     echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
