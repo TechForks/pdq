@@ -27,7 +27,7 @@ bldblue=${txtbld}$(tput setaf 6) # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
 txtrst=$(tput sgr0)             # Reset
 
-MOUNT_POINT="/mnt"
+mnt_point="/mnt"
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
@@ -48,6 +48,7 @@ ask_something() {
     return $return
 }
 
+## root script
 if [ $(id -u) -eq 0 ]; then
 
     clr="\Zb\Z0"
@@ -129,12 +130,14 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     make_fs() {
+        ## TODO
         mkfs -t ext4 /dev/sda1
         mkfs -t ext4 /dev/sda2
         what_do
     }
 
     make_internet() {
+        ## TODO
         ping -c 3 www.google.com
         what_do
     }
@@ -145,32 +148,32 @@ if [ $(id -u) -eq 0 ]; then
 
         [[  $# =  1  ]] || {  echo "no device added. Rerun" ;  error=1 ; }
         [[ -b $1 ]] ||  { echo "not a valid block device. Rerun " ;  error=1 ; }
-        [[ -d "$MOUNT_POINT" ]] || { echo "no $MOUNT_POINT ?" ; error=1 ; }
+        [[ -d "$mnt_point" ]] || { echo "no $mnt_point ?" ; error=1 ; }
         echo
 
-        { mount "$MOUNT_DEV" "$MOUNT_POINT" && echo "root successfully mounted at $MOUNT_POINT" ;  } || { echo "mounting of root failed. Exit" ; error=1 ; }
+        { mount "$MOUNT_DEV" "$mnt_point" && echo "root successfully mounted at $mnt_point" ;  } || { echo "mounting of root failed. Exit" ; error=1 ; }
 
-        echo "here is the actual content of the mounted device $MOUNT_DEV on $MOUNT_POINT"
-        ls "$MOUNT_POINT"
+        echo "here is the actual content of the mounted device $MOUNT_DEV on $mnt_point"
+        ls "$mnt_point"
         what_do
     }
 
     mount_home() {
         error=0
         MOUNT_DEV="$1"
-        mkdir -p $MOUNT_POINT/home
+        mkdir -p $mnt_point/home
         [[  $# =  1  ]] || {  echo "no device added. Rerun" ;  error=1 ; }
         [[ -b $1 ]] ||  { echo "not a valid block device. Rerun " ;  error=1 ; }
-        [[ -d "$MOUNT_POINT/home" ]] || { echo "no $MOUNT_POINT/home ?" ; error=1 ; }
+        [[ -d "$mnt_point/home" ]] || { echo "no $mnt_point/home ?" ; error=1 ; }
         echo
 
-        { mount  "$MOUNT_DEV" "$MOUNT_POINT/home" && echo "home successfully mounted at $MOUNT_POINT/home" ;  } || { echo "mounting of home failed. Exit" ; error=1 ; }
+        { mount  "$MOUNT_DEV" "$mnt_point/home" && echo "home successfully mounted at $mnt_point/home" ;  } || { echo "mounting of home failed. Exit" ; error=1 ; }
 
         if [ $error -eq 1 ] ; then
             exit 1
         else
-            echo "here is the actual content of the mounted device $MOUNT_DEV on $MOUNT_POINT"
-            ls "$MOUNT_POINT/home"
+            echo "here is the actual content of the mounted device $MOUNT_DEV on $mnt_point"
+            ls "$mnt_point/home"
         fi
         what_do
     }
@@ -200,6 +203,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     finish_up() {
+        ## TODO
         systemctl enable dhcpcd@eth0.service
         pacman -Syy
         reboot
