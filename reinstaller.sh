@@ -65,13 +65,13 @@ echo "weee"
         clear
         rm -f $_TEMP
         echo "exiting..."
-        sleep 3s
+        sleep 1s
         exit 0
     }
 
     what_do() {
         if [ ! $_PROCEED -eq 1 ] ; then
-            echo -n "${bldblue}Go back to main menu?${txtrst} ${bldgreen}<Enter>${txtrst} ${bldblue}or hit${txtrst} ${bldred}n${txtrst} ${bldblue}to EXIT:${txtrst} "
+            echo -n "${bldblue}Go back to menu?${txtrst} ${bldgreen}<Enter>${txtrst} ${bldblue}or hit${txtrst} ${bldred}n${txtrst} ${bldblue}to EXIT:${txtrst} "
             read choice
             if [ $choice = "n" ] ; then
                 exiting
@@ -120,6 +120,8 @@ echo "weee"
         else
             echo "$partition_list"
         fi
+
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     part_editor() {
@@ -129,14 +131,13 @@ echo "weee"
             what_do
         fi
 
-        dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?" 10 30
         dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 10 30
         if [ $? = 1 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
         fi
 
-        what_do
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     make_fs() {
@@ -223,8 +224,6 @@ echo "weee"
         fi
 
         dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
-        
-        what_do
     }
 
     make_internet() {
@@ -237,7 +236,7 @@ echo "weee"
         ## TODO
         ping -c 3 www.google.com
         
-        what_do
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     un_mount() {
@@ -248,8 +247,8 @@ echo "weee"
         fi
      
         umount /mnt/* 2>/dev/null
-        
-        what_do
+
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     init_install() {
@@ -261,7 +260,7 @@ echo "weee"
        
         pacstrap -i /mnt base base-devel sudo git hub rsync wget
         
-        what_do
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     chroot_conf() {
@@ -275,7 +274,7 @@ echo "weee"
         chmod +x chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
 
-        what_do
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     gen_fstab() {
@@ -292,7 +291,7 @@ echo "weee"
             nano /mnt/etc/fstab
         fi
         
-        what_do
+        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     finish_up() {
