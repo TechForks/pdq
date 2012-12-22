@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ## reinstall from github backup! =)
 ## 03-22-2012 pdq
 ## 07-10-2012 pdq
@@ -76,14 +76,14 @@ echo "weee"
             if [ $choice = "n" ] ; then
                 exiting
             else
-                main_menu
+                i_menu
             fi
         else
             echo "${bldgreen}[GO] Proceeding...${txtrst}"
         fi
     }
 
-    main_menu() {
+    i_menu() {
         dialog \
             --colors --title $b_title \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
@@ -315,7 +315,7 @@ echo "weee"
     # while true
     # do
 
-    main_menu
+    i_menu
     echo "end of root function"
     #done
 else
