@@ -87,7 +87,7 @@ echo "weee"
         echo "wtf"
         sleep 2s
         dialog \
-            --colors --title $b_title \
+            --colors --title "$b_title" \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
             1 $clr"List linux partitions" \
             2 $clr"Partition editor (cfdisk)" \
