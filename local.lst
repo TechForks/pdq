@@ -1,4 +1,5 @@
 aarchup
+adwaita-x-dark-and-light-theme
 archiso-git
 arm
 bespin-black-icons
@@ -27,7 +28,6 @@ google-image-downloader
 grake
 lib32-curl
 lib32-google-breakpad-svn
-lib32-libtxc_dxtn
 logstalgia
 lua-sqlite3
 montecarlo-font

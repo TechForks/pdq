@@ -6,7 +6,7 @@
 ## 12-05-2012 pdq
 ## 12-15-2012 pdq
 
-exit 1
+#exit 1
 
 ## Instructions
 
@@ -28,6 +28,7 @@ bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
 txtrst=$(tput sgr0)             # Reset
 
 mnt_point="/mnt"
+b_title="pdqOS Installer for Arch Linux x86_64"
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
@@ -55,6 +56,8 @@ if [ $(id -u) -eq 0 ]; then
 
     # temporary file
     _TEMP=/tmp/answer$$
+    mkdir -p /tmp/tmp 2>/dev/null
+    TMP=/tmp/tmp 2>/dev/null
 
     _PROCEED=0
 
@@ -72,7 +75,6 @@ if [ $(id -u) -eq 0 ]; then
             if [ $choice = "n" ] ; then
                 exiting
             else
-                initialize_start
                 main_menu
             fi
         else
@@ -82,20 +84,18 @@ if [ $(id -u) -eq 0 ]; then
 
     main_menu() {
         dialog \
-            --colors --title "pdqOS Installer for Arch Linux x86_64" \
-            --menu "\ZbSelect action: (Do them in order)" 20 60 12 \
+            --colors --title $b_title \
+            --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
             1 $clr"List linux partitions" \
             2 $clr"Partition editor (cfdisk)" \
-            3 $clr"Create filesystems" \
+            3 $clr"Format and mount filesystems" \
             4 $clr"Create internet connection" \
-            5 $clr"Mount root partition" \
-            6 $clr"Mount home partition" \
-            7 $clr"Initial install" \
-            8 $clr"Generate fstab" \
-            9 $clr"Configure" \
-            10 $clr"Unmount install partitions" \
-            11 $clr"Finish up and reboot to complete. (remove livecd after poweroff)" \
-            12 $clr"Exit" 2>$_TEMP
+            5 $clr"Initial install" \
+            6 $clr"Generate fstab" \
+            7 $clr"Configure" \
+            8 $clr"Unmount install partitions" \
+            9 $clr"Finish up and reboot to complete. (remove livecd after poweroff)" \
+            10 $clr"Exit" 2>$_TEMP
 
         choice=$(cat $_TEMP)
         case $choice in
@@ -103,14 +103,12 @@ if [ $(id -u) -eq 0 ]; then
             2) part_editor;;
             3) make_fs;;
             4) make_internet;;
-            5) mount_root;;
-            6) mount_home;;
-            7) init_install;;
-            8) gen_fstab;;
-            9) chroot_conf;;
-            10) unmount_part;;
-            11) finish_up;;
-            12) exiting;;
+            5) init_install;;
+            6) gen_fstab;;
+            7) chroot_conf;;
+            8) un_mount;;
+            9) finish_up;;
+            10) exiting;;
         esac
     }
 
@@ -124,90 +122,187 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     part_editor() {
-        echo "${bldblue}Create a / (primary, bootable and recommended 6GB in size) and a /home (primary and remaining size) partition${txtrst}"
-        cfdisk
+        dialog --clear --title $b_title --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer!" 20 70
+        
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+
+        dialog --clear --title $b_title --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed (Y/N)?\n"
+        if [ $? = 1 ] ; then
+            umount /mnt/* 2>/dev/null
+            cfdisk
+        fi
+
         what_do
     }
 
     make_fs() {
-        ## TODO
-        mkfs -t ext4 /dev/sda1
-        mkfs -t ext4 /dev/sda2
+        # format root partition
+        
+        fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
+
+        dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\n In the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+
+        # choose root partition
+        dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/pout
+
+        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
+        "1" "ext2" on \
+        "2" "ext3" off \
+        "3" "ext4" off \
+        2> $TMP/part
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+
+        pout=$(cat $TMP/pout)
+        part=$(cat $TMP/part)
+        fs_type=
+
+        if [ $part = "1" ] ; then
+            fs_type="ext2"
+        fi
+
+        if [ $part = "2" ] ; then
+            fs_type="ext3"
+        fi
+
+        if [ $part = "3" ] ; then
+            fs_type="ext4"
+        fi
+
+        if [ $fs_type != ""] ; then
+            mkfs -t $fs_type $pout
+            dialog --clear --title "FORMAT ROOT PARTITION" --msgbox "Now your partition will be formatted with $fs_type filesystem." 10 70
+            mount /dev/`cat $TMP/pout | cut -b 6-9` /mnt
+   
+        fi
+
+        dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
+
+        # choose home partition
+        dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
+
+        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
+        "1" "ext2" on \
+        "2" "ext3" off \
+        "3" "ext4" off \
+        2> $TMP/plart
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+
+        plout=$(cat $TMP/plout)
+        plart=$(cat $TMP/plart)
+        fs_type=
+
+        if [ $plart = "1" ] ; then
+            fs_type="ext2"
+        fi
+
+        if [ $plart = "2" ] ; then
+            fs_type="ext3"
+        fi
+
+        if [ $plart = "3" ] ; then
+            fs_type="ext4"
+        fi
+
+        if [ $fs_type != ""] ; then
+            mkdir -p /mnt/home
+            mkfs -t $fs_type $plout
+            dialog --clear --title "FORMAT HOME PARTITION" --msgbox "Now your partition has been formatted with ext4 filesystem." 10 70
+            mount /dev/`cat $TMP/plout | cut -b 6-9` /mnt/home
+   
+        fi
+
+        dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
+        
         what_do
     }
 
     make_internet() {
+        dialog --clear --title $b_title --msgbox "Test/configure internet connection" 20 70
+        
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+      
         ## TODO
         ping -c 3 www.google.com
+        
         what_do
     }
 
-    mount_root() {
-        error=0
-        MOUNT_DEV="$1"
-
-        [[  $# =  1  ]] || {  echo "no device added. Rerun" ;  error=1 ; }
-        [[ -b $1 ]] ||  { echo "not a valid block device. Rerun " ;  error=1 ; }
-        [[ -d "$mnt_point" ]] || { echo "no $mnt_point ?" ; error=1 ; }
-        echo
-
-        { mount "$MOUNT_DEV" "$mnt_point" && echo "root successfully mounted at $mnt_point" ;  } || { echo "mounting of root failed. Exit" ; error=1 ; }
-
-        echo "here is the actual content of the mounted device $MOUNT_DEV on $mnt_point"
-        ls "$mnt_point"
-        what_do
-    }
-
-    mount_home() {
-        error=0
-        MOUNT_DEV="$1"
-        mkdir -p $mnt_point/home
-        [[  $# =  1  ]] || {  echo "no device added. Rerun" ;  error=1 ; }
-        [[ -b $1 ]] ||  { echo "not a valid block device. Rerun " ;  error=1 ; }
-        [[ -d "$mnt_point/home" ]] || { echo "no $mnt_point/home ?" ; error=1 ; }
-        echo
-
-        { mount  "$MOUNT_DEV" "$mnt_point/home" && echo "home successfully mounted at $mnt_point/home" ;  } || { echo "mounting of home failed. Exit" ; error=1 ; }
-
-        if [ $error -eq 1 ] ; then
-            exit 1
-        else
-            echo "here is the actual content of the mounted device $MOUNT_DEV on $mnt_point"
-            ls "$mnt_point/home"
+    un_mount() {
+        dialog --clear --title $b_title --msgbox "Unmount /mnt and /mnt/home" 20 70
+        
+        if [ $? = 1 ] ; then
+            what_do
         fi
+     
+        umount /mnt/* 2>/dev/null
+        
         what_do
     }
 
     init_install() {
+        dialog --clear --title $b_title --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
+       
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+       
         pacstrap -i /mnt base base-devel sudo git hub rsync wget
+        
         what_do
     }
 
     chroot_conf() {
+        dialog --clear --title $b_title --msgbox "Chroot into mounted filesystem" 20 70
+        
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+       
         wget https://github.com/idk/pdq/blob/master/chroot-rs.sh -O chroot-rs.sh
         chmod +x chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
+
         what_do
     }
 
     gen_fstab() {
+        dialog --clear --title $b_title --msgbox "Generate fstab" 20 70
+       
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+       
         genfstab -U -p /mnt >> /mnt/etc/fstab
-        nano /mnt/etc/fstab
-        what_do
-    }
-
-    unmount_part() {
-        umount /mnt/home
-        umount /mnt
+        dialog --clear --title $b_title --yesno "Do you wish to view/edit this file?"
+       
+        if [ $? = 1 ] ; then
+            nano /mnt/etc/fstab
+        fi
+        
         what_do
     }
 
     finish_up() {
+        dialog --clear --title $b_title --msgbox "Finish install and reboot" 20 70
+
+        if [ $? = 1 ] ; then
+            what_do
+        fi
+
         ## TODO
-        systemctl enable dhcpcd@eth0.service
-        pacman -Syy
+        echo "Now rebooting..."
         reboot
-        what_do
     }
 
     # utility execution

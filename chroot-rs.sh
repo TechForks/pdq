@@ -2,11 +2,10 @@
 ## chroot-rs.sh sub-script for chroot from github backup! =)
 ## 12-15-2012 pdq
 
-exit 1
+#exit 1
 
-mnt_point="/mnt"
 is_chroot=$(ls -di /)
-upper_title="[ pdqOS environment configuration ]"
+upper_title="[ pdqOS environment configuration ] (chroot)"
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
@@ -15,31 +14,24 @@ upper_title="[ pdqOS environment configuration ]"
 : ${DIALOG_ITEM_HELP=4}
 : ${DIALOG_ESC=255}
 
-ask_something() {
-    echo -ne $question
-    while read -r -n 1 -s yn; do
-        if [[ $yn = [YyNn] ]]; then
-           [[ $yn = [Yy] ]] && return=0
-            [[ $yn = [Nn] ]] && return=1
-            break
-        fi
-    done
-    return $return
-}
-
 if [ "$is_chroot" = "2 /" ] ; then
-    echo "Hrm, something went fubar! pdq!?!?!?!?!?"
+    echo "Hrm, something went fubar! pdq!?!? help!?!?!?"
 else
     if [ $(id -u) -eq 0 ]; then
 
         clr="\Zb\Z0"
 
-        # temporary file
-        _TEMP=/tmp/answer$$
+        # temporary files
+        _TEMP=/tmp/chanswer$$
+        mkdir -p /tmp/tmp 2>/dev/null
+        TMP=/tmp/tmp 2>/dev/null
+        echo "unset" > $TMP/rootpasswd
 
-        _PROCEED=0
+        # sanity default checks
+        systemctl enable dhcpcd@eth0.service
+        pacman -Syy
 
-        # FUNCTIONS
+        # functions
         exiting() {
             clear
             rm -f $_TEMP
@@ -47,6 +39,12 @@ else
         }
 
         gen_tz() {
+            dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Generate timezone/localtime" 20 70
+            
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
+
             local tz_list tz
             for tz in $(grep -v "#" /usr/share/zoneinfo/zone.tab | awk '{print $3}') ; do
                 tz_list+="${tz} - "
@@ -57,24 +55,37 @@ else
             
             if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ]
                 ln -s /usr/share/zoneinfo/$GEN_TIMEZONE /etc/localtime
+                dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Set timezone to $GEN_TIMEZONE" 20 70
             else
-                echo "Failed to set timezone...timezone does not exist?"
+                dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Failed to set timezone...timezone does not exist?" 20 70
             fi
 
             chroot_menu
         }
 
         gen_hostname() {
+            dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 20 70
+            
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
 
             GEN_HOSTNAME=$(dialog --stdout --backtitle "${upper_title}" --title '[ HOSTNAME ]' --cancel-label "Go Back" \
                --inputbox "Enter the desired hostname or <Go Back> to return" 9 40 "${GEN_HOSTNAME}" || echo "${GEN_HOSTNAME}")
           
             echo $GEN_HOSTNAME > /etc/hostname
+            dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Set hostname to $GEN_HOSTNAME" 20 70
 
             chroot_menu
         }
 
         gen_locale() {
+            dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Generate locale" 20 70
+            
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
+
             GEN_LANG=$(dialog --stdout --backtitle "${upper_title}" --title '[ LOCALES ]' --cancel-label "Go Back" --default-item "${GEN_LANG}" \
                --menu "Choose a locale or <Go Back> to return" 16 40 23 \
                 en_US.UTF-8 - \
@@ -237,44 +248,109 @@ else
             echo "LANG=${GEN_LANG}" > "/etc/locale.conf"
             export "LANG=${GEN_LANG}"
             locale-gen 1>/dev/null) || echo "Unable to setup the locales to" "${GEN_LANG}"
+            dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Set locale to ${GEN_LANG}" 20 70
 
             chroot_menu
         }
 
         set_root_pass() {
+            dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "Set root password" 20 70
+            
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
+
             passwd
+            echo "set" > $TMP/rootpasswd
+            dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "root password set!" 20 70
 
             chroot_menu
         }
 
         add_user() {
-            adduser
-            ## TODO
-            EDITOR=nano visudo
+            dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Create user and add to sudoers" 20 70
+            
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
+
+            dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --inputbox "Please choose your username:\n\n" 10 70 2> $TMP/puser
+            puser=$(cat $TMP/puser)
+            adduser $psuer
+
+            sudo cp /etc/sudoers /etc/sudoers.bak
+
+            dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --yesno "Require no password for sudo? [suggested: Yes]"
+            if [ $? = 1 ] ; then
+                sudo sh -c "echo '$puser ALL=(ALL) NOPASSWD: ALL' >>  /etc/sudoers"
+                npasswd="no password required"
+            else
+                sudo sh -c "echo '$puser ALL=(ALL) ALL' >>  /etc/sudoers"
+                npasswd="password required"
+            fi
+
+            dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 20 70
 
             chroot_menu
         }
 
         install_grub() {
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Install Grub" 20 70
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
+
             ## TODO
-            pacman -S grub-bios
-            grub-install --target=i386-pc --recheck /dev/sda
+            pacman -S --needed grub-bios
+
+            # choose root partition
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --inputbox "Please choose the disk to install grub to.\n\n This should be the same drive your root partition is on:\n\nUsually /dev/sda. Be careful!" 10 70 2> $TMP/bout
+
+            bout=$(cat $TMP/bout)
+           
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --yesno "Is this correct?\n\n grub-install --target=i386-pc --recheck $bout"
+            if [ $? = 1 ] ; then
+                grub-install --target=i386-pc --recheck $bout
+                dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub installed" 20 70
+
+            else
+                dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub not installed..." 20 70
+            fi
 
             chroot_menu
         }
 
         conf_grub() {
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Configure Grub" 20 70
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
+
             ## TODO
-            cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+            cp -v /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
             grub-mkconfig -o /boot/grub/grub.cfg
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Grub configured" 20 70
+
+            chroot_menu
+        }
+
+        conf_view() {
+
+            echo "HOSTNAME: $(cat /etc/hostname)"
+            echo "TIMEZONE: $(readlink /etc/localtime)"
+            echo "LOCALE: $(cat /etc/locale.conf)"
+            echo "ROOT PASSWORD: $(cat $TMP/rootpasswd)"
+            echo "USER: $(cat $TMP/puser)"
+            echo "GRUB: installed as: --target=i386-pc --recheck $(cat $TMP/bout)"
+            dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 20 70
 
             chroot_menu
         }
 
         chroot_menu() {
             dialog \
-                --colors --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
-                --menu "\ZbSelect action:" 20 60 8 \
+                --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
+                --menu "\ZbSelect action:" 20 60 9 \
                 1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
                 2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
                 3 $clr"Generate locale [${GEN_LANG}]" \
@@ -282,7 +358,8 @@ else
                 5 $clr"Create default user and add to sudoers" \
                 6 $clr"Install Grub" \
                 7 $clr"Configure Grub" \
-                8 $clr"Exit chroot" 2>$_TEMP
+                8 $clr"View/confirm generated data" \
+                9 $clr"Exit chroot" 2>$_TEMP
 
             choice=$(cat $_TEMP)
             case $choice in
@@ -293,10 +370,9 @@ else
                 5) add_user;;
                 6) install_grub;;
                 7) conf_grub;;
-                8) exiting;;
+                8) conf_view;;
+                9) exiting;;
             esac
-            
-            initialize_start
         }
 
         # utility execution

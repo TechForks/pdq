@@ -15,6 +15,7 @@ awesome
 binutils-multilib
 bison
 bitlbee
+blender
 cairo
 cclive
 cdrdao
@@ -59,6 +60,7 @@ gstreamer0.10-base-plugins
 gstreamer0.10-good
 gstreamer0.10-ugly
 gtk-engine-murrine
+gtk-vnc
 hardinfo
 hddtemp
 hgsvn
@@ -75,6 +77,7 @@ keepassx
 keychain
 lib32-intel-dri
 lib32-libldap
+lib32-libtxc_dxtn
 lib32-libxft
 lib32-mpg123
 lib32-openal
@@ -102,6 +105,7 @@ memtest86+
 mesa
 mlocate
 moc
+mtools
 multitail
 mumble
 mysql
@@ -159,6 +163,7 @@ transmission-cli
 truecrypt
 ttf-envy-code-r
 udevil
+unetbootin
 unrar
 unzip
 upx
