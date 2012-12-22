@@ -66,7 +66,7 @@ echo "weee"
         rm -f $_TEMP
         echo "exiting..."
         sleep 3s
-        exit
+        exit 0
     }
 
     what_do() {
@@ -316,6 +316,7 @@ echo "weee"
     # do
 
     main_menu
+    echo "end of root function"
     #done
 else
     echo "peee"
@@ -920,3 +921,6 @@ else
         echo "${bldgreen}pacaur intel [replacing 'intel' with your graphics card type])${txtrst}"
     fi
 fi
+
+echo "end of script"
+sleep 3s
