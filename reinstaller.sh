@@ -27,7 +27,6 @@ bldblue=${txtbld}$(tput setaf 6) # Blue Colored
 bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
 txtrst=$(tput sgr0)             # Reset
 
-mnt_point="/mnt"
 b_title="pdqOS Installer for Arch Linux x86_64"
 
 : ${DIALOG_OK=0}
