@@ -312,7 +312,8 @@ echo "weee"
     # utility execution
     # while true
     # do
-        main_menu
+
+    main_menu
     #done
 else
     echo "peee"
@@ -915,5 +916,3 @@ else
         echo "${bldgreen}pacaur intel [replacing 'intel' with your graphics card type])${txtrst}"
     fi
 fi
-
-exit 1
