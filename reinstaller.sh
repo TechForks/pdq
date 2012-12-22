@@ -119,7 +119,7 @@ echo "weee"
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --title "$b_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 10 30
+        dialog --title "$b_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 30 90
     }
 
     part_editor() {
