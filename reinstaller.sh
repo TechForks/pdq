@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ## reinstall from github backup! =)
 ## 03-22-2012 pdq
 ## 07-10-2012 pdq
