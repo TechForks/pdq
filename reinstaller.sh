@@ -909,3 +909,5 @@ systemctl enable memcached.service"
     echo "${bldgreen}If complete, type: sudo reboot (you may also want to search, chose and install a video driver now, ie:${txtrst}"
     echo "${bldgreen}pacaur intel [replacing 'intel' with your graphics card type])${txtrst}"
 fi
+
+exit 1
