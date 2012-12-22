@@ -50,7 +50,7 @@ ask_something() {
 
 ## root script
 if [ $(id -u) -eq 0 ]; then
-
+echo "weee"
     clr="\Zb\Z0"
 
     # temporary file
@@ -315,6 +315,7 @@ if [ $(id -u) -eq 0 ]; then
         main_menu
     #done
 else
+    echo "peee"
     ## user script
 
     my_home="$HOME/"
