@@ -84,8 +84,6 @@ echo "weee"
     }
 
     i_menu() {
-        echo "wtf"
-        sleep 2s
         dialog \
             --colors --title "$b_title" \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
@@ -125,13 +123,13 @@ echo "weee"
     }
 
     part_editor() {
-        dialog --clear --title $b_title --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer!" 20 70
+        dialog --clear --title "$b_title" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer!" 20 70
         
         if [ $? = 1 ] ; then
             what_do
         fi
 
-        dialog --clear --title $b_title --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed (Y/N)?\n"
+        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed (Y/N)?\n"
         if [ $? = 1 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
@@ -229,7 +227,7 @@ echo "weee"
     }
 
     make_internet() {
-        dialog --clear --title $b_title --msgbox "Test/configure internet connection" 20 70
+        dialog --clear --title "$b_title" --msgbox "Test/configure internet connection" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -242,7 +240,7 @@ echo "weee"
     }
 
     un_mount() {
-        dialog --clear --title $b_title --msgbox "Unmount /mnt and /mnt/home" 20 70
+        dialog --clear --title "$b_title" --msgbox "Unmount /mnt and /mnt/home" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -254,7 +252,7 @@ echo "weee"
     }
 
     init_install() {
-        dialog --clear --title $b_title --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
+        dialog --clear --title "$b_title" --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
        
         if [ $? = 1 ] ; then
             what_do
@@ -266,7 +264,7 @@ echo "weee"
     }
 
     chroot_conf() {
-        dialog --clear --title $b_title --msgbox "Chroot into mounted filesystem" 20 70
+        dialog --clear --title "$b_title" --msgbox "Chroot into mounted filesystem" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -280,14 +278,14 @@ echo "weee"
     }
 
     gen_fstab() {
-        dialog --clear --title $b_title --msgbox "Generate fstab" 20 70
+        dialog --clear --title "$b_title" --msgbox "Generate fstab" 20 70
        
         if [ $? = 1 ] ; then
             what_do
         fi
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
-        dialog --clear --title $b_title --yesno "Do you wish to view/edit this file?"
+        dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?"
        
         if [ $? = 1 ] ; then
             nano /mnt/etc/fstab
@@ -297,7 +295,7 @@ echo "weee"
     }
 
     finish_up() {
-        dialog --clear --title $b_title --msgbox "Finish install and reboot" 20 70
+        dialog --clear --title "$b_title" --msgbox "Finish install and reboot" 20 70
 
         if [ $? = 1 ] ; then
             what_do
