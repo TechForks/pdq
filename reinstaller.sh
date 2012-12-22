@@ -116,12 +116,10 @@ echo "weee"
     list_partitions() {
         partition_list=`blkid | grep -i 'TYPE="ext[234]"' | cut -d ' ' -f 1 | grep -i '^/dev/' | grep -v '/dev/loop' | sed "s/://g"`
         if [ "$partition_list" = "" ] ; then
-            echo "It appears you have no linux partitions yet."
-        else
-            echo "$partition_list"
+            partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --title "$b_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 10 30
     }
 
     part_editor() {
