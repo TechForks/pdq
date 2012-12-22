@@ -129,8 +129,8 @@ echo "weee"
             what_do
         fi
 
-        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 10 30
-        if [ $? = 1 ] ; then
+        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 30 70
+        if [ $? != 1 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
         fi
