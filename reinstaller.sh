@@ -84,6 +84,8 @@ echo "weee"
     }
 
     i_menu() {
+        echo "wtf"
+        sleep 2s
         dialog \
             --colors --title $b_title \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
