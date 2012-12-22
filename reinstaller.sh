@@ -95,7 +95,7 @@ echo "weee"
             6 $clr"Generate fstab" \
             7 $clr"Configure" \
             8 $clr"Unmount install partitions" \
-            9 $clr"Finish up and reboot to complete. (remove livecd after poweroff)" \
+            9 $clr"Finish and reboot. (Remove livecd after poweroff)" \
             10 $clr"Exit" 2>$_TEMP
 
         choice=$(cat $_TEMP)
