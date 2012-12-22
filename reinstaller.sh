@@ -64,6 +64,8 @@ echo "weee"
     exiting() {
         clear
         rm -f $_TEMP
+        echo "exiting..."
+        sleep 3s
         exit
     }
 
@@ -334,11 +336,13 @@ else
     grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
     if [ "$archtype" = "no" ]; then
         echo "Sorry this is for x86_64 only! =)"
+        sleep 3s
         exit 1
     fi
 
     if [ $(id -u) -eq 0 ]; then
         echo "Do not run me as root! =)"
+        sleep 3s
         exit 1
     fi
 
