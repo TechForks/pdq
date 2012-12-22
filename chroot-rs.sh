@@ -280,7 +280,7 @@ else
 
             sudo cp /etc/sudoers /etc/sudoers.bak
 
-            dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --yesno "Require no password for sudo? [suggested: Yes]"
+            dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --yesno "Require no password for sudo? [suggested: Yes]" 10 30
             if [ $? = 1 ] ; then
                 sudo sh -c "echo '$puser ALL=(ALL) NOPASSWD: ALL' >>  /etc/sudoers"
                 npasswd="no password required"
@@ -308,7 +308,7 @@ else
 
             bout=$(cat $TMP/bout)
            
-            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --yesno "Is this correct?\n\n grub-install --target=i386-pc --recheck $bout"
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --yesno "Is this correct?\n\n grub-install --target=i386-pc --recheck $bout" 10 30
             if [ $? = 1 ] ; then
                 grub-install --target=i386-pc --recheck $bout
                 dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub installed" 20 70

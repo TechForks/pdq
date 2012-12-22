@@ -129,7 +129,8 @@ echo "weee"
             what_do
         fi
 
-        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed (Y/N)?\n"
+        dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?" 10 30
+        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 10 30
         if [ $? = 1 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
@@ -285,7 +286,7 @@ echo "weee"
         fi
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
-        dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?"
+        dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?" 10 30
        
         if [ $? = 1 ] ; then
             nano /mnt/etc/fstab
