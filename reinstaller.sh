@@ -314,12 +314,11 @@ echo "weee"
     }
 
     # utility execution
-    # while true
-    # do
-
-    i_menu
+    while true
+    do
+        i_menu
     echo "end of root function"
-    #done
+    done
 else
     echo "peee"
     ## user script
