@@ -123,7 +123,7 @@ if [ $(id -u) -eq 0 ]; then
             what_do
         fi
 
-        dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
         if [ $? = 0 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
@@ -133,15 +133,15 @@ if [ $(id -u) -eq 0 ]; then
     make_fs() {
         fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
 
-        dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\n In the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
+        dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
         if [ $? = 1 ] ; then
             what_do
         fi
 
         # choose root partition
-        dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/pout
+        dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
 
-        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
+        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next2 is the recommended filesystem." 10 70 0 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -168,9 +168,9 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
 
         # choose home partition
-        dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
+        dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
 
-        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
+        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next2 is the recommended filesystem." 10 70 0 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -220,7 +220,7 @@ if [ $(id -u) -eq 0 ]; then
      
         umount /mnt/* 2>/dev/null
 
-        dialog --title "$upper_title" --msgbox "Unmounted /mnt and /mnt/home. \n\n Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Unmounted /mnt and /mnt/home.\n\n Hit enter to return to menu" 10 30
     }
 
     init_install() {
@@ -232,7 +232,7 @@ if [ $(id -u) -eq 0 ]; then
        
         pacstrap /mnt base base-devel sudo git hub rsync wget
         
-        dialog --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt. \n\n Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt.\n\n Hit enter to return to menu" 10 30
     }
 
     chroot_conf() {
@@ -360,7 +360,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
     dialog --clear --title "$upper_title" --yesno "Install main packages?" 20 70
     if [ $? = 0 ] ; then
-        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\n chose 2\n\n When it asks if replace foo with bar chose y for everyone"
+        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone"
         sudo powerpill -Syy
         sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
@@ -368,11 +368,11 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 20 70
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n [This may take a while]"
+        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n[This may take a while]"
         pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n [Use this option if the prior one failed, otherwise skip it]" 20 70
+    dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 20 70
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
         dialog --title "$upper_title" --msgbox "Installing AUR packages (with confirm)"
@@ -391,7 +391,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         hub clone idk/gh
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install all repos (Y/N) [Cannot do in chroot]?" 20 70
+    dialog --clear --title "$upper_title" --yesno "Install all repos [Cannot do in chroot]?" 20 70
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
@@ -840,15 +840,15 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         dialog --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...."
         rand=$RANDOM
         sudo mysqladmin -u root password $USER-$rand
-        dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\n Write this down before proceeding..."
-        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n $ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\n For example, you can set the new password to 123456, enter:\n $ mysqladmin -u root -p'$USER-$rand' password '123456'"
+        dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..."
+        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'"
         sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
         sudo ln -s /srv/http ${my_home}localhost
         sudo chown -R $USER /srv/http
 
         dialog --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
 
-        dialog --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\n systemctl enable httpd.service\n systemctl enable mysqld.service\n systemctl enable memcached.service"
+        dialog --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service"
         
         dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 20 70
         if [ $? = 0 ] ; then
@@ -860,7 +860,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         pwd
         chsh -s $(which zsh)
         cd
-        dialog --title "$upper_title" --msgbox "Exiting install script...\n If complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]"
+        dialog --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]"
     fi
 fi
 
