@@ -315,6 +315,10 @@ else
 
     sudo locale-gen
 
+    if [ ! -f /usr/bin/hub ]; then
+        sudo pacman -S --noconfirm --needed hub
+    fi
+
     if [ ! -f /usr/bin/pacaur ]; then
         #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
         sudo pacman -S --noconfirm yajl
@@ -330,14 +334,6 @@ else
     if [ ! -f /usr/bin/powerpill ]; then
         #dialog --title "$upper_title" --msgbox "Installing powerpill" 20 70
         wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U powerpill* && cd
-    fi
-
-    if [ ! -f /usr/bin/git ]; then
-        sudo pacman -S --noconfirm git
-    fi
-
-    if [ ! -f /usr/bin/hub ]; then
-        sudo pacman -S --noconfirm --needed hub
     fi
 
     sleep 30s
