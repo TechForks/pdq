@@ -335,6 +335,7 @@ else
 
     if [ ! -f /usr/bin/powerpill ]; then
         #dialog --title "$upper_title" --msgbox "Installing powerpill" 20 70
+        sudo pacman -S --noconfirm --needed python3
         packer -S --noconfirm powerpill
     fi
 
@@ -368,7 +369,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
     dialog --clear --title "$upper_title" --yesno "Install main packages?" 20 70
     if [ $? = 0 ] ; then
-        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 10 30
+        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
         sudo powerpill -Syy
         sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
