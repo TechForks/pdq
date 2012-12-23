@@ -322,6 +322,8 @@ else
     if [ ! -f /usr/bin/pacaur ]; then
         #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
         sudo pacman -S --noconfirm --needed yajl
+        sudo pacman -S --noconfirm --needed jshon
+        sudo pacman -S --noconfirm --needed jansson
         wget https://aur.archlinux.org/packages/pa/packer/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm --needed packer* && cd
         packer -S --noconfirm pacaur
     fi
