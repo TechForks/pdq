@@ -332,9 +332,9 @@ if [ $(id -u) -eq 0 ]; then
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
             --menu "\ZbSelect action:" 20 60 9 \
-            1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
-            2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
-            3 $clr"Generate locale [${GEN_LANG}]" \
+            1 $clr"Generate hostname" \
+            2 $clr"Generate timezone" \
+            3 $clr"Generate locale" \
             4 $clr"Set root password" \
             5 $clr"Create default user and add to sudoers" \
             6 $clr"Install Grub" \
