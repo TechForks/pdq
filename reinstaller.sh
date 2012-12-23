@@ -283,7 +283,7 @@ if [ $(id -u) -eq 0 ]; then
         my_user=$(cat $TMP/myuser)
         mv -v /home/rs.sh /home/$my_user/rs.sh
         chown -R $my_user /home/$my_user/rs.sh
-        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:/n/nlogin as $my_user and run: sh rs.sh"
+        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:/n/nlogin as $my_user and run: sh rs.sh" 10 30
         echo "Now rebooting..."
         reboot
     }
@@ -340,7 +340,7 @@ else
 
     sleep 3s
     if [ ! -d "${dev_directory}pdq" ]; then
-        dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
+        dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/" 10 30
         cd ${dev_directory}
         hub clone idk/pdq
         hub clone idk/etc
@@ -368,7 +368,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
     dialog --clear --title "$upper_title" --yesno "Install main packages?" 20 70
     if [ $? = 0 ] ; then
-        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone"
+        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 10 30
         sudo powerpill -Syy
         sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
@@ -376,14 +376,14 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 20 70
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n[This may take a while]"
+        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n[This may take a while]" 10 30
         pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
     dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 20 70
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        dialog --title "$upper_title" --msgbox "Installing AUR packages (with confirm)"
+        dialog --title "$upper_title" --msgbox "Installing AUR packages (with confirm)" 10 30
         pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
@@ -405,17 +405,17 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
-        dialog --clear --title "$upper_title" --msgbox "Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
+        dialog --clear --title "$upper_title" --msgbox "Backing up mirrorlist and write/rank/sort new mirrorlist" 10 30
         sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
         sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
         
-        dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs${txtrst}"
+        dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs" 10 30
         # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
         # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
         # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
         sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
 
-        dialog --title "$upper_title" --msgbox "Backing up and copying user configs${txtrst}"
+        dialog --title "$upper_title" --msgbox "Backing up and copying user configs" 10 30
         mv -v ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
         cp -v ${dev_directory}pdq/.gmail_symlink ${my_home}.gmail_symlink
         mv -v ${my_home}.gtkrc-2.0 ${my_home}.gtkrc-2.0.bak
@@ -440,7 +440,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
         cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
-        dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
+        dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing..." 10 30
         mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
         mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
         cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
@@ -501,7 +501,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             cd
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files"
+        dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files" 10 30
         sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
         sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
         sudo mkdir -p /etc/privoxy
@@ -802,7 +802,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
         # End of file' > /etc/hosts"
 
-        dialog --clear --title "$upper_title" --msgbox "Creating self-signed certificate"
+        dialog --clear --title "$upper_title" --msgbox "Creating self-signed certificate" 10 30
         cd /etc/httpd/conf
         sudo openssl genrsa -des3 -out server.key 1024
         sudo openssl req -new -key server.key -out server.csr
@@ -842,23 +842,23 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo chmod g+xr-w /srv/http/mail.$USER.c0m
         sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
 
-        dialog --clear --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p"
-        dialog --clear --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!"
+        dialog --clear --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p" 10 30
+        dialog --clear --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!" 10 30
         sudo systemctl start httpd
         sudo systemctl start mysqld
         sleep 1s
-        dialog --clear --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...."
+        dialog --clear --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...." 10 30
         rand=$RANDOM
         sudo mysqladmin -u root password $USER-$rand
-        dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..."
-        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'"
+        dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
+        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 10 30
         sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
         sudo ln -s /srv/http ${my_home}localhost
         sudo chown -R $USER /srv/http
 
-        dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
+        dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
 
-        dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service"
+        dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 30
         
         dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 20 70
         if [ $? = 0 ] ; then
@@ -870,7 +870,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         pwd
         chsh -s $(which zsh)
         cd
-        dialog --clear --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]"
+        dialog --clear --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 10 30
     fi
 fi
 
