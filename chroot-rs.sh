@@ -247,7 +247,7 @@ else
             echo "${GEN_LANG} ${GEN_LANG##*.}" > "/etc/locale.gen"
             echo "LANG=${GEN_LANG}" > "/etc/locale.conf"
             export "LANG=${GEN_LANG}"
-            locale-gen 1>/dev/null) || echo "Unable to setup the locales to" "${GEN_LANG}"
+            locale-gen 1>/dev/null || echo "Unable to setup the locales to" "${GEN_LANG}"
             dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Set locale to ${GEN_LANG}" 20 70
 
             chroot_menu
