@@ -230,7 +230,7 @@ if [ $(id -u) -eq 0 ]; then
             what_do
         fi
        
-        pacstrap -i /mnt base base-devel sudo git hub rsync wget
+        pacstrap /mnt base base-devel sudo git hub rsync wget
         
         dialog --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt. \n\n Hit enter to return to menu" 10 30
     }
