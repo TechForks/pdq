@@ -369,7 +369,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     if [ $? = 0 ] ; then
         dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
         sudo powerpill -Syy
-        sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
+        sudo pacman-color -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
 
     dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 10 30
