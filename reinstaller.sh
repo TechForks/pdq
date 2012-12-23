@@ -301,7 +301,9 @@ else
         dialog --title "$upper_title" --msgbox "Do not run me as root!" 20 70
         exit 1
     fi
-
+        
+    sudo mv /home/rs.sh /home/$USER/rs.sh
+    sudo chown -R $USER "/home/$USER/rs.sh"
     my_home="$HOME/"
     #my_home="/home/pdq/test/"
     dev_directory="${my_home}github/"
