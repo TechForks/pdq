@@ -322,18 +322,18 @@ else
     if [ ! -f /usr/bin/pacaur ]; then
         #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
         sudo pacman -S --noconfirm yajl
-        wget https://aur.archlinux.org/packages/co/cower/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U cower* && cd
-        wget https://aur.archlinux.org/packages/pa/pacaur/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U pacaur* && cd
+        wget https://aur.archlinux.org/packages/co/cower/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm --needed cower* && cd
+        wget https://aur.archlinux.org/packages/pa/pacaur/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm --needed pacaur* && cd
     fi
 
     if [ ! -f /usr/bin/pacman-color ]; then
         #dialog --title "$upper_title" --msgbox "Installing pacman-color" 20 70
-        wget https://aur.archlinux.org/packages/pa/pacman-color/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U pacman-color* && cd
+        wget https://aur.archlinux.org/packages/pa/pacman-color/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm --needed pacman-color* && cd
     fi
 
     if [ ! -f /usr/bin/powerpill ]; then
         #dialog --title "$upper_title" --msgbox "Installing powerpill" 20 70
-        wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U powerpill* && cd
+        wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm --needed powerpill* && cd
     fi
 
     sleep 3s
