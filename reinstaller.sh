@@ -281,8 +281,8 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "Your username" --inputbox "Please enter your username you created earlier:\n\n" 10 70 2> $TMP/myuser
 
         my_user=$(cat $TMP/myuser)
-        mv -v /home/rs.sh "/home/$my_user/rs.sh"
-        chown -R $my_user "/home/$my_user/rs.sh"
+        mv -v /home/rs.sh /home/$my_user/rs.sh
+        chown -R $my_user /home/$my_user/rs.sh
         dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:/n/nlogin as $my_user and run: sh rs.sh"
         echo "Now rebooting..."
         reboot
@@ -301,9 +301,7 @@ else
         dialog --title "$upper_title" --msgbox "Do not run me as root!" 20 70
         exit 1
     fi
-        
-    sudo mv /home/rs.sh /home/$USER/rs.sh
-    sudo chown -R $USER "/home/$USER/rs.sh"
+
     my_home="$HOME/"
     #my_home="/home/pdq/test/"
     dev_directory="${my_home}github/"
@@ -319,6 +317,7 @@ else
 
     if [ ! -f /usr/bin/pacaur ]; then
         #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
+        wget https://aur.archlinux.org/packages/co/cower/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm cower* && cd
         wget https://aur.archlinux.org/packages/pa/pacaur/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm pacaur* && cd
     fi
 
@@ -340,6 +339,7 @@ else
         sudo pacman -S --noconfirm --needed hub
     fi
 
+    sleep 30s
     if [ ! -d "${dev_directory}pdq" ]; then
         dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
         hub clone idk/pdq
