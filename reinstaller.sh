@@ -248,7 +248,7 @@ if [ $(id -u) -eq 0 ]; then
         chmod +x chroot-rs.sh
         mv chroot-rs.sh /mnt/chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
-        sleep 3s
+        sleep 10s
         dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
