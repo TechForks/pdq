@@ -250,7 +250,6 @@ if [ $(id -u) -eq 0 ]; then
         chmod +x chroot-rs.sh
         mv chroot-rs.sh /mnt/chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
-        sleep 10s
         dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
@@ -277,13 +276,8 @@ if [ $(id -u) -eq 0 ]; then
         if [ $? = 1 ] ; then
             what_do
         fi
-
-        dialog --clear --title "Your username" --inputbox "Please enter your username you created earlier:\n\n" 10 70 2> $TMP/myuser
-
-        my_user=$(cat $TMP/myuser)
-        mv -v /home/rs.sh /home/$my_user/rs.sh
-        chown -R $my_user /home/$my_user/rs.sh
-        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:/n/nlogin as $my_user and run: sh rs.sh" 10 30
+        
+        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:\n\nlogin as $my_user and run: sh rs.sh" 10 30
         echo "Now rebooting..."
         reboot
     }
@@ -314,6 +308,8 @@ else
     export TMPDIR=${my_home}vital/tmp
 
     sudo locale-gen
+    sudo dhcpcd eth0
+    sudo systemctl enable dhcpcd@eth0.service
 
     if [ ! -f /usr/bin/hub ]; then
         sudo pacman -S --noconfirm --needed hub
@@ -349,6 +345,8 @@ else
         sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
         sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
         sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
+        sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+        sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
         sudo mv -v /etc/powerpill/powerpill.json /etc/powerpill/powerpill.json.bak
         sudo cp -v ${dev_directory}etc/powerpill.json /etc/powerpill/powerpill.json
         cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
@@ -356,7 +354,7 @@ else
     fi
 
     if [ ! -f /usr/bin/rsync ]; then
-        sudo powerpill -S --noconfirm rsync
+        sudo pacman-color -S --noconfirm rsync
     fi
 
     dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 10 30
@@ -406,9 +404,6 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
-        dialog --clear --title "$upper_title" --msgbox "Backing up mirrorlist and write/rank/sort new mirrorlist" 10 30
-        sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-        sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
         
         dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs" 10 30
         # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak

@@ -285,6 +285,9 @@ if [ $(id -u) -eq 0 ]; then
             EDITOR=nano visudo
         fi
 
+        wget http://is.gd/reinstaller -O /home/$puser/rs.sh
+        chown -R $puser /home/$puser/rs.sh
+
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 10 30
     }
 
