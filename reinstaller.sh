@@ -277,7 +277,7 @@ if [ $(id -u) -eq 0 ]; then
             what_do
         fi
         
-        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:\n\nlogin as $my_user and run: sh rs.sh" 10 30
+        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:\n\nlogin as your created user and run: sh rs.sh" 10 30
         echo "Now rebooting..."
         reboot
     }
