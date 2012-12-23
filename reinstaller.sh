@@ -13,7 +13,7 @@
 # wget http://is.gd/reinstaller -O rs.sh
 # sh rs.sh
 
-## when it askes if install 1) phonon-gstreamer or 2) phonon-vlc
+## when it asks if install 1) phonon-gstreamer or 2) phonon-vlc
 ## chose 2
 ## when it asks if replace foo with bar chose y for everyone
 
