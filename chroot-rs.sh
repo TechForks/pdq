@@ -36,7 +36,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_tz() {
-        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Generate timezone/localtime" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Generate timezone/localtime" 0 0
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -52,14 +52,14 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ] ; then
             ln -s /usr/share/zoneinfo/$GEN_TIMEZONE /etc/localtime
-            dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Set timezone to $GEN_TIMEZONE" 20 70
+            dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Set timezone to $GEN_TIMEZONE" 0 0
         else
-            dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Failed to set timezone...timezone does not exist?" 20 70
+            dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Failed to set timezone...timezone does not exist?" 0 0
         fi
     }
 
     gen_hostname() {
-        dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 0 0
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -69,11 +69,11 @@ if [ $(id -u) -eq 0 ]; then
            --inputbox "Enter the desired hostname or <Go Back> to return" 9 40 "${GEN_HOSTNAME}" || echo "${GEN_HOSTNAME}")
       
         echo $GEN_HOSTNAME > /etc/hostname
-        dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Set hostname to $GEN_HOSTNAME" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Set hostname to $GEN_HOSTNAME" 0 0
     }
 
     gen_locale() {
-        dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Generate locale" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Generate locale" 0 0
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -245,7 +245,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     set_root_pass() {
-        dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "Set root password" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "Set root password" 0 0
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -253,11 +253,11 @@ if [ $(id -u) -eq 0 ]; then
 
         passwd
         echo "set" > $TMP/rootpasswd
-        dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "root password set!" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "root password set!" 0 0
     }
 
     add_user() {
-        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Create user and add to sudoers" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Create user and add to sudoers" 0 0
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -278,17 +278,22 @@ if [ $(id -u) -eq 0 ]; then
             npasswd="password required"
         fi
 
-        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --yesno "Confirm/view sudoers?" 10 30
+        if [ $? = 1 ] ; then
+            EDITOR=nano visudo
+        fi
+
+        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 0 0
     }
 
     install_grub() {
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Install Grub" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Install Grub" 0 0
         if [ $? = 1 ] ; then
             chroot_menu
         fi
 
         ## TODO
-        pacman -S --needed grub-bios
+        pacman -S --noconfirm --needed grub-bios
 
         # choose root partition
         dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --inputbox "Please choose the disk to install grub to.\n\n This should be the same drive your root partition is on:\n\nUsually /dev/sda. Be careful!" 10 70 2> $TMP/bout
@@ -296,17 +301,17 @@ if [ $(id -u) -eq 0 ]; then
         bout=$(cat $TMP/bout)
        
         dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --yesno "Is this correct?\n\n grub-install --target=i386-pc --recheck $bout" 10 30
-        if [ $? = 1 ] ; then
+        if [ $? = 0 ] ; then
             grub-install --target=i386-pc --recheck $bout
-            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub installed" 20 70
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub installed" 0 0
 
         else
-            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub not installed..." 20 70
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub not installed..." 0 0
         fi
     }
 
     conf_grub() {
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Configure Grub" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Configure Grub" 0 0
         if [ $? = 1 ] ; then
             chroot_menu
         fi
@@ -314,7 +319,7 @@ if [ $(id -u) -eq 0 ]; then
         ## TODO
         cp -v /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
         grub-mkconfig -o /boot/grub/grub.cfg
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Grub configured" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Grub configured" 0 0
     }
 
     conf_view() {
@@ -325,7 +330,9 @@ if [ $(id -u) -eq 0 ]; then
         echo "ROOT PASSWORD: $(cat $TMP/rootpasswd)"
         echo "USER: $(cat $TMP/puser)"
         echo "GRUB: installed as: --target=i386-pc --recheck $(cat $TMP/bout)"
-        dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 20 70
+        echo "Returning to menu in 5 seconds..."
+        sleep 5s
+        dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 0 0
     }
 
     chroot_menu() {
