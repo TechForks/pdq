@@ -35,12 +35,15 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_tz() {
+        echo
     }
 
     gen_hostname() {
+        echo
         }
 
     gen_locale() {
+        echo
            }
 
     set_root_pass() {
