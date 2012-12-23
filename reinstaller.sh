@@ -188,7 +188,7 @@ if [ $(id -u) -eq 0 ]; then
         elif [ "$plart" == "3" ] ; then
             fs_type="ext4"
         else
-             fs_type="ext2"
+            fs_type="ext2"
         fi
 
         mkdir -vp /mnt/home
@@ -231,6 +231,8 @@ if [ $(id -u) -eq 0 ]; then
         fi
        
         pacstrap /mnt base base-devel sudo git hub rsync wget
+
+        sleep 3s
         
         dialog --clear --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt.\n\n Hit enter to return to menu" 10 30
     }
