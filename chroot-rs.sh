@@ -32,7 +32,8 @@ if [ $(id -u) -eq 0 ]; then
     exiting() {
         clear
         rm -f $_TEMP
-        exit
+        exit 0
+        exit 0
     }
 
     gen_tz() {
