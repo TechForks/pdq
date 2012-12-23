@@ -26,6 +26,7 @@ if [ $(id -u) -eq 0 ]; then
     # sanity default checks
     systemctl enable dhcpcd@eth0.service
     pacman -Syy
+    pacman -S --noconfirm --needed dialog
 
     # functions
     exiting() {
@@ -357,9 +358,9 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     # utility execution
- #   while true
- #   do
+    while true
+    do
         chroot_menu
         echo "end of chroot function"
- #   done
+    done
 fi
