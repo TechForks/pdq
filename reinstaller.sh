@@ -141,7 +141,7 @@ if [ $(id -u) -eq 0 ]; then
         # choose root partition
         dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
 
-        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next2 is the recommended filesystem." 10 70 0 \
+        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next2 is the recommended filesystem." 10 710 30 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -170,7 +170,7 @@ if [ $(id -u) -eq 0 ]; then
         # choose home partition
         dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
 
-        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next2 is the recommended filesystem." 10 70 0 \
+        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next2 is the recommended filesystem." 10 710 30 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -194,6 +194,8 @@ if [ $(id -u) -eq 0 ]; then
         mkdir -vp /mnt/home
         mkfs -t $fs_type $plout
         mount $plout /mnt/home
+
+        cp -v rs.sh "/mnt/home/rs.sh"
 
         dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
     }
@@ -279,9 +281,9 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "Your username" --inputbox "Please enter your username you created earlier:\n\n" 10 70 2> $TMP/myuser
 
         my_user=$(cat $TMP/myuser)
-        cp rs.sh "/home/$my_user/rs.sh"
+        mv -v /home/rs.sh "/home/$my_user/rs.sh"
         chown -R $my_user "/home/$my_user/rs.sh"
-        ## TODO
+        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:/n/nlogin as $my_user and run: sh rs.sh"
         echo "Now rebooting..."
         reboot
     }
