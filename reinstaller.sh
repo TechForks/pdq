@@ -162,24 +162,16 @@ echo "weee"
         part=$(cat $TMP/part)
         fs_type=
 
-        if [ $part = "1" ] ; then
+        if [ $part = "2" ] ; then
+            fs_type="ext3"
+        elif [ $part = "3" ] ; then
+            fs_type="ext4"
+        else
             fs_type="ext2"
         fi
 
-        if [ $part = "2" ] ; then
-            fs_type="ext3"
-        fi
-
-        if [ $part = "3" ] ; then
-            fs_type="ext4"
-        fi
-
-        if [ $fs_type != ""] ; then
-            mkfs -t $fs_type $pout
-            dialog --clear --title "FORMAT ROOT PARTITION" --msgbox "Now your partition will be formatted with $fs_type filesystem." 10 70
-            mount /dev/`cat $TMP/pout | cut -b 6-9` /mnt
-   
-        fi
+        mkfs -t $fs_type $pout
+        mount $pout /mnt
 
         dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
 
@@ -199,25 +191,17 @@ echo "weee"
         plart=$(cat $TMP/plart)
         fs_type=
 
-        if [ $plart = "1" ] ; then
-            fs_type="ext2"
-        fi
-
         if [ $plart = "2" ] ; then
             fs_type="ext3"
-        fi
-
-        if [ $plart = "3" ] ; then
+        elif [ $plart = "3" ] ; then
             fs_type="ext4"
+        else
+             fs_type="ext2"
         fi
 
-        if [ $fs_type != ""] ; then
-            mkdir -p /mnt/home
-            mkfs -t $fs_type $plout
-            dialog --clear --title "FORMAT HOME PARTITION" --msgbox "Now your partition has been formatted with ext4 filesystem." 10 70
-            mount /dev/`cat $TMP/plout | cut -b 6-9` /mnt/home
-   
-        fi
+        mkdir -vp /mnt/home
+        mkfs -t $fs_type $plout
+        mount $plout /mnt/home
 
         dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
     }
