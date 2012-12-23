@@ -4,7 +4,6 @@
 
 #exit 1
 
-is_chroot=$(ls -di /)
 upper_title="[ pdqOS environment configuration ] (chroot)"
 
 : ${DIALOG_OK=0}
@@ -13,7 +12,6 @@ upper_title="[ pdqOS environment configuration ] (chroot)"
 : ${DIALOG_EXTRA=3}
 : ${DIALOG_ITEM_HELP=4}
 : ${DIALOG_ESC=255}
-
 
 if [ $(id -u) -eq 0 ]; then
 
@@ -346,6 +344,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     chroot_menu() {
+        echo "make it so"
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
             --menu "\ZbSelect action:" 20 60 9 \
