@@ -336,7 +336,7 @@ else
         wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U powerpill* && cd
     fi
 
-    sleep 30s
+    sleep 3s
     if [ ! -d "${dev_directory}pdq" ]; then
         dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
         hub clone idk/pdq
