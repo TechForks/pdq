@@ -245,7 +245,7 @@ if [ $(id -u) -eq 0 ]; then
         wget https://github.com/idk/pdq/blob/master/chroot-rs.sh -O chroot-rs.sh
         chmod +x chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
-
+        sleep 3s
         dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
