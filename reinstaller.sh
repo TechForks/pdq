@@ -117,7 +117,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     part_editor() {
-        dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer!" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer by hitting <ESC> key." 20 70
         
         if [ $? = 1 ] ; then
             what_do
