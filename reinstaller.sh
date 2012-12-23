@@ -139,9 +139,9 @@ if [ $(id -u) -eq 0 ]; then
         fi
 
         # choose root partition
-        dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/pout
+        dialog --clear --title "CHOOSE ROOT PARTITION" --cancel-label "Go Back" --inputbox "Please choose your preferred root partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/pout
 
-        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
+        dialog --clear --title "FORMAT ROOT PARTITION" --cancel-label "Go Back" --radiolist "Now you can choose the filesystem for your root partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -168,9 +168,9 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
 
         # choose home partition
-        dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
+        dialog --clear --title "CHOOSE HOME PARTITION" --cancel-label "Go Back" --inputbox "Please choose your preferred home partition in this way:\n\n /dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
 
-        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
+        dialog --clear --title "FORMAT HOME PARTITION" --cancel-label "Go Back" --radiolist "Now you can choose the filesystem for your home partition.\n\n ext2 is the recommended filesystem." 10 70 0 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -199,7 +199,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     make_internet() {
-        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Go Back"--msgbox "Test/configure internet connection" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -212,7 +212,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     un_mount() {
-        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt and /mnt/home" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Go Back" --msgbox "Unmount /mnt and /mnt/home" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -224,7 +224,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     init_install() {
-        dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Go Back" --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
        
         if [ $? = 1 ] ; then
             what_do
@@ -236,7 +236,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     chroot_conf() {
-        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Go Back" --msgbox "Chroot into mounted filesystem" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -250,7 +250,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_fstab() {
-        dialog --clear --title "$upper_title" --msgbox "Generate fstab" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Go Back" --msgbox "Generate fstab" 20 70
        
         if [ $? = 1 ] ; then
             what_do
@@ -267,7 +267,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     finish_up() {
-        dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Go Back" --msgbox "Finish install and reboot" 20 70
 
         if [ $? = 1 ] ; then
             what_do
@@ -334,7 +334,7 @@ else
     fi
 
     if [ ! -d "${dev_directory}pdq" ]; then
-        dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
+        dialog --title "$upper_title" --cancel-label "Go Back" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
         hub clone idk/pdq
         hub clone idk/etc
         sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
