@@ -119,7 +119,7 @@ echo "weee"
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --title "$b_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 30 90
+        dialog --title "$b_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 20 70
     }
 
     part_editor() {
@@ -129,13 +129,11 @@ echo "weee"
             what_do
         fi
 
-        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 30 70
-        if [ $? != 1 ] ; then
+        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 20 70
+        if [ $? = 0 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
         fi
-
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     make_fs() {
@@ -234,7 +232,7 @@ echo "weee"
         ## TODO
         ping -c 3 www.google.com
         
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --title "$b_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
     }
 
     un_mount() {
@@ -246,7 +244,7 @@ echo "weee"
      
         umount /mnt/* 2>/dev/null
 
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --title "$b_title" --msgbox "Unmounted /mnt and /mnt/home. \n\n Hit enter to return to menu" 10 30
     }
 
     init_install() {
@@ -258,7 +256,7 @@ echo "weee"
        
         pacstrap -i /mnt base base-devel sudo git hub rsync wget
         
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --title "$b_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt. \n\n Hit enter to return to menu" 10 30
     }
 
     chroot_conf() {
@@ -285,7 +283,7 @@ echo "weee"
         genfstab -U -p /mnt >> /mnt/etc/fstab
         dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?" 10 30
        
-        if [ $? = 1 ] ; then
+        if [ $? = 0 ] ; then
             nano /mnt/etc/fstab
         fi
         
