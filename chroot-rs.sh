@@ -53,7 +53,7 @@ else
             GEN_TIMEZONE=$(dialog --stdout --backtitle "${upper_title}" --title '[ TIMEZONE ]' --cancel-label "Go Back" \
                --default-item "${GEN_TIMEZONE}" --menu "Choose a timezone or <Go Back> to return" 16 40 23 ${tz_list} "null" "-" || echo "${GEN_TIMEZONE}")
             
-            if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ]
+            if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ] ; then
                 ln -s /usr/share/zoneinfo/$GEN_TIMEZONE /etc/localtime
                 dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Set timezone to $GEN_TIMEZONE" 20 70
             else
