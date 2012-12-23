@@ -376,5 +376,6 @@ if [ $(id -u) -eq 0 ]; then
     while true
     do
         chroot_menu
+        echo "end of chroot function"
     done
 fi
