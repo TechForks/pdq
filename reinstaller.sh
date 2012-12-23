@@ -1,11 +1,10 @@
 #!/bin/sh
-## reinstall from github backup! =)
+## pdqOS Installer for Arch Linux x86_64 =)
 ## 03-22-2012 pdq
 ## 07-10-2012 pdq
 ## 11-04-2012 pdq
 ## 12-05-2012 pdq
 ## 12-15-2012 pdq
-
 #exit 1
 
 ## Instructions
@@ -20,14 +19,14 @@
 
 
 ## color formatting
-txtbld=$(tput bold)             # Bold
-bldred=${txtbld}$(tput setaf 1) # Red Colored
-bldgreen=${txtbld}$(tput setaf 2) # Green Colored
-bldblue=${txtbld}$(tput setaf 6) # Blue Colored
-bldyellow=${txtbld}$(tput setaf 3) # Yellow Colored
-txtrst=$(tput sgr0)             # Reset
+txtbld=$(tput bold)
+bldred=${txtbld}$(tput setaf 1)
+bldgreen=${txtbld}$(tput setaf 2)
+bldblue=${txtbld}$(tput setaf 6)
+bldyellow=${txtbld}$(tput setaf 3)
+txtrst=$(tput sgr0)
 
-b_title="pdqOS Installer for Arch Linux x86_64"
+upper_title="pdqOS Installer for Arch Linux x86_64"
 
 : ${DIALOG_OK=0}
 : ${DIALOG_CANCEL=1}
@@ -36,24 +35,19 @@ b_title="pdqOS Installer for Arch Linux x86_64"
 : ${DIALOG_ITEM_HELP=4}
 : ${DIALOG_ESC=255}
 
-ask_something() {
-    echo -ne $question
-    while read -r -n 1 -s yn; do
-        if [[ $yn = [YyNn] ]]; then
-           [[ $yn = [Yy] ]] && return=0
-            [[ $yn = [Nn] ]] && return=1
-            break
-        fi
-    done
-    return $return
-}
+## code be `ere! ##
+grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
+if [ "$archtype" = "no" ]; then
+    dialog --title "$upper_title" --msgbox "Sorry this is for x86_64 only!" 20 70
+    exit 1
+fi
 
 ## root script
 if [ $(id -u) -eq 0 ]; then
-echo "weee"
+
     clr="\Zb\Z0"
 
-    # temporary file
+    # temporary files
     _TEMP=/tmp/answer$$
     mkdir -p /tmp/tmp 2>/dev/null
     TMP=/tmp/tmp 2>/dev/null
@@ -64,7 +58,7 @@ echo "weee"
     exiting() {
         clear
         rm -f $_TEMP
-        echo "exiting..."
+        echo "exiting... type rs.sh to re-run"
         sleep 1s
         exit 0
     }
@@ -85,7 +79,7 @@ echo "weee"
 
     i_menu() {
         dialog \
-            --colors --title "$b_title" \
+            --colors --title "$upper_title" \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
             1 $clr"List linux partitions" \
             2 $clr"Partition editor (cfdisk)" \
@@ -119,17 +113,17 @@ echo "weee"
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --title "$b_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 20 70
+        dialog --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 20 70
     }
 
     part_editor() {
-        dialog --clear --title "$b_title" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer!" 20 70
+        dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\n If you accept this, you can start cfdisk now! Or you may cancel the installer!" 20 70
         
         if [ $? = 1 ] ; then
             what_do
         fi
 
-        dialog --clear --title "$b_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n Just follow the menu, store your changes and quit cfdisk to go on!\n\n IMPORTANT: Read the instructions and the output of cfdisk carefully.\n\n Proceed?" 20 70
         if [ $? = 0 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
@@ -137,8 +131,6 @@ echo "weee"
     }
 
     make_fs() {
-        # format root partition
-        
         fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
 
         dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\n In the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
@@ -162,9 +154,9 @@ echo "weee"
         part=$(cat $TMP/part)
         fs_type=
 
-        if [ $part = "2" ] ; then
+        if [ "$part" == "2" ] ; then
             fs_type="ext3"
-        elif [ $part = "3" ] ; then
+        elif [ "$part" == "3" ] ; then
             fs_type="ext4"
         else
             fs_type="ext2"
@@ -191,9 +183,9 @@ echo "weee"
         plart=$(cat $TMP/plart)
         fs_type=
 
-        if [ $plart = "2" ] ; then
+        if [ "$plart" == "2" ] ; then
             fs_type="ext3"
-        elif [ $plart = "3" ] ; then
+        elif [ "$plart" == "3" ] ; then
             fs_type="ext4"
         else
              fs_type="ext2"
@@ -207,7 +199,7 @@ echo "weee"
     }
 
     make_internet() {
-        dialog --clear --title "$b_title" --msgbox "Test/configure internet connection" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -216,11 +208,11 @@ echo "weee"
         ## TODO
         ping -c 3 www.google.com
         
-        dialog --title "$b_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
     }
 
     un_mount() {
-        dialog --clear --title "$b_title" --msgbox "Unmount /mnt and /mnt/home" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt and /mnt/home" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -228,11 +220,11 @@ echo "weee"
      
         umount /mnt/* 2>/dev/null
 
-        dialog --title "$b_title" --msgbox "Unmounted /mnt and /mnt/home. \n\n Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Unmounted /mnt and /mnt/home. \n\n Hit enter to return to menu" 10 30
     }
 
     init_install() {
-        dialog --clear --title "$b_title" --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
        
         if [ $? = 1 ] ; then
             what_do
@@ -240,11 +232,11 @@ echo "weee"
        
         pacstrap -i /mnt base base-devel sudo git hub rsync wget
         
-        dialog --title "$b_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt. \n\n Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt. \n\n Hit enter to return to menu" 10 30
     }
 
     chroot_conf() {
-        dialog --clear --title "$b_title" --msgbox "Chroot into mounted filesystem" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 20 70
         
         if [ $? = 1 ] ; then
             what_do
@@ -254,28 +246,28 @@ echo "weee"
         chmod +x chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
 
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     gen_fstab() {
-        dialog --clear --title "$b_title" --msgbox "Generate fstab" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Generate fstab" 20 70
        
         if [ $? = 1 ] ; then
             what_do
         fi
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
-        dialog --clear --title "$b_title" --yesno "Do you wish to view/edit this file?" 10 30
+        dialog --clear --title "$upper_title" --yesno "Do you wish to view/edit this file?" 10 30
        
         if [ $? = 0 ] ; then
             nano /mnt/etc/fstab
         fi
         
-        dialog --title "$b_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     finish_up() {
-        dialog --clear --title "$b_title" --msgbox "Finish install and reboot" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 20 70
 
         if [ $? = 1 ] ; then
             what_do
@@ -298,8 +290,12 @@ echo "weee"
     echo "end of root function"
     done
 else
-    echo "peee"
     ## user script
+
+    if [ $(id -u) -eq 0 ]; then
+        dialog --title "$upper_title" --msgbox "Do not run me as root!" 20 70
+        exit 1
+    fi
 
     my_home="$HOME/"
     #my_home="/home/pdq/test/"
@@ -312,34 +308,20 @@ else
     mkdir -p ${my_home}vital/tmp
     export TMPDIR=${my_home}vital/tmp
 
-    ## code be `ere! ##
-    grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
-    if [ "$archtype" = "no" ]; then
-        echo "Sorry this is for x86_64 only! =)"
-        sleep 3s
-        exit 1
-    fi
-
-    if [ $(id -u) -eq 0 ]; then
-        echo "Do not run me as root! =)"
-        sleep 3s
-        exit 1
-    fi
-
     sudo locale-gen
 
     if [ ! -f /usr/bin/pacaur ]; then
-        echo "${bldblue} ==> Installing pacaur${txtrst}"
+        #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
         wget https://aur.archlinux.org/packages/pa/pacaur/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm pacaur* && cd
     fi
 
     if [ ! -f /usr/bin/pacman-color ]; then
-        echo "${bldblue} ==> Installing pacman-color${txtrst}"
+        #dialog --title "$upper_title" --msgbox "Installing pacman-color" 20 70
         wget https://aur.archlinux.org/packages/pa/pacman-color/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm pacman-color* && cd
     fi
 
     if [ ! -f /usr/bin/powerpill ]; then
-        echo "${bldblue} ==> Installing powerpill${txtrst}"
+        #dialog --title "$upper_title" --msgbox "Installing powerpill" 20 70
         wget https://aur.archlinux.org/packages/po/powerpill/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm powerpill* && cd
     fi
 
@@ -352,7 +334,7 @@ else
     fi
 
     if [ ! -d "${dev_directory}pdq" ]; then
-        echo "${bldgreen} ==> Cloning initial repo to ${dev_directory}pdq/${txtrst}"
+        dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
         hub clone idk/pdq
         hub clone idk/etc
         sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
@@ -368,36 +350,37 @@ else
         sudo powerpill -S --noconfirm rsync
     fi
 
-    question="${bldgreen}Is this a VirtualBox install (Y/N)?${txtrst}\n"
-    if ask_something; then
+    dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 20 70
+    if [ $? = 0 ] ; then
         sudo powerpill -S --noconfirm --needed virtualbox-guest-utils
         sudo sh -c "echo 'vboxguest
-    vboxsf
-    vboxvideo' > /etc/modules-load.d/virtualbox.conf"
+vboxsf
+vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     fi
 
-    question="${bldgreen}Install main packages (Y/N)?${txtrst}\n"
-    if ask_something; then
+    dialog --clear --title "$upper_title" --yesno "Install main packages?" 20 70
+    if [ $? = 0 ] ; then
+        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\n chose 2\n\n When it asks if replace foo with bar chose y for everyone"
         sudo powerpill -Syy
         sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
 
-    question="${bldgreen}Install AUR packages (Y/N)?${txtrst}\n"
-    if ask_something; then
+    dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 20 70
+    if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        echo "${bldgreen} ==> Installing AUR packages (no confirm) [This may take a while]${txtrst}"
+        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n [This may take a while]"
         pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    question="${bldgreen}Install AUR packages (with confirm) [Use this option if the prior one failed, otherwise skip it] (Y/N)${txtrst}?\n"
-    if ask_something; then
+    dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n [Use this option if the prior one failed, otherwise skip it]" 20 70
+    if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        echo "${bldgreen} ==> Installing AUR packages (with confirm)${txtrst}"
+        dialog --title "$upper_title" --msgbox "Installing AUR packages (with confirm)"
         pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    question="${bldgreen}Clone all repos (Y/N)?${txtrst}\n"
-    if ask_something; then
+    dialog --clear --title "$upper_title" --yesno "Clone all repos?" 20 70
+    if [ $? = 0 ] ; then
         hub clone idk/awesomewm-X
         hub clone idk/conky-X
         hub clone idk/zsh
@@ -408,21 +391,21 @@ else
         hub clone idk/gh
     fi
 
-    question="${bldgreen}Install all repos (Y/N) [Cannot do in chroot]?${txtrst}\n"
-    if ask_something; then
+    dialog --clear --title "$upper_title" --yesno "Install all repos (Y/N) [Cannot do in chroot]?" 20 70
+    if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
-        echo "${bldgreen} ==> Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
+        dialog --title "$upper_title" --msgbox "Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
         sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
         sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
         
-        echo "${bldgreen} ==> Backing up and copying root configs${txtrst}"
+        dialog --title "$upper_title" --msgbox "Backing up and copying root configs${txtrst}"
         # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
         # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
         # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
         sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
 
-        echo "${bldgreen} ==> Backing up and copying user configs${txtrst}"
+        dialog --title "$upper_title" --msgbox "Backing up and copying user configs${txtrst}"
         mv -v ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
         cp -v ${dev_directory}pdq/.gmail_symlink ${my_home}.gmail_symlink
         mv -v ${my_home}.gtkrc-2.0 ${my_home}.gtkrc-2.0.bak
@@ -447,7 +430,7 @@ else
         cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
         cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
-        echo "${bldgreen} ==> awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
+        dialog --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
         mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
         mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
         cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
@@ -499,8 +482,8 @@ else
         sudo systemctl enable vnstat.sevice
         sudo systemctl enable cronie.service
 
-        question="${bldgreen}Download Wallpapers (Y/N) [size: 260 MB]?${txtrst}\n"
-        if ask_something; then
+        dialog --clear --title "$upper_title" --yesno "Download Wallpapers [size: 260 MB]?" 20 70
+        if [ $? = 0 ] ; then
             mkdir -p ${my_home}Pictures
             cd ${my_home}Pictures
             wget https://dl.dropbox.com/u/9702684/wallpaper.tar.gz
@@ -508,7 +491,7 @@ else
             cd
         fi
 
-        echo "${bldgreen} ==> Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files${txtrst}"
+        dialog --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files"
         sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
         sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
         sudo mkdir -p /etc/privoxy
@@ -809,82 +792,66 @@ else
 
         # End of file' > /etc/hosts"
 
-        echo "Creating self-signed certificate (you can change key size and days of validity)"
-            cd /etc/httpd/conf
-            sudo openssl genrsa -des3 -out server.key 1024
-            sudo openssl req -new -key server.key -out server.csr
-            sudo cp -v server.key server.key.org
-            sudo openssl rsa -in server.key.org -out server.key
-            sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+        dialog --title "$upper_title" --msgbox "Creating self-signed certificate"
+        cd /etc/httpd/conf
+        sudo openssl genrsa -des3 -out server.key 1024
+        sudo openssl req -new -key server.key -out server.csr
+        sudo cp -v server.key server.key.org
+        sudo openssl rsa -in server.key.org -out server.key
+        sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-            sudo mkdir -p /srv/http/root/public_html
-            sudo chmod g+xr-w /srv/http/root
-            sudo chmod -R g+xr-w /srv/http/root/public_html
+        sudo mkdir -p /srv/http/root/public_html
+        sudo chmod g+xr-w /srv/http/root
+        sudo chmod -R g+xr-w /srv/http/root/public_html
 
-            sudo mkdir -p /srv/http/$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/$USER.c0m/public_html
+        sudo mkdir -p /srv/http/$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/$USER.c0m/public_html
 
-            sudo mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
-            sudo chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
-            sudo chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
+        sudo mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
+        sudo chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
+        sudo chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
 
-            sudo mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
 
-            sudo mkdir -p /srv/http/torrent.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/torrent.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/torrent.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/torrent.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
 
-            sudo mkdir -p /srv/http/admin.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/admin.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/admin.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/admin.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
 
-            sudo mkdir -p /srv/http/stats.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/stats.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/stats.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/stats.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
 
-            sudo mkdir -p /srv/http/mail.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/mail.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
+        sudo mkdir -p /srv/http/mail.$USER.c0m/public_html
+        sudo chmod g+xr-w /srv/http/mail.$USER.c0m
+        sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
 
-            sleep 2s
-            echo "w00t!! You're just flying through this stuff you hacker you!! :p"
-            sleep 1s
-            echo "rah rah $USER rah rah $USER!!!"
-            sleep 1s
-            echo "Ok... let's continue on with this..."
-            sudo systemctl start httpd
-            sudo systemctl start mysqld
-            sleep 1s
-            echo "Ok... starting MySQL and setting a root password for MySQL...."
-            rand=$RANDOM
-            sudo mysqladmin -u root password $USER-$rand
-            echo "${bldred}You're mysql root password is $USER-$rand Write this down before proceeding...${txtrst}
-            "
-            question="${bldgreen}Written it down (Y/N)?${txtrst}\n"
-            if ask_something; then
-                echo ":]"
-            else
-                echo ":O"
-            fi
-            echo "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:
-            $ mysqladmin -u root -p'$USER-$rand' password newpasswordhere
-
-            For example, you can set the new password to 123456, enter:
-
-            $ mysqladmin -u root -p'$USER-$rand' password '123456'"
-            sleep 3s 
+        dialog --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p"
+        dialog --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!"
+        sudo systemctl start httpd
+        sudo systemctl start mysqld
+        sleep 1s
+        dialog --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...."
+        rand=$RANDOM
+        sudo mysqladmin -u root password $USER-$rand
+        dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\n Write this down before proceeding..."
+        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n $ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\n For example, you can set the new password to 123456, enter:\n $ mysqladmin -u root -p'$USER-$rand' password '123456'"
         sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
         sudo ln -s /srv/http ${my_home}localhost
         sudo chown -R $USER /srv/http
-        echo "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
-        sleep 2s
-        echo "If you want LAMP to start at boot, run these commands ay any time as root user:
-    systemctl enable httpd.service
-    systemctl enable mysqld.service
-    systemctl enable memcached.service"
+
+        dialog --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
+
+        dialog --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\n systemctl enable httpd.service\n systemctl enable mysqld.service\n systemctl enable memcached.service"
+        
+        dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 20 70
+        if [ $? = 0 ] ; then
         question="${bldgreen}Do you want this to be done now? (Y/N) [default=N]?${txtrst}\n"
         if ask_something; then
             sudo systemctl enable httpd.service
@@ -895,11 +862,10 @@ else
         pwd
         chsh -s $(which zsh)
         cd
-        echo "${bldgreen} ==> Exiting install script...${txtrst}"
-        echo "${bldgreen}If complete, type: sudo reboot (you may also want to search, chose and install a video driver now, ie:${txtrst}"
-        echo "${bldgreen}pacaur intel [replacing 'intel' with your graphics card type])${txtrst}"
+        dialog --title "$upper_title" --msgbox "Exiting install script...\n If complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]"
     fi
 fi
 
+#DEBUG
 echo "end of script"
-sleep 3s
+sleep 2s
