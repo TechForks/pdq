@@ -55,8 +55,6 @@ if [ $(id -u) -eq 0 ]; then
         else
             dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Failed to set timezone...timezone does not exist?" 20 70
         fi
-
-        chroot_menu
     }
 
     gen_hostname() {
@@ -71,8 +69,6 @@ if [ $(id -u) -eq 0 ]; then
       
         echo $GEN_HOSTNAME > /etc/hostname
         dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Set hostname to $GEN_HOSTNAME" 20 70
-
-        chroot_menu
     }
 
     gen_locale() {
@@ -245,8 +241,6 @@ if [ $(id -u) -eq 0 ]; then
         export "LANG=${GEN_LANG}"
         locale-gen 1>/dev/null || echo "Unable to setup the locales to" "${GEN_LANG}"
         dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Set locale to ${GEN_LANG}" 20 70
-
-        chroot_menu
     }
 
     set_root_pass() {
@@ -259,8 +253,6 @@ if [ $(id -u) -eq 0 ]; then
         passwd
         echo "set" > $TMP/rootpasswd
         dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "root password set!" 20 70
-
-        chroot_menu
     }
 
     add_user() {
@@ -286,8 +278,6 @@ if [ $(id -u) -eq 0 ]; then
         fi
 
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 20 70
-
-        chroot_menu
     }
 
     install_grub() {
@@ -312,8 +302,6 @@ if [ $(id -u) -eq 0 ]; then
         else
             dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub not installed..." 20 70
         fi
-
-        chroot_menu
     }
 
     conf_grub() {
@@ -326,8 +314,6 @@ if [ $(id -u) -eq 0 ]; then
         cp -v /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
         grub-mkconfig -o /boot/grub/grub.cfg
         dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Grub configured" 20 70
-
-        chroot_menu
     }
 
     conf_view() {
@@ -339,8 +325,6 @@ if [ $(id -u) -eq 0 ]; then
         echo "USER: $(cat $TMP/puser)"
         echo "GRUB: installed as: --target=i386-pc --recheck $(cat $TMP/bout)"
         dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 20 70
-
-        chroot_menu
     }
 
     chroot_menu() {
