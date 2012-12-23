@@ -341,8 +341,10 @@ else
     sleep 3s
     if [ ! -d "${dev_directory}pdq" ]; then
         dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/"
+        cd ${dev_directory}
         hub clone idk/pdq
         hub clone idk/etc
+        cd
         sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
         sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
         sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
@@ -387,6 +389,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
     dialog --clear --title "$upper_title" --yesno "Clone all repos?" 20 70
     if [ $? = 0 ] ; then
+        cd ${dev_directory}
         hub clone idk/awesomewm-X
         hub clone idk/conky-X
         hub clone idk/zsh
@@ -395,6 +398,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         hub clone idk/systemd
         hub clone idk/eggdrop-scripts
         hub clone idk/gh
+        cd
     fi
 
     dialog --clear --title "$upper_title" --yesno "Install all repos [Cannot do in chroot]?" 20 70
