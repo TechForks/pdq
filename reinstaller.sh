@@ -113,7 +113,7 @@ if [ $(id -u) -eq 0 ]; then
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 20 70
+        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 10 30
     }
 
     part_editor() {
@@ -201,7 +201,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     make_internet() {
-        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 30
         
         if [ $? = 1 ] ; then
             what_do
@@ -214,7 +214,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     un_mount() {
-        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt and /mnt/home" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt and /mnt/home" 10 30
         
         if [ $? = 1 ] ; then
             what_do
@@ -226,7 +226,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     init_install() {
-        dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
        
         if [ $? = 1 ] ; then
             what_do
@@ -240,7 +240,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     chroot_conf() {
-        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30
         
         if [ $? = 1 ] ; then
             what_do
@@ -255,7 +255,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_fstab() {
-        dialog --clear --title "$upper_title" --msgbox "Generate fstab" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
        
         if [ $? = 1 ] ; then
             what_do
@@ -272,7 +272,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     finish_up() {
-        dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 20 70
+        dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
 
         if [ $? = 1 ] ; then
             what_do
@@ -298,7 +298,7 @@ else
     ## user script
 
     if [ $(id -u) -eq 0 ]; then
-        dialog --title "$upper_title" --msgbox "Do not run me as root!" 20 70
+        dialog --title "$upper_title" --msgbox "Do not run me as root!" 10 30
         exit 1
     fi
 
@@ -359,7 +359,7 @@ else
         sudo powerpill -S --noconfirm rsync
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 20 70
+    dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 10 30
     if [ $? = 0 ] ; then
         sudo powerpill -S --noconfirm --needed virtualbox-guest-utils
         sudo sh -c "echo 'vboxguest
@@ -367,28 +367,28 @@ vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install main packages?" 20 70
+    dialog --clear --title "$upper_title" --yesno "Install main packages?" 10 30
     if [ $? = 0 ] ; then
         dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
         sudo powerpill -Syy
         sudo powerpill -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 20 70
+    dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 10 30
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n[This may take a while]" 10 30
+        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n[This may take a while]" 10 40
         pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 20 70
+    dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 10 40
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
         dialog --title "$upper_title" --msgbox "Installing AUR packages (with confirm)" 10 30
         pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Clone all repos?" 20 70
+    dialog --clear --title "$upper_title" --yesno "Clone all repos?" 10 30
     if [ $? = 0 ] ; then
         cd ${dev_directory}
         hub clone idk/awesomewm-X
@@ -402,7 +402,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cd
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install all repos [Cannot do in chroot]?" 20 70
+    dialog --clear --title "$upper_title" --yesno "Install all repos [Cannot do in chroot]?" 10 30
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
@@ -441,7 +441,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
         cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
-        dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing..." 10 30
+        dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing..." 10 40
         mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
         mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
         cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
@@ -493,7 +493,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo systemctl enable vnstat.sevice
         sudo systemctl enable cronie.service
 
-        dialog --clear --title "$upper_title" --yesno "Download Wallpapers [size: 260 MB]?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Download Wallpapers [size: 260 MB]?" 10 30
         if [ $? = 0 ] ; then
             mkdir -p ${my_home}Pictures
             cd ${my_home}Pictures
@@ -852,16 +852,16 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         rand=$RANDOM
         sudo mysqladmin -u root password $USER-$rand
         dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
-        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 10 30
+        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 20 40
         sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
         sudo ln -s /srv/http ${my_home}localhost
         sudo chown -R $USER /srv/http
 
         dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
 
-        dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 30
+        dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 40
         
-        dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 10 30
         if [ $? = 0 ] ; then
             sudo systemctl enable httpd.service
             sudo systemctl enable mysqld.service
@@ -871,7 +871,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         pwd
         chsh -s $(which zsh)
         cd
-        dialog --clear --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
     fi
 fi
 
