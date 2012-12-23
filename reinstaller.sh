@@ -244,7 +244,7 @@ if [ $(id -u) -eq 0 ]; then
             what_do
         fi
        
-        wget https://github.com/idk/pdq/blob/master/chroot-rs.sh -O chroot-rs.sh
+        wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
         chmod +x chroot-rs.sh
         mv chroot-rs.sh /mnt/chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
