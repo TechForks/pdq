@@ -850,10 +850,8 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
         dialog --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\n systemctl enable httpd.service\n systemctl enable mysqld.service\n systemctl enable memcached.service"
         
-        dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 20 70
         if [ $? = 0 ] ; then
-        question="${bldgreen}Do you want this to be done now? (Y/N) [default=N]?${txtrst}\n"
-        if ask_something; then
             sudo systemctl enable httpd.service
             sudo systemctl enable mysqld.service
             sudo systemctl enable memcached.service
