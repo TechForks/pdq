@@ -113,7 +113,7 @@ if [ $(id -u) -eq 0 ]; then
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 20 70
+        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 20 70
     }
 
     part_editor() {
@@ -208,7 +208,7 @@ if [ $(id -u) -eq 0 ]; then
         ## TODO
         ping -c 3 www.google.com
         
-        dialog --title "$upper_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
     }
 
     un_mount() {
@@ -220,7 +220,7 @@ if [ $(id -u) -eq 0 ]; then
      
         umount /mnt/* 2>/dev/null
 
-        dialog --title "$upper_title" --msgbox "Unmounted /mnt and /mnt/home.\n\n Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Unmounted /mnt and /mnt/home.\n\n Hit enter to return to menu" 10 30
     }
 
     init_install() {
@@ -232,7 +232,7 @@ if [ $(id -u) -eq 0 ]; then
        
         pacstrap /mnt base base-devel sudo git hub rsync wget
         
-        dialog --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt.\n\n Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt.\n\n Hit enter to return to menu" 10 30
     }
 
     chroot_conf() {
@@ -246,7 +246,7 @@ if [ $(id -u) -eq 0 ]; then
         chmod +x chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
 
-        dialog --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     gen_fstab() {
@@ -263,7 +263,7 @@ if [ $(id -u) -eq 0 ]; then
             nano /mnt/etc/fstab
         fi
         
-        dialog --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
     finish_up() {
@@ -395,11 +395,11 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
-        dialog --title "$upper_title" --msgbox "Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
+        dialog --clear --title "$upper_title" --msgbox "Backing up mirrorlist and write/rank/sort new mirrorlist${txtrst}"
         sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
         sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
         
-        dialog --title "$upper_title" --msgbox "Backing up and copying root configs${txtrst}"
+        dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs${txtrst}"
         # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
         # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
         # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
@@ -430,7 +430,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
         cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
-        dialog --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
+        dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing...${txtrst}"
         mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
         mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
         cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
@@ -491,7 +491,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             cd
         fi
 
-        dialog --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files"
+        dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files"
         sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
         sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
         sudo mkdir -p /etc/privoxy
@@ -792,7 +792,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
         # End of file' > /etc/hosts"
 
-        dialog --title "$upper_title" --msgbox "Creating self-signed certificate"
+        dialog --clear --title "$upper_title" --msgbox "Creating self-signed certificate"
         cd /etc/httpd/conf
         sudo openssl genrsa -des3 -out server.key 1024
         sudo openssl req -new -key server.key -out server.csr
@@ -832,12 +832,12 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo chmod g+xr-w /srv/http/mail.$USER.c0m
         sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
 
-        dialog --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p"
-        dialog --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!"
+        dialog --clear --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p"
+        dialog --clear --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!"
         sudo systemctl start httpd
         sudo systemctl start mysqld
         sleep 1s
-        dialog --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...."
+        dialog --clear --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...."
         rand=$RANDOM
         sudo mysqladmin -u root password $USER-$rand
         dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..."
@@ -846,9 +846,9 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo ln -s /srv/http ${my_home}localhost
         sudo chown -R $USER /srv/http
 
-        dialog --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
+        dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off"
 
-        dialog --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service"
+        dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service"
         
         dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 20 70
         if [ $? = 0 ] ; then
@@ -860,7 +860,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         pwd
         chsh -s $(which zsh)
         cd
-        dialog --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]"
+        dialog --clear --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]"
     fi
 fi
 
