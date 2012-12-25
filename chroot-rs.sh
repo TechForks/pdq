@@ -408,16 +408,12 @@ if [ $(id -u) -eq 0 ]; then
 
     edit_file() {
         dialog --clear --backtitle "$upper_title" --title "[ Edit files ]" --msgbox "Please choose a file to open with nano.\n\nUse the <tab>, <spacebar> and arrow keys to navigate and select file." 10 30
-        if [ $? = 255 ] ; then
-            chroot_menu
-            return 0
-        fi
 
         FILE=$(dialog --stdout --backtitle "$upper_title" --title "Please select file." --fselect /etc/ 20 40)
 
         if [ $? = 0 ] ; then
             nano "$FILE"
-            dialog --clear --backtitle "$upper_title" --title "[ Edit files ]" --defaultno --yesno "Edit/view another file?" 0 0
+            dialog --clear --backtitle "$upper_title" --title "[ Edit files ]" --defaultno --yesno "Edit/view another file?" 10 30
             if [ $? = 0 ] ; then
                 edit_file
             else
