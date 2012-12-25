@@ -14,7 +14,7 @@ upper_title="pdqOS Installer for Arch Linux x86_64"
 ## code be `ere
 grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
 if [ "$archtype" = "no" ]; then
-    dialog --title "$upper_title" --msgbox "Sorry this is for x86_64 only!" 20 70
+    dialog --backtitle "$upper_title" --title "Oopsie" --msgbox "Sorry this is for x86_64 only!" 20 70
     exit 1
 fi
 
@@ -33,7 +33,7 @@ if [ $(id -u) -eq 0 ]; then
     exiting_installer() {
         clear
         rm -f $_TEMP
-        dialog --clear --title "$upper_title" --msgbox "exiting...\n\ntype: rs.sh to re-run" 10 40
+        dialog --clear --backtitle "$upper_title" --title "Exiting Script" --msgbox "type: rs.sh to re-run" 10 40
         exit 0
     }
 
@@ -75,17 +75,17 @@ if [ $(id -u) -eq 0 ]; then
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 15 40
+        dialog --clear --backtitle "$upper_title" --title "Partitions" --msgbox "$partition_list \n\n Hit enter to return to menu" 15 40
     }
 
     partition_editor() {
-        dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
+        dialog --clear --backtitle "$upper_title" --title "Partition editor" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
         if [ $? = 255 ] ; then
             installer_menu
             return 0            
         fi
 
-        dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable* and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n* Optionally create a /swap (primary and recommended twice the size of your onboard RAM) and /boot (primary, bootable and recommended minimum 1GB in size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
+        dialog --clear --backtitle "$upper_title" --title "Partition editor" --yesno "Create a / (primary, bootable* and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n* Optionally create a /swap (primary and recommended twice the size of your onboard RAM) and /boot (primary, bootable and recommended minimum 1GB in size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
         if [ $? = 0 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
@@ -95,20 +95,20 @@ if [ $(id -u) -eq 0 ]; then
     make_filesystems() {
         fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
 
-        dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
+        dialog --clear --backtitle "$upper_title" --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
 
         # choose root partition
-        dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
+        dialog --clear --backtitle "$upper_title" --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
 
-        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
+        dialog --clear --backtitle "$upper_title" --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
         "1" "ext2" off \
         "2" "ext3" off \
         "3" "ext4" on \
@@ -133,20 +133,20 @@ if [ $(id -u) -eq 0 ]; then
         mkfs -t $fs_type $pout
         mount $pout /mnt
 
-        dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
+        dialog --clear --backtitle "$upper_title" --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
 
         # choose home partition
-        dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
+        dialog --clear --backtitle "$upper_title" --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
 
-        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
+        dialog --clear --backtitle "$upper_title" --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
         "1" "ext2" off \
         "2" "ext3" off \
         "3" "ext4" on \
@@ -172,18 +172,18 @@ if [ $(id -u) -eq 0 ]; then
         mkfs -t $fs_type $plout
         mount $plout /mnt/home
 
-        dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
+        dialog --clear --backtitle "$upper_title" --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
     
 
-        dialog --clear --title "BOOT  PARTITION" --defaultno --yesno "Create the boot filesystem?" 20 70
+        dialog --clear --backtitle "$upper_title" --title "BOOT  PARTITION" --defaultno --yesno "Create the boot filesystem?" 20 70
         if [ $? = 0 ] ; then
             # choose boot partition
-            dialog --clear --title "CHOOSE BOOT PARTITION" --inputbox "Please choose your preferred boot partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 3 for /dev/hda3!" 10 70 2> $TMP/pbout
+            dialog --clear --backtitle "$upper_title" --title "CHOOSE BOOT PARTITION" --inputbox "Please choose your preferred boot partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 3 for /dev/hda3!" 10 70 2> $TMP/pbout
             if [ $? = 1 ] || [ $? = 255 ] ; then
                 installer_menu
                 return 0 
             fi
-            dialog --clear --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
+            dialog --clear --backtitle "$upper_title" --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
             "1" "ext2" off \
             "2" "ext3" off \
             "3" "ext4" on \
@@ -209,38 +209,38 @@ if [ $(id -u) -eq 0 ]; then
             mkfs -t $fs_type $pbout
             mount $pbout /mnt/boot
 
-            dialog --clear --title "BOOT PARTITION MOUNTED" --msgbox "Your $pbout partition has been mounted at /mnt/boot as $fs_type" 10 70
+            dialog --clear --backtitle "$upper_title" --title "BOOT PARTITION MOUNTED" --msgbox "Your $pbout partition has been mounted at /mnt/boot as $fs_type" 10 70
         fi
 
-        dialog --clear --title "SWAP PARTITION" --defaultno --yesno "Create the swap filesystem?" 10 70
+        dialog --clear --backtitle "$upper_title" --title "SWAP PARTITION" --defaultno --yesno "Create the swap filesystem?" 10 70
         if [ $? = 0 ] ; then
             # choose home partition
-            dialog --clear --title "CHOOSE SWAP PARTITION" --inputbox "Please choose your preferred swap partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 4 for /dev/hda4!" 10 70 2> $TMP/psout
+            dialog --clear --backtitle "$upper_title" --title "CHOOSE SWAP PARTITION" --inputbox "Please choose your preferred swap partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 4 for /dev/hda4!" 10 70 2> $TMP/psout
             psout=$(cat $TMP/psout)
             mkswap $psout
             swapon $psout
-            dialog --clear --title "SWAP SETUP" --msgbox "Ran: mkswap $psout and swapon $psout" 10 70
+            dialog --clear --backtitle "$upper_title" --title "SWAP SETUP" --msgbox "Ran: mkswap $psout and swapon $psout" 10 70
         fi
     }
 
     make_internet() {
-        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 70
+        dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Test/configure internet connection" 10 70
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
 
-        dialog --clear --title "$upper_title" --yesno "Do you have a wired connection?" 10 70
+        dialog --clear --backtitle "$upper_title" --title "Internet" --yesno "Do you have a wired connection?" 10 70
         if [ $? = 0 ] ; then
             dhcpcd eth0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
-                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
             else
-                dialog --clear --title "$upper_title" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
             fi
         else
-            dialog --clear --title "" --radiolist "Choose your preferred wireless setup tool" 10 70 30 \
+            dialog --clear --backtitle "$upper_title" --title "Internet" --radiolist "Choose your preferred wireless setup tool" 10 70 30 \
             "1" "wifi-menu" on \
             "2" "wpa_supplicant" off \
             2> $TMP/pwifi
@@ -253,10 +253,10 @@ if [ $(id -u) -eq 0 ]; then
             if [ "$pwifi" == "1" ] ; then
                 wifi-menu
             else
-                dialog --clear --title "$upper_title" --inputbox "Please enter your SSID" 10 70 2> $TMP/pssid
+                dialog --clear --backtitle "$upper_title" --title "Internet" --inputbox "Please enter your SSID" 10 70 2> $TMP/pssid
                 pssid=$(cat $TMP/pssid)
 
-                dialog --clear --title "$upper_title" --passwordbox "Please enter your wireless passphrase" 10 70 2> $TMP/ppassphrase
+                dialog --clear --backtitle "$upper_title" --title "Internet" --passwordbox "Please enter your wireless passphrase" 10 70 2> $TMP/ppassphrase
                 ppassphrase=$(cat $TMP/ppassphrase)
                 wpa_passphrase "$pssid" "$ppassphrase" >> /etc/wpa_supplicant.conf
                 wpa_supplicant -B -Dwext -i wlan0 -c /etc/wpa_supplicant.conf & >/dev/null
@@ -265,17 +265,17 @@ if [ $(id -u) -eq 0 ]; then
             dhcpcd wlan0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
-                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 20 30
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 20 30
             else
-                dialog --clear --title "$upper_title" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
             fi
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "Internet configuration complete.\n\n Hit enter to return to menu" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Internet configuration complete.\n\n Hit enter to return to menu" 10 30
     }
 
     cleanup() {
-        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt/*" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Cleaning up" --msgbox "Unmount /mnt/*" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -283,11 +283,11 @@ if [ $(id -u) -eq 0 ]; then
      
         umount /mnt/* 2>/dev/null
 
-        dialog --clear --title "$upper_title" --msgbox "Unmounted /mnt/*.\n\nHit enter to return to menu" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Cleaning up" --msgbox "Unmounted /mnt/*.\n\nHit enter to return to menu" 10 30
     }
 
     initial_install() {
-        dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -298,11 +298,11 @@ if [ $(id -u) -eq 0 ]; then
 
         pacstrap -i /mnt base base-devel sudo git hub rsync wget "$ppkgs"
         
-        dialog --clear --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget $ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
+        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget $ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
     }
 
     chroot_configuration() {
-        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30 
+        dialog --clear --backtitle "$upper_title" --title "Chroot" --msgbox "Chroot into mounted filesystem" 10 30 
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -312,33 +312,33 @@ if [ $(id -u) -eq 0 ]; then
         chmod +x chroot-rs.sh
         mv chroot-rs.sh /mnt/chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
-        dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Chroot" --msgbox "Hit enter to return to menu" 10 30
     }
 
     generate_fstab() {
-        dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
+        dialog --clear --backtitle "$upper_title" --title "fstab configuration" --msgbox "Generate fstab" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
-        dialog --clear --title "$upper_title" --yesno "Do you wish to view/edit this file?" 10 30
+        dialog --clear --backtitle "$upper_title" --title "fstab configuration" --yesno "Do you wish to view/edit this file?" 10 30
         if [ $? = 0 ] ; then
             nano /mnt/etc/fstab
         fi
         
-        dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
+        dialog --clear --backtitle "$upper_title" --title "fstab configuration" --msgbox "Hit enter to return to menu" 10 30
     }
 
     finishup() {
-        dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Finishing up" --msgbox "Finish install and reboot" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
         
-        dialog --clear --title "$upper_title" --msgbox "Arch Linux has been installed!\n\nAfter reboot, to complete install of pdqOS:\n\nlogin as your created user and run: sh rs.sh\n\nAlternatively, do not run rs.sh and setup your system to your own liking.\n\nSee ya!" 30 60
+        dialog --clear --backtitle "$upper_title" --title "Finishing up" --msgbox "Arch Linux has been installed!\n\nAfter reboot, to complete install of pdqOS:\n\nlogin as your created user and run: sh rs.sh\n\nAlternatively, do not run rs.sh and setup your system to your own liking.\n\nSee ya!" 30 60
         reboot
     }
 
@@ -351,11 +351,11 @@ else
     ## user script
 
     if [ $(id -u) -eq 0 ]; then
-        dialog --title "$upper_title" --msgbox "Do not run me as root!" 10 30
+        dialog --backtitle "$upper_title" --title "Oopsie" --msgbox "Do not run me as root!" 10 30
         exit 1
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Do you wish to run pdqOS installer Step 2?" 10 30
+    dialog --clear --backtitle "$upper_title" --title "Here we go!" --yesno "Do you wish to run pdqOS installer Step 2?\n\nDefault: yes" 20 30
     if [ $? = 1 ] || [ $? = 255 ] ; then
         exit 1
     fi
@@ -403,7 +403,7 @@ else
 
     sleep 3s
     if [ ! -d "${dev_directory}pdq" ]; then
-        dialog --title "$upper_title" --msgbox "Cloning initial repo to ${dev_directory}pdq/" 10 30
+        dialog --backtitle "$upper_title" --title "Initial clone" --msgbox "Cloning initial repo to ${dev_directory}pdq/" 10 30
         cd ${dev_directory}
         hub clone idk/pdq
         hub clone idk/etc
@@ -423,7 +423,7 @@ else
         sudo pacman-color -S --noconfirm rsync
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Is this a VirtualBox install?" 10 30
+    dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Is this a VirtualBox install?" 10 30
     if [ $? = 0 ] ; then
         sudo powerpill -S --noconfirm --needed virtualbox-guest-utils
         sudo sh -c "echo 'vboxguest
@@ -431,26 +431,26 @@ vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install main packages?" 10 30
+    dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install main packages?" 10 30
     if [ $? = 0 ] ; then
-        dialog --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
+        dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
         sudo powerpill -Syy
         sudo pacman-color -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install AUR packages (no confirm)\n[This may take a while]?" 10 30
+    dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install AUR packages (no confirm)\n[This may take a while]?" 10 30
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
         pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 10 40
+    dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 10 40
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
         pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Clone all repos?" 10 30
+    dialog --clear --backtitle "$upper_title" --title "Configuration files" --yesno "Clone all repos?" 10 30
     if [ $? = 0 ] ; then
         cd ${dev_directory}
         hub clone idk/awesomewm-X
@@ -464,7 +464,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cd
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install all repos?" 10 30
+    dialog --clear --backtitle "$upper_title" --title "Configuration files" --yesno "Install all repos?" 10 30
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
@@ -549,7 +549,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo systemctl enable vnstat.sevice
         sudo systemctl enable cronie.service
 
-        dialog --clear --title "$upper_title" --yesno "Download Wallpapers [size: 260 MB]?" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Download Wallpapers [size: 260 MB]?" 10 30
         if [ $? = 0 ] ; then
             mkdir -p ${my_home}Pictures
             cd ${my_home}Pictures
@@ -558,7 +558,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             cd
         fi
 
-        dialog --clear --title "$upper_title" --yesno "Install Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files?" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Install Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files?" 10 30
         if [ $? = 0 ] ; then
             #dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files" 10 30
             sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
@@ -857,7 +857,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
             # End of file' > /etc/hosts"
 
-            dialog --clear --title "$upper_title" --msgbox "Creating self-signed certificate" 10 30
+            dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Creating self-signed certificate" 10 30
             cd /etc/httpd/conf
             sudo openssl genrsa -des3 -out server.key 1024
             sudo openssl req -new -key server.key -out server.csr
@@ -897,25 +897,25 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             sudo chmod g+xr-w /srv/http/mail.$USER.c0m
             sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
 
-            dialog --clear --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p" 10 30
-            dialog --clear --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!" 10 30
+            dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p" 10 30
+            dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "rah rah $USER rah rah $USER!!!" 10 30
             sudo systemctl start httpd
             sudo systemctl start mysqld
             sleep 1s
-            dialog --clear --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...." 10 30
+            dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok... starting MySQL and setting a root password for MySQL...." 10 30
             rand=$RANDOM
             sudo mysqladmin -u root password $USER-$rand
-            dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
-            dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 20 40
+            dialog --backtitle "$upper_title" --title "Extra" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
+            dialog --backtitle "$upper_title" --title "Extra" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 20 40
             sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
             sudo ln -s /srv/http ${my_home}localhost
             sudo chown -R $USER /srv/http
 
-            dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
+            dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
 
-            dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 40
+            dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 40
             
-            dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 10 30
+            dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Do you want this to be done now? [default=No]?" 10 30
             if [ $? = 0 ] ; then
                 sudo systemctl enable httpd.service
                 sudo systemctl enable mysqld.service
@@ -924,16 +924,16 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         fi
         sudo systemctl daemon-reload
         
-        dialog --clear --title "$upper_title" --yesno "Enable automatic login to virtual console?" 10 30
+        dialog --clear --backtitle "$upper_title" --title "pdqOS" --yesno "Enable automatic login to virtual console?" 10 30
         if [ $? = 0 ] ; then
             sudo systemctl disable getty@tty1
             sudo systemctl enable autologin@tty1
             sudo systemctl start autologin@tty1
         fi
         
-        dialog --clear --title "$upper_title" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
+        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
         chsh -s $(which zsh)
-        dialog --clear --title "$upper_title" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
+        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
     fi
 fi
 
