@@ -44,6 +44,8 @@ if [ $(id -u) -eq 0 ]; then
         else
             installer_menu
         fi
+        
+        return 0
     }
 
     installer_menu() {
