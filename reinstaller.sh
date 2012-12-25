@@ -235,7 +235,7 @@ if [ $(id -u) -eq 0 ]; then
             return 0 
         fi
 
-        dialog --clear --backtitle "$upper_title" --title "Internet" --yesno "Do you have a wired connection?" 10 70
+        dialog --clear --backtitle "$upper_title" --title "Internet" --yesno "Configure wired connection?" 10 70
         if [ $? = 0 ] ; then
             dhcpcd eth0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
