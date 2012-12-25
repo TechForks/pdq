@@ -1,8 +1,6 @@
 #!/bin/sh
 ## chroot-rs.sh sub-script for chroot from github backup! =)
-## 12-15-2012 pdq
-
-#exit 1
+## 12-25-2012 pdq
 
 upper_title="[ pdqOS environment configuration ] (chroot)"
 
@@ -45,7 +43,6 @@ if [ $(id -u) -eq 0 ]; then
 
     gen_tz() {
         dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]"  --cancel-label "Go Back" --msgbox "Generate timezone/localtime" 10 40
-        
         if [ $? = 1 ] ; then
             chroot_menu
         fi
@@ -67,8 +64,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_hostname() {
-        #dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 10 30
-        
+        dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 10 30
         if [ $? = 1 ] ; then
             chroot_menu
         fi
@@ -298,7 +294,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 10 30
     }
 
-    install_grub() {
+    install_bootloader() {
         dialog --clear --backtitle "$upper_title" --title "[ GRUB 2]" --msgbox "Install Grub" 10 30
         if [ $? = 1 ] ; then
             chroot_menu
@@ -372,7 +368,7 @@ if [ $(id -u) -eq 0 ]; then
         echo "LOCALE: $(cat /etc/locale.conf)"
         echo "ROOT PASSWORD: $(cat $TMP/rootpasswd)"
         echo "USER: $(cat $TMP/puser)"
-        echo "Bootloader: $(cat $TMP/bootmsg)"
+        echo "BOOTLOADER: $(cat $TMP/bootmsg)"
         echo "Returning to menu in 5 seconds..."
         sleep 5s
         dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 10 30
@@ -400,7 +396,7 @@ if [ $(id -u) -eq 0 ]; then
             3) gen_locale;;
             4) set_root_pass;;
             5) add_user;;
-            6) install_grub;;
+            6) install_bootloader;;
             7) conf_view;;
             8) exiting;;
         esac
@@ -410,6 +406,5 @@ if [ $(id -u) -eq 0 ]; then
     while true
     do
         chroot_menu
-        echo "end of chroot function"
     done
 fi
