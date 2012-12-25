@@ -417,6 +417,13 @@ if [ $(id -u) -eq 0 ]; then
 
         if [ $? = 0 ] ; then
             nano "$FILE"
+            dialog --clear --backtitle "$upper_title" --title "[ Edit files ]" --defaultno --yesno "Edit/view another file?" 10 30
+            if [ $? = 0 ] ; then
+                edit_file
+            else
+                chroot_menu
+                return 0 
+            fi
         else
             chroot_menu
             return 0 
