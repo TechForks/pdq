@@ -75,7 +75,7 @@ if [ $(id -u) -eq 0 ]; then
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 15 30
+        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 15 40
     }
 
     partition_editor() {
