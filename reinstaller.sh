@@ -939,7 +939,12 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         
         dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
         chsh -s $(which zsh)
-        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
+        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\npacaur XXXX\n\nReplacing XXXX with:\n'lib32-ati-dri: for open source ATI driver users'
+  'lib32-catalyst-utils: for AMD Catalyst users'
+  'lib32-intel-dri: for open source Intel driver users'
+  'lib32-nouveau-dri: for Nouveau users'
+  'lib32-nvidia-utils-bumblebee: for NVIDIA + Bumblebee users'
+  'lib32-nvidia-utils: for NVIDIA proprietary blob users'" 30 70
     fi
 fi
 
