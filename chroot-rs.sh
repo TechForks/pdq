@@ -413,7 +413,7 @@ if [ $(id -u) -eq 0 ]; then
             return 0
         fi
 
-        FILE=$(dialog --stdout --backtitle "$upper_title" --title "Please select file." --fselect /etc/ 0 0)
+        FILE=$(dialog --stdout --backtitle "$upper_title" --title "Please select file." --fselect /etc/ 20 40)
 
         if [ $? = 0 ] ; then
             nano "$FILE"
