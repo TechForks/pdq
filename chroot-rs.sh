@@ -44,7 +44,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_tz() {
-        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]"  --cancel-label "Go Back" --msgbox "Generate timezone/localtime" 10 30
+        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]"  --cancel-label "Go Back" --msgbox "Generate timezone/localtime" 10 40
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -56,7 +56,7 @@ if [ $(id -u) -eq 0 ]; then
         done
 
         GEN_TIMEZONE=$(dialog --stdout --backtitle "${upper_title}" --title '[ TIMEZONE ]' --cancel-label "Go Back" \
-           --default-item "${GEN_TIMEZONE}" --menu "Choose a timezone or <Go Back> to return" 16 40 23 ${tz_list} "null" "-" || echo "${GEN_TIMEZONE}")
+           --default-item "${GEN_TIMEZONE}" --menu "Choose timezone or <Go Back> to return" 16 40 23 ${tz_list} "null" "-" || echo "${GEN_TIMEZONE}")
         
         if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ] ; then
             ln -s /usr/share/zoneinfo/$GEN_TIMEZONE /etc/localtime
@@ -74,7 +74,7 @@ if [ $(id -u) -eq 0 ]; then
         fi
 
         GEN_HOSTNAME=$(dialog --stdout --backtitle "${upper_title}" --title '[ HOSTNAME ]' --cancel-label "Go Back" \
-           --inputbox "Enter the desired hostname or <Go Back> to return" 9 40 "${GEN_HOSTNAME}" || echo "${GEN_HOSTNAME}")
+           --inputbox "Enter desired hostname or <Go Back> to return" 9 40 "${GEN_HOSTNAME}" || echo "${GEN_HOSTNAME}")
       
         echo $GEN_HOSTNAME > /etc/hostname
         dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Set hostname to $GEN_HOSTNAME" 10 30
@@ -249,7 +249,7 @@ if [ $(id -u) -eq 0 ]; then
         echo "LANG=${GEN_LANG}" > "/etc/locale.conf"
         export "LANG=${GEN_LANG}"
         locale-gen 1>/dev/null || echo "Unable to setup the locales to" "${GEN_LANG}"
-        dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Set locale to ${GEN_LANG}" 20 70
+        dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Set locale to ${GEN_LANG}" 10 30
     }
 
     set_root_pass() {
@@ -273,8 +273,9 @@ if [ $(id -u) -eq 0 ]; then
 
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --inputbox "Please choose your username:\n\n" 10 70 2> $TMP/puser
         puser=$(cat $TMP/puser)
-        adduser $psuer
 
+        useradd -m -g users -s /bin/bash $puser
+        passwd $puser
         sudo cp /etc/sudoers /etc/sudoers.bak
 
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --yesno "Require no password for sudo? [suggested: Yes]" 10 30
@@ -298,39 +299,70 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     install_grub() {
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Install Grub" 10 30
+        dialog --clear --backtitle "$upper_title" --title "[ GRUB 2]" --msgbox "Install Grub" 10 30
+        if [ $? = 1 ] ; then
+            chroot_menu
+        fi
+        
+        dialog --clear --backtitle "$upper_title" --title "[ BOOTLOADER ]" --radiolist "Select bootloader" 20 70 30 \
+        "1" "grub 2" on \
+        "2" "syslinux" off \
+        2> $TMP/pbootloader
         if [ $? = 1 ] ; then
             chroot_menu
         fi
 
-        ## TODO
-        pacman -S --noconfirm --needed grub-bios
+        pbootloader=$(cat $TMP/pbootloader)
+        if [ "$pbootloader" == "1" ] ; then
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB 2]"--radiolist "Select grub type" 20 70 30 \
+            "1" "grub-bios" on \
+            "2" "grub-efi" off \
+            2> $TMP/pgrub
+            if [ $? = 1 ] ; then
+                chroot_menu
+            fi
 
-        # choose root partition
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --inputbox "Please choose the disk to install grub to.\n\n This should be the same drive your root partition is on:\n\nUsually /dev/sda. Be careful!" 10 70 2> $TMP/bout
+            pgrub=$(cat $TMP/pgrub)
+            if [ "$pgrub" == "1" ] ; then
+                pacman -S --noconfirm --needed grub-bios
+            else
+                pacman -S --noconfirm --needed grub-efi-x86_64
+            fi
 
-        bout=$(cat $TMP/bout)
-       
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --yesno "Is this correct?\n\n grub-install --target=i386-pc --recheck $bout" 10 30
-        if [ $? = 0 ] ; then
-            grub-install --target=i386-pc --recheck $bout
-            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub installed" 10 30
+            # choose boot/root drive
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB 2 ]" --inputbox "Please choose the disk to install grub to.\n\n This should be the same drive your boot or root partition is on:\n\nUsually /dev/sda. Be careful!" 10 70 2> $TMP/bout
 
+            bout=$(cat $TMP/bout)
+            bootmsg="grub-install --target=i386-pc --recheck $bout"
+           
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB 2 ]" --yesno "Is this correct?\n\n grub-install --target=i386-pc --recheck $bout" 10 30
+            if [ $? = 0 ] ; then
+                grub-install --target=i386-pc --recheck $bout
+                dialog --clear --backtitle "$upper_title" --title "[ GRUB 2 ]" --msgbox "Grub installed" 10 30
+    
+                dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Configure Grub" 10 30
+                if [ $? = 1 ] ; then
+                    chroot_menu
+                fi
+
+                ## TODO
+                cp -v /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+                grub-mkconfig -o /boot/grub/grub.cfg
+                dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Grub configured" 10 30
+
+            else
+                dialog --clear --backtitle "$upper_title" --title "[ GRUB 2 ]" --msgbox "Grub not installed..." 10 30
+            fi
         else
-            dialog --clear --backtitle "$upper_title" --title "[ GRUB ]" --msgbox "Grub not installed..." 10 30
+            pacman -S --noconfirm --needed syslinux
+            syslinux-install_update -i -a -m
+            dialog --clear --backtitle "$upper_title" --title "[ SYSLINUX ]" --msgbox "Syslinux installed" 10 30
+            dialog --clear --backtitle "$upper_title" --title "[ SYSLINUX ]" --defaultno --yesno "Edit/view syslinux.cfg?" 10 30
+            if [ $? = 0 ] ; then
+                nano /boot/syslinux/syslinux.cfg
+            fi
+            bootmsg="syslinux @ /boot/syslinux/syslinux.cfg"
         fi
-    }
-
-    conf_grub() {
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Configure Grub" 10 30
-        if [ $? = 1 ] ; then
-            chroot_menu
-        fi
-
-        ## TODO
-        cp -v /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-        grub-mkconfig -o /boot/grub/grub.cfg
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Grub configured" 10 30
     }
 
     conf_view() {
@@ -340,7 +372,7 @@ if [ $(id -u) -eq 0 ]; then
         echo "LOCALE: $(cat /etc/locale.conf)"
         echo "ROOT PASSWORD: $(cat $TMP/rootpasswd)"
         echo "USER: $(cat $TMP/puser)"
-        echo "GRUB: installed as: --target=i386-pc --recheck $(cat $TMP/bout)"
+        echo "Bootloader: $(cat $TMP/bootmsg)"
         echo "Returning to menu in 5 seconds..."
         sleep 5s
         dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 10 30
@@ -348,18 +380,18 @@ if [ $(id -u) -eq 0 ]; then
 
     chroot_menu() {
         echo "make it so"
+        rootpasswd=$TMP/rootpasswd
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
-            --menu "\ZbSelect action:" 20 60 9 \
+            --menu "\ZbSelect action:" 20 60 8 \
             1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
             2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
             3 $clr"Generate locale [${GEN_LANG}]" \
-            4 $clr"Set root password" \
+            4 $clr"Set root password [$rootpasswd]" \
             5 $clr"Create default user and add to sudoers" \
-            6 $clr"Install Grub" \
-            7 $clr"Configure Grub" \
-            8 $clr"View/confirm generated data" \
-            9 $clr"Exit chroot" 2>$_TEMP
+            6 $clr"Install Bootloader" \
+            7 $clr"View/confirm generated data" \
+            8 $clr"Exit chroot and return to installer" 2>$_TEMP
 
         choice=$(cat $_TEMP)
         case $choice in
@@ -369,9 +401,8 @@ if [ $(id -u) -eq 0 ]; then
             4) set_root_pass;;
             5) add_user;;
             6) install_grub;;
-            7) conf_grub;;
-            8) conf_view;;
-            9) exiting;;
+            7) conf_view;;
+            8) exiting;;
         esac
     }
 

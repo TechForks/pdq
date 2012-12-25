@@ -48,7 +48,7 @@ if [ $(id -u) -eq 0 ]; then
 
     installer_menu() {
         dialog \
-            --colors --title "$upper_title" \
+            --colors --backtitle "$upper_title" --title "$upper_title" \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
             1 $clr"List linux partitions" \
             2 $clr"Partition editor (cfdisk)" \
