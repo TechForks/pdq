@@ -22,7 +22,7 @@ if [ $(id -u) -eq 0 ]; then
     fi
 
     ## styling
-    clr="\Zb\Z0"
+    clr=""
 
     ## temporary files
     _TEMP=/tmp/chanswer$$
@@ -395,11 +395,6 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     conf_view() {
-root:x:0:0:root:/root:/bin/bash
-pdq:x:1000:100::/home/pdq:/bin/zsh
-git:x:998:998:git daemon user:/:/bin/bash
-memcached:x:997:997:memcached user:/:/bin/bash
-getent passwd |egrep -v "nologin|false"
         echo "HOSTNAME: $(cat /etc/hostname)"
         echo "TIMEZONE: $(readlink /etc/localtime)"
         echo "LOCALE: $(cat /etc/locale.conf)"
@@ -416,7 +411,7 @@ getent passwd |egrep -v "nologin|false"
         rootpasswd=$(cat $TMP/rootpasswd)
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
-            --menu "\ZbSelect action:" 20 60 8 \
+            --menu "\Select action:" 20 60 8 \
             1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
             2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
             3 $clr"Generate locale [${GEN_LANG}]" \
