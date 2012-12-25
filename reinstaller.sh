@@ -300,9 +300,9 @@ if [ $(id -u) -eq 0 ]; then
         
         echo "" > $TMP/ppkgs
         dialog --clear --backtitle "$upper_title" --title "Custom packages" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git hub rsync wget\nleave input blank and continue." 40 70 2> $TMP/ppkgs
-        ppkgs="$(cat $TMP/ppkgs)"
+        ppkgs=" $(cat $TMP/ppkgs)"
 
-        pacstrap /mnt base base-devel sudo git hub rsync wget "$ppkgs"
+        pacstrap /mnt base base-devel sudo git hub rsync wget"$ppkgs"
         
         dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget $ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
     }
