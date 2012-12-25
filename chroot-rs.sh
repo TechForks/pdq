@@ -291,7 +291,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --inputbox "Please choose your username:\n\n" 10 70 2> $TMP/puser
         puser=$(cat $TMP/puser)
 
-        useradd -m -g users -s /bin/bash $puser
+        useradd -m -g users -s /bin/zsh $puser
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Next step is to add password for $puser" 10 30
         passwd $puser
         sudo cp /etc/sudoers /etc/sudoers.bak
@@ -395,12 +395,16 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     conf_view() {
-
+root:x:0:0:root:/root:/bin/bash
+pdq:x:1000:100::/home/pdq:/bin/zsh
+git:x:998:998:git daemon user:/:/bin/bash
+memcached:x:997:997:memcached user:/:/bin/bash
+getent passwd |egrep -v "nologin|false"
         echo "HOSTNAME: $(cat /etc/hostname)"
         echo "TIMEZONE: $(readlink /etc/localtime)"
         echo "LOCALE: $(cat /etc/locale.conf)"
         echo "ROOT PASSWORD: $(cat $TMP/rootpasswd)"
-        echo "USER: $(awk -F: '{print $1}' /etc/passwd)"
+        echo "USER: $(awk -F":" '$7 ~ /\/bin\/zsh/ {print $1}' /etc/passwd)"
         echo "BOOTLOADER: $bootmsg"
         echo "Returning to menu in 5 seconds..."
         sleep 5s
