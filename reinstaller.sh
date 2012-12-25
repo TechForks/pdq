@@ -37,15 +37,6 @@ if [ $(id -u) -eq 0 ]; then
         exit 0
     }
 
-    exit_installer() {
-        dialog --clear --title "$upper_title" --yesno "Exit Installer?" 10 40
-        if [ $? = 0 ] ; then
-            exiting_installer
-        else
-            installer_menu
-        fi
-    }
-
     installer_menu() {
         dialog \
             --colors --backtitle "$upper_title" --title "$upper_title" \
@@ -91,7 +82,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0            
         fi
 
@@ -107,7 +98,7 @@ if [ $(id -u) -eq 0 ]; then
 
         dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
 
@@ -120,7 +111,7 @@ if [ $(id -u) -eq 0 ]; then
         "3" "ext4" on \
         2> $TMP/part
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
 
@@ -150,7 +141,7 @@ if [ $(id -u) -eq 0 ]; then
         "3" "ext4" on \
         2> $TMP/plart
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
 
@@ -184,7 +175,7 @@ if [ $(id -u) -eq 0 ]; then
             "3" "ext4" on \
             2> $TMP/pbart
             if [ $? = 1 ] || [ $? = 255 ] ; then
-                exit_installer
+                installer_menu
                 return 0 
             fi
 
@@ -222,7 +213,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 70
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
 
@@ -241,7 +232,7 @@ if [ $(id -u) -eq 0 ]; then
             "2" "wpa_supplicant" off \
             2> $TMP/pwifi
             if [ $? = 1 ] || [ $? = 255 ] ; then
-                exit_installer
+                installer_menu
                 return 0 
             fi
 
@@ -274,7 +265,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Unmount /mnt/*" 10 30
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
      
@@ -287,7 +278,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
        
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
        
@@ -303,7 +294,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
        
@@ -318,7 +309,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
        
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
        
@@ -336,7 +327,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
 
         if [ $? = 1 ] || [ $? = 255 ] ; then
-            exit_installer
+            installer_menu
             return 0 
         fi
         
