@@ -6,8 +6,7 @@
 ## Instructions
 ## from livecd/liveusb
 
-# wget http://is.gd/pdqos -O rs.sh
-# sh rs.sh
+# wget http://is.gd/pdqos -O rs.sh && sh rs.sh
 
 upper_title="pdqOS Installer for Arch Linux x86_64"
 
