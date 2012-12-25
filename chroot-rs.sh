@@ -42,8 +42,8 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_tz() {
-        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]"  --cancel-label "Go Back" --msgbox "Generate timezone/localtime" 10 40
-        if [ $? = 1 ] ; then
+        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Generate timezone/localtime" 10 40
+        if [ $? = 255 ] ; then
             chroot_menu
         fi
 
@@ -55,6 +55,10 @@ if [ $(id -u) -eq 0 ]; then
         GEN_TIMEZONE=$(dialog --stdout --backtitle "${upper_title}" --title '[ TIMEZONE ]' --cancel-label "Go Back" \
            --default-item "${GEN_TIMEZONE}" --menu "Choose timezone or <Go Back> to return" 16 40 23 ${tz_list} "null" "-" || echo "${GEN_TIMEZONE}")
         
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            chroot_menu
+        fi
+
         if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ] ; then
             ln -s /usr/share/zoneinfo/$GEN_TIMEZONE /etc/localtime
             dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Set timezone to $GEN_TIMEZONE" 10 30
@@ -65,7 +69,7 @@ if [ $(id -u) -eq 0 ]; then
 
     gen_hostname() {
         dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 10 30
-        if [ $? = 1 ] ; then
+        if [ $? = 255 ] ; then
             chroot_menu
         fi
 
@@ -79,7 +83,7 @@ if [ $(id -u) -eq 0 ]; then
     gen_locale() {
         dialog --clear --backtitle "$upper_title" --title "[ LOCALES ]" --msgbox "Generate locale" 10 30
         
-        if [ $? = 1 ] ; then
+        if [ $? = 255 ] ; then
             chroot_menu
         fi
 
@@ -241,6 +245,9 @@ if [ $(id -u) -eq 0 ]; then
             zh_TW.UTF-8 - \
             zu_ZA.UTF-8 - "null" "-" || echo "${GEN_LANG}")
     
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            chroot_menu
+        fi
         echo "${GEN_LANG} ${GEN_LANG##*.}" > "/etc/locale.gen"
         echo "LANG=${GEN_LANG}" > "/etc/locale.conf"
         export "LANG=${GEN_LANG}"
@@ -251,7 +258,7 @@ if [ $(id -u) -eq 0 ]; then
     set_root_pass() {
         dialog --clear --backtitle "$upper_title" --title "[ ROOT PASSWD ]" --msgbox "Set root password" 10 30
         
-        if [ $? = 1 ] ; then
+        if [ $? = 255 ] ; then
             chroot_menu
         fi
 
@@ -263,7 +270,7 @@ if [ $(id -u) -eq 0 ]; then
     add_user() {
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Create user and add to sudoers" 10 30
         
-        if [ $? = 1 ] ; then
+        if [ $? = 255 ] ; then
             chroot_menu
         fi
 
@@ -295,8 +302,8 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     install_bootloader() {
-        dialog --clear --backtitle "$upper_title" --title "[ GRUB 2]" --msgbox "Install Grub" 10 30
-        if [ $? = 1 ] ; then
+        dialog --clear --backtitle "$upper_title" --title "[ BOOTLOADER ]" --msgbox "Install Bootloader" 10 30
+        if [ $? = 255 ] ; then
             chroot_menu
         fi
         
@@ -304,7 +311,7 @@ if [ $(id -u) -eq 0 ]; then
         "1" "grub 2" on \
         "2" "syslinux" off \
         2> $TMP/pbootloader
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             chroot_menu
         fi
 
@@ -314,7 +321,7 @@ if [ $(id -u) -eq 0 ]; then
             "1" "grub-bios" on \
             "2" "grub-efi" off \
             2> $TMP/pgrub
-            if [ $? = 1 ] ; then
+            if [ $? = 1 ] || [ $? = 255 ] ; then
                 chroot_menu
             fi
 
