@@ -54,8 +54,8 @@ if [ $(id -u) -eq 0 ]; then
 
         GEN_TIMEZONE=$(dialog --stdout --backtitle "${upper_title}" --title '[ TIMEZONE ]' --cancel-label "Go Back" \
            --default-item "${GEN_TIMEZONE}" --menu "Choose timezone or <Go Back> to return" 16 40 23 ${tz_list} "null" "-" || echo "${GEN_TIMEZONE}")
-        
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+
+        if [ "$GEN_TIMEZONE" = "" ] ; then
             chroot_menu
         fi
 
@@ -76,6 +76,10 @@ if [ $(id -u) -eq 0 ]; then
         GEN_HOSTNAME=$(dialog --stdout --backtitle "${upper_title}" --title '[ HOSTNAME ]' --cancel-label "Go Back" \
            --inputbox "Enter desired hostname or <Go Back> to return" 9 40 "${GEN_HOSTNAME}" || echo "${GEN_HOSTNAME}")
       
+        if [ "$GEN_HOSTNAME" = "" ] ; then
+            chroot_menu
+        fi
+
         echo $GEN_HOSTNAME > /etc/hostname
         dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Set hostname to $GEN_HOSTNAME" 10 30
     }
@@ -245,7 +249,7 @@ if [ $(id -u) -eq 0 ]; then
             zh_TW.UTF-8 - \
             zu_ZA.UTF-8 - "null" "-" || echo "${GEN_LANG}")
     
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ "$GEN_LANG" = "" ] ; then
             chroot_menu
         fi
         echo "${GEN_LANG} ${GEN_LANG##*.}" > "/etc/locale.gen"
