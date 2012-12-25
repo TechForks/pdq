@@ -303,7 +303,7 @@ if [ $(id -u) -eq 0 ]; then
         ppkgs=" $(cat $TMP/ppkgs)"
 
         pacstrap /mnt base base-devel sudo git hub rsync wget"$ppkgs"
-        
+        sleep 5s
         dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget $ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
     }
 
