@@ -1,11 +1,7 @@
 #!/bin/sh
 ## pdqOS Installer for Arch Linux x86_64 =)
 ## 03-22-2012 pdq
-## 07-10-2012 pdq
-## 11-04-2012 pdq
-## 12-05-2012 pdq
-## 12-15-2012 pdq
-#exit 1
+## 12-25-2012 pdq
 
 ## Instructions
 
@@ -16,15 +12,6 @@
 ## when it asks if install 1) phonon-gstreamer or 2) phonon-vlc
 ## chose 2
 ## when it asks if replace foo with bar chose y for everyone
-
-
-## color formatting
-txtbld=$(tput bold)
-bldred=${txtbld}$(tput setaf 1)
-bldgreen=${txtbld}$(tput setaf 2)
-bldblue=${txtbld}$(tput setaf 6)
-bldyellow=${txtbld}$(tput setaf 3)
-txtrst=$(tput sgr0)
 
 upper_title="pdqOS Installer for Arch Linux x86_64"
 
@@ -45,6 +32,7 @@ fi
 ## root script
 if [ $(id -u) -eq 0 ]; then
 
+    # styling
     clr="\Zb\Z0"
 
     # temporary files
@@ -52,32 +40,24 @@ if [ $(id -u) -eq 0 ]; then
     mkdir -p /tmp/tmp 2>/dev/null
     TMP=/tmp/tmp 2>/dev/null
 
-    _PROCEED=0
-
-    # FUNCTIONS
-    exiting() {
+    # functions
+    exiting_installer() {
         clear
         rm -f $_TEMP
-        echo "exiting... type rs.sh to re-run"
-        sleep 1s
+        dialog --clear --title "$upper_title" --msgbox "exiting_installer... type: rs.sh to re-run" 10 30
         exit 0
     }
 
-    what_do() {
-        if [ ! $_PROCEED -eq 1 ] ; then
-            echo -n "${bldblue}Go back to menu?${txtrst} ${bldgreen}<Enter>${txtrst} ${bldblue}or hit${txtrst} ${bldred}n${txtrst} ${bldblue}to EXIT:${txtrst} "
-            read choice
-            if [ $choice = "n" ] ; then
-                exiting
-            else
-                i_menu
-            fi
+    exit_installer() {
+        dialog --clear --title "$upper_title" --yesno "Exit Installer?" 10 40
+        if [ $? = 0 ] ; then
+            exiting_installer
         else
-            echo "${bldgreen}[GO] Proceeding...${txtrst}"
+            installer_menu
         fi
     }
 
-    i_menu() {
+    installer_menu() {
         dialog \
             --colors --title "$upper_title" \
             --menu "\ZbSelect action: (Do them in order)" 20 60 10 \
@@ -95,15 +75,15 @@ if [ $(id -u) -eq 0 ]; then
         choice=$(cat $_TEMP)
         case $choice in
             1) list_partitions;;
-            2) part_editor;;
-            3) make_fs;;
+            2) partition_editor;;
+            3) make_filesystems;;
             4) make_internet;;
-            5) init_install;;
-            6) gen_fstab;;
-            7) chroot_conf;;
-            8) un_mount;;
-            9) finish_up;;
-            10) exiting;;
+            5) initial_install;;
+            6) generate_fstab;;
+            7) chroot_configuration;;
+            8) cleanup;;
+            9) finishup;;
+            10) exiting_installer;;
         esac
     }
 
@@ -116,11 +96,11 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 10 30
     }
 
-    part_editor() {
+    partition_editor() {
         dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
         
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
 
         dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable* and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n* Optionally create a /swap (primary and recommended twice the size of your onboard RAM) and /boot (primary, bootable and recommended minimum 1GB in size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
@@ -130,12 +110,12 @@ if [ $(id -u) -eq 0 ]; then
         fi
     }
 
-    make_fs() {
+    make_filesystems() {
         fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
 
         dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
 
         # choose root partition
@@ -147,7 +127,7 @@ if [ $(id -u) -eq 0 ]; then
         "3" "ext4" off \
         2> $TMP/part
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
 
         pout=$(cat $TMP/pout)
@@ -176,7 +156,7 @@ if [ $(id -u) -eq 0 ]; then
         "3" "ext4" off \
         2> $TMP/plart
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
 
         plout=$(cat $TMP/plout)
@@ -209,7 +189,7 @@ if [ $(id -u) -eq 0 ]; then
             "3" "ext4" off \
             2> $TMP/pbart
             if [ $? = 1 ] ; then
-                what_do
+                exit_installer
             fi
 
             pbout=$(cat $TMP/pbout)
@@ -245,16 +225,17 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 30
         
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
-      
-        ## TODO
+
         dialog --clear --title "$upper_title" --yesno "Do you have a wired connection?" 20 70
         if [ $? = 0 ] ; then
             dhcpcd eth0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
                 dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 30
+            else
+                dialog --clear --title "$upper_title" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
             fi
         else
             dialog --clear --title "" --radiolist "Choose your preferred wireless setup tool" 20 70 30 \
@@ -262,7 +243,7 @@ if [ $(id -u) -eq 0 ]; then
             "2" "wpa_supplicant" off \
             2> $TMP/pwifi
             if [ $? = 1 ] ; then
-                what_do
+                exit_installer
             fi
 
             pwifi=$(cat $TMP/pwifi)
@@ -281,43 +262,46 @@ if [ $(id -u) -eq 0 ]; then
             dhcpcd wlan0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
-                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 30
+                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 20 30
+            else
+                dialog --clear --title "$upper_title" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
             fi
         fi
-        dialog --clear --title "$upper_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
+
+        dialog --clear --title "$upper_title" --msgbox "Internet configuration complete.\n\n Hit enter to return to menu" 10 30
     }
 
-    un_mount() {
-        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt and /mnt/home" 10 30
+    cleanup() {
+        dialog --clear --title "$upper_title" --msgbox "Unmount /mnt/*" 10 30
         
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
      
         umount /mnt/* 2>/dev/null
 
-        dialog --clear --title "$upper_title" --msgbox "Unmounted /mnt and /mnt/home.\n\n Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Unmounted /mnt/*.\n\nHit enter to return to menu" 10 30
     }
 
-    init_install() {
+    initial_install() {
         dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
        
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
        
-        pacstrap /mnt base base-devel sudo git hub rsync wget
-
-        sleep 3s
+        dialog --clear --title "$upper_title" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git hub rsync wget\nleave input blank and continue." 10 70 2> $TMP/ppkgs
+        ppkgs=$(cat $TMP/ppkgs)
+        pacstrap /mnt base base-devel sudo git hub rsync wget $ppkgs
         
-        dialog --clear --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget to /mnt.\n\n Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Installed base base-devel sudo git hub rsync wget $ppkgs to /mnt.\n\n Hit enter to return to menu" 10 30
     }
 
-    chroot_conf() {
+    chroot_configuration() {
         dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30
         
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
        
         wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
@@ -327,11 +311,11 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
-    gen_fstab() {
+    generate_fstab() {
         dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
        
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
@@ -344,11 +328,11 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "$upper_title" --msgbox "Hit enter to return to menu" 10 30
     }
 
-    finish_up() {
+    finishup() {
         dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
 
         if [ $? = 1 ] ; then
-            what_do
+            exit_installer
         fi
         
         dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:\n\nlogin as your created user and run: sh rs.sh" 10 30
@@ -359,7 +343,7 @@ if [ $(id -u) -eq 0 ]; then
     # utility execution
     while true
     do
-        i_menu
+        installer_menu
     echo "end of root function"
     done
 else
@@ -942,7 +926,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         pwd
         chsh -s $(which zsh)
         cd
-        dialog --clear --title "$upper_title" --msgbox "Exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
+        dialog --clear --title "$upper_title" --msgbox "exiting_installer install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
     fi
 fi
 
