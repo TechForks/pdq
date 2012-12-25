@@ -291,6 +291,7 @@ if [ $(id -u) -eq 0 ]; then
         puser=$(cat $TMP/puser)
 
         useradd -m -g users -s /bin/bash $puser
+        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Next step is to add password for $puser" 10 30
         passwd $puser
         sudo cp /etc/sudoers /etc/sudoers.bak
 
@@ -332,7 +333,7 @@ if [ $(id -u) -eq 0 ]; then
 
         pbootloader=$(cat $TMP/pbootloader)
         if [ "$pbootloader" == "1" ] ; then
-            dialog --clear --backtitle "$upper_title" --title "[ GRUB 2]"--radiolist "Select grub type" 20 70 30 \
+            dialog --clear --backtitle "$upper_title" --title "[ GRUB 2]" --radiolist "Select grub type" 20 70 30 \
             "1" "grub-bios" on \
             "2" "grub-efi" off \
             2> $TMP/pgrub

@@ -11,7 +11,7 @@
 
 upper_title="pdqOS Installer for Arch Linux x86_64"
 
-## code be `ere! ##
+## code be `ere
 grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
 if [ "$archtype" = "no" ]; then
     dialog --title "$upper_title" --msgbox "Sorry this is for x86_64 only!" 20 70
@@ -21,15 +21,15 @@ fi
 ## root script
 if [ $(id -u) -eq 0 ]; then
 
-    # styling
+    ## styling
     clr="\Zb\Z0"
 
-    # temporary files
+    ## temporary files
     _TEMP=/tmp/answer$$
     mkdir -p /tmp/tmp 2>/dev/null
     TMP=/tmp/tmp 2>/dev/null
 
-    # functions
+    ## functions
     exiting_installer() {
         clear
         rm -f $_TEMP
@@ -90,7 +90,7 @@ if [ $(id -u) -eq 0 ]; then
     partition_editor() {
         dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
         
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
 
@@ -105,7 +105,7 @@ if [ $(id -u) -eq 0 ]; then
         fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
 
         dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
 
@@ -117,7 +117,7 @@ if [ $(id -u) -eq 0 ]; then
         "2" "ext3" off \
         "3" "ext4" on \
         2> $TMP/part
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
 
@@ -146,7 +146,7 @@ if [ $(id -u) -eq 0 ]; then
         "2" "ext3" off \
         "3" "ext4" on \
         2> $TMP/plart
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
 
@@ -179,7 +179,7 @@ if [ $(id -u) -eq 0 ]; then
             "2" "ext3" off \
             "3" "ext4" on \
             2> $TMP/pbart
-            if [ $? = 1 ] ; then
+            if [ $? = 1 ] || [ $? = 255 ] ; then
                 exit_installer
             fi
 
@@ -216,7 +216,7 @@ if [ $(id -u) -eq 0 ]; then
     make_internet() {
         dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 70
         
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
 
@@ -234,7 +234,7 @@ if [ $(id -u) -eq 0 ]; then
             "1" "wifi-menu" on \
             "2" "wpa_supplicant" off \
             2> $TMP/pwifi
-            if [ $? = 1 ] ; then
+            if [ $? = 1 ] || [ $? = 255 ] ; then
                 exit_installer
             fi
 
@@ -266,7 +266,7 @@ if [ $(id -u) -eq 0 ]; then
     cleanup() {
         dialog --clear --title "$upper_title" --msgbox "Unmount /mnt/*" 10 30
         
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
      
@@ -278,7 +278,7 @@ if [ $(id -u) -eq 0 ]; then
     initial_install() {
         dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
        
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
        
@@ -293,7 +293,7 @@ if [ $(id -u) -eq 0 ]; then
     chroot_configuration() {
         dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30
         
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
        
@@ -307,7 +307,7 @@ if [ $(id -u) -eq 0 ]; then
     generate_fstab() {
         dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
        
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
        
@@ -324,7 +324,7 @@ if [ $(id -u) -eq 0 ]; then
     finishup() {
         dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
 
-        if [ $? = 1 ] ; then
+        if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
         fi
         
@@ -346,7 +346,7 @@ else
     fi
 
     dialog --clear --title "$upper_title" --yesno "Do you wish to run pdqOS installer Step 2?" 10 30
-    if [ $? = 1 ] ; then
+    if [ $? = 1 ] || [ $? = 255 ] ; then
         exit 1
     fi
 
