@@ -77,7 +77,9 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     list_partitions() {
-        partition_list=`blkid | grep -i 'TYPE="ext[234]"' | cut -d ' ' -f 1 | grep -i '^/dev/' | grep -v '/dev/loop' | grep -v '/dev/mapper' | sed "s/://g"`
+        #partition_list=`blkid | grep -i 'TYPE="ext[234]"' | cut -d ' ' -f 1 | grep -i '^/dev/' | grep -v '/dev/loop' | grep -v '/dev/mapper' | sed "s/://g"`
+        fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
+        partition_list=$(cat $TMP/pout)
         if [ "$partition_list" = "" ] ; then
             partition_list="It appears you have no linux partitions yet."
         fi
