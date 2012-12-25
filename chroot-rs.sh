@@ -407,7 +407,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     edit_file() {
-        FILE=$(dialog --stdout --backtitle "$upper_title" --title "Please choose a file to open with nano:" --fselect /etc 0 0)
+        FILE=$(dialog --stdout --backtitle "$upper_title" --title "Please choose a file to open with nano.\n\nUse the <tab>, <spacebar> and arrow keys to navigate and select file." --fselect /etc/ 0 0)
 
         if [ $? = 0 ] ; then
             nano "$FILE"
