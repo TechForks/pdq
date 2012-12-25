@@ -44,8 +44,6 @@ if [ $(id -u) -eq 0 ]; then
         else
             installer_menu
         fi
-        
-        return 0
     }
 
     installer_menu() {
@@ -94,6 +92,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0            
         fi
 
         dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable* and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n* Optionally create a /swap (primary and recommended twice the size of your onboard RAM) and /boot (primary, bootable and recommended minimum 1GB in size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
@@ -109,6 +108,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
 
         # choose root partition
@@ -121,6 +121,7 @@ if [ $(id -u) -eq 0 ]; then
         2> $TMP/part
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
 
         pout=$(cat $TMP/pout)
@@ -150,6 +151,7 @@ if [ $(id -u) -eq 0 ]; then
         2> $TMP/plart
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
 
         plout=$(cat $TMP/plout)
@@ -183,6 +185,7 @@ if [ $(id -u) -eq 0 ]; then
             2> $TMP/pbart
             if [ $? = 1 ] || [ $? = 255 ] ; then
                 exit_installer
+                return 0 
             fi
 
             pbout=$(cat $TMP/pbout)
@@ -220,6 +223,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
 
         dialog --clear --title "$upper_title" --yesno "Do you have a wired connection?" 10 70
@@ -238,6 +242,7 @@ if [ $(id -u) -eq 0 ]; then
             2> $TMP/pwifi
             if [ $? = 1 ] || [ $? = 255 ] ; then
                 exit_installer
+                return 0 
             fi
 
             pwifi=$(cat $TMP/pwifi)
@@ -270,6 +275,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
      
         umount /mnt/* 2>/dev/null
@@ -282,6 +288,7 @@ if [ $(id -u) -eq 0 ]; then
        
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
        
         dialog --clear --backtitle "$upper_title" --title "Custom packages" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git hub rsync wget\nleave input blank and continue." 40 70 2> $TMP/ppkgs
@@ -297,6 +304,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
        
         wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
@@ -311,6 +319,7 @@ if [ $(id -u) -eq 0 ]; then
        
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
@@ -328,6 +337,7 @@ if [ $(id -u) -eq 0 ]; then
 
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exit_installer
+            return 0 
         fi
         
         dialog --clear --title "$upper_title" --msgbox "Arch Linux has been installed!\n\nAfter reboot, to complete install of pdqOS:\n\nlogin as your created user and run: sh rs.sh\n\nAlternatively, do not run rs.sh and setup your system to your own liking.\n\nSee ya!" 30 60
