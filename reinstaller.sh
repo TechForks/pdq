@@ -80,7 +80,6 @@ if [ $(id -u) -eq 0 ]; then
 
     partition_editor() {
         dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
-        
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0            
@@ -104,6 +103,10 @@ if [ $(id -u) -eq 0 ]; then
 
         # choose root partition
         dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            installer_menu
+            return 0 
+        fi
 
         dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
         "1" "ext2" off \
@@ -131,9 +134,17 @@ if [ $(id -u) -eq 0 ]; then
         mount $pout /mnt
 
         dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            installer_menu
+            return 0 
+        fi
 
         # choose home partition
         dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            installer_menu
+            return 0 
+        fi
 
         dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
         "1" "ext2" off \
@@ -168,7 +179,10 @@ if [ $(id -u) -eq 0 ]; then
         if [ $? = 0 ] ; then
             # choose boot partition
             dialog --clear --title "CHOOSE BOOT PARTITION" --inputbox "Please choose your preferred boot partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 3 for /dev/hda3!" 10 70 2> $TMP/pbout
-            
+            if [ $? = 1 ] || [ $? = 255 ] ; then
+                installer_menu
+                return 0 
+            fi
             dialog --clear --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
             "1" "ext2" off \
             "2" "ext3" off \
@@ -211,7 +225,6 @@ if [ $(id -u) -eq 0 ]; then
 
     make_internet() {
         dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 70
-        
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -263,7 +276,6 @@ if [ $(id -u) -eq 0 ]; then
 
     cleanup() {
         dialog --clear --title "$upper_title" --msgbox "Unmount /mnt/*" 10 30
-        
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -276,7 +288,6 @@ if [ $(id -u) -eq 0 ]; then
 
     initial_install() {
         dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
-       
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -291,8 +302,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     chroot_configuration() {
-        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30
-        
+        dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30 
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -307,7 +317,6 @@ if [ $(id -u) -eq 0 ]; then
 
     generate_fstab() {
         dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
-       
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -315,7 +324,6 @@ if [ $(id -u) -eq 0 ]; then
        
         genfstab -U -p /mnt >> /mnt/etc/fstab
         dialog --clear --title "$upper_title" --yesno "Do you wish to view/edit this file?" 10 30
-       
         if [ $? = 0 ] ; then
             nano /mnt/etc/fstab
         fi
@@ -325,7 +333,6 @@ if [ $(id -u) -eq 0 ]; then
 
     finishup() {
         dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
-
         if [ $? = 1 ] || [ $? = 255 ] ; then
             installer_menu
             return 0 
