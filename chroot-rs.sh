@@ -29,6 +29,7 @@ if [ $(id -u) -eq 0 ]; then
     mkdir -p /tmp/tmp 2>/dev/null
     TMP=/tmp/tmp 2>/dev/null
     echo "unset" > $TMP/rootpasswd
+    echo "unset" > $TMP/puser
 
     pacman -Syy
     pacman -S --noconfirm --needed dialog
@@ -401,7 +402,7 @@ if [ $(id -u) -eq 0 ]; then
         echo "LOCALE: $(cat /etc/locale.conf)"
         echo "ROOT PASSWORD: $(cat $TMP/rootpasswd)"
         echo "USER: $(cat $TMP/puser)"
-        echo "BOOTLOADER: $(cat $TMP/bootmsg)"
+        echo "BOOTLOADER: $bootmsg"
         echo "Returning to menu in 5 seconds..."
         sleep 5s
         dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 10 30
