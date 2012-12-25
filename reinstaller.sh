@@ -312,10 +312,12 @@ if [ $(id -u) -eq 0 ]; then
             installer_menu
             return 0 
         fi
-       
-        wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
-        chmod +x chroot-rs.sh
-        mv chroot-rs.sh /mnt/chroot-rs.sh
+         
+        if [ ! -f /mnt/chroot-rs.sh ]; then
+            wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
+            chmod +x chroot-rs.sh
+            mv chroot-rs.sh /mnt/chroot-rs.sh
+        fi
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
     }
 
