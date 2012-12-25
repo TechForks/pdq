@@ -4,23 +4,12 @@
 ## 12-25-2012 pdq
 
 ## Instructions
-
 ## from livecd/liveusb
+
 # wget http://is.gd/pdqos -O rs.sh
 # sh rs.sh
 
-## when it asks if install 1) phonon-gstreamer or 2) phonon-vlc
-## chose 2
-## when it asks if replace foo with bar chose y for everyone
-
 upper_title="pdqOS Installer for Arch Linux x86_64"
-
-: ${DIALOG_OK=0}
-: ${DIALOG_CANCEL=1}
-: ${DIALOG_HELP=2}
-: ${DIALOG_EXTRA=3}
-: ${DIALOG_ITEM_HELP=4}
-: ${DIALOG_ESC=255}
 
 ## code be `ere! ##
 grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
@@ -88,12 +77,12 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     list_partitions() {
-        partition_list=`blkid | grep -i 'TYPE="ext[234]"' | cut -d ' ' -f 1 | grep -i '^/dev/' | grep -v '/dev/loop' | sed "s/://g"`
+        partition_list=`blkid | grep -i 'TYPE="ext[234]"' | cut -d ' ' -f 1 | grep -i '^/dev/' | grep -v '/dev/loop' | grep -v '/dev/mapper' | sed "s/://g"`
         if [ "$partition_list" = "" ] ; then
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 10 30
+        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 10 20
     }
 
     partition_editor() {
@@ -122,9 +111,9 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
 
         dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
-        "1" "ext2" on \
+        "1" "ext2" off \
         "2" "ext3" off \
-        "3" "ext4" off \
+        "3" "ext4" on \
         2> $TMP/part
         if [ $? = 1 ] ; then
             exit_installer
@@ -151,9 +140,9 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
 
         dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
-        "1" "ext2" on \
+        "1" "ext2" off \
         "2" "ext3" off \
-        "3" "ext4" off \
+        "3" "ext4" on \
         2> $TMP/plart
         if [ $? = 1 ] ; then
             exit_installer
@@ -178,15 +167,15 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
     
 
-        dialog --clear --title "BOOT PARTITION" --defaultno --yesno "Create the boot filesystem?" 20 70
+        dialog --clear --title "BOOT  PARTITION" --defaultno --yesno "Create the boot filesystem?" 20 70
         if [ $? = 0 ] ; then
             # choose boot partition
             dialog --clear --title "CHOOSE BOOT PARTITION" --inputbox "Please choose your preferred boot partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 3 for /dev/hda3!" 10 70 2> $TMP/pbout
             
             dialog --clear --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
-            "1" "ext2" on \
+            "1" "ext2" off \
             "2" "ext3" off \
-            "3" "ext4" off \
+            "3" "ext4" on \
             2> $TMP/pbart
             if [ $? = 1 ] ; then
                 exit_installer
@@ -211,7 +200,7 @@ if [ $(id -u) -eq 0 ]; then
             dialog --clear --title "BOOT PARTITION MOUNTED" --msgbox "Your $pbout partition has been mounted at /mnt/boot as $fs_type" 10 70
         fi
 
-        dialog --clear --title "SWAP PARTITION" --defaultno --yesno "Create the swap filesystem?" 20 70
+        dialog --clear --title "SWAP PARTITION" --defaultno --yesno "Create the swap filesystem?" 10 70
         if [ $? = 0 ] ; then
             # choose home partition
             dialog --clear --title "CHOOSE SWAP PARTITION" --inputbox "Please choose your preferred swap partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 4 for /dev/hda4!" 10 70 2> $TMP/psout
@@ -222,23 +211,23 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     make_internet() {
-        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 30
+        dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 70
         
         if [ $? = 1 ] ; then
             exit_installer
         fi
 
-        dialog --clear --title "$upper_title" --yesno "Do you have a wired connection?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Do you have a wired connection?" 10 70
         if [ $? = 0 ] ; then
             dhcpcd eth0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
-                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 30
+                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
             else
                 dialog --clear --title "$upper_title" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
             fi
         else
-            dialog --clear --title "" --radiolist "Choose your preferred wireless setup tool" 20 70 30 \
+            dialog --clear --title "" --radiolist "Choose your preferred wireless setup tool" 10 70 30 \
             "1" "wifi-menu" on \
             "2" "wpa_supplicant" off \
             2> $TMP/pwifi
