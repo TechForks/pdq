@@ -249,8 +249,41 @@ if [ $(id -u) -eq 0 ]; then
         fi
       
         ## TODO
-        ping -c 3 www.google.com
-        
+        dialog --clear --title "$upper_title" --yesno "Do you have a wired connection?" 20 70
+        if [ $? = 0 ] ; then
+            dhcpcd eth0
+            wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+            if [ ! -s /tmp/index.google ] ; then
+                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 30
+            fi
+        else
+            dialog --clear --title "" --radiolist "Choose your preferred wireless setup tool" 20 70 30 \
+            "1" "wifi-menu" on \
+            "2" "wpa_supplicant" off \
+            2> $TMP/pwifi
+            if [ $? = 1 ] ; then
+                what_do
+            fi
+
+            pwifi=$(cat $TMP/pwifi)
+            if [ "$pwifi" == "1" ] ; then
+                wifi-menu
+            else
+                dialog --clear --title "$upper_title" --inputbox "Please enter your SSID" 10 70 2> $TMP/pssid
+                pssid=$(cat $TMP/pssid)
+
+                dialog --clear --title "$upper_title" --passwordbox "Please enter your wireless passphrase" 10 70 2> $TMP/ppassphrase
+                ppassphrase=$(cat $TMP/ppassphrase)
+                wpa_passphrase "$pssid" "$ppassphrase" >> /etc/wpa_supplicant.conf
+                wpa_supplicant -B -Dwext -i wlan0 -c /etc/wpa_supplicant.conf & >/dev/null
+            fi
+
+            dhcpcd wlan0
+            wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+            if [ ! -s /tmp/index.google ] ; then
+                dialog --clear --title "$upper_title" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 30
+            fi
+        fi
         dialog --clear --title "$upper_title" --msgbox "Internet configured. \n\n Hit enter to return to menu" 10 30
     }
 
