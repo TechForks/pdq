@@ -6,15 +6,23 @@
 
 upper_title="[ pdqOS environment configuration ] (chroot)"
 
-: ${DIALOG_OK=0}
-: ${DIALOG_CANCEL=1}
-: ${DIALOG_HELP=2}
-: ${DIALOG_EXTRA=3}
-: ${DIALOG_ITEM_HELP=4}
-: ${DIALOG_ESC=255}
-
 if [ $(id -u) -eq 0 ]; then
 
+    # sanity default checks
+    wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+    if [ ! -s /tmp/index.google ] ; then
+        systemctl enable dhcpcd@eth0.service
+    fi
+
+    wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+    if [ ! -s /tmp/index.google ] ; then
+        echo "It appears you have no internet connectivity.\n\nRead: https://wiki.archlinux.org/index.php/Configuring_network"
+        echo "This script will exit in 1 minute... or press ctrl-c to exit now."
+        sleep 60s
+        exit 0
+    fi
+
+    # styling
     clr="\Zb\Z0"
 
     # temporary files
@@ -23,8 +31,6 @@ if [ $(id -u) -eq 0 ]; then
     TMP=/tmp/tmp 2>/dev/null
     echo "unset" > $TMP/rootpasswd
 
-    # sanity default checks
-    systemctl enable dhcpcd@eth0.service
     pacman -Syy
     pacman -S --noconfirm --needed dialog
 
@@ -32,7 +38,7 @@ if [ $(id -u) -eq 0 ]; then
     exiting() {
         clear
         rm -f $_TEMP
-        echo "This may take a while... be patient :p"
+        dialog --clear --backtitle "$upper_title" --title "[ Return to Installer ]" --msgbox "Proceed." 10 30
         exit 0
         exit 0
     }
