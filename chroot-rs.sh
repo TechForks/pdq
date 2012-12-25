@@ -45,6 +45,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Generate timezone/localtime" 10 40
         if [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
 
         local tz_list tz
@@ -57,6 +58,7 @@ if [ $(id -u) -eq 0 ]; then
 
         if [ "$GEN_TIMEZONE" = "" ] ; then
             chroot_menu
+            return 0
         fi
 
         if [ -f "/usr/share/zoneinfo/$GEN_TIMEZONE" ] ; then
@@ -71,6 +73,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 10 30
         if [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
 
         GEN_HOSTNAME=$(dialog --stdout --backtitle "${upper_title}" --title '[ HOSTNAME ]' --cancel-label "Go Back" \
@@ -78,6 +81,7 @@ if [ $(id -u) -eq 0 ]; then
       
         if [ "$GEN_HOSTNAME" = "" ] ; then
             chroot_menu
+            return 0
         fi
 
         echo $GEN_HOSTNAME > /etc/hostname
@@ -89,6 +93,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
 
         GEN_LANG=$(dialog --stdout --backtitle "${upper_title}" --title '[ LOCALES ]' --cancel-label "Go Back" --default-item "${GEN_LANG}" \
@@ -251,7 +256,9 @@ if [ $(id -u) -eq 0 ]; then
     
         if [ "$GEN_LANG" = "" ] ; then
             chroot_menu
+            return 0
         fi
+
         echo "${GEN_LANG} ${GEN_LANG##*.}" > "/etc/locale.gen"
         echo "LANG=${GEN_LANG}" > "/etc/locale.conf"
         export "LANG=${GEN_LANG}"
@@ -264,6 +271,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
 
         passwd
@@ -276,6 +284,7 @@ if [ $(id -u) -eq 0 ]; then
         
         if [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
 
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --inputbox "Please choose your username:\n\n" 10 70 2> $TMP/puser
@@ -309,6 +318,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "[ BOOTLOADER ]" --msgbox "Install Bootloader" 10 30
         if [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
         
         dialog --clear --backtitle "$upper_title" --title "[ BOOTLOADER ]" --radiolist "Select bootloader" 20 70 30 \
@@ -317,6 +327,7 @@ if [ $(id -u) -eq 0 ]; then
         2> $TMP/pbootloader
         if [ $? = 1 ] || [ $? = 255 ] ; then
             chroot_menu
+            return 0
         fi
 
         pbootloader=$(cat $TMP/pbootloader)
@@ -327,6 +338,7 @@ if [ $(id -u) -eq 0 ]; then
             2> $TMP/pgrub
             if [ $? = 1 ] || [ $? = 255 ] ; then
                 chroot_menu
+                return 0
             fi
 
             pgrub=$(cat $TMP/pgrub)
@@ -350,6 +362,7 @@ if [ $(id -u) -eq 0 ]; then
                 dialog --clear --backtitle "$upper_title" --title "[ GRUB CONFIGURE ]" --msgbox "Configure Grub" 10 30
                 if [ $? = 1 ] ; then
                     chroot_menu
+                    return 0
                 fi
 
                 ## TODO
