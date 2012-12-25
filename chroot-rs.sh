@@ -411,7 +411,7 @@ if [ $(id -u) -eq 0 ]; then
         rootpasswd=$(cat $TMP/rootpasswd)
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
-            --menu "\Select action:" 20 60 8 \
+            --menu "Select action:" 20 60 8 \
             1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
             2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
             3 $clr"Generate locale [${GEN_LANG}]" \
@@ -420,6 +420,11 @@ if [ $(id -u) -eq 0 ]; then
             6 $clr"Install Bootloader" \
             7 $clr"View/confirm generated data" \
             8 $clr"Exit chroot and return to installer" 2>$_TEMP
+
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            exiting
+            return 0
+        fi
 
         choice=$(cat $_TEMP)
         case $choice in

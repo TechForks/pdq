@@ -52,6 +52,11 @@ if [ $(id -u) -eq 0 ]; then
             9 $clr"Finish and reboot. (Remove livecd after poweroff)" \
             10 $clr"Exit" 2>$_TEMP
 
+        if [ $? = 1 ] || [ $? = 255 ] ; then
+            exiting
+            return 0
+        fi
+
         choice=$(cat $_TEMP)
         case $choice in
             1) list_partitions;;
