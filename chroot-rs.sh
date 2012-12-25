@@ -38,7 +38,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_tz() {
-        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]" --msgbox "Generate timezone/localtime" 10 30
+        dialog --clear --backtitle "$upper_title" --title "[ TIMEZONE ]"  --cancel-label "Go Back" --msgbox "Generate timezone/localtime" 10 30
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -61,7 +61,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     gen_hostname() {
-        dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 10 30
+        #dialog --clear --backtitle "$upper_title" --title "[ HOSTNAME ]" --msgbox "Generate hostname" 10 30
         
         if [ $? = 1 ] ; then
             chroot_menu
@@ -280,7 +280,7 @@ if [ $(id -u) -eq 0 ]; then
             npasswd="password required"
         fi
 
-        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --yesno "Confirm/view sudoers?" 10 30
+        dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --defaultno --yesno "Confirm/view sudoers?" 10 30
         if [ $? = 0 ] ; then
             EDITOR=nano visudo
         fi
@@ -343,7 +343,7 @@ if [ $(id -u) -eq 0 ]; then
     chroot_menu() {
         echo "make it so"
         dialog \
-            --colors --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
+            --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
             --menu "\ZbSelect action:" 20 60 9 \
             1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
             2 $clr"Generate timezone [${GEN_TIMEZONE}]" \

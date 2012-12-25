@@ -123,7 +123,7 @@ if [ $(id -u) -eq 0 ]; then
             what_do
         fi
 
-        dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
+        dialog --clear --title "$upper_title" --yesno "Create a / (primary, bootable* and recommended minimum 6GB in size) and a /home (primary and remaining size) partition.\n\n* Optionally create a /swap (primary and recommended twice the size of your onboard RAM) and /boot (primary, bootable and recommended minimum 1GB in size) partition.\n\nJust follow the menu, store your changes and quit cfdisk to go on!\n\nIMPORTANT: Read the instructions and the output of cfdisk carefully.\n\nProceed?" 20 70
         if [ $? = 0 ] ; then
             umount /mnt/* 2>/dev/null
             cfdisk
@@ -141,7 +141,7 @@ if [ $(id -u) -eq 0 ]; then
         # choose root partition
         dialog --clear --title "CHOOSE ROOT PARTITION" --inputbox "Please choose your preferred root partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 1 for /dev/hda1!" 10 70 2> $TMP/pout
 
-        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next2 is the recommended filesystem." 10 710 30 \
+        dialog --clear --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -170,7 +170,7 @@ if [ $(id -u) -eq 0 ]; then
         # choose home partition
         dialog --clear --title "CHOOSE HOME PARTITION" --inputbox "Please choose your preferred home partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 2 for /dev/hda2!" 10 70 2> $TMP/plout
 
-        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next2 is the recommended filesystem." 10 710 30 \
+        dialog --clear --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
         "1" "ext2" on \
         "2" "ext3" off \
         "3" "ext4" off \
@@ -195,9 +195,50 @@ if [ $(id -u) -eq 0 ]; then
         mkfs -t $fs_type $plout
         mount $plout /mnt/home
 
-        cp -v rs.sh "/mnt/home/rs.sh"
-
         dialog --clear --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
+    
+
+        dialog --clear --title "BOOT PARTITION" --defaultno --yesno "Create the boot filesystem?" 20 70
+        if [ $? = 0 ] ; then
+            # choose boot partition
+            dialog --clear --title "CHOOSE BOOT PARTITION" --inputbox "Please choose your preferred boot partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 3 for /dev/hda3!" 10 70 2> $TMP/pbout
+            
+            dialog --clear --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
+            "1" "ext2" on \
+            "2" "ext3" off \
+            "3" "ext4" off \
+            2> $TMP/pbart
+            if [ $? = 1 ] ; then
+                what_do
+            fi
+
+            pbout=$(cat $TMP/pbout)
+            pbart=$(cat $TMP/pbart)
+            fs_type=
+
+            if [ "$pbart" == "2" ] ; then
+            fs_type="ext3"
+            elif [ "$pbart" == "3" ] ; then
+            fs_type="ext4"
+            else
+            fs_type="ext2"
+            fi
+
+            mkdir -vp /mnt/boot
+            mkfs -t $fs_type $pbout
+            mount $pbout /mnt/boot
+
+            dialog --clear --title "BOOT PARTITION MOUNTED" --msgbox "Your $pbout partition has been mounted at /mnt/boot as $fs_type" 10 70
+        fi
+
+        dialog --clear --title "SWAP PARTITION" --defaultno --yesno "Create the swap filesystem?" 20 70
+        if [ $? = 0 ] ; then
+            # choose home partition
+            dialog --clear --title "CHOOSE SWAP PARTITION" --inputbox "Please choose your preferred swap partition in this way:\n\n/dev/hdaX --- X = number of the partition, e. g. 4 for /dev/hda4!" 10 70 2> $TMP/psout
+            psout=$(cat $TMP/psout)
+            mkswap $psout
+            swapon $psout
+        fi
     }
 
     make_internet() {
@@ -508,10 +549,12 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
         sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
         sudo systemctl daemon-reload
-        sudo systemctl disable getty@tty1
-        sudo systemctl enable autologin@tty1
-        sudo systemctl start autologin@tty1
-
+        dialog --clear --title "$upper_title" --yesno "Enable automatic login to virtual console?" 10 30
+        if [ $? = 0 ] ; then
+            sudo systemctl disable getty@tty1
+            sudo systemctl enable autologin@tty1
+            sudo systemctl start autologin@tty1
+        fi
         sudo sh -c "echo '#
         # /etc/hosts: static lookup table for host names
         #
