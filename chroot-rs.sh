@@ -376,7 +376,7 @@ if [ $(id -u) -eq 0 ]; then
 
     chroot_menu() {
         echo "make it so"
-        rootpasswd=$TMP/rootpasswd
+        rootpasswd=$(cat $TMP/rootpasswd)
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
             --menu "\ZbSelect action:" 20 60 8 \
