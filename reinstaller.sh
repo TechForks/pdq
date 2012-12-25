@@ -80,7 +80,7 @@ if [ $(id -u) -eq 0 ]; then
 
     partition_editor() {
         dialog --clear --title "$upper_title" --cancel-label "Cancel" --msgbox "pdq is not responsible for loss of data or anything else. When in doubt, cancel and read the code.\n\nIf you accept this, you can start cfdisk now!\n\nYou can return to the main menu at any time by hitting <ESC> key." 20 70
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0            
         fi
@@ -96,7 +96,7 @@ if [ $(id -u) -eq 0 ]; then
         fdisk -l | grep Linux | sed -e '/swap/d' | cut -b 1-9 > $TMP/pout 2>/dev/null
 
         dialog --clear --title "ROOT PARTITION DETECTED" --exit-label OK --msgbox "Installer has detected\n\n `cat /tmp/tmp/pout` \n\n as your linux partition(s).\n\nIn the next box you can choose the linux filesystem for your root partition or choose the partition if you have more linux partitions!" 20 70
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -134,7 +134,7 @@ if [ $(id -u) -eq 0 ]; then
         mount $pout /mnt
 
         dialog --clear --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -225,7 +225,7 @@ if [ $(id -u) -eq 0 ]; then
 
     make_internet() {
         dialog --clear --title "$upper_title" --msgbox "Test/configure internet connection" 10 70
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -276,7 +276,7 @@ if [ $(id -u) -eq 0 ]; then
 
     cleanup() {
         dialog --clear --title "$upper_title" --msgbox "Unmount /mnt/*" 10 30
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -288,7 +288,7 @@ if [ $(id -u) -eq 0 ]; then
 
     initial_install() {
         dialog --clear --title "$upper_title" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -303,7 +303,7 @@ if [ $(id -u) -eq 0 ]; then
 
     chroot_configuration() {
         dialog --clear --title "$upper_title" --msgbox "Chroot into mounted filesystem" 10 30 
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -317,7 +317,7 @@ if [ $(id -u) -eq 0 ]; then
 
     generate_fstab() {
         dialog --clear --title "$upper_title" --msgbox "Generate fstab" 10 30
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
@@ -333,7 +333,7 @@ if [ $(id -u) -eq 0 ]; then
 
     finishup() {
         dialog --clear --title "$upper_title" --msgbox "Finish install and reboot" 10 30
-        if [ $? = 1 ] || [ $? = 255 ] ; then
+        if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi

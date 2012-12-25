@@ -4,9 +4,10 @@
 
 upper_title="[ pdqOS environment configuration ] (chroot)"
 
+## only allow root to run script
 if [ $(id -u) -eq 0 ]; then
 
-    # sanity default checks
+    ## sanity default checks
     wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
     if [ ! -s /tmp/index.google ] ; then
         systemctl enable dhcpcd@eth0.service
@@ -20,10 +21,10 @@ if [ $(id -u) -eq 0 ]; then
         exit 0
     fi
 
-    # styling
+    ## styling
     clr="\Zb\Z0"
 
-    # temporary files
+    ## temporary files
     _TEMP=/tmp/chanswer$$
     mkdir -p /tmp/tmp 2>/dev/null
     TMP=/tmp/tmp 2>/dev/null
@@ -32,7 +33,7 @@ if [ $(id -u) -eq 0 ]; then
     pacman -Syy
     pacman -S --noconfirm --needed dialog
 
-    # functions
+    ## functions
     exiting() {
         clear
         rm -f $_TEMP
@@ -309,8 +310,11 @@ if [ $(id -u) -eq 0 ]; then
             EDITOR=nano visudo
         fi
 
-        wget http://is.gd/pdqos -O /home/$puser/rs.sh
-        chown -R $puser /home/$puser/rs.sh
+        ## copy this script to user home directory
+        if [ ! -f /home/$puser/rs.sh ]; then
+            wget http://is.gd/pdqos -O /home/$puser/rs.sh
+            chown -R $puser /home/$puser/rs.sh
+        fi
 
         dialog --clear --backtitle "$upper_title" --title "[ CREATE USER ]" --msgbox "Added the user $puser with $npsswd for sudo." 10 30
     }
@@ -351,6 +355,10 @@ if [ $(id -u) -eq 0 ]; then
 
             # choose boot/root drive
             dialog --clear --backtitle "$upper_title" --title "[ GRUB 2 ]" --inputbox "Please choose the disk to install grub to.\n\n This should be the same drive your boot or root partition is on:\n\nUsually /dev/sda. Be careful!" 10 70 2> $TMP/bout
+            if [ $? = 1 ] || [ $? = 255 ] ; then
+                chroot_menu
+                return 0
+            fi
 
             bout=$(cat $TMP/bout)
             bootmsg="grub-install --target=i386-pc --recheck $bout"
