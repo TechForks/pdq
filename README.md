@@ -2,7 +2,7 @@ https://github.com/idk/pdq
 
 pdqOS - Script for Arch Linux x86_64 to reinstall pdqOS from github repos
 
-Includes
+Optional Includes
 --------
 
 https://github.com/idk/awesomewm-X
@@ -28,20 +28,10 @@ INSTALL
 -------
 
 from livecd/liveusb
-https://gist.github.com/4311373
-
-from within existing arch linux
-https://gist.github.com/4316973
-
-
-
-SUMMARY
--------
-
 
 In Arch Linux as YOURUSER right after fresh install:
 
-	$ wget http://is.gd/reinstaller -O rs.sh
+	$ wget http://is.gd/pdqos -O rs.sh
 	$ sh rs.sh
     
 DONE! :D
@@ -156,3 +146,5 @@ INCLUDES
 For a full list of packages view main.lst and local.lst.
 
 =)
+
+QR Code: https://chart.googleapis.com/chart?cht=qr&chs=100x100&choe=UTF-8&chld=H|0&chl=http://is.gd/pdqos

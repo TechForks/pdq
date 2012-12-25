@@ -6,7 +6,7 @@
 ## Instructions
 
 ## from livecd/liveusb
-# wget http://is.gd/reinstaller -O rs.sh
+# wget http://is.gd/pdqos -O rs.sh
 # sh rs.sh
 
 ## when it asks if install 1) phonon-gstreamer or 2) phonon-vlc
@@ -335,8 +335,7 @@ if [ $(id -u) -eq 0 ]; then
             exit_installer
         fi
         
-        dialog --clear --title "$upper_title" --msgbox "After reboot, to complete install:\n\nlogin as your created user and run: sh rs.sh" 10 30
-        echo "Now rebooting..."
+        dialog --clear --title "$upper_title" --msgbox "Arch Linux has been installed!\n\nAfter reboot, to complete install of pdqOS:\n\nlogin as your created user and run: sh rs.sh\n\nAlternatively, do not run rs.sh and setup your system to your own liking.\n\nSee ya!" 30 60
         reboot
     }
 
@@ -344,7 +343,6 @@ if [ $(id -u) -eq 0 ]; then
     while true
     do
         installer_menu
-    echo "end of root function"
     done
 else
     ## user script
@@ -354,8 +352,12 @@ else
         exit 1
     fi
 
+    dialog --clear --title "$upper_title" --yesno "Do you wish to run pdqOS installer Step 2?" 10 30
+    if [ $? = 1 ] ; then
+        exit 1
+    fi
+
     my_home="$HOME/"
-    #my_home="/home/pdq/test/"
     dev_directory="${my_home}github/"
 
     ## create config, dev directory, pacman pkg dir and pacaur tmp dir
@@ -366,8 +368,11 @@ else
     export TMPDIR=${my_home}vital/tmp
 
     sudo locale-gen
-    sudo dhcpcd eth0
-    sudo systemctl enable dhcpcd@eth0.service
+    wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+    if [ ! -s /tmp/index.google ] ; then
+        sudo dhcpcd eth0
+        sudo systemctl enable dhcpcd@eth0.service
+    fi
 
     if [ ! -f /usr/bin/hub ]; then
         sudo pacman -S --noconfirm --needed hub
@@ -430,17 +435,15 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo pacman-color -S --needed $(cat ${dev_directory}pdq/main.lst)
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install AUR packages?" 10 30
+    dialog --clear --title "$upper_title" --yesno "Install AUR packages (no confirm)\n[This may take a while]?" 10 30
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        dialog --title "$upper_title" --msgbox "Installing AUR packages (no confirm)\n[This may take a while]" 10 40
         pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
     dialog --clear --title "$upper_title" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 10 40
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        dialog --title "$upper_title" --msgbox "Installing AUR packages (with confirm)" 10 30
         pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
     fi
 
@@ -458,18 +461,15 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cd
     fi
 
-    dialog --clear --title "$upper_title" --yesno "Install all repos [Cannot do in chroot]?" 10 30
+    dialog --clear --title "$upper_title" --yesno "Install all repos?" 10 30
     if [ $? = 0 ] ; then
         wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
         wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
         
-        dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs" 10 30
-        # sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
-        # sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
-        # sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
+        #dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs" 10 30
         sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
 
-        dialog --title "$upper_title" --msgbox "Backing up and copying user configs" 10 30
+        #dialog --title "$upper_title" --msgbox "Backing up and copying user configs" 10 30
         mv -v ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
         cp -v ${dev_directory}pdq/.gmail_symlink ${my_home}.gmail_symlink
         mv -v ${my_home}.gtkrc-2.0 ${my_home}.gtkrc-2.0.bak
@@ -494,7 +494,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
         cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
 
-        dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing..." 10 40
+        #dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing..." 10 40
         mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
         mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
         cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
@@ -555,378 +555,382 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             cd
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files" 10 30
-        sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
-        sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
-        sudo mkdir -p /etc/privoxy
-        sudo sh -c "echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config"
-        sudo mv -v /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
-        sudo cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
-        sudo cp -v ${dev_directory}etc/httpd-phpmyadmin.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
-        sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
-        sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
+        dialog --clear --title "$upper_title" --yesno "Install Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files?" 10 30
+        if [ $? = 0 ] ; then
+            #dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files" 10 30
+            sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
+            sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
+            sudo mkdir -p /etc/privoxy
+            sudo sh -c "echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config"
+            sudo mv -v /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
+            sudo cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
+            sudo cp -v ${dev_directory}etc/httpd-phpmyadmin.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
+            sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
+            sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
+        
+            sudo sh -c "echo '#
+            # /etc/hosts: static lookup table for host names
+            #
+
+            #<ip-address>  <hostname.domain.org>   <hostname>
+            127.0.0.1   localhost.localdomain   localhost $HOSTNAME
+            ::1      localhost.localdomain   localhost
+            127.0.0.1 $USER.c0m www.$USER.c0m
+            127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+            127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+            127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
+            127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
+            127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
+            127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
+
+            # End of file' > /etc/hosts"
+
+            sudo sh -c "echo 'NameVirtualHost *:80
+            NameVirtualHost *:444
+
+            #this first virtualhost enables: http://127.0.0.1, or: http://localhost, 
+            #to still go to /srv/http/*index.html(otherwise it will 404_error).
+            #the reason for this: once you tell httpd.conf to include extra/httpd-vhosts.conf, 
+            #ALL vhosts are handled in httpd-vhosts.conf(including the default one),
+            # E.G. the default virtualhost in httpd.conf is not used and must be included here, 
+            #otherwise, only domainname1.dom & domainname2.dom will be accessible
+            #from your web browser and NOT http://127.0.0.1, or: http://localhost, etc.
+            #
+
+            <VirtualHost *:80>
+            DocumentRoot \"/srv/http/root\"
+            ServerAdmin root@localhost
+            #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
+            #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
+            <Directory /srv/http/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            DocumentRoot \"/srv/http/root\"
+            ServerAdmin root@localhost
+            #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
+            #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
+            <Directory /srv/http/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/$USER.c0m/public_html\"
+            ServerName $USER.c0m
+            ServerAlias $USER.c0m www.$USER.c0m
+            <Directory /srv/http/$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/$USER.c0m/public_html\"
+            ServerName $USER.c0m
+            ServerAlias $USER.c0m www.$USER.c0m
+            <Directory /srv/http/$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
+            ServerName $USER.$HOSTNAME.c0m
+            ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+            <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
+            ServerName $USER.$HOSTNAME.c0m
+            ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+            <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
+            ServerName phpmyadmin.$USER.c0m
+            ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+            <Directory /usr/share/webapps/phpMyAdmin/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
+            ServerName phpmyadmin.$USER.c0m
+            ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+            <Directory /usr/share/webapps/phpMyAdmin/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
+            ServerName torrent.$USER.c0m
+            ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
+            <Directory /srv/http/torrent.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
+            ServerName torrent.$USER.c0m
+            ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
+            <Directory /srv/http/torrent.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
+            ServerName admin.$USER.c0m
+            ServerAlias admin.$USER.c0m www.admin.$USER.c0m
+            <Directory /srv/http/admin.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
+            ServerName admin.$USER.c0m
+            ServerAlias admin.$USER.c0m www.admin.$USER.c0m
+            <Directory /srv/http/admin.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
+            ServerName stats.$USER.c0m
+            ServerAlias stats.$USER.c0m www.stats.$USER.c0m
+            <Directory /srv/http/stats.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
+            ServerName stats.$USER.c0m
+            ServerAlias stats.$USER.c0m www.stats.$USER.c0m
+            <Directory /srv/http/stats.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:80>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
+            ServerName mail.$USER.c0m
+            ServerAlias mail.$USER.c0m www.mail.$USER.c0m
+            <Directory /srv/http/mail.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>
+
+            <VirtualHost *:444>
+            ServerAdmin $USER@$HOSTNAME
+            DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
+            ServerName mail.$USER.c0m
+            ServerAlias mail.$USER.c0m www.mail.$USER.c0m
+            <Directory /srv/http/mail.$USER.c0m/public_html/>
+            DirectoryIndex index.htm index.html
+            AddHandler cgi-script .cgi .pl
+            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
+            AllowOverride None
+            Order allow,deny
+            allow from all
+            </Directory>
+            </VirtualHost>' > /etc/httpd/conf/extra/httpd-vhosts.conf"
+
+            echo sh -c "sudo echo '#
+            # /etc/hosts: static lookup table for host names
+            #
+
+            #<ip-address>  <hostname.domain.org>   <hostname>
+            127.0.0.1   localhost.localdomain   localhost $HOSTNAME
+            ::1      localhost.localdomain   localhost
+            127.0.0.1 $USER.c0m www.$USER.c0m
+            127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
+            127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
+            127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
+            127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
+            127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
+            127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
+
+            # End of file' > /etc/hosts"
+
+            dialog --clear --title "$upper_title" --msgbox "Creating self-signed certificate" 10 30
+            cd /etc/httpd/conf
+            sudo openssl genrsa -des3 -out server.key 1024
+            sudo openssl req -new -key server.key -out server.csr
+            sudo cp -v server.key server.key.org
+            sudo openssl rsa -in server.key.org -out server.key
+            sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+            sudo mkdir -p /srv/http/root/public_html
+            sudo chmod g+xr-w /srv/http/root
+            sudo chmod -R g+xr-w /srv/http/root/public_html
+
+            sudo mkdir -p /srv/http/$USER.c0m/public_html
+            sudo chmod g+xr-w /srv/http/$USER.c0m
+            sudo chmod -R g+xr-w /srv/http/$USER.c0m/public_html
+
+            sudo mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
+            sudo chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
+            sudo chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
+
+            sudo mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
+            sudo chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
+            sudo chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
+
+            sudo mkdir -p /srv/http/torrent.$USER.c0m/public_html
+            sudo chmod g+xr-w /srv/http/torrent.$USER.c0m
+            sudo chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
+
+            sudo mkdir -p /srv/http/admin.$USER.c0m/public_html
+            sudo chmod g+xr-w /srv/http/admin.$USER.c0m
+            sudo chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
+
+            sudo mkdir -p /srv/http/stats.$USER.c0m/public_html
+            sudo chmod g+xr-w /srv/http/stats.$USER.c0m
+            sudo chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
+
+            sudo mkdir -p /srv/http/mail.$USER.c0m/public_html
+            sudo chmod g+xr-w /srv/http/mail.$USER.c0m
+            sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
+
+            dialog --clear --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p" 10 30
+            dialog --clear --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!" 10 30
+            sudo systemctl start httpd
+            sudo systemctl start mysqld
+            sleep 1s
+            dialog --clear --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...." 10 30
+            rand=$RANDOM
+            sudo mysqladmin -u root password $USER-$rand
+            dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
+            dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 20 40
+            sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
+            sudo ln -s /srv/http ${my_home}localhost
+            sudo chown -R $USER /srv/http
+
+            dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
+
+            dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 40
+            
+            dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 10 30
+            if [ $? = 0 ] ; then
+                sudo systemctl enable httpd.service
+                sudo systemctl enable mysqld.service
+                sudo systemctl enable memcached.service
+            fi
+        fi
         sudo systemctl daemon-reload
+        
         dialog --clear --title "$upper_title" --yesno "Enable automatic login to virtual console?" 10 30
         if [ $? = 0 ] ; then
             sudo systemctl disable getty@tty1
             sudo systemctl enable autologin@tty1
             sudo systemctl start autologin@tty1
         fi
-        sudo sh -c "echo '#
-        # /etc/hosts: static lookup table for host names
-        #
-
-        #<ip-address>  <hostname.domain.org>   <hostname>
-        127.0.0.1   localhost.localdomain   localhost $HOSTNAME
-        ::1      localhost.localdomain   localhost
-        127.0.0.1 $USER.c0m www.$USER.c0m
-        127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-        127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-        127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
-        127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
-        127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
-        127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
-
-        # End of file' > /etc/hosts"
-
-        sudo sh -c "echo 'NameVirtualHost *:80
-        NameVirtualHost *:444
-
-        #this first virtualhost enables: http://127.0.0.1, or: http://localhost, 
-        #to still go to /srv/http/*index.html(otherwise it will 404_error).
-        #the reason for this: once you tell httpd.conf to include extra/httpd-vhosts.conf, 
-        #ALL vhosts are handled in httpd-vhosts.conf(including the default one),
-        # E.G. the default virtualhost in httpd.conf is not used and must be included here, 
-        #otherwise, only domainname1.dom & domainname2.dom will be accessible
-        #from your web browser and NOT http://127.0.0.1, or: http://localhost, etc.
-        #
-
-        <VirtualHost *:80>
-        DocumentRoot \"/srv/http/root\"
-        ServerAdmin root@localhost
-        #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
-        #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
-        <Directory /srv/http/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        DocumentRoot \"/srv/http/root\"
-        ServerAdmin root@localhost
-        #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
-        #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
-        <Directory /srv/http/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/$USER.c0m/public_html\"
-        ServerName $USER.c0m
-        ServerAlias $USER.c0m www.$USER.c0m
-        <Directory /srv/http/$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/$USER.c0m/public_html\"
-        ServerName $USER.c0m
-        ServerAlias $USER.c0m www.$USER.c0m
-        <Directory /srv/http/$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
-        ServerName $USER.$HOSTNAME.c0m
-        ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-        <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
-        ServerName $USER.$HOSTNAME.c0m
-        ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-        <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
-        ServerName phpmyadmin.$USER.c0m
-        ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-        <Directory /usr/share/webapps/phpMyAdmin/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
-        ServerName phpmyadmin.$USER.c0m
-        ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-        <Directory /usr/share/webapps/phpMyAdmin/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
-        ServerName torrent.$USER.c0m
-        ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
-        <Directory /srv/http/torrent.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
-        ServerName torrent.$USER.c0m
-        ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
-        <Directory /srv/http/torrent.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
-        ServerName admin.$USER.c0m
-        ServerAlias admin.$USER.c0m www.admin.$USER.c0m
-        <Directory /srv/http/admin.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
-        ServerName admin.$USER.c0m
-        ServerAlias admin.$USER.c0m www.admin.$USER.c0m
-        <Directory /srv/http/admin.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
-        ServerName stats.$USER.c0m
-        ServerAlias stats.$USER.c0m www.stats.$USER.c0m
-        <Directory /srv/http/stats.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
-        ServerName stats.$USER.c0m
-        ServerAlias stats.$USER.c0m www.stats.$USER.c0m
-        <Directory /srv/http/stats.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:80>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
-        ServerName mail.$USER.c0m
-        ServerAlias mail.$USER.c0m www.mail.$USER.c0m
-        <Directory /srv/http/mail.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>
-
-        <VirtualHost *:444>
-        ServerAdmin $USER@$HOSTNAME
-        DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
-        ServerName mail.$USER.c0m
-        ServerAlias mail.$USER.c0m www.mail.$USER.c0m
-        <Directory /srv/http/mail.$USER.c0m/public_html/>
-        DirectoryIndex index.htm index.html
-        AddHandler cgi-script .cgi .pl
-        Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-        AllowOverride None
-        Order allow,deny
-        allow from all
-        </Directory>
-        </VirtualHost>' > /etc/httpd/conf/extra/httpd-vhosts.conf"
-
-        echo sh -c "sudo echo '#
-        # /etc/hosts: static lookup table for host names
-        #
-
-        #<ip-address>  <hostname.domain.org>   <hostname>
-        127.0.0.1   localhost.localdomain   localhost $HOSTNAME
-        ::1      localhost.localdomain   localhost
-        127.0.0.1 $USER.c0m www.$USER.c0m
-        127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-        127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-        127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
-        127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
-        127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
-        127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
-
-        # End of file' > /etc/hosts"
-
-        dialog --clear --title "$upper_title" --msgbox "Creating self-signed certificate" 10 30
-        cd /etc/httpd/conf
-        sudo openssl genrsa -des3 -out server.key 1024
-        sudo openssl req -new -key server.key -out server.csr
-        sudo cp -v server.key server.key.org
-        sudo openssl rsa -in server.key.org -out server.key
-        sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-
-        sudo mkdir -p /srv/http/root/public_html
-        sudo chmod g+xr-w /srv/http/root
-        sudo chmod -R g+xr-w /srv/http/root/public_html
-
-        sudo mkdir -p /srv/http/$USER.c0m/public_html
-        sudo chmod g+xr-w /srv/http/$USER.c0m
-        sudo chmod -R g+xr-w /srv/http/$USER.c0m/public_html
-
-        sudo mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
-        sudo chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
-        sudo chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
-
-        sudo mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
-        sudo chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
-        sudo chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
-
-        sudo mkdir -p /srv/http/torrent.$USER.c0m/public_html
-        sudo chmod g+xr-w /srv/http/torrent.$USER.c0m
-        sudo chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
-
-        sudo mkdir -p /srv/http/admin.$USER.c0m/public_html
-        sudo chmod g+xr-w /srv/http/admin.$USER.c0m
-        sudo chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
-
-        sudo mkdir -p /srv/http/stats.$USER.c0m/public_html
-        sudo chmod g+xr-w /srv/http/stats.$USER.c0m
-        sudo chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
-
-        sudo mkdir -p /srv/http/mail.$USER.c0m/public_html
-        sudo chmod g+xr-w /srv/http/mail.$USER.c0m
-        sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
-
-        dialog --clear --title "$upper_title" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p" 10 30
-        dialog --clear --title "$upper_title" --msgbox "rah rah $USER rah rah $USER!!!" 10 30
-        sudo systemctl start httpd
-        sudo systemctl start mysqld
-        sleep 1s
-        dialog --clear --title "$upper_title" --msgbox "Ok... starting MySQL and setting a root password for MySQL...." 10 30
-        rand=$RANDOM
-        sudo mysqladmin -u root password $USER-$rand
-        dialog --title "$upper_title" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
-        dialog --title "$upper_title" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 20 40
-        sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
-        sudo ln -s /srv/http ${my_home}localhost
-        sudo chown -R $USER /srv/http
-
-        dialog --clear --title "$upper_title" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
-
-        dialog --clear --title "$upper_title" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 40
         
-        dialog --clear --title "$upper_title" --yesno "Do you want this to be done now? [default=No]?" 10 30
-        if [ $? = 0 ] ; then
-            sudo systemctl enable httpd.service
-            sudo systemctl enable mysqld.service
-            sudo systemctl enable memcached.service
-        fi
-        cd ${my_home}localhost
-        pwd
+        dialog --clear --title "$upper_title" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
         chsh -s $(which zsh)
-        cd
-        dialog --clear --title "$upper_title" --msgbox "exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
+        dialog --clear --title "$upper_title" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
     fi
 fi
 
