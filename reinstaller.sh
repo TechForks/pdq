@@ -317,7 +317,6 @@ if [ $(id -u) -eq 0 ]; then
         chmod +x chroot-rs.sh
         mv chroot-rs.sh /mnt/chroot-rs.sh
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
-        dialog --clear --backtitle "$upper_title" --title "Chroot" --msgbox "Hit enter to return to menu" 10 30
     }
 
     generate_fstab() {
