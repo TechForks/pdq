@@ -313,11 +313,11 @@ if [ $(id -u) -eq 0 ]; then
             return 0 
         fi
          
-        if [ ! -f /mnt/chroot-rs.sh ]; then
+        #if [ ! -f /mnt/chroot-rs.sh ]; then
             wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
             chmod +x chroot-rs.sh
             mv chroot-rs.sh /mnt/chroot-rs.sh
-        fi
+        #fi
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
     }
 
