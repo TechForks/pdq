@@ -22,7 +22,7 @@ fi
 if [ $(id -u) -eq 0 ]; then
 
     ## styling
-    clr="\Zb\Z0"
+    clr=""
 
     ## temporary files
     _TEMP=/tmp/answer$$
