@@ -44,7 +44,7 @@ if [ $(id -u) -eq 0 ]; then
     exiting_installer() {
         clear
         rm -f $_TEMP
-        dialog --clear --title "$upper_title" --msgbox "exiting_installer... type: rs.sh to re-run" 10 30
+        dialog --clear --title "$upper_title" --msgbox "exiting... type: rs.sh to re-run" 10 30
         exit 0
     }
 
@@ -926,7 +926,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         pwd
         chsh -s $(which zsh)
         cd
-        dialog --clear --title "$upper_title" --msgbox "exiting_installer install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
+        dialog --clear --title "$upper_title" --msgbox "exiting install script...\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\n pacaur intel [replacing 'intel' with your graphics card type]" 20 40
     fi
 fi
 
