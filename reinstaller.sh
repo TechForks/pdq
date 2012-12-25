@@ -292,7 +292,7 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     initial_install() {
-        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Install base base-devel sudo git hub rsync wget" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Install base base-devel sudo git hub rsync wget zsh" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -302,9 +302,8 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "Custom packages" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git hub rsync wget\nleave input blank and continue." 40 70 2> $TMP/ppkgs
         ppkgs=" $(cat $TMP/ppkgs)"
 
-        pacstrap /mnt base base-devel sudo git hub rsync wget$ppkgs
-        sleep 5s
-        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget $ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
+        pacstrap /mnt base base-devel sudo git hub rsync wget zsh$ppkgs
+        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget zsh$ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
     }
 
     chroot_configuration() {
