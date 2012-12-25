@@ -33,7 +33,7 @@ if [ $(id -u) -eq 0 ]; then
     exiting_installer() {
         clear
         rm -f $_TEMP
-        dialog --clear --title "$upper_title" --msgbox "exiting... type: rs.sh to re-run" 10 30
+        dialog --clear --title "$upper_title" --msgbox "exiting...\n\ntype: rs.sh to re-run" 20 30
         exit 0
     }
 
