@@ -406,12 +406,23 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "[ VIEW CONFIGURATION ]" --msgbox "Return" 10 30
     }
 
+    edit_file() {
+        FILE=$(dialog --stdout --backtitle "$upper_title" --title "Please choose a file to open with nano:" --fselect /etc 0 0)
+
+        if [ $? = 0 ] ; then
+            nano "$FILE"
+        else
+            chroot_menu
+            return 0 
+        fi
+    }
+
     chroot_menu() {
         echo "make it so"
         rootpasswd=$(cat $TMP/rootpasswd)
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
-            --menu "Select action:" 20 60 8 \
+            --menu "Select action:" 20 60 9 \
             1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
             2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
             3 $clr"Generate locale [${GEN_LANG}]" \
@@ -419,7 +430,8 @@ if [ $(id -u) -eq 0 ]; then
             5 $clr"Create default user and add to sudoers" \
             6 $clr"Install Bootloader" \
             7 $clr"View/confirm generated data" \
-            8 $clr"Exit chroot and return to installer" 2>$_TEMP
+            8 $clr"View/edit files [optional]" \
+            9 $clr"Exit chroot and return to installer" 2>$_TEMP
 
         if [ $? = 1 ] || [ $? = 255 ] ; then
             exiting
@@ -435,7 +447,8 @@ if [ $(id -u) -eq 0 ]; then
             5) add_user;;
             6) install_bootloader;;
             7) conf_view;;
-            8) exiting;;
+            8) edit_file;;
+            9) exiting;;
         esac
     }
 
