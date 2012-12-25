@@ -33,7 +33,7 @@ if [ $(id -u) -eq 0 ]; then
     exiting_installer() {
         clear
         rm -f $_TEMP
-        dialog --clear --title "$upper_title" --msgbox "exiting...\n\ntype: rs.sh to re-run" 10 60
+        dialog --clear --title "$upper_title" --msgbox "exiting...\n\ntype: rs.sh to re-run" 10 40
         exit 0
     }
 
@@ -75,7 +75,7 @@ if [ $(id -u) -eq 0 ]; then
             partition_list="It appears you have no linux partitions yet."
         fi
 
-        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 15 20
+        dialog --clear --title "$upper_title" --msgbox "$partition_list \n\n Hit enter to return to menu" 15 30
     }
 
     partition_editor() {
