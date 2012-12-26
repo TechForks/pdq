@@ -8,14 +8,24 @@
 
 # wget http://is.gd/pdqos -O rs.sh && sh rs.sh
 
-upper_title="pdqOS Installer for Arch Linux x86_64"
 
-## code be `ere
-grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="yes" || archtype="no"
-if [ "$archtype" = "no" ]; then
-    dialog --backtitle "$upper_title" --title "Oopsie" --msgbox "Sorry this is for x86_64 only!" 20 70
-    exit 1
+
+
+### Code be `ere yarrr! ###
+## figure out architecture type
+grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="x86_64" || archtype="i686"
+
+if [ "$archtype" = "x86_64" ]; then
+    dialog --backtitle "pdq OS Installer for Arch Linux" --title "Information" --msgbox "Your architecture type is x86_64, this installer assumes you are using the x86_64 livecd option...\nproceeding (press ESC to exit)" 20 70
+else
+    dialog --backtitle "pdq OS Installer for Arch Linux" --title "Information" --msgbox "Your architecture type is i686, this installer assumes you are using the i686 livecd option... proceeding\n(press ESC to exit)" 20 70
 fi
+
+if [ $? = 255 ] ; then
+    exit 0
+fi
+
+upper_title="pdqOS Installer for Arch Linux $archtype"
 
 ## root script
 if [ $(id -u) -eq 0 ]; then
@@ -414,7 +424,11 @@ else
         hub clone idk/etc
         cd
         sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
-        sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
+        if [ "$archtype" = "x86_64" ]; then
+            sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
+        else
+            sudo cp -v ${dev_directory}etc/pacman.i686.conf /etc/pacman.conf
+        fi
         sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
         sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
         sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
@@ -440,19 +454,33 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     if [ $? = 0 ] ; then
         dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
         sudo powerpill -Syy
-        sudo pacman-color -S --needed $(cat ${dev_directory}pdq/main.lst)
+
+        if [ "$archtype" = "x86_64" ]; then
+            mainpkgs="main-i686.lst"
+        else
+            mainpkgs="main.lst"
+        fi
+        
+        sudo pacman-color -S --needed $(cat ${dev_directory}pdq/$mainpkgs)
+    fi
+
+    if [ "$archtype" = "x86_64" ]; then
+        localpkgs="local.lst"
+    else
+        localpkgs="local-i686.lst"
     fi
 
     dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install AUR packages (no confirm)\n[This may take a while]?" 10 30
+
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        pacaur --noconfirm -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+        pacaur --noconfirm -S $(cat ${dev_directory}pdq/$localpkgs | grep -vx "$(pacman -Qqm)")
     fi
 
     dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 10 40
     if [ $? = 0 ] ; then
         sudo powerpill -Syy
-        pacaur -S $(cat ${dev_directory}pdq/local.lst | grep -vx "$(pacman -Qqm)")
+        pacaur -S $(cat ${dev_directory}pdq/$localpkgs | grep -vx "$(pacman -Qqm)")
     fi
 
     dialog --clear --backtitle "$upper_title" --title "Configuration files" --yesno "Clone all repos?" 10 30

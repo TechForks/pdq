@@ -118,7 +118,6 @@ ntfsprogs
 ntp
 openshot
 openssh
-openttd
 openttd-opengfx
 openttd-opensfx
 patch
@@ -163,7 +162,6 @@ transmission-cli
 truecrypt
 ttf-envy-code-r
 udevil
-unetbootin
 unrar
 unzip
 upx
