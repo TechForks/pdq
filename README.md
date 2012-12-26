@@ -29,10 +29,9 @@ INSTALL
 
 from livecd/liveusb
 
-In Arch Linux as YOURUSER right after fresh install:
+In Arch Linux as YOURUSER right after fresh install and autologin as root:
 
-	$ wget http://is.gd/pdqos -O rs.sh
-	$ sh rs.sh
+	# wget http://is.gd/pdqos -O rs.sh && sh rs.sh
     
 DONE! :D
 --------
