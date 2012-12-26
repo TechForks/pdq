@@ -890,13 +890,14 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
             # End of file' > /etc/hosts"
 
-            dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Creating self-signed certificate" 10 30
-            cd /etc/httpd/conf
-            sudo openssl genrsa -des3 -out server.key 1024
-            sudo openssl req -new -key server.key -out server.csr
-            sudo cp -v server.key server.key.org
-            sudo openssl rsa -in server.key.org -out server.key
-            sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+            #TODO
+            # dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Creating self-signed certificate" 10 30
+            # cd /etc/httpd/conf
+            # sudo openssl genrsa -des3 -out server.key 1024
+            # sudo openssl req -new -key server.key -out server.csr
+            # sudo cp -v server.key server.key.org
+            # sudo openssl rsa -in server.key.org -out server.key
+            # sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
             sudo mkdir -p /srv/http/root/public_html
             sudo chmod g+xr-w /srv/http/root
