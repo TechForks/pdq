@@ -450,6 +450,11 @@ vboxsf
 vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     fi
 
+    ## sanity checks
+    if [ ! -f /usr/bin/rsync ] || [ ! -f /usr/bin/hub ] || [ ! -f /usr/bin/pacaur ] || [ ! -f /usr/bin/pacman-color ] || [ ! -f /usr/bin/powerpill ]; then
+        dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "Hmmm. An ERROR has occured...\n\nPackage depends not met, this installer failed to install one of the following:\nrsync, git, hub, packer, pacaur, pacman-color or powerpill.\n\nExiting..." 30 70
+    fi
+
     dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install main packages?" 10 30
     if [ $? = 0 ] ; then
         dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
