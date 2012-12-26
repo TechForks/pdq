@@ -965,8 +965,9 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             sudo systemctl start autologin@tty1
         fi
         
-        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
-        chsh -s $(which zsh)
+        # not needed anymore since zsh shell is set via chroot script run previously
+        # dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
+        # chsh -s $(which zsh)
 
         if [ "$archtype" = "x86_64" ]; then
         dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\npacaur XXXX\n\nReplacing XXXX with:\n'lib32-ati-dri: for open source ATI driver users'
