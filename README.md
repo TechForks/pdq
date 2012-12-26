@@ -1,6 +1,6 @@
 https://github.com/idk/pdq
 
-pdqOS - Script for Arch Linux x86_64 to reinstall pdqOS from github repos
+pdqOS - Script for Arch Linux x86_64/i686 to reinstall pdqOS from github repos
 
 Optional Includes
 --------
