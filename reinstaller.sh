@@ -26,6 +26,7 @@ if [ $? = 255 ] ; then
 fi
 
 upper_title="pdqOS Installer for Arch Linux $archtype"
+setterm -blank 0
 
 ## root script
 if [ $(id -u) -eq 0 ]; then

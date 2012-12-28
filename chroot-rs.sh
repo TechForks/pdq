@@ -30,7 +30,7 @@ if [ $(id -u) -eq 0 ]; then
     TMP=/tmp/tmp 2>/dev/null
     echo "unset" > $TMP/rootpasswd
 
-    xset -dpms; xset s off
+    setterm -blank 0
     pacman -Syy
     pacman -S --noconfirm --needed dialog
 
