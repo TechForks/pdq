@@ -461,9 +461,9 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo powerpill -Syy
 
         if [ "$archtype" = "x86_64" ]; then
-            mainpkgs="main-i686.lst"
-        else
             mainpkgs="main.lst"
+        else
+            mainpkgs="main-i686.lst"
         fi
 
         sudo pacman-color -S --needed $(cat ${dev_directory}pdq/$mainpkgs)
