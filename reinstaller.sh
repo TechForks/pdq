@@ -17,12 +17,23 @@ grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="x86_64" || archtype="i686"
 
 if [ "$archtype" = "x86_64" ]; then
     dialog --backtitle "pdq OS Installer for Arch Linux" --title "Information" --msgbox "Your architecture type is x86_64, this installer assumes you are using the x86_64 livecd option...\nproceeding (press ESC to exit)" 20 70
+    archtype="x86_64"
+    not_archtype="i686"
 else
     dialog --backtitle "pdq OS Installer for Arch Linux" --title "Information" --msgbox "Your architecture type is i686, this installer assumes you are using the i686 livecd option... proceeding\n(press ESC to exit)" 20 70
+    archtype="i686"
+    not_archtype="x86_64"
 fi
 
 if [ $? = 255 ] ; then
     exit 0
+fi
+
+dialog --clear --backtitle "$upper_title" --title "Architecture type" --yes-label "$archtype" --no-label "$not_archtype" --yesno "Double check. [Select Arch type]" 20 70
+if [ $? = 0 ] ; then
+        archtype=$archtype
+    else
+        archtype=$not_archtype
 fi
 
 upper_title="pdqOS Installer for Arch Linux $archtype"
