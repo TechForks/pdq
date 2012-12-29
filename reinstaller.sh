@@ -53,7 +53,7 @@ if [ $(id -u) -eq 0 ]; then
             --menu "Select action: (Do them in order)" 20 60 10 \
             1 $clr"List linux partitions" \
             2 $clr"Partition editor (cfdisk)" \
-            3 $clr"Format and mount filesystems" \
+            3 $clr"Format and/or mount filesystems" \
             4 $clr"Create internet connection" \
             5 $clr"Initial install" \
             6 $clr"Generate fstab" \
@@ -123,32 +123,38 @@ if [ $(id -u) -eq 0 ]; then
             return 0 
         fi
 
-        dialog --clear --backtitle "$upper_title" --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
-        "1" "ext2" off \
-        "2" "ext3" off \
-        "3" "ext4" on \
-        2> $TMP/part
-        if [ $? = 1 ] || [ $? = 255 ] ; then
-            installer_menu
-            return 0 
-        fi
-
         pout=$(cat $TMP/pout)
-        part=$(cat $TMP/part)
-        fs_type=
 
-        if [ "$part" == "2" ] ; then
-            fs_type="ext3"
-        elif [ "$part" == "3" ] ; then
-            fs_type="ext4"
-        else
-            fs_type="ext2"
+        dialog --clear --backtitle "$upper_title" --title "ROOT  PARTITION" --yesno "Create the filesystem? [Select No to skip to mounting]" 20 70
+        if [ $? = 0 ] ; then
+            dialog --clear --backtitle "$upper_title" --title "FORMAT ROOT PARTITION" --radiolist "Now you can choose the filesystem for your root partition.\n\next4 is the recommended filesystem." 20 70 30 \
+            "1" "ext2" off \
+            "2" "ext3" off \
+            "3" "ext4" on \
+            2> $TMP/part
+            if [ $? = 1 ] || [ $? = 255 ] ; then
+                installer_menu
+                return 0 
+            fi
+
+            part=$(cat $TMP/part)
+            fs_type=
+
+            if [ "$part" == "2" ] ; then
+                fs_type="ext3"
+            elif [ "$part" == "3" ] ; then
+                fs_type="ext4"
+            else
+                fs_type="ext2"
+            fi
+
+            mkfs -t $fs_type $pout
+            typefs=" as $fs_type"
         fi
 
-        mkfs -t $fs_type $pout
         mount $pout /mnt
 
-        dialog --clear --backtitle "$upper_title" --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt as $fs_type" 10 70
+        dialog --clear --backtitle "$upper_title" --title "ROOT PARTITION MOUNTED" --msgbox "Your $pout partition has been mounted at /mnt$typefs" 10 70
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
@@ -160,34 +166,40 @@ if [ $(id -u) -eq 0 ]; then
             installer_menu
             return 0 
         fi
-
-        dialog --clear --backtitle "$upper_title" --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
-        "1" "ext2" off \
-        "2" "ext3" off \
-        "3" "ext4" on \
-        2> $TMP/plart
-        if [ $? = 1 ] || [ $? = 255 ] ; then
-            installer_menu
-            return 0 
-        fi
-
+        
         plout=$(cat $TMP/plout)
-        plart=$(cat $TMP/plart)
-        fs_type=
 
-        if [ "$plart" == "2" ] ; then
-            fs_type="ext3"
-        elif [ "$plart" == "3" ] ; then
-            fs_type="ext4"
-        else
-            fs_type="ext2"
+        dialog --clear --backtitle "$upper_title" --title "HOME  PARTITION" --yesno "Create the filesystem? [Select No to skip to mounting]" 20 70
+        if [ $? = 0 ] ; then
+            dialog --clear --backtitle "$upper_title" --title "FORMAT HOME PARTITION" --radiolist "Now you can choose the filesystem for your home partition.\n\next4 is the recommended filesystem." 20 70 30 \
+            "1" "ext2" off \
+            "2" "ext3" off \
+            "3" "ext4" on \
+            2> $TMP/plart
+            if [ $? = 1 ] || [ $? = 255 ] ; then
+                installer_menu
+                return 0 
+            fi
+
+            plart=$(cat $TMP/plart)
+            fs_type=
+
+            if [ "$plart" == "2" ] ; then
+                fs_type="ext3"
+            elif [ "$plart" == "3" ] ; then
+                fs_type="ext4"
+            else
+                fs_type="ext2"
+            fi
+
+            mkdir -vp /mnt/home
+            mkfs -t $fs_type $plout
+            typefs=" as $fs_type"
         fi
 
-        mkdir -vp /mnt/home
-        mkfs -t $fs_type $plout
         mount $plout /mnt/home
 
-        dialog --clear --backtitle "$upper_title" --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home as $fs_type" 10 70
+        dialog --clear --backtitle "$upper_title" --title "HOME PARTITION MOUNTED" --msgbox "Your $plout partition has been mounted at /mnt/home$typefs" 10 70
     
 
         dialog --clear --backtitle "$upper_title" --title "BOOT  PARTITION" --defaultno --yesno "Create the boot filesystem?" 20 70
@@ -198,33 +210,39 @@ if [ $(id -u) -eq 0 ]; then
                 installer_menu
                 return 0 
             fi
-            dialog --clear --backtitle "$upper_title" --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
-            "1" "ext2" off \
-            "2" "ext3" off \
-            "3" "ext4" on \
-            2> $TMP/pbart
-            if [ $? = 1 ] || [ $? = 255 ] ; then
-                installer_menu
-                return 0 
-            fi
-
+            
             pbout=$(cat $TMP/pbout)
-            pbart=$(cat $TMP/pbart)
-            fs_type=
 
-            if [ "$pbart" == "2" ] ; then
-            fs_type="ext3"
-            elif [ "$pbart" == "3" ] ; then
-            fs_type="ext4"
-            else
-            fs_type="ext2"
+            dialog --clear --backtitle "$upper_title" --title "BOOT PARTITION" --yesno "Create the filesystem? [Select No to skip to mounting]" 20 70
+            if [ $? = 0 ] ; then
+                dialog --clear --backtitle "$upper_title" --title "FORMAT BOOT PARTITION" --radiolist "Now you can choose the filesystem for your boot partition.\n\next4 is the recommended filesystem." 20 70 30 \
+                "1" "ext2" off \
+                "2" "ext3" off \
+                "3" "ext4" on \
+                2> $TMP/pbart
+                if [ $? = 1 ] || [ $? = 255 ] ; then
+                    installer_menu
+                    return 0 
+                fi
+
+                pbart=$(cat $TMP/pbart)
+                fs_type=
+
+                if [ "$pbart" == "2" ] ; then
+                fs_type="ext3"
+                elif [ "$pbart" == "3" ] ; then
+                fs_type="ext4"
+                else
+                fs_type="ext2"
+                fi
+
+                mkdir -vp /mnt/boot
+                mkfs -t $fs_type $pbout
+                typefs=" as $fs_type"
             fi
-
-            mkdir -vp /mnt/boot
-            mkfs -t $fs_type $pbout
             mount $pbout /mnt/boot
 
-            dialog --clear --backtitle "$upper_title" --title "BOOT PARTITION MOUNTED" --msgbox "Your $pbout partition has been mounted at /mnt/boot as $fs_type" 10 70
+            dialog --clear --backtitle "$upper_title" --title "BOOT PARTITION MOUNTED" --msgbox "Your $pbout partition has been mounted at /mnt/boot$typefs" 10 70
         fi
 
         dialog --clear --backtitle "$upper_title" --title "SWAP PARTITION" --defaultno --yesno "Create the swap filesystem?" 10 70
