@@ -167,6 +167,7 @@ unzip
 upx
 vim
 virtualbox
+virtualbox-guest-iso
 vlc
 vnstat
 vorbis-tools
