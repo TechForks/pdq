@@ -55,7 +55,6 @@ gnome-icon-theme
 gnome-icon-theme-extras
 gnunet-gtk
 gparted
-gpicview
 gstreamer0.10-bad
 gstreamer0.10-base-plugins
 gstreamer0.10-good
@@ -72,6 +71,7 @@ hub
 iotop
 k3b
 kdebase-dolphin
+kdebase-plasma
 kdemultimedia-ffmpegthumbs
 kdeutils-ark
 keepassx
@@ -154,6 +154,7 @@ syslinux
 systemd
 tangerine-icon-theme
 tcpdump
+tellico
 terminus-font
 tig
 tls

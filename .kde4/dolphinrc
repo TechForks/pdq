@@ -59,7 +59,7 @@ Height 480=864
 Height 768=563
 Height 900=882
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAwAAAAAAAAA5AAADUvwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAADUgAAAD0A////AAAAAQAAALQAAAM6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAM6AAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAQA////AAACjwAAA1IAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+State=AAAA/wAAAAD9AAAAAwAAAAAAAABOAAADVPwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAgBAAAF+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAeAAADVAAAAFABAAAFAAAAAQAAALQAAAM6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAM6AAAACAEAAAX7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAgBAAAFAAACfQAAA1QAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1024=512
 Width 1280=452
@@ -77,7 +77,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=avidemux2_qt4,/usr/bin/vlc %U,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U,geany %F,/usr/bin/opera %U,urxvt,leafpad %f,wine,umplayer %f
+History=/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,/usr/bin/vlc %U,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U,geany %F,/usr/bin/opera %U,urxvt,leafpad %f,wine
 
 [PreviewSettings]
 Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
