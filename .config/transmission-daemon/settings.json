@@ -15,7 +15,7 @@
     "download-dir": "/home/pdq/Down", 
     "download-queue-enabled": true, 
     "download-queue-size": 5, 
-    "encryption": 0, 
+    "encryption": 1, 
     "idle-seeding-limit": 30, 
     "idle-seeding-limit-enabled": false, 
     "incomplete-dir": "/home/pdq/Down", 
