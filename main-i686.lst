@@ -37,6 +37,7 @@ elinks
 encfs
 epdfview
 fakeroot
+feh
 filezilla
 firefox
 flex
@@ -112,7 +113,6 @@ mysql
 namcap
 nethogs
 networkmanager
-nitrogen
 ntfs-3g
 ntfsprogs
 ntp
@@ -146,6 +146,7 @@ rsync
 ruby
 rxvt-unicode
 screen
+scrot
 squashfs-tools
 sshfs
 sudo
