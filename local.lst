@@ -6,7 +6,6 @@ bespin-black-icons
 cacheclean
 compton-git
 conkytransmission-bzr
-conkywx
 cower
 cutycapt-svn
 cw
@@ -17,15 +16,16 @@ dolphin-box-plugin-git
 downgrade
 dropbox
 dropbox-cli
+dtrx
 eggdrop
 ffcast
 flashplugin-beta
 flexget
-freetuxtv
 fslint
 gnomish-dark-theme
 google-image-downloader
 grake
+lgi
 lib32-curl
 lib32-google-breakpad-svn
 logstalgia
@@ -59,7 +59,6 @@ torsocks
 transcoder
 ttf-ms-fonts
 ttf-openlogos
-ttf-pizzadude-bullets
 ttf-stylebats
 ttyload
 urxvt-perls-git

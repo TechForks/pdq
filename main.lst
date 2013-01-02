@@ -93,7 +93,6 @@ libxft
 lm_sensors
 lua51-filesystem
 lua51-socket
-luarocks
 lxappearance
 lxtask
 lzop
@@ -158,6 +157,7 @@ terminus-font
 tig
 tls
 tor
+traceroute
 transmission-cli
 truecrypt
 ttf-envy-code-r
