@@ -24,6 +24,8 @@ if [ $1 = "razor" ]; then
 	exec razor-session
 elif [ $1 = "kde" ]; then
 	exec startkde
+elif [ $1 = "e17" ]; then
+	exec enlightenment_start
 else
 	exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
 fi

@@ -12,6 +12,7 @@ autocutsel
 automake
 avidemux-qt
 awesome
+baobab
 binutils-multilib
 bison
 bitlbee
@@ -36,6 +37,7 @@ driconf
 dvd+rw-tools
 elinks
 encfs
+enlightenment17
 epdfview
 fakeroot
 feh
@@ -121,6 +123,7 @@ openssh
 openttd-opengfx
 openttd-opensfx
 opera
+oxygen-gtk3
 patch
 php
 php-apache
@@ -178,8 +181,6 @@ wavpack
 webkitgtk2
 weechat
 wget
-wine
-winetricks
 wireshark-cli
 wmctrl
 wpa_supplicant
