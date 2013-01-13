@@ -18,6 +18,7 @@ bison
 bitlbee
 blender
 cairo
+catfish
 cclive
 cdrdao
 chromium
@@ -165,6 +166,7 @@ tor
 traceroute
 transmission-cli
 truecrypt
+ttf-bitstream-vera
 ttf-envy-code-r
 udevil
 unrar
