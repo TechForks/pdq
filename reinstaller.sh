@@ -606,6 +606,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
         sudo chown -R tor:tor /usr/share/tor/hidden_service2
         sudo chown -R tor:tor /usr/share/tor/hidden_service3
         sudo chown -R tor:tor /usr/share/tor/hidden_service4
+        sudo cp ${dev_directory}bin/lamp.sh /usr/bin/lamp
         sudo systemctl enable dhcpcd@eth0.service
         sudo systemctl enable NetworkManager.service
         sudo systemctl enable ntpd.service
