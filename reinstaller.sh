@@ -356,7 +356,6 @@ if [ $(id -u) -eq 0 ]; then
             wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
             chmod +x chroot-rs.sh
             mv chroot-rs.sh /mnt/chroot-rs.sh
-        #fi
         arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
     }
 
@@ -927,12 +926,12 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
 
             #TODO
             # dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Creating self-signed certificate" 10 30
-            # cd /etc/httpd/conf
-            # sudo openssl genrsa -des3 -out server.key 1024
-            # sudo openssl req -new -key server.key -out server.csr
-            # sudo cp -v server.key server.key.org
-            # sudo openssl rsa -in server.key.org -out server.key
-            # sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+            cd /etc/httpd/conf
+            sudo openssl genrsa -des3 -out server.key 1024
+            sudo openssl req -new -key server.key -out server.csr
+            sudo cp -v server.key server.key.org
+            sudo openssl rsa -in server.key.org -out server.key
+            sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
             sudo mkdir -p /srv/http/root/public_html
             sudo chmod g+xr-w /srv/http/root
