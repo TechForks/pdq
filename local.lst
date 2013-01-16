@@ -19,6 +19,7 @@ dropbox-cli
 dtrx
 e17-themes
 eggdrop
+elementary-icons
 ffcast
 flashplugin-beta
 flexget
@@ -26,6 +27,7 @@ fslint
 gnomish-dark-theme
 google-image-downloader
 grake
+kfaenza-icon-theme
 lib32-curl
 lib32-flashplugin
 lib32-google-breakpad-svn
@@ -36,6 +38,8 @@ lwks
 montecarlo-font
 mysqltcl
 neuropolitical_font
+nuovext2-icon-theme
+oxygenrefit2-icon-theme
 pacaur
 packer
 pacman-color
