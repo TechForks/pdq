@@ -15,14 +15,12 @@ binutils
 bison
 bitlbee
 cairo
-catfish
 cclive
 cdrdao
 chromium
 cmatrix
 conky
 cowsay
-curlftpfs
 ddd
 devede
 devtools
@@ -61,7 +59,6 @@ gstreamer0.10-base-plugins
 gstreamer0.10-good
 gstreamer0.10-ugly
 gtk-engine-murrine
-gtk-vnc
 hardinfo
 hddtemp
 hgsvn
@@ -119,7 +116,6 @@ ntfsprogs
 ntp
 openshot
 openssh
-oxygen-gtk3
 patch
 php
 php-apache
