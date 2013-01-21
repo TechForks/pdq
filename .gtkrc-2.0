@@ -3,7 +3,7 @@
 
 gtk-theme-name="GnomishDark"
 gtk-icon-theme-name="KFaenza"
-gtk-font-name="DejaVu Sans 10"
+gtk-font-name="Bitstream Vera Sans 11"
 gtk-cursor-theme-name="Shere_Khan_X"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
