@@ -26,6 +26,8 @@ elif [ $1 = "kde" ]; then
 	exec startkde
 elif [ $1 = "e17" ]; then
 	exec enlightenment_start
-else
+elif [ $1 = "awesome" ]; then
 	exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr
+else
+	exec enlightenment_start
 fi
