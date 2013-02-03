@@ -2,6 +2,7 @@ aarchup
 adwaita-x-dark-and-light-theme
 archiso-git
 cacheclean
+codecs64
 compton-git
 conkytransmission-bzr
 cower
@@ -21,6 +22,7 @@ ffcast
 flashplugin-beta
 flexget
 fslint
+geary
 gnomish-dark-theme
 google-image-downloader
 grake
@@ -30,7 +32,6 @@ flashplugin
 google-breakpad-svn
 libtiff4
 logstalgia
-lua-sqlite3
 lwks
 mysqltcl
 pacaur
@@ -60,7 +61,6 @@ ttyload
 urxvt-perls-git
 vcp
 vlc-git
-vlmc-git
 wicked-git
 xcursor-arch-simple
 xcursor-shere-khan-x

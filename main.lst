@@ -14,11 +14,11 @@ baobab
 binutils-multilib
 bison
 bitlbee
+blender
 cairo
 cclive
 cdrdao
 chromium
-cinelerra-cv
 cmatrix
 conky
 cowsay
@@ -72,7 +72,6 @@ k3b
 kdebase-dolphin
 kdebase-plasma
 kdemultimedia-ffmpegthumbs
-kdenlive
 kdeutils-ark
 keepassx
 keychain
@@ -91,8 +90,6 @@ libtool
 libunique
 libxft
 lm_sensors
-lua51-filesystem
-lua51-socket
 lxappearance
 lxtask
 lzop
@@ -104,7 +101,6 @@ memcached
 memtest86+
 mesa
 mlocate
-mlt
 moc
 mtools
 multitail
