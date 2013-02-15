@@ -9,6 +9,7 @@ audio-convert
 autoconf
 autocutsel
 automake
+avidemux-qt
 awesome
 baobab
 binutils
@@ -50,11 +51,10 @@ gcc
 gcolor2
 gdb
 git
-gnome-disk-utility
 gnome-icon-theme
 gnome-icon-theme-extras
-gnunet-gtk
-gparted
+gnome-subtitles
+gpac
 gstreamer0.10-bad
 gstreamer0.10-base-plugins
 gstreamer0.10-good
@@ -75,6 +75,7 @@ kdemultimedia-ffmpegthumbs
 kdeutils-ark
 keepassx
 keychain
+flashplugin
 intel-dri
 libldap
 libtxc_dxtn
@@ -131,6 +132,7 @@ phpmyadmin
 pinta
 pkg-config
 pkgfile
+playonlinux
 polipo
 preload
 privoxy
@@ -144,6 +146,7 @@ screen
 scrot
 squashfs-tools
 sshfs
+steam
 sudo
 syslinux
 systemd
@@ -170,6 +173,7 @@ wavpack
 webkitgtk2
 weechat
 wget
+wine
 wireshark-cli
 wmctrl
 wpa_supplicant

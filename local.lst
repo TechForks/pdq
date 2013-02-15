@@ -8,6 +8,7 @@ conkytransmission-bzr
 cower
 cutycapt-svn
 cw
+delaycut-git
 detox
 dmenu-path-c
 dmenu_mocp
@@ -27,8 +28,6 @@ gnomish-dark-theme
 google-image-downloader
 grake
 kfaenza-icon-theme
-lib32-curl
-lib32-flashplugin
 lib32-google-breakpad-svn
 libtiff4
 logstalgia
@@ -40,14 +39,13 @@ pacman-color
 pkgbrowser
 pm2ml
 powerpill
-pyrss2gen
 python2-pynzb
+python2-pyrss2gen
 python3-aur
 python3-xynexdg
 pytransmissionrpc
 screenfetch-git
 secure-delete
-steam
 stjerm
 sublime-text-dev
 syncbackup
