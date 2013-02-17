@@ -13,6 +13,7 @@ detox
 dmenu-path-c
 dmenu_mocp
 dolphin-box-plugin-git
+doomsday
 downgrade
 dropbox
 dropbox-cli
@@ -27,6 +28,7 @@ geary
 gnomish-dark-theme
 google-image-downloader
 grake
+kde-servicemenus-fuseiso
 kfaenza-icon-theme
 lib32-google-breakpad-svn
 libtiff4
@@ -56,9 +58,9 @@ transcoder
 ttf-ms-fonts
 ttf-stylebats
 ttyload
+umplayer-svn
 urxvt-perls-git
 vcp
-vlc-git
 wicked-git
 xcursor-arch-simple
 xcursor-shere-khan-x

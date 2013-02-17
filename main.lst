@@ -4,6 +4,7 @@ alsa-oss
 alsa-plugins
 alsa-utils
 apache
+arandr
 arch-install-scripts
 audio-convert
 autoconf
@@ -167,6 +168,7 @@ upx
 vicious
 vim
 virtualbox
+vlc
 vnstat
 vorbis-tools
 wavpack
