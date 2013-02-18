@@ -40,6 +40,7 @@ enlightenment17
 epdfview
 fakeroot
 feh
+ffmpeg
 filezilla
 firefox
 flex
@@ -118,6 +119,7 @@ ntp
 openshot
 openssh
 patch
+phonon-vlc
 php
 php-apache
 php-apc
@@ -179,6 +181,7 @@ wine
 wireshark-cli
 wmctrl
 wpa_supplicant
+x264
 xbindkeys
 xclip
 xcursor-themes
