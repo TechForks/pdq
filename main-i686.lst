@@ -4,7 +4,6 @@ alsa-oss
 alsa-plugins
 alsa-utils
 apache
-arandr
 arch-install-scripts
 audio-convert
 autoconf
@@ -32,7 +31,6 @@ dmenu
 dmidecode
 dnsutils
 dosfstools
-driconf
 dvd+rw-tools
 elinks
 encfs
@@ -53,15 +51,17 @@ gcc
 gcolor2
 gdb
 git
-gnome-icon-theme
-gnome-icon-theme-extras
 gnome-subtitles
 gpac
 gparted
 gstreamer0.10-bad
+gstreamer0.10-bad-plugins
 gstreamer0.10-base-plugins
+gstreamer0.10-ffmpeg
 gstreamer0.10-good
+gstreamer0.10-good-plugins
 gstreamer0.10-ugly
+gstreamer0.10-ugly-plugins
 gtk-engine-murrine
 hardinfo
 hddtemp
@@ -74,6 +74,7 @@ iotop
 k3b
 kdebase-dolphin
 kdemultimedia-ffmpegthumbs
+kdeutils-ark
 keepassx
 keychain
 flashplugin
