@@ -42,7 +42,6 @@ ViewPropsTimestamp=2013,2,25,17,48,35
 [IconsMode]
 FontWeight=50
 IconSize=64
-PreviewSize=96
 TextWidthIndex=0
 
 [KFileDialog Settings]
@@ -54,24 +53,24 @@ Width 1440=277
 
 [KPropertiesDialog]
 Height 768=448
-Height 900=428
+Height 900=569
 Width 1024=474
 Width 1360=489
-Width 1440=698
+Width 1440=475
 
 [MainWindow]
 Height 480=864
 Height 768=551
-Height 900=357
+Height 900=346
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAwAAAAAAAABvAAABRfwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAABRQAAAD0A////AAAAAQAAALQAAAF6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAAB4AAAF6AAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAQA////AAAB5QAAAUUAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+State=AAAA/wAAAAD9AAAAAwAAAAAAAAA5AAABOvwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAABOgAAAD0A////AAAAAQAAALQAAAF6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAAB4AAAF6AAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAQA////AAACJAAAAToAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1024=512
 Width 1280=782
 Width 1360=678
 Width 1368=684
 Width 1376=688
-Width 1440=602
+Width 1440=611
 Width 640=720
 
 [MainWindow][Toolbar mainToolBar]
@@ -84,7 +83,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=subl %F,playonlinux,epdfview,/usr/bin/vlc %U,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U,geany %F,/usr/bin/opera %U
+History=foxitreader,subl %F,playonlinux,epdfview,/usr/bin/vlc %U,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U,geany %F
 
 [PreviewSettings]
 Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs

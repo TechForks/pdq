@@ -114,7 +114,6 @@ nethogs
 networkmanager
 nmon
 ntfs-3g
-ntfsprogs
 ntp
 openshot
 openssh
@@ -142,6 +141,7 @@ privoxy
 pyalpm
 pystatgrab
 python2-beautifulsoup4
+qemu
 rsync
 ruby
 rxvt-unicode
@@ -158,6 +158,7 @@ terminus-font
 tig
 tls
 tor
+torsocks
 traceroute
 transmission-cli
 truecrypt
@@ -176,6 +177,7 @@ vorbis-tools
 wavpack
 webkitgtk2
 weechat
+weston
 wget
 wine
 wireshark-cli

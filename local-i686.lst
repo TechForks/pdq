@@ -6,7 +6,6 @@ codecs64
 compton-git
 conkytransmission-bzr
 cower
-cutycapt-svn
 cw
 delaycut-git
 detox
@@ -23,9 +22,9 @@ eggdrop
 ffcast
 flashplugin-beta
 flexget
+foxitreader
 fslint
 gnomish-dark-theme
-google-image-downloader
 grake
 google-breakpad-svn
 libtiff4
@@ -49,10 +48,8 @@ screenfetch-git
 secure-delete
 stjerm
 sublime-text-nightly
-syncbackup
 systemd-ui-git
 teamviewer
-torsocks
 transcoder
 ttf-ms-fonts
 ttf-stylebats
