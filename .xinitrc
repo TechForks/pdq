@@ -31,6 +31,10 @@ if [ $USE_SOUNDS = 1 ] && [ -f "/media/truecrypt1/test" ] ; then
     ogg123 -q "${wm_path}desktop-login.ogg"
 fi
 
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+[ -f "$XDG_CONFIG_HOME/qdm/qdm.sh" ] && . "$XDG_CONFIG_HOME/qdm/qdm.sh"
+
+exit 0
 case $1 in
     e17) exec enlightenment_start;;
     awesome) exec awesome >> "$HOME"/.cache/awesome/stdout 2>> "$HOME"/.cache/awesome/stderr;;
