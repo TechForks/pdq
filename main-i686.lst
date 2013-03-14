@@ -51,7 +51,6 @@ gcc
 gcolor2
 gdb
 git
-gnome-subtitles
 gpac
 gparted
 gstreamer0.10-bad
@@ -59,7 +58,6 @@ gstreamer0.10-bad-plugins
 gstreamer0.10-base-plugins
 gstreamer0.10-ffmpeg
 gstreamer0.10-good
-gstreamer0.10-good-plugins
 gstreamer0.10-ugly
 gstreamer0.10-ugly-plugins
 gtk-engine-murrine
@@ -111,7 +109,6 @@ mysql
 namcap
 nethogs
 networkmanager
-nmon
 ntfs-3g
 ntp
 openshot
@@ -133,18 +130,15 @@ phpmyadmin
 pinta
 pkg-config
 pkgfile
-playonlinux
 polipo
 preload
 privoxy
 pyalpm
 pystatgrab
 python2-beautifulsoup4
-qemu
 rsync
 ruby
 rxvt-unicode
-screen
 scrot
 squashfs-tools
 sshfs
@@ -176,7 +170,6 @@ vorbis-tools
 wavpack
 webkitgtk2
 weechat
-weston
 wget
 wine
 wireshark-cli
