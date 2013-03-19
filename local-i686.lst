@@ -36,6 +36,9 @@ mysqltcl
 pacaur
 packer
 pacman-color
+pacman4console
+perl-xml-feedpp
+perl-xml-treepp
 pkgbrowser
 pm2ml
 powerpill
@@ -61,5 +64,6 @@ virtualbox-ext-oracle
 wicked-git
 xcursor-arch-simple
 xcursor-shere-khan-x
+yadex
 zsh-completions
 zsh-syntax-highlighting
