@@ -39,7 +39,6 @@ pacman-color
 pacman4console
 perl-xml-feedpp
 perl-xml-treepp
-pkgbrowser
 pm2ml
 powerpill
 python2-pynzb
@@ -51,7 +50,6 @@ screenfetch-git
 secure-delete
 stjerm
 sublime-text-nightly
-systemd-ui-git
 teamviewer
 transcoder
 tripwire
@@ -61,9 +59,8 @@ ttyload
 urxvt-perls-git
 vcp
 virtualbox-ext-oracle
-wicked-git
+vlc-ncurses
 xcursor-arch-simple
 xcursor-shere-khan-x
-yadex
 zsh-completions
 zsh-syntax-highlighting

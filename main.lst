@@ -130,6 +130,7 @@ phpmyadmin
 pinta
 pkg-config
 pkgfile
+playonlinux
 polipo
 preload
 privoxy
@@ -164,7 +165,6 @@ upx
 vicious
 vim
 virtualbox
-vlc
 vnstat
 vorbis-tools
 wavpack

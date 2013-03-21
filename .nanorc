@@ -234,13 +234,13 @@ set nowrap
 
 
 ## Nanorc files
-# include "/usr/share/nano/nanorc.nanorc"
+include "/usr/share/nano/nanorc.nanorc"
 
 ## C/C++
 include "/usr/share/nano/c.nanorc"
 
 ## Makefiles
-# include "/usr/share/nano/makefile.nanorc"
+include "/usr/share/nano/makefile.nanorc"
 
 ## Cascading Style Sheets
 include "/usr/share/nano/css.nanorc"
@@ -276,13 +276,13 @@ include "/usr/share/nano/man.nanorc"
 # include "/usr/share/nano/groff.nanorc"
 
 ## Perl
-# include "/usr/share/nano/perl.nanorc"
+include "/usr/share/nano/perl.nanorc"
 
 ## Python
 include "/usr/share/nano/python.nanorc"
 
 ## Ruby
-# include "/usr/share/nano/ruby.nanorc"
+include "/usr/share/nano/ruby.nanorc"
 
 ## Java
 # include "/usr/share/nano/java.nanorc"
@@ -291,7 +291,7 @@ include "/usr/share/nano/python.nanorc"
 # include "/usr/share/nano/fortran.nanorc"
 
 ## Objective-C
-# include "/usr/share/nano/objc.nanorc"
+include "/usr/share/nano/objc.nanorc"
 
 ## OCaml
 # include "/usr/share/nano/ocaml.nanorc"
@@ -300,7 +300,7 @@ include "/usr/share/nano/python.nanorc"
 # include "/usr/share/nano/awk.nanorc"
 
 ## Assembler
-# include "/usr/share/nano/asm.nanorc"
+include "/usr/share/nano/asm.nanorc"
 
 ## Bourne shell scripts
 include "/usr/share/nano/sh.nanorc"
@@ -309,6 +309,6 @@ include "/usr/share/nano/sh.nanorc"
 # include "/usr/share/nano/pov.nanorc"
 
 ## XML-type files
-# include "/usr/share/nano/xml.nanorc"
+include "/usr/share/nano/xml.nanorc"
 
 include "/usr/share/nano/pkgbuild.nanorc"
