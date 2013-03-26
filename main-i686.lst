@@ -82,6 +82,7 @@ libxft
 mpg123
 openal
 libisoburn
+libmariadbclient
 libmodplug
 libotr
 libpng12
@@ -94,6 +95,8 @@ lxtask
 lzop
 m4
 make
+mariadb
+mariadb-clients
 mcomix
 meld
 memcached
@@ -104,7 +107,6 @@ moc
 mtools
 multitail
 mumble
-mysql
 namcap
 nethogs
 networkmanager
