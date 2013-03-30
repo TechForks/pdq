@@ -1,6 +1,5 @@
 aarchup
 archiso-git
-azy-svn
 cacheclean
 clipbored-git
 codecs64
@@ -19,9 +18,7 @@ dropbox-cli
 dtrx
 e17-themes
 eggdrop
-enki-svn
-enlil-svn
-eweather-svn
+engage-svn
 faenza-green-icon-theme
 ffcast
 flashplugin-beta
@@ -31,7 +28,6 @@ fslint
 gnomish-dark-theme
 grake
 lib32-google-breakpad-svn
-libeweather-svn
 libtiff4
 libvpx-git
 logstalgia
