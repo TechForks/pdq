@@ -4,7 +4,7 @@ cacheclean
 clipbored-git
 codecs64
 compton-git
-cower
+cower-git
 delaycut-git
 detox
 dmenu-path-c
@@ -34,9 +34,8 @@ lwks
 marples-black
 mysqltcl
 nast
-pacaur
+pacaur-git
 packer
-pacman-color
 pacman4console
 pacserve
 perl-xml-feedpp
