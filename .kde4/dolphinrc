@@ -42,7 +42,6 @@ ViewPropsTimestamp=2013,2,25,17,48,35
 [IconsMode]
 FontWeight=50
 IconSize=64
-PreviewSize=80
 TextWidthIndex=0
 
 [KFileDialog Settings]
@@ -63,16 +62,16 @@ Width 1440=568
 [MainWindow]
 Height 480=864
 Height 768=769
-Height 900=558
+Height 900=476
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAwAAAAAAAABWAAACCPwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAUA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAmAAACCAAAAEsA////AAAAAQAAALQAAAG6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAG6AAAABQD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAUA////AAAC1gAAAggAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+State=AAAA/wAAAAD9AAAAAwAAAAAAAABWAAABtvwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAUA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAmAAABtgAAAEsA////AAAAAQAAALQAAAG6/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAG6AAAABQD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAUA////AAACqwAAAbYAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1024=748
 Width 1280=782
 Width 1360=678
 Width 1368=1369
 Width 1376=688
-Width 1440=818
+Width 1440=775
 Width 640=720
 
 [MainWindow][Toolbar mainToolBar]
@@ -85,7 +84,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=foxitreader,subl %F,playonlinux,epdfview,/usr/bin/vlc %U,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U,geany %F
+History=meld %F,foxitreader,subl %F,playonlinux,epdfview,/usr/bin/vlc %U,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u,scribes %U
 
 [PreviewSettings]
 Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs

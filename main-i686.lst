@@ -31,7 +31,6 @@ dmidecode
 dnsutils
 dosfstools
 dvd+rw-tools
-dwb
 ecore
 edje
 eet
@@ -44,7 +43,6 @@ embryo
 emotion
 encfs
 enlightenment17
-epdfview
 ethumb
 evas
 fakeroot
@@ -79,6 +77,7 @@ hicolor-icon-theme
 hsetroot
 htop
 hub
+i7z
 iotop
 k3b
 kdebase-dolphin
@@ -101,6 +100,7 @@ libpng12
 libstatgrab
 libtool
 libunique
+libva-vdpau-driver
 libxft
 lm_sensors
 lxtask
@@ -117,11 +117,11 @@ mesa
 mlocate
 moc
 mtools
-multitail
 mumble
 namcap
 nethogs
 networkmanager
+nmap
 ntfs-3g
 ntp
 openshot
