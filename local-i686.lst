@@ -26,6 +26,7 @@ foxitreader
 fslint
 gnomish-dark-theme
 grake
+kmod-roccat
 google-breakpad-svn
 libtiff4
 libvpx-git
@@ -34,7 +35,7 @@ lwks
 marples-black
 mysqltcl
 nast
-pacaur-git
+pacaur
 packer
 pacman4console
 pacserve
@@ -49,6 +50,18 @@ python2-sqlalchemy-0.7.9
 python2-xynehttpserver
 python3-aur
 python3-xynexdg
+roccat-tools-arvo
+roccat-tools-common
+roccat-tools-isku
+roccat-tools-iskufx
+roccat-tools-kone
+roccat-tools-koneplus
+roccat-tools-konepure
+roccat-tools-konextd
+roccat-tools-kovaplus
+roccat-tools-lua
+roccat-tools-pyra
+roccat-tools-savu
 screenfetch-git
 secure-delete
 stjerm
