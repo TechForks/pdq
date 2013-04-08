@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ## pdqOS Installer for Arch Linux x86_64 =)
 ## 03-22-2012 pdq
 ## 12-25-2012 pdq
@@ -434,11 +434,6 @@ else
         packer -S --noconfirm pacaur
     fi
 
-    if [ ! -f /usr/bin/pacman-color ]; then
-        #dialog --title "$upper_title" --msgbox "Installing pacman-color" 20 70
-        packer -S --noconfirm pacman-color
-    fi
-
     if [ ! -f /usr/bin/powerpill ]; then
         #dialog --title "$upper_title" --msgbox "Installing powerpill" 20 70
         sudo pacman -S --noconfirm --needed python3
@@ -464,11 +459,11 @@ else
         sudo mv -v /etc/powerpill/powerpill.json /etc/powerpill/powerpill.json.bak
         sudo cp -v ${dev_directory}etc/powerpill.json /etc/powerpill/powerpill.json
         cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
-        sudo pacman-color -Syy
+        sudo pacman -Syy
     fi
 
     if [ ! -f /usr/bin/rsync ]; then
-        sudo pacman-color -S --noconfirm rsync
+        sudo pacman -S --noconfirm rsync
     fi
 
     dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Is this a VirtualBox install?" 10 30
@@ -480,8 +475,8 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     fi
 
     ## sanity checks
-    if [ ! -f /usr/bin/rsync ] || [ ! -f /usr/bin/hub ] || [ ! -f /usr/bin/pacaur ] || [ ! -f /usr/bin/pacman-color ] || [ ! -f /usr/bin/powerpill ]; then
-        dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "Hmmm. An ERROR has occured...\n\nPackage depends not met, this installer failed to install one of the following:\nrsync, git, hub, packer, pacaur, pacman-color or powerpill.\n\nExiting..." 30 70
+    if [ ! -f /usr/bin/rsync ] || [ ! -f /usr/bin/hub ] || [ ! -f /usr/bin/pacaur ] || [ ! -f /usr/bin/pacman ] || [ ! -f /usr/bin/powerpill ]; then
+        dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "Hmmm. An ERROR has occured...\n\nPackage depends not met, this installer failed to install one of the following:\nrsync, git, hub, packer, pacaur, pacman or powerpill.\n\nExiting..." 30 70
     fi
 
     dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install main packages?" 10 30
@@ -495,7 +490,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
             mainpkgs="main-i686.lst"
         fi
 
-        sudo pacman-color -S --needed $(cat ${dev_directory}pdq/$mainpkgs)
+        sudo pacman -S --needed $(cat ${dev_directory}pdq/$mainpkgs)
     fi
 
     if [ "$archtype" = "x86_64" ]; then
