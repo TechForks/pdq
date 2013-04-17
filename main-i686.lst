@@ -119,6 +119,7 @@ moc
 mtools
 mumble
 namcap
+netctl
 nethogs
 networkmanager
 nmap
@@ -208,6 +209,7 @@ xorg-xinit
 xorg-xkill
 xterm
 xvkbd
+youtube-dl
 zenity
 zip
 zsh

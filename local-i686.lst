@@ -28,6 +28,7 @@ gnomish-dark-theme
 grake
 kmod-roccat
 google-breakpad-svn
+libjpeg6
 libtiff4
 libvpx-git
 logstalgia
@@ -59,6 +60,7 @@ teamviewer
 terminology
 transcoder
 tripwire
+tt-rss
 ttf-envy-code-r
 ttf-ms-fonts
 ttf-stylebats
@@ -69,5 +71,6 @@ virtualbox-ext-oracle
 vlc-ncurses
 xcursor-arch-simple
 xcursor-shere-khan-x
+zandronum
 zsh-completions
 zsh-syntax-highlighting
