@@ -28,7 +28,6 @@ gnomish-dark-theme
 grake
 kmod-roccat
 lib32-google-breakpad-svn
-libjpeg6
 libtiff4
 libvpx-git
 logstalgia
@@ -71,6 +70,5 @@ virtualbox-ext-oracle
 vlc-ncurses
 xcursor-arch-simple
 xcursor-shere-khan-x
-zandronum
 zsh-completions
 zsh-syntax-highlighting
