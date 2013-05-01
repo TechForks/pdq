@@ -1,6 +1,6 @@
 {
     "alt-speed-down": 3210, 
-    "alt-speed-enabled": true, 
+    "alt-speed-enabled": false, 
     "alt-speed-time-begin": 540, 
     "alt-speed-time-day": 127, 
     "alt-speed-time-enabled": false, 
@@ -48,7 +48,7 @@
     "rpc-url": "/transmission/", 
     "rpc-username": "pdq", 
     "rpc-whitelist": "127.0.0.1", 
-    "rpc-whitelist-enabled": true, 
+    "rpc-whitelist-enabled": false, 
     "scrape-paused-torrents-enabled": true, 
     "script-torrent-done-enabled": true, 
     "script-torrent-done-filename": "/home/pdq/bin/transmission-unrar.sh", 
