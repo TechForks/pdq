@@ -276,8 +276,28 @@ if [ $(id -u) -eq 0 ]; then
 
         dialog --clear --backtitle "$upper_title" --title "Internet" --yesno "Configure wired connection?" 10 70
         if [ $? = 0 ] ; then
-            dhcpcd enp3s0
+            local net_list mynet
+            for mynet in $(ip link show | awk '/: / {print $2}' | tr -d :) ; do
+                net_list+="${mynet} - "
+            done
+
+            my_networks=$(dialog --stdout --backtitle "$upper_title" --title 'Internet' --cancel-label "Go Back" \
+            --default-item "${my_networks}" --menu "Choose network or <Go Back> to return" 16 45 23 ${net_list} "Exit" "-" || echo "${my_networks}")
+
+            if [ "$my_networks" = "" ] || [ $? = 255 ] || [ "$my_networks" = "Exit" ] ; then
+                installer_menu
+                return 0
+            fi
+
+            if [ "$my_networks" ] ; then # some better check should be here / placeholder
+                dhcpcd $my_networks
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Set network to $my_networks" 10 30
+            else
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Failed to set network...network does not exist/null?" 10 30
+            fi
+
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+
             if [ ! -s /tmp/index.google ] ; then
                 dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
             else
@@ -293,9 +313,29 @@ if [ $(id -u) -eq 0 ]; then
                 return 0 
             fi
 
+            local net_list mynet
+            for mynet in $(ip link show | awk '/: / {print $2}' | tr -d :) ; do
+                net_list+="${mynet} - "
+            done
+
+            my_networks=$(dialog --stdout --backtitle "$upper_title" --title 'Internet' --cancel-label "Go Back" \
+            --default-item "${my_networks}" --menu "Choose network or <Go Back> to return" 16 45 23 ${net_list} "Exit" "-" || echo "${my_networks}")
+
+            if [ "$my_networks" = "" ] || [ $? = 255 ] || [ "$my_networks" = "Exit" ] ; then
+                installer_menu
+                return 0
+            fi
+
+            if [ "$my_networks" ] ; then # some better check should be here / placeholder
+                dhcpcd $my_networks
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Set network to $my_networks" 10 30
+            else
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Failed to set network...network does not exist/null?" 10 30
+            fi
+
             pwifi=$(cat $TMP/pwifi)
             if [ "$pwifi" == "1" ] ; then
-                wifi-menu
+                wifi-menu $my_networks
             else
                 dialog --clear --backtitle "$upper_title" --title "Internet" --inputbox "Please enter your SSID" 10 70 2> $TMP/pssid
                 pssid=$(cat $TMP/pssid)
@@ -303,10 +343,10 @@ if [ $(id -u) -eq 0 ]; then
                 dialog --clear --backtitle "$upper_title" --title "Internet" --passwordbox "Please enter your wireless passphrase" 10 70 2> $TMP/ppassphrase
                 ppassphrase=$(cat $TMP/ppassphrase)
                 wpa_passphrase "$pssid" "$ppassphrase" >> /etc/wpa_supplicant.conf
-                wpa_supplicant -B -Dwext -i wlan0 -c /etc/wpa_supplicant.conf & >/dev/null
+                wpa_supplicant -B -Dwext -i $my_networks -c /etc/wpa_supplicant.conf & >/dev/null
             fi
 
-            dhcpcd wlan0
+            #dhcpcd $my_networks
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
                 dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 20 30
