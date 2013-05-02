@@ -276,7 +276,7 @@ if [ $(id -u) -eq 0 ]; then
 
         dialog --clear --backtitle "$upper_title" --title "Internet" --yesno "Configure wired connection?" 10 70
         if [ $? = 0 ] ; then
-            dhcpcd eth0
+            dhcpcd enp3s0
             wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
             if [ ! -s /tmp/index.google ] ; then
                 dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
