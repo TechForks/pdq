@@ -27,9 +27,9 @@ fi
 [ -f "$HOME/.gtkrc-2.0" ] && export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 ## truecrypt mounted success file
-if [ $USE_SOUNDS = 1 ] && [ -f "/media/truecrypt1/test" ] ; then
+#if [ $USE_SOUNDS = 1 ] && [ -f "/media/truecrypt1/test" ] ; then
     ogg123 -q "${wm_path}desktop-login.ogg"
-fi
+#fi
 
 case $1 in
     e17) exec enlightenment_start;;
