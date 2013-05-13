@@ -6,6 +6,7 @@ alsa-plugins
 alsa-utils
 apache
 arch-install-scripts
+archiso
 audio-convert
 autoconf
 autocutsel
@@ -21,7 +22,6 @@ cairo
 cclive
 cdrdao
 cmatrix
-conky
 cowsay
 ddd
 devede
@@ -101,6 +101,7 @@ libpulse
 libtxc_dxtn
 libxft
 mpg123
+nvidia-utils
 openal
 libisoburn
 libmariadbclient
@@ -135,7 +136,9 @@ nethogs
 nmap
 ntfs-3g
 ntp
+nvidia
 nvidia-cg-toolkit
+nvidia-utils
 openshot
 openssh
 patch
@@ -200,7 +203,6 @@ wget
 wine
 wireshark-cli
 wmctrl
-wpa_supplicant
 x264
 xbindkeys
 xclip

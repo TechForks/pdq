@@ -1,6 +1,5 @@
 aarchup
 anypaper
-archiso-git
 bootchart2-git
 cacheclean
 clipbored-git
@@ -31,8 +30,6 @@ gkrellshoot_
 gnomish-dark-theme
 grake
 jreen
-kmod-roccat
-nvidia-utils-beta
 libechonest2
 libimago2-svn
 libtiff4
@@ -44,8 +41,6 @@ marples-black
 mod_evasive
 mysqltcl
 nast
-nvidia-beta
-nvidia-utils-beta
 pacaur
 packer
 pacman4console
@@ -69,6 +64,7 @@ python3-threaded_servers
 python3-xynexdg
 qtweetlib
 quazip
+roccat-dkms
 rtmpdump-git
 secure-delete
 stjerm
