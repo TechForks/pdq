@@ -136,7 +136,6 @@ nethogs
 nmap
 ntfs-3g
 ntp
-nvidia
 nvidia-cg-toolkit
 nvidia-utils
 openshot
@@ -181,6 +180,7 @@ sudo
 syslinux
 tcpdump
 terminus-font
+thunderbird
 tig
 tls
 tor
@@ -195,6 +195,7 @@ unzip
 upx
 vicious
 vim
+virtualbox-host-dkms
 vnstat
 vorbis-tools
 wavpack

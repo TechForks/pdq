@@ -25,7 +25,9 @@ flexget
 foxitreader
 fslint
 gkrellm-gkfreq
+gkrellm-mailwatch
 gkrellm2-multiping
+gkrellm2-show_ip
 gkrellshoot_
 gnomish-dark-theme
 grake
@@ -41,6 +43,8 @@ marples-black
 mod_evasive
 mysqltcl
 nast
+nvidia-dkms
+nvidia-hook
 pacaur
 packer
 pacman4console
@@ -70,7 +74,9 @@ secure-delete
 stjerm
 sublime-text-nightly
 systemd-ui
+tcptraceroute
 teamviewer
+terminology
 tomahawk-git
 transcoder
 tripwire

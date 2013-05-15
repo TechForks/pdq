@@ -63,12 +63,12 @@ Width 1440=568
 Width 1920=835
 
 [MainWindow]
-Height 1080=626
+Height 1080=487
 Height 480=864
 Height 768=769
 Height 900=607
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAwAAAAAAAABOAAACVPwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAgBAAAF+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAeAAACVAAAAFABAAAFAAAAAQAAALIAAAGY/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAGYAAAACAEAAAX7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAgBAAAFAAACswAAAlQAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+State=AAAA/wAAAAD9AAAAAwAAAAAAAABOAAAByfwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAgBAAAF+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAeAAAByQAAAFABAAAFAAAAAQAAALIAAAGY/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAGYAAAACAEAAAX7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAgBAAAFAAACUwAAAckAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1024=940
 Width 1280=782
@@ -76,7 +76,7 @@ Width 1360=678
 Width 1368=1369
 Width 1376=688
 Width 1440=732
-Width 1920=772
+Width 1920=676
 Width 640=720
 
 [MainWindow][Toolbar mainToolBar]
@@ -89,7 +89,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=mcomix %f,meld %F,foxitreader,subl %F,playonlinux,epdfview,/usr/bin/vlc %U,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U,kdenlive %i -caption "%c" %u
+History=mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U,luakit %U
 
 [PreviewSettings]
 Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
