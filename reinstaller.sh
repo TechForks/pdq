@@ -291,7 +291,7 @@ if [ $(id -u) -eq 0 ]; then
 
             if [ "$my_networks" ] ; then # some better check should be here / placeholder
                 #dhcpcd $my_networks
-                if [ ! -f /usr/bin/netctl ]; then
+                if [ -f /usr/bin/netctl ]; then
                     cp /etc/netctl/examples/ethernet-dhcp /etc/netctl/ethernetdhcp
                     sed -i "s/eth0/$my_networks/g" /etc/netctl/ethernetdhcp
                     netctl start ethernet-dhcp
@@ -344,7 +344,7 @@ if [ $(id -u) -eq 0 ]; then
 
             pwifi=$(cat $TMP/pwifi)
             if [ "$pwifi" == "1" ] ; then
-                if [ ! -f /usr/bin/netctl ]; then
+                if [ -f /usr/bin/netctl ]; then
                     wifi-menu $my_networks
                 else
                     dhcpcd $my_networks
