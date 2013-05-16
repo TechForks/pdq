@@ -52,6 +52,7 @@ pacserve
 pbget
 perl-xml-feedpp
 perl-xml-treepp
+playonlinux-git
 pm2ml
 powerpill
 profile-sync-daemon
@@ -90,6 +91,7 @@ urxvt-perls-git
 vcp
 virtualbox-ext-oracle
 vlc-dev
+vlc-subtitles-mod
 vokoscreen
 xcursor-arch-simple
 xcursor-shere-khan-x

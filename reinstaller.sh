@@ -290,8 +290,17 @@ if [ $(id -u) -eq 0 ]; then
             fi
 
             if [ "$my_networks" ] ; then # some better check should be here / placeholder
-                dhcpcd $my_networks
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Set network to $my_networks" 10 30
+                #dhcpcd $my_networks
+                if [ ! -f /usr/bin/netctl ]; then
+                    cp /etc/netctl/examples/ethernet-dhcp /etc/netctl/ethernetdhcp
+                    sed -i "s/eth0/$my_networks/g" /etc/netctl/ethernetdhcp
+                    netctl start ethernet-dhcp
+                    netctl enable ethernet-dhcp
+                else
+                    dhcpcd $my_networks
+                fi
+
+                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Set network to $my_networks using netctl (enabled/started)" 10 30
             else
                 dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Failed to set network...network does not exist/null?" 10 30
             fi
@@ -335,7 +344,11 @@ if [ $(id -u) -eq 0 ]; then
 
             pwifi=$(cat $TMP/pwifi)
             if [ "$pwifi" == "1" ] ; then
-                wifi-menu $my_networks
+                if [ ! -f /usr/bin/netctl ]; then
+                    wifi-menu $my_networks
+                else
+                    dhcpcd $my_networks
+                fi
             else
                 dialog --clear --backtitle "$upper_title" --title "Internet" --inputbox "Please enter your SSID" 10 70 2> $TMP/pssid
                 pssid=$(cat $TMP/pssid)
