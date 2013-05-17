@@ -15,7 +15,6 @@ downgrade
 dropbox
 dropbox-cli
 dtrx
-e-modules-extra-svn
 e17-themes
 eggdrop
 faenza-green-icon-theme
@@ -72,7 +71,6 @@ quazip
 roccat-dkms
 rtmpdump-git
 secure-delete
-stjerm
 sublime-text-nightly
 systemd-ui
 tcptraceroute
@@ -95,5 +93,6 @@ vlc-subtitles-mod
 vokoscreen
 xcursor-arch-simple
 xcursor-shere-khan-x
+yeahconsole
 zsh-completions
 zsh-syntax-highlighting
