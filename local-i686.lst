@@ -31,6 +31,7 @@ gkrellshoot_
 gnomish-dark-theme
 grake
 jreen
+kmod-roccat
 libechonest2
 libimago2-svn
 libtiff4
@@ -42,8 +43,6 @@ marples-black
 mod_evasive
 mysqltcl
 nast
-nvidia-dkms
-nvidia-hook
 pacaur
 packer
 pacman4console
@@ -68,7 +67,6 @@ python3-threaded_servers
 python3-xynexdg
 qtweetlib
 quazip
-roccat-dkms
 rtmpdump-git
 secure-delete
 sublime-text-nightly

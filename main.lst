@@ -6,6 +6,7 @@ alsa-plugins
 alsa-utils
 apache
 arch-install-scripts
+arch-wiki-lite
 archiso
 audio-convert
 autoconf
@@ -136,6 +137,7 @@ nethogs
 nmap
 ntfs-3g
 ntp
+nvidia
 nvidia-cg-toolkit
 nvidia-utils
 openshot
