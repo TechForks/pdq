@@ -12,7 +12,6 @@ audio-convert
 autoconf
 autocutsel
 automake
-avidemux-qt
 awesome
 baobab
 binutils-multilib
@@ -72,10 +71,7 @@ gstreamer0.10-ffmpeg
 gstreamer0.10-good
 gstreamer0.10-ugly
 gstreamer0.10-ugly-plugins
-gtk-engine-murrine
-hardinfo
 hddtemp
-hdparm
 hgsvn
 hicolor-icon-theme
 hsetroot
@@ -93,7 +89,6 @@ kdenlive
 kdeutils-ark
 keepassx
 keychain
-leafpad
 lib32-alsa-plugins
 lib32-flashplugin
 lib32-libldap
@@ -197,7 +192,7 @@ unzip
 upx
 vicious
 vim
-virtualbox-host-dkms
+vlc
 vnstat
 vorbis-tools
 wavpack
@@ -218,7 +213,6 @@ xf86-input-synaptics
 xf86-input-vmmouse
 xf86-input-void
 xf86-video-vesa
-xonotic
 xorg-server
 xorg-server-utils
 xorg-server-xephyr
