@@ -1,5 +1,3 @@
-aarchup
-anypaper
 cacheclean
 clipbored-git
 codecs64
@@ -17,13 +15,11 @@ dtrx
 e17-themes
 eggdrop
 faenza-green-icon-theme
-ffcast
 flashplugin-beta
 flexget
 foxitreader
 fslint
 gkrellm-gkfreq
-gkrellm-mailwatch
 gkrellm2-multiping
 gkrellm2-show_ip
 gkrellshoot_
@@ -37,13 +33,11 @@ libvpx-git
 livestreamer-git
 logstalgia
 lwks
-marples-black
 mod_evasive
 mysqltcl
 nast
 pacaur
 packer
-pacman4console
 pacserve
 pbget
 perl-xml-feedpp
@@ -67,7 +61,6 @@ quazip
 rtmpdump-git
 secure-delete
 sublime-text-nightly
-systemd-ui
 tcptraceroute
 teamviewer
 terminology
