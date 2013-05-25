@@ -1,0 +1,103 @@
+! Xft settings ---------------------------------------------------------------
+
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+!-------------------------------------------------------------------------------
+!
+!	U R X V T - Settings
+!
+URxvt*saveLines: 3100
+URxvt*geometry:					80x25
+URxvt*borderLess:				false
+URxvt*depth:					32
+URxvt*scrollBar_right:				false
+URxvt*scrollBar:		      false
+URxvt*cursorBlink:				true
+URxvt*cursorUnderline:				true
+URxvt*scrollColor:				#111111
+URxvt*internalborder: 6
+
+!yeahconsole*inheritPixmap: true
+yeahconsole*term:urxvtc
+yeahconsole*transparent:true
+!yeahconsole*background: rgba:0000/0000/0000/dddd
+!yeahconsole*foreground: green
+yeahconsole*screenWidth: 1129
+yeahconsole*xOffset: 2123
+yeahconsole*toggleKey: None+F12
+yeahconsole*consoleHeight: 20
+yeahconsole*aniDelay: 30
+yeahconsole*stepSize: 10
+yeahconsole*faceName: xft:terminus:pixelsize=16:antialias=false
+!yeahconsole*faceSize: 9
+yeahconsole*keyFull: Alt+F12
+yeahconsole*handleWidth: 3
+yeahconsole*handleColor: #000000
+
+! rxvt-unicode
+URxvt*urgentOnBell:  true
+
+*color0:     #101010
+*color8:     #404040
+!red
+*color1:     #E84F4F
+*color9:     #D23D3D
+!green
+*color2:     #B8D68C
+*color10:    #A0CF5D
+!yellow
+*color3:     #E1AA5D
+*color11:    #F39D21
+!blue
+*color4:     #7DC1CF
+*color12:    #4E9FB1
+!magenta
+*color5:     #9B64FB
+*color13:    #8542FF
+!cyan
+*color6:     #6D878D
+*color14:    #42717B
+!white
+*color7:     #dddddd
+*color15:    #dddddd
+
+! enable clickable links
+URxvt*url-launcher: firefox
+URxvt*urlLauncher:  /home/pdq/bin/urlLauncher $0
+URxvt*matcher.button: 1
+
+URxvt*tabbed.tabbar-fg: 11
+URxvt*tabbed.tabbar-bg: 0
+URxvt*tabbed.tab-fg:    14
+URxvt*tabbed.tab-bg:    0
+
+! include font and bg/fg colors
+URxvt*font: xft:terminus:pixelsize=16:antialias=false
+!URxvt*font: xft:Envy Code R-10
+URxvt*iconFile: /usr/share/icons/Faenza/apps/32/utilities-terminal.png
+URxvt*background: rgba:0000/0000/0000/dddd
+URxvt*foreground: #d3d3d3
+URxvt*transparent: false
+!Urxvt*fading: 10
+!Urxvt*fadeColor: #a146ff
+URxvt*perl-ext-common:  default,clipboard,matcher
+*underlineColor: #1691CF
+
+URxvt*keysym.C-Delete:                 perl:matcher:last
+URxvt*keysym.M-Delete:                 perl:matcher:list
+URxvt*matcher.pattern.1:   \\bhttps?:\/\/(?:(?:www.youtube|youtube).com\/watch\\?.*v=|youtu.be/)([\\w-]*)
+URxvt*matcher.launcher.1:		urlLauncher -video $0
+URxvt*matcher.pattern.2:		\\bhttps?:\/\/vimeo.com\/([\\w-]*)
+URxvt*matcher.launcher.2:		urlLauncher -video $0
+URxvt*matcher.pattern.3:		\\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(?i)(mp3|ogg|wav|wma|flv)
+URxvt*matcher.launcher.3:		urlLauncher -audio $0
+URxvt*matcher.pattern.4:		\\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(?i)(jpg|jpeg|png)
+URxvt*matcher.launcher.4:		urlLauncher -image $0
+URxvt*matcher.pattern.5: \\b(http|https|ftp):[/]*[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*matcher.launcher.5:		url-launcher
+URxvt*matcher.pattern.6: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*matcher.launcher.6:		url-launcher
