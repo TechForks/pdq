@@ -25,6 +25,8 @@ gkrellm2-multiping
 gkrellm2-show_ip
 gkrellshoot_
 grake
+gtk-youtube-viewer
+gtk2-theme-black-fate
 jreen
 kmod-roccat
 libechonest2
@@ -37,6 +39,7 @@ lwks
 mod_evasive
 mysqltcl
 nast
+omg-suite
 pacaur
 packer
 pacserve
@@ -74,12 +77,16 @@ ttf-ms-fonts
 ttf-stylebats
 ttyload
 unigine-sanctuary
+update-mirrorlist
 urxvt-perls-git
 vcp
 virtualbox-ext-oracle
 vlc-subtitles-mod
 vokoscreen
+whitey
 xcursor-arch-simple
+xcursor-blackstyle
+xcursor-blackwidow
 xcursor-shere-khan-x
 yeahconsole
 zsh-completions

@@ -140,6 +140,7 @@ openshot
 openssh
 patch
 pavucontrol
+perl-lwp-protocol-https
 phonon-vlc
 phoronix-test-suite
 php
@@ -224,7 +225,6 @@ xterm
 xvkbd
 yajl
 youtube-dl
-youtube-viewer
 zenity
 zip
 zsh
