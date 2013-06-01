@@ -42,6 +42,7 @@ ViewPropsTimestamp=2013,2,25,17,48,35
 [IconsMode]
 FontWeight=50
 IconSize=64
+PreviewSize=80
 TextWidthIndex=0
 
 [KFileDialog Settings]
@@ -67,15 +68,15 @@ Height 480=864
 Height 768=769
 Height 900=901
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAwAAAAAAAABOAAACFfwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAgBAAAF+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAeAAACFQAAAFABAAAFAAAAAQAAALIAAAGY/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAGYAAAACAEAAAX7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAgBAAAFAAACcAAAAhUAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+State=AAAA/wAAAAD9AAAAAwAAAAAAAABOAAAD+vwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAgBAAAF+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAeAAAD+gAAAFABAAAFAAAAAQAAALIAAAGY/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACYAAAGYAAAACAEAAAX7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAACzAAAAN38AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAACzAAAAAgBAAAFAAAFTwAAA/oAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1024=688
 Width 1280=782
 Width 1360=678
 Width 1368=1369
 Width 1376=688
-Width 1440=673
-Width 1920=705
+Width 1440=1440
+Width 1920=1440
 Width 640=720
 
 [MainWindow][Toolbar mainToolBar]
@@ -91,7 +92,7 @@ CompletionMode=5
 History=subl3 %F,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U
 
 [PreviewSettings]
-Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
+Plugins=audiothumbs,comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
 
 [SettingsDialog]
 Height 1080=590
