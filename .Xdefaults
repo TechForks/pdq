@@ -32,7 +32,7 @@ yeahconsole*toggleKey: None+F12
 yeahconsole*consoleHeight: 20
 yeahconsole*aniDelay: 30
 yeahconsole*stepSize: 10
-yeahconsole*faceName: xft:terminus:pixelsize=16:antialias=false
+yeahconsole*faceName: xft:terminus:pixelsize=14:antialias=false
 !yeahconsole*faceSize: 9
 yeahconsole*keyFull: Alt+F12
 yeahconsole*handleWidth: 3
@@ -76,7 +76,7 @@ URxvt*tabbed.tab-fg:    14
 URxvt*tabbed.tab-bg:    0
 
 ! include font and bg/fg colors
-URxvt*font: xft:terminus:pixelsize=16:antialias=false
+URxvt*font: xft:terminus:pixelsize=14:antialias=false
 !URxvt*font: xft:Envy Code R-10
 URxvt*iconFile: /usr/share/icons/Faenza/apps/32/utilities-terminal.png
 URxvt*background: rgba:0000/0000/0000/dddd
@@ -84,8 +84,14 @@ URxvt*foreground: #d3d3d3
 URxvt*transparent: false
 !Urxvt*fading: 10
 !Urxvt*fadeColor: #a146ff
-URxvt*perl-ext-common:  default,clipboard,matcher
+URxvt*perl-ext-common:  default,clipboard,matcher,font-size
 *underlineColor: #1691CF
+
+URxvt*keysym.C-Up:     perl:font-size:increase
+URxvt*keysym.C-Down:   perl:font-size:decrease
+URxvt*keysym.C-S-Up:   perl:font-size:incglobal
+URxvt*keysym.C-S-Down: perl:font-size:decglobal
+
 
 URxvt*keysym.C-Delete:                 perl:matcher:last
 URxvt*keysym.M-Delete:                 perl:matcher:list

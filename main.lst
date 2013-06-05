@@ -170,6 +170,7 @@ python
 python2-beautifulsoup4
 quvi
 rsync
+rtmpdump
 rxvt-unicode
 scrot
 squashfs-tools
@@ -187,6 +188,7 @@ torsocks
 traceroute
 transmission-cli
 truecrypt
+tt-rss
 ttf-bitstream-vera
 udevil
 unrar
