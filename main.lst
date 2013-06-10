@@ -29,6 +29,7 @@ devtools
 dialog
 dmenu
 dmidecode
+dnsmasq
 dnsutils
 dosfstools
 dvd+rw-tools
@@ -123,7 +124,6 @@ meld
 memcached
 memtest86+
 mlocate
-mlt
 moc
 mtools
 mumble
@@ -136,7 +136,6 @@ ntp
 nvidia
 nvidia-cg-toolkit
 nvidia-utils
-openshot
 openssh
 patch
 pavucontrol
@@ -174,6 +173,7 @@ rtmpdump
 rxvt-unicode
 scrot
 squashfs-tools
+squid
 sshfs
 steam
 sudo
@@ -183,7 +183,6 @@ terminus-font
 thunderbird
 tig
 tls
-tor
 torsocks
 traceroute
 transmission-cli
@@ -204,6 +203,7 @@ weechat
 wget
 wine
 wireshark-cli
+wireshark-gtk
 wmctrl
 x264
 xbindkeys
