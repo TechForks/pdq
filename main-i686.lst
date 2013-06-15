@@ -21,6 +21,7 @@ blender
 cairo
 cclive
 cdrdao
+claws-mail
 cmatrix
 cowsay
 ddd
@@ -180,7 +181,6 @@ sudo
 syslinux
 tcpdump
 terminus-font
-thunderbird
 tig
 tls
 torsocks

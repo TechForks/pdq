@@ -23,6 +23,7 @@ fslint
 grake
 gtk-youtube-viewer
 gtk2-theme-black-fate
+keepass
 kmod-roccat
 at-spi2-atk
 at-spi2-core
@@ -76,7 +77,9 @@ python2-xynehttpserver
 python3-aur
 python3-threaded_servers
 python3-xynexdg
+retroshare
 secure-delete
+simplescreenrecorder
 sublime-text-nightly
 tcptraceroute
 teamviewer
@@ -97,7 +100,6 @@ urxvt-perls-git
 vcp
 virtualbox-ext-oracle
 vlc-subtitles-mod
-vokoscreen
 whitey
 xcursor-arch-simple
 xcursor-blackstyle
