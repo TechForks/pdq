@@ -81,6 +81,7 @@ htop
 hub
 hwinfo
 i7z
+iftop
 iotop
 jshon
 k3b
@@ -157,7 +158,6 @@ phpmyadmin
 pinta
 pkg-config
 pkgfile
-playonlinux
 polipo
 portaudio_cpp
 ppp
@@ -201,7 +201,6 @@ vorbis-tools
 wavpack
 weechat
 wget
-wine
 wireshark-cli
 wireshark-gtk
 wmctrl
