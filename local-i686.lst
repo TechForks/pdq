@@ -23,7 +23,6 @@ fslint
 grake
 gtk-youtube-viewer
 gtk2-theme-black-fate
-hotshots
 kmod-roccat
 at-spi2-atk
 at-spi2-core
@@ -45,7 +44,6 @@ pam
 polkit
 wayland
 libimago2-svn
-libqxt
 libtiff4
 libvpx-git
 logstalgia
