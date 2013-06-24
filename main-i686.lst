@@ -11,14 +11,12 @@ audio-convert
 autoconf
 autocutsel
 automake
-awesome
 baobab
 binutils
 bison
 bitlbee
 blender
 cairo
-cclive
 cdrdao
 claws-mail
 cmatrix
@@ -82,10 +80,8 @@ hwinfo
 i7z
 iftop
 iotop
-jshon
 k3b
 kdebase-dolphin
-kdebase-workspace
 kdemultimedia-ffmpegthumbs
 kdenlive
 kdesdk-dolphin-plugins
@@ -102,7 +98,6 @@ mpg123
 nvidia-utils
 openal
 libisoburn
-libmariadbclient
 libmodplug
 libotr
 libpng12
@@ -117,8 +112,6 @@ lxtask
 lzop
 m4
 make
-mariadb
-mariadb-clients
 mcomix
 meld
 memcached

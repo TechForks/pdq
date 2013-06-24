@@ -1,9 +1,7 @@
 alarm-clock
-audiothumbs
 cacheclean
 clipbored-git
 codecs64
-compton-git
 cower-git
 dansguardian
 delaycut-git
@@ -23,7 +21,6 @@ foxitreader
 fslint
 grake
 gtk-youtube-viewer
-gtk2-theme-black-fate
 kmod-roccat
 lib32-at-spi2-atk
 lib32-at-spi2-core
@@ -44,7 +41,6 @@ lib32-libxkbcommon
 lib32-pam
 lib32-polkit
 lib32-wayland
-libimago2-svn
 libtiff4
 libvpx-git
 logstalgia
@@ -52,7 +48,6 @@ lwks
 nast
 omg-suite
 pacaur
-packer
 pacserve
 pbget
 pcre-old
@@ -77,7 +72,6 @@ secure-delete
 sublime-text-nightly
 tcptraceroute
 teamviewer
-terminology
 tor-unstable
 transcoder
 ttf-envy-code-r
@@ -86,17 +80,11 @@ ttf-hylian-fonts
 ttf-ms-fonts
 ttf-stylebats
 ttf-unifur
-ttyload
 unigine-sanctuary
 update-mirrorlist
 urxvt-font-size-git
 urxvt-perls-git
 virtualbox-ext-oracle
-vlc-subtitles-mod
-whitey
-xcursor-arch-simple
-xcursor-blackstyle
-xcursor-blackwidow
 xcursor-shere-khan-x
 yeahconsole
 zsh-completions
