@@ -99,15 +99,12 @@ lib32-nvidia-utils
 lib32-openal
 libisoburn
 libmodplug
-libotr
 libpng12
-libstatgrab
 libtool
 libunique
 libva-vdpau-driver
 libxft
 lm_sensors
-lshw
 lxtask
 lzop
 m4
@@ -146,12 +143,10 @@ preload
 privoxy
 pulseaudio
 pulseaudio-alsa
-pystatgrab
 python
 python-feedparser
 python-gobject
 python2-beautifulsoup4
-quvi
 rsync
 rtmpdump
 rxvt-unicode
@@ -164,7 +159,6 @@ sudo
 syslinux
 tcpdump
 terminus-font
-tig
 tls
 torsocks
 traceroute
@@ -175,7 +169,6 @@ udevil
 unrar
 unzip
 upx
-vicious
 vim
 vlc
 vnstat
@@ -189,7 +182,6 @@ wmctrl
 x264
 xbindkeys
 xclip
-xcursor-themes
 xdotool
 xf86-input-evdev
 xf86-input-keyboard
@@ -200,7 +192,6 @@ xf86-input-void
 xf86-video-vesa
 xorg-server
 xorg-server-utils
-xorg-server-xephyr
 xorg-utils
 xorg-xinit
 xorg-xkill
