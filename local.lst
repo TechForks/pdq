@@ -1,3 +1,4 @@
+alarm-clock
 audiothumbs
 cacheclean
 clipbored-git
@@ -48,8 +49,6 @@ libtiff4
 libvpx-git
 logstalgia
 lwks
-mod_evasive
-mysqltcl
 nast
 omg-suite
 pacaur
@@ -64,8 +63,6 @@ powerpill
 profile-sync-daemon
 ps_mem
 pulseaudio_ctl
-pybitmessage-git
-pychrom
 python2-certifi
 python2-jsonschema
 python2-pynzb
@@ -76,9 +73,7 @@ python2-xynehttpserver
 python3-aur
 python3-threaded_servers
 python3-xynexdg
-retroshare
 secure-delete
-simplescreenrecorder
 sublime-text-nightly
 tcptraceroute
 teamviewer
@@ -96,7 +91,6 @@ unigine-sanctuary
 update-mirrorlist
 urxvt-font-size-git
 urxvt-perls-git
-vcp
 virtualbox-ext-oracle
 vlc-subtitles-mod
 whitey
