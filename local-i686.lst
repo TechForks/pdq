@@ -17,9 +17,11 @@ eggdrop
 faenza-green-icon-theme
 flexget
 foxitreader
+frei0r-plugins-git
 fslint
 grake
 gtk-youtube-viewer
+hotshots
 kmod-roccat
 at-spi2-atk
 at-spi2-core
@@ -40,6 +42,7 @@ libxkbcommon
 pam
 polkit
 wayland
+libqxt
 libtiff4
 libvpx-git
 logstalgia
