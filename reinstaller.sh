@@ -408,8 +408,9 @@ if [ $(id -u) -eq 0 ]; then
         #if [ ! -f /mnt/chroot-rs.sh ]; then
             wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
             chmod +x chroot-rs.sh
+            cp /etc/resolv.conf /mnt/etc/resolv.conf
             mv chroot-rs.sh /mnt/chroot-rs.sh
-        arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
+            arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
     }
 
     generate_fstab() {

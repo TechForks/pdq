@@ -80,6 +80,7 @@ hwinfo
 i7z
 iftop
 iotop
+jhead
 k3b
 kdebase-dolphin
 kdemultimedia-ffmpegthumbs
@@ -170,6 +171,8 @@ unrar
 unzip
 upx
 vim
+virtualbox
+virtualbox-host-dkms
 vlc
 vnstat
 vorbis-tools

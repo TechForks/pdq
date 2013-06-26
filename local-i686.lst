@@ -50,6 +50,7 @@ lwks
 nast
 omg-suite
 pacaur
+packer
 pacserve
 pbget
 pcre-old
@@ -71,6 +72,7 @@ python3-aur
 python3-threaded_servers
 python3-xynexdg
 secure-delete
+simplescreenrecorder
 sublime-text-nightly
 tcptraceroute
 teamviewer
@@ -86,6 +88,7 @@ update-mirrorlist
 urxvt-font-size-git
 urxvt-perls-git
 virtualbox-ext-oracle
+vokoscreen
 xcursor-shere-khan-x
 yeahconsole
 zsh-completions
