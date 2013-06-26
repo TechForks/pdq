@@ -8,18 +8,18 @@ upper_title="[ pdqOS environment configuration ] (chroot)"
 if [ $(id -u) -eq 0 ]; then
 
     ## sanity default checks
-    wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
-    if [ ! -s /tmp/index.google ] ; then
-        systemctl enable dhcpcd@eth0.service
-    fi
+    # wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+    # if [ ! -s /tmp/index.google ] ; then
+    #     systemctl enable dhcpcd@eth0.service
+    # fi
 
-    wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
-    if [ ! -s /tmp/index.google ] ; then
-        echo "It appears you have no internet connectivity.\n\nRead: https://wiki.archlinux.org/index.php/Configuring_network"
-        echo "This script will exit in 1 minute... or press ctrl-c to exit now."
-        sleep 60s
-        exit 0
-    fi
+    # wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+    # if [ ! -s /tmp/index.google ] ; then
+    #     echo "It appears you have no internet connectivity.\n\nRead: https://wiki.archlinux.org/index.php/Configuring_network"
+    #     echo "This script will exit in 1 minute... or press ctrl-c to exit now."
+    #     sleep 60s
+    #     exit 0
+    # fi
 
     ## styling
     clr=""

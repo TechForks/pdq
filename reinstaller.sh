@@ -294,8 +294,8 @@ if [ $(id -u) -eq 0 ]; then
                 if [ -f /usr/bin/netctl ]; then
                     cp /etc/netctl/examples/ethernet-dhcp /etc/netctl/ethernetdhcp
                     sed -i "s/eth0/$my_networks/g" /etc/netctl/ethernetdhcp
-                    netctl start ethernet-dhcp
-                    netctl enable ethernet-dhcp
+                    netctl start ethernetdhcp
+                    netctl enable ethernetdhcp
                 else
                     dhcpcd $my_networks
                 fi
@@ -305,13 +305,13 @@ if [ $(id -u) -eq 0 ]; then
                 dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Failed to set network...network does not exist/null?" 10 30
             fi
 
-            wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+            # wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
 
-            if [ ! -s /tmp/index.google ] ; then
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
-            else
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
-            fi
+            # if [ ! -s /tmp/index.google ] ; then
+            #     dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 10 40
+            # else
+            #     dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
+            # fi
         else
             dialog --clear --backtitle "$upper_title" --title "Internet" --radiolist "Choose your preferred wireless setup tool" 10 70 30 \
             "1" "wifi-menu" on \
@@ -360,12 +360,12 @@ if [ $(id -u) -eq 0 ]; then
             fi
 
             #dhcpcd $my_networks
-            wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
-            if [ ! -s /tmp/index.google ] ; then
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 20 30
-            else
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
-            fi
+            # wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+            # if [ ! -s /tmp/index.google ] ; then
+            #     dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have no internet connection, refer to for instructions on loading your required wireless kernel modules.\n\nhttps://wiki.archlinux.org/index.php/Wireless_Setup" 20 30
+            # else
+            #     dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "It appears you have an internet connection, huzzah for small miracles. :p" 10 30
+            # fi
         fi
 
         dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Internet configuration complete.\n\n Hit enter to return to menu" 10 30
@@ -394,6 +394,7 @@ if [ $(id -u) -eq 0 ]; then
         dialog --clear --backtitle "$upper_title" --title "Custom packages" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git hub rsync wget zsh\nleave input blank and continue." 40 70 2> $TMP/ppkgs
         ppkgs=" $(cat $TMP/ppkgs)"
 
+        pacstrap /mnt base base-devel sudo git hub rsync wget zsh$ppkgs
         pacstrap /mnt base base-devel sudo git hub rsync wget zsh$ppkgs
         dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget zsh$ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
     }
