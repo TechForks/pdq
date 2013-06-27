@@ -542,7 +542,7 @@ if [ $(id -u) -eq 0 ]; then
         rootpasswd=$(cat $TMP/rootpasswd)
         dialog \
             --colors --backtitle "$upper_title" --title "pdqOS Installer (chroot) for Arch Linux x86_64" \
-            --menu "Select action:" 20 60 10
+            --menu "Select action:" 20 60 10 \
             1 $clr"Generate hostname [${GEN_HOSTNAME}]" \
             2 $clr"Generate timezone [${GEN_TIMEZONE}]" \
             3 $clr"Generate locale [${GEN_LANG}]" \
