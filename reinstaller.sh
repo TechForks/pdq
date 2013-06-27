@@ -384,19 +384,19 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     initial_install() {
-        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Install base base-devel sudo git hub rsync wget zsh" 10 30
+        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Install base base-devel sudo git rsync wget zsh" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
         
         echo "" > $TMP/ppkgs
-        dialog --clear --backtitle "$upper_title" --title "Custom packages" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git hub rsync wget zsh\nleave input blank and continue." 40 70 2> $TMP/ppkgs
+        dialog --clear --backtitle "$upper_title" --title "Custom packages" --inputbox "Please enter any packages you would like added to the initial base system installation.\n\nSeperate multiple packages with a space.\n\nIf you do not wish to add any packages beyond the default:\nbase base-devel sudo git rsync wget zsh\nleave input blank and continue." 40 70 2> $TMP/ppkgs
         ppkgs=" $(cat $TMP/ppkgs)"
 
-        pacstrap -i /mnt base base-devel sudo git hub rsync wget zsh$ppkgs
-        #pacstrap /mnt base base-devel sudo git hub rsync wget zsh$ppkgs
-        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git hub rsync wget zsh$ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
+        pacstrap -i /mnt base base-devel sudo git rsync wget zsh$ppkgs
+        #pacstrap /mnt base base-devel sudo git rsync wget zsh$ppkgs
+        dialog --clear --backtitle "$upper_title" --title "Initial install" --msgbox "Installed base base-devel sudo git rsync wget zsh$ppkgs to /mnt.\n\n Hit enter to return to menu" 30 50
     }
 
     chroot_configuration() {
@@ -470,15 +470,15 @@ else
     export TMPDIR=${my_home}vital/tmp
 
     sudo locale-gen
-    wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
-    if [ ! -s /tmp/index.google ] ; then
-        sudo dhcpcd eth0
-        sudo systemctl enable dhcpcd@eth0.service
-    fi
+    # wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+    # if [ ! -s /tmp/index.google ] ; then
+    #     sudo dhcpcd eth0
+    #     sudo systemctl enable dhcpcd@eth0.service
+    # fi
 
-    if [ ! -f /usr/bin/hub ]; then
-        sudo pacman -S --noconfirm --needed hub
-    fi
+    #if [ ! -f /usr/bin/hub ]; then
+    #    sudo pacman -S --noconfirm --needed hub
+    #fi
 
     if [ ! -f /usr/bin/pacaur ]; then
         #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
@@ -499,8 +499,8 @@ else
     if [ ! -d "${dev_directory}pdq" ]; then
         dialog --backtitle "$upper_title" --title "Initial clone" --msgbox "Cloning initial repo to ${dev_directory}pdq/" 10 30
         cd ${dev_directory}
-        hub clone idk/pdq
-        hub clone idk/etc
+        git clone https://github.com/idk/pdq.git
+        git clone idk/etc
         cd
         sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
         if [ "$archtype" = "x86_64" ]; then
@@ -530,7 +530,7 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     fi
 
     ## sanity checks
-    if [ ! -f /usr/bin/rsync ] || [ ! -f /usr/bin/hub ] || [ ! -f /usr/bin/pacaur ] || [ ! -f /usr/bin/pacman ] || [ ! -f /usr/bin/powerpill ]; then
+    if [ ! -f /usr/bin/rsync ] || [ ! -f /usr/bin/pacaur ] || [ ! -f /usr/bin/pacman ] || [ ! -f /usr/bin/powerpill ]; then
         dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "Hmmm. An ERROR has occured...\n\nPackage depends not met, this installer failed to install one of the following:\nrsync, git, hub, packer, pacaur, pacman or powerpill.\n\nExiting..." 30 70
     fi
 
@@ -570,14 +570,14 @@ vboxvideo' > /etc/modules-load.d/virtualbox.conf"
     dialog --clear --backtitle "$upper_title" --title "Configuration files" --yesno "Clone all repos?" 10 30
     if [ $? = 0 ] ; then
         cd ${dev_directory}
-        hub clone idk/awesomewm-X
-        hub clone idk/conky-X
-        hub clone idk/zsh
-        hub clone idk/bin
-        hub clone idk/php
-        hub clone idk/systemd
-        hub clone idk/eggdrop-scripts
-        hub clone idk/gh
+        git clone https://github.com/idk/awesomewm-X.git
+        git clone https://github.com/idk/conky-X.git
+        git clone https://github.com/idk/zsh.git
+        git clone https://github.com/idk/bin.git
+        git clone https://github.com/idk/php.git
+        git clone https://github.com/idk/systemd.git
+        git clone https://github.com/idk/eggdrop-scripts.git
+        git clone https://github.com/idk/gh.git
         cd
     fi
 
