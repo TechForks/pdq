@@ -13,7 +13,15 @@ dropbox
 dropbox-cli
 dtrx
 e17-themes
+efl-git
+efl-git-debug
 eggdrop
+elementary-git
+elementary-git-debug
+elementary_test-git
+elementary_test-git-debug
+enlightenment17-git
+enlightenment17-git-debug
 faenza-green-icon-theme
 flexget
 foxitreader
@@ -22,7 +30,6 @@ fslint
 grake
 gtk-youtube-viewer
 hotshots
-kmod-roccat
 at-spi2-atk
 at-spi2-core
 colord
@@ -47,6 +54,7 @@ libtiff4
 libvpx-git
 logstalgia
 lwks
+minitube-git
 nast
 omg-suite
 pacaur
@@ -71,6 +79,7 @@ python2-xynehttpserver
 python3-aur
 python3-threaded_servers
 python3-xynexdg
+roccat-dkms
 secure-delete
 simplescreenrecorder
 sublime-text-nightly
@@ -88,7 +97,6 @@ update-mirrorlist
 urxvt-font-size-git
 urxvt-perls-git
 virtualbox-ext-oracle
-vokoscreen
 xcursor-shere-khan-x
 yeahconsole
 zsh-completions

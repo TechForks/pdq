@@ -31,20 +31,8 @@ dnsmasq
 dnsutils
 dosfstools
 dvd+rw-tools
-ecore
-edje
-eet
-eeze
-efreet
-eina
-eio
 elinks
-embryo
-emotion
 encfs
-enlightenment17
-ethumb
-evas
 fakeroot
 feh
 ffmpeg
@@ -70,6 +58,7 @@ gstreamer0.10-ffmpeg
 gstreamer0.10-good
 gstreamer0.10-ugly
 gstreamer0.10-ugly-plugins
+hardinfo
 hddtemp
 hgsvn
 hicolor-icon-theme
@@ -177,6 +166,7 @@ vlc
 vnstat
 vorbis-tools
 wavpack
+wayland
 weechat
 wget
 wireshark-cli
