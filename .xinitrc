@@ -28,7 +28,7 @@ fi
 
 ## truecrypt mounted success file
 #if [ $USE_SOUNDS = 1 ] && [ -f "/media/truecrypt1/test" ] ; then
-    ogg123 -q "${wm_path}desktop-login.ogg"
+#    ogg123 -q "$HOME/.config/awesome/sounds/desktop-login.ogg"
 #fi
 
 case $1 in
