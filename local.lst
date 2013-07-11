@@ -1,5 +1,4 @@
 alarm-clock
-cacheclean
 codecs64
 cower-git
 dansguardian
@@ -62,6 +61,7 @@ pbget
 pcre-old
 perl-xml-feedpp
 perl-xml-treepp
+pkgcacheclean
 pm2ml
 powerpill
 profile-sync-daemon
