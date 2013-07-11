@@ -1,10 +1,8 @@
 alarm-clock
 cacheclean
-clipbored-git
 codecs64
 cower-git
 dansguardian
-delaycut-git
 dmenu-path-c
 dmenu_mocp
 dolphin-box-plugin-git
@@ -54,7 +52,7 @@ libtiff4
 libvpx-git
 logstalgia
 lwks
-minitube-git
+mediadownloader
 nast
 omg-suite
 pacaur
@@ -79,6 +77,7 @@ python2-xynehttpserver
 python3-aur
 python3-threaded_servers
 python3-xynexdg
+radiotray
 roccat-dkms
 secure-delete
 simplescreenrecorder
