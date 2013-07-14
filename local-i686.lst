@@ -1,6 +1,6 @@
 alarm-clock
 codecs64
-cower-git
+cower
 dansguardian
 dmenu-path-c
 dmenu_mocp
@@ -22,7 +22,6 @@ enlightenment17-git-debug
 faenza-green-icon-theme
 flexget
 foxitreader
-frei0r-plugins-git
 fslint
 grake
 gtk-youtube-viewer
@@ -32,9 +31,7 @@ at-spi2-core
 colord
 cracklib
 db
-dbus-glib
 flex
-gconf
 gtk3
 js185
 lcms2
@@ -48,7 +45,6 @@ polkit
 wayland
 libqxt
 libtiff4
-libvpx-git
 logstalgia
 lwks
 mediadownloader
@@ -77,7 +73,6 @@ python2-xynehttpserver
 python3-aur
 python3-threaded_servers
 python3-xynexdg
-radiotray
 roccat-dkms
 secure-delete
 simplescreenrecorder
@@ -94,7 +89,6 @@ ttf-stylebats
 ttf-unifur
 update-mirrorlist
 urxvt-font-size-git
-urxvt-perls-git
 virtualbox-ext-oracle
 xcursor-shere-khan-x
 yeahconsole

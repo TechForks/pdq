@@ -41,6 +41,7 @@ firefox
 flex
 fontconfig
 fortune-mod
+frei0r-plugins
 fuseiso
 gcc-libs-multilib
 gcc-multilib
@@ -87,12 +88,14 @@ lib32-libxft
 lib32-mpg123
 lib32-nvidia-utils
 lib32-openal
+libavc1394
 libisoburn
 libmodplug
 libpng12
 libtool
 libunique
 libva-vdpau-driver
+libvpx
 libxft
 lm_sensors
 lxtask
@@ -104,6 +107,8 @@ meld
 memcached
 memtest86+
 mlocate
+mlt
+mlt-python-bindings
 moc
 mtools
 mumble
@@ -158,6 +163,7 @@ udevil
 unrar
 unzip
 upx
+urxvt-perls
 vim
 virtualbox
 virtualbox-host-dkms
