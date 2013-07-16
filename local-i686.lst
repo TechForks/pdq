@@ -25,7 +25,6 @@ foxitreader
 fslint
 grake
 gtk-youtube-viewer
-hotshots
 at-spi2-atk
 at-spi2-core
 colord
@@ -43,11 +42,11 @@ libxkbcommon
 pam
 polkit
 wayland
-libqxt
 libtiff4
 logstalgia
 lwks
 mediadownloader
+montage
 nast
 omg-suite
 pacaur

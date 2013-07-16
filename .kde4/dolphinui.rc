@@ -1,4 +1,4 @@
-<!DOCTYPE kpartgui SYSTEM 'kpartgui.dtd'>
+<!DOCTYPE kpartgui>
 <kpartgui version="14" name="dolphin">
  <MenuBar alreadyVisited="1">
   <Menu noMerge="1" name="file" alreadyVisited="1">
@@ -257,6 +257,9 @@
   <Separator weakSeparator="1"/>
   <Separator weakSeparator="1"/>
   <Separator weakSeparator="1"/>
+  <Separator weakSeparator="1"/>
+  <Separator weakSeparator="1"/>
+  <Separator weakSeparator="1"/>
   <Menu noMerge="1" name="tools" alreadyVisited="1">
    <text>&amp;Tools</text>
    <Action name="show_filter_bar"/>
@@ -462,9 +465,13 @@
   <Action name="split_view"/>
   <Action name="view_mode"/>
   <Separator name="separator_4"/>
-  <Action name="options_configure"/>
   <Separator name="separator_5"/>
+  <Action name="show_filter_bar"/>
+  <Action name="show_terminal_panel"/>
+  <Separator name="separator_6"/>
   <Action name="file_quit"/>
+  <Separator name="separator_7"/>
+  <Action name="options_configure"/>
  </ToolBar>
  <State name="new_file">
   <disable>
