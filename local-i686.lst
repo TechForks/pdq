@@ -43,11 +43,15 @@ pam
 polkit
 wayland
 libtiff4
+linux-pdq
+linux-pdq-docs
+linux-pdq-headers
 logstalgia
 lwks
 mediadownloader
 montage
 nast
+nvidia-all
 omg-suite
 pacaur
 packer
@@ -59,6 +63,7 @@ perl-xml-treepp
 pkgcacheclean
 pm2ml
 powerpill
+preload
 profile-sync-daemon
 ps_mem
 pulseaudio_ctl

@@ -32,7 +32,7 @@ yeahconsole*toggleKey: None+F12
 yeahconsole*consoleHeight: 20
 yeahconsole*aniDelay: 30
 yeahconsole*stepSize: 10
-yeahconsole*faceName: xft:terminus:pixelsize=14:antialias=false
+yeahconsole*faceName: xft:terminus:pixelsize=13:antialias=false
 !yeahconsole*faceSize: 9
 yeahconsole*keyFull: Alt+F12
 yeahconsole*handleWidth: 3
@@ -76,7 +76,7 @@ URxvt*tabbed.tab-fg:    14
 URxvt*tabbed.tab-bg:    0
 
 ! include font and bg/fg colors
-URxvt*font: xft:terminus:pixelsize=14:antialias=false
+URxvt*font: xft:terminus:pixelsize=13:antialias=false
 !URxvt*font: xft:Envy Code R-10
 URxvt*iconFile: /usr/share/icons/Faenza/apps/32/utilities-terminal.png
 URxvt*background: rgba:0000/0000/0000/dddd
