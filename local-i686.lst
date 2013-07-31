@@ -1,7 +1,11 @@
 alarm-clock
-canto
+canto-curses
+canto-daemon
 codecs64
 cower
+ctodo
+curseofwar
+cursetheweather
 dansguardian
 dmenu-path-c
 dmenu_mocp
@@ -61,6 +65,7 @@ pbget
 pcre-old
 perl-xml-feedpp
 perl-xml-treepp
+pinger
 pkgcacheclean
 pm2ml
 powerpill
@@ -92,6 +97,7 @@ ttf-hylian-fonts
 ttf-ms-fonts
 ttf-stylebats
 ttf-unifur
+tty-clock-patched
 update-mirrorlist
 urxvt-font-size-git
 virtualbox-ext-oracle
