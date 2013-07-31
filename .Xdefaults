@@ -56,7 +56,7 @@ URxvt*urgentOnBell:  true
 *color4:     #7DC1CF
 *color12:    #4E9FB1
 !magenta
-*color5:     #9B64FB
+*color5:     #e8007c
 *color13:    #8542FF
 !cyan
 *color6:     #6D878D
@@ -79,7 +79,8 @@ URxvt*tabbed.tab-bg:    0
 URxvt*font: xft:terminus:pixelsize=13:antialias=false
 !URxvt*font: xft:Envy Code R-10
 URxvt*iconFile: /usr/share/icons/Faenza/apps/32/utilities-terminal.png
-URxvt*background: rgba:0000/0000/0000/dddd
+!URxvt*background: rgba:0000/0000/0000/dddd
+URxvt*background: rgba:0190/0200/0210/dddd
 URxvt*foreground: #d3d3d3
 URxvt*transparent: false
 !Urxvt*fading: 10
@@ -103,7 +104,9 @@ URxvt*matcher.pattern.3:		\\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(?i)(mp3|ogg|wav
 URxvt*matcher.launcher.3:		urlLauncher -audio $0
 URxvt*matcher.pattern.4:		\\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(?i)(jpg|jpeg|png)
 URxvt*matcher.launcher.4:		urlLauncher -image $0
-URxvt*matcher.pattern.5: \\b(http|https|ftp):[/]*[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt*matcher.launcher.5:		url-launcher
-URxvt*matcher.pattern.6: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*matcher.pattern.5:        \\bhttps?:\/\/[\\w-.]\/[\\w./?&@#-].(jpg|jpeg|png)
+URxvt*matcher.launcher.5:		feh $0
+URxvt*matcher.pattern.6: \\b(http|https|ftp):[/]*[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 URxvt*matcher.launcher.6:		url-launcher
+URxvt*matcher.pattern.7: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*matcher.launcher.7:		url-launcher
