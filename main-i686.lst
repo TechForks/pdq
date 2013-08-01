@@ -37,7 +37,6 @@ feh
 ffmpeg
 filezilla
 firefox
-flashplugin
 flex
 fontconfig
 fortune-mod
@@ -81,7 +80,6 @@ kdeutils-ark
 keepassx
 keychain
 alsa-plugins
-flashplugin
 libldap
 libpng12
 libpulse
@@ -140,6 +138,7 @@ ppp
 privoxy
 pulseaudio
 pulseaudio-alsa
+pv
 python
 python-feedparser
 python-gobject
@@ -152,6 +151,7 @@ squashfs-tools
 squid
 sshfs
 steam
+strace
 sudo
 syslinux
 tcpdump
