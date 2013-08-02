@@ -46,6 +46,7 @@ gcc-libs-multilib
 gcc-multilib
 gcolor2
 gdb
+getmail
 git
 gkrellm
 gpac
@@ -72,7 +73,9 @@ iotop
 jhead
 k3b
 kdebase-dolphin
+kdebase-kdialog
 kdebase-konsole
+kdebase-workspace
 kdemultimedia-ffmpegthumbs
 kdenlive
 kdesdk-dolphin-plugins
@@ -113,6 +116,7 @@ moc
 mtools
 multitail
 mumble
+mutt
 namcap
 ncdu
 net-tools
@@ -172,6 +176,7 @@ virtualbox
 virtualbox-host-dkms
 vlc
 vorbis-tools
+w3m
 wavpack
 wayland
 weechat
