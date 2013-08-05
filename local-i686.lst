@@ -75,6 +75,7 @@ preload
 profile-sync-daemon
 ps_mem
 pulseaudio_ctl
+pyradio-git
 python2-certifi
 python2-jsonschema
 python2-pynzb
