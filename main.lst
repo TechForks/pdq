@@ -17,9 +17,9 @@ bitlbee
 blender
 cairo
 cdrdao
-claws-mail
 cmatrix
 cowsay
+cpupower
 ddd
 devede
 devtools
@@ -179,6 +179,7 @@ wavpack
 wayland
 weechat
 wget
+wgetpaste
 wireshark-cli
 wireshark-gtk
 wmctrl

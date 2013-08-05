@@ -90,16 +90,16 @@ URxvt*transparent: false
 !Urxvt*fading: 10
 !Urxvt*fadeColor: #a146ff
 URxvt*perl-ext-common:  default,clipboard,matcher,font-size
-*underlineColor: #1691CF
+URxvt*underlineColor: #1691CF
 
 URxvt*keysym.C-Up:     perl:font-size:increase
 URxvt*keysym.C-Down:   perl:font-size:decrease
 URxvt*keysym.C-S-Up:   perl:font-size:incglobal
 URxvt*keysym.C-S-Down: perl:font-size:decglobal
 
-
 URxvt*keysym.C-Delete:                 perl:matcher:last
 URxvt*keysym.M-Delete:                 perl:matcher:list
+
 URxvt*matcher.pattern.1:   \\bhttps?:\/\/(?:(?:www.youtube|youtube).com\/watch\\?.*v=|youtu.be/)([\\w-]*)
 URxvt*matcher.launcher.1:		urlLauncher -video $0
 URxvt*matcher.pattern.2:		\\bhttps?:\/\/vimeo.com\/([\\w-]*)
