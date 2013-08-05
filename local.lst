@@ -65,6 +65,7 @@ pacserve
 pbget
 pcre-old
 perl-clipboard
+perl-umph-prompt
 perl-xml-feedpp
 perl-xml-treepp
 pinger
