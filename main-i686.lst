@@ -104,6 +104,7 @@ lzop
 m4
 make
 mcomix
+mediainfo
 meld
 memcached
 memtest86+
@@ -203,7 +204,6 @@ xterm
 xvkbd
 yajl
 youtube-dl
-youtube-viewer
 zenity
 zip
 zsh
