@@ -12,9 +12,9 @@ license=('custom:MIT/X')
 depends=('libx11')
 install='tabbed.install'
 source=("http://dl.suckless.org/tools/${pkgname}-${pkgver}.tar.gz"
-        'https://raw.github.com/idk/pdq/master/config.h')
+        'config.h')
 md5sums=('cd9cfd696db745637486ec3b9bbe4b75'
-         'fa6134f9133e06287a829b866b432738')
+         '408bc7f1ac38f9e2a833607ed235408a')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
