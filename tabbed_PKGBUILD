@@ -14,7 +14,7 @@ install='tabbed.install'
 source=("http://dl.suckless.org/tools/${pkgname}-${pkgver}.tar.gz"
         'config.h')
 md5sums=('cd9cfd696db745637486ec3b9bbe4b75'
-         '77ea78265499f319e56ef9cef0f7d136')
+         '78d6d39e76923ca4190e3007e5cf1f64')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
