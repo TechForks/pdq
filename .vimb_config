@@ -12,6 +12,7 @@ nmap gH=tabopen
 nmap u=open-closed
 nmap U=tabopen-closed
 nmap <ctrl-q>=quit
+nmap d=quit
 nmap <ctrl-o>=back
 nmap <ctrl-i>=forward
 nmap r=reload
