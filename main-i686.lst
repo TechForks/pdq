@@ -123,6 +123,7 @@ nethogs
 nmap
 ntfs-3g
 ntp
+nvidia
 nvidia-cg-toolkit
 nvidia-utils
 openssh
@@ -157,6 +158,7 @@ steam
 strace
 sudo
 syslinux
+tabbed
 tcpdump
 terminus-font
 tig
