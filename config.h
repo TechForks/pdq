@@ -47,7 +47,7 @@ static Key keys[] = { \
 	{ MODKEY,                       XK_0,      move,           { .i = 9 } },
 
 	{ MODKEY,                       XK_q,      killclient,     { 0 } },
-	{ 0,                            XK_d,      killclient,     { 0 } },
+	{ MODKEY,                       XK_d,      killclient,     { 0 } },
 
 	{ 0,                            XK_F11,    fullscreen,     { 0 } },
 };
