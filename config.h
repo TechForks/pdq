@@ -1,10 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]        = "-*-*-medium-*-*-*-12-*-*-*-*-*-*-*";
+static const char font[]        = "-*-*-medium-*-*-*-13-*-*-*-*-*-*-*";
 static const char normbgcolor[] = "#090909";
 static const char normfgcolor[] = "#07CD01";
-static const char selbgcolor[]  = "#555555";
+static const char selbgcolor[]  = "#000000";
 static const char selfgcolor[]  = "#ffffff";
 static const char before[]      = "<";
 static const char after[]       = ">";
