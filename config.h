@@ -1,14 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]        = "-*-*-medium-*-*-*-12-*-*-*-*-*-*-*";
+static const char font[]        = "-*-*-medium-*-*-*-11-*-*-*-*-*-*-*";
 static const char normbgcolor[] = "#090909";
-static const char normfgcolor[] = "#07CD01";
-static const char selbgcolor[]  = "#000000";
-static const char selfgcolor[]  = "#ffffff";
+static const char normfgcolor[] = "#FFFFFF";
+static const char selbgcolor[]  = "#090909";
+static const char selfgcolor[]  = "#07CD01";
 static const char before[]      = "<";
 static const char after[]       = ">";
-static const int  tabwidth      = 200;
+static const int  tabwidth      = 180;
 static const Bool foreground    = True;
 
 /*
