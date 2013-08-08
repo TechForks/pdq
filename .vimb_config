@@ -115,3 +115,4 @@ set home-page=https://startpage.com
 set download-path=/home/pdq/Downloads
 set history-max-items=2000
 set editor-command=urxvtc -name "Editor" -e nano %s
+nmap 00=shellcmd flashsucks %s
