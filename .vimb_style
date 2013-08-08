@@ -22,3 +22,6 @@
 ._hintLabel._hintFocus{
     opacity: 1
 }
+input, select, textarea {
+    color: #000000 !important; background: #AAAAAA !important;
+}
