@@ -30,6 +30,7 @@ flexget
 foxitreader
 fslint
 grake
+hotshots
 at-spi2-atk
 at-spi2-core
 colord
@@ -47,6 +48,7 @@ libxkbcommon
 pam
 polkit
 wayland
+libqxt
 libtiff4
 linux-pdq
 linux-pdq-docs
