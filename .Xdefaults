@@ -66,7 +66,7 @@ URxvt*urgentOnBell:  true
 *color15:    #dddddd
 
 ! enable clickable links
-URxvt*url-launcher: firefox
+URxvt*url-launcher: vbp
 URxvt*urlLauncher:  /home/pdq/bin/urlLauncher $0
 URxvt*matcher.button: 1
 
@@ -111,6 +111,6 @@ URxvt*matcher.launcher.4:		urlLauncher -image $0
 URxvt*matcher.pattern.5:        \\bhttps?:\/\/[\\w-.]\/[\\w./?&@#-].(jpg|jpeg|png)
 URxvt*matcher.launcher.5:		feh $0
 URxvt*matcher.pattern.6: \\b(http|https|ftp):[/]*[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt*matcher.launcher.6:		url-launcher
+URxvt*matcher.launcher.6:		url-launcher -u $0
 URxvt*matcher.pattern.7: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt*matcher.launcher.7:		url-launcher
+URxvt*matcher.launcher.7:		url-launcher -u $0
