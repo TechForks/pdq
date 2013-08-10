@@ -63,7 +63,7 @@ cmap <up>=hist-prev
 cmap <down>=hist-next
 imap <ctrl-t>=editor
 imap <ctrl-z>=pass-through
-shortcut-add goo=https://google.com/?q=$0
+shortcut-add goo=https://google.com/webhp?q=$0
 shortcut-add sp=https://startpage.com/do/search?q=$0
 shortcut-add dl=https://duckduckgo.com/html/?q=$0
 shortcut-add dd=https://duckduckgo.com/?q=$0
