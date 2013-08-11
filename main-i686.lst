@@ -16,6 +16,7 @@ bison
 bitlbee
 blender
 cairo
+cclive
 cdrdao
 cmatrix
 cowsay
@@ -30,8 +31,8 @@ dnsmasq
 dnsutils
 dosfstools
 dvd+rw-tools
-elinks
 encfs
+epdfview
 fakeroot
 feh
 ffmpeg
