@@ -50,11 +50,14 @@ ViewPropsTimestamp=2013,2,25,17,48,35
 [IconsMode]
 FontWeight=50
 IconSize=64
+PreviewSize=48
 TextWidthIndex=0
 UseSystemFont=false
 
 [KFileDialog Settings]
 Autoplay sounds=true
+Height 1080=450
+Width 1920=720
 
 [KFileMetaPropsPlugin]
 Height 900=260
@@ -68,16 +71,16 @@ Width 1024=474
 Width 1360=489
 Width 1368=751
 Width 1440=568
-Width 1920=835
+Width 1920=830
 
 [MainWindow]
-Height 1080=286
+Height 1080=311
 Height 480=864
 Height 724=575
 Height 768=630
 Height 900=450
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAwAAAAAAAAA5AAAA/vwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAAA/gAAAD0A////AAAAAQAAALIAAAGi/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACAAAAGiAAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAADvgAAAJb8AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAADvgAAAAQA////AAADfwAAAP4AAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+State=AAAA/wAAAAD9AAAAAwAAAAAAAAA5AAABF/wCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAgAAADQgAAAAQA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAgAAABFwAAAD0A////AAAAAQAAALIAAAGi/AIAAAAC+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACAAAAGiAAAABAD////7AAAAFABzAGUAYQByAGMAaABEAG8AYwBrAAAAAAD/////AAAAAAAAAAAAAAADAAADvgAAAJb8AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAADvgAAAAQA////AAAD4QAAARcAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1024=931
 Width 1280=782
@@ -85,7 +88,7 @@ Width 1360=678
 Width 1368=1369
 Width 1376=688
 Width 1440=948
-Width 1920=958
+Width 1920=1056
 Width 640=720
 Width 800=1011
 
@@ -99,7 +102,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=subl3 %F,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U,foxitreader %f,chromium %U
+History=sudo_subl3,sudo subl3,subl3 %F,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U
 
 [PreviewSettings]
 Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
