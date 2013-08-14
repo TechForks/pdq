@@ -74,7 +74,7 @@ Width 1440=568
 Width 1920=830
 
 [MainWindow]
-Height 1080=450
+Height 1080=311
 Height 480=864
 Height 724=575
 Height 768=630
@@ -88,7 +88,7 @@ Width 1360=678
 Width 1368=1369
 Width 1376=688
 Width 1440=948
-Width 1920=948
+Width 1920=1056
 Width 640=720
 Width 800=1011
 
@@ -102,7 +102,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=sudo_subl3,sudo subl3,subl3 %F,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U
+History=subl3 %F,sudo_subl3,sudo subl3,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U,subl %U
 
 [PreviewSettings]
 Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
