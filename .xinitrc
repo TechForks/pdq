@@ -40,6 +40,7 @@ case $1 in
     xfce) exec startxfce4;;
     lxde) exec startlxde;;
     wmii) exec wmii;;
+    wmfs) exec wmfs;;
     i3) exec i3;;
     spectrwm) exec spectrwm;;
     wmaker) exec wmaker;;
