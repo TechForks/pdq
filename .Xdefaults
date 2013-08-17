@@ -67,7 +67,7 @@ URxvt*urgentOnBell:  true
 
 ! enable clickable links
 URxvt*url-launcher: vbp
-URxvt*urlLauncher:  /home/pdq/bin/urlLauncher $0
+URxvt*urlLauncher:  urlLauncher $0
 URxvt*matcher.button: 1
 
 URxvt*tabbed.tabbar-fg: 11
