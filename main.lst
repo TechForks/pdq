@@ -75,6 +75,7 @@ k3b
 kdebase-dolphin
 kdebase-konsole
 kdemultimedia-ffmpegthumbs
+kdemultimedia-kmix
 kdenlive
 kdesdk-dolphin-plugins
 kdeutils-ark
@@ -161,6 +162,7 @@ torsocks
 traceroute
 truecrypt
 ttf-bitstream-vera
+ttf-liberation
 udevil
 unrar
 unzip
