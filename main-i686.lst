@@ -13,6 +13,7 @@ autocutsel
 automake
 binutils
 bison
+bitcoin-qt
 bitlbee
 blender
 cairo
@@ -78,6 +79,7 @@ kdemultimedia-ffmpegthumbs
 kdemultimedia-kmix
 kdenlive
 kdesdk-dolphin-plugins
+kdesdk-thumbnailers
 kdeutils-ark
 keepassx
 keychain
