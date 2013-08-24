@@ -22,6 +22,7 @@ cdrdao
 cmatrix
 cowsay
 cpupower
+cvs
 ddd
 devede
 devtools
@@ -162,6 +163,7 @@ tls
 tor
 torsocks
 traceroute
+transmission-qt
 truecrypt
 ttf-bitstream-vera
 ttf-liberation
