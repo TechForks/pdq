@@ -1,26 +1,22 @@
 #!/bin/bash
-## pdqOS Installer for Arch Linux x86_64 =)
+## mooOS Installer =)
 ## 03-22-2012 pdq
 ## 12-25-2012 pdq
+## 08-27-2013 pdq
 
 ## Instructions
-## from livecd/liveusb
-
-# wget http://is.gd/pdqos -O rs.sh && sh rs.sh
-
-
-
+## from mooValtamlivecd/liveusb
 
 ### Code be `ere yarrr! ###
-## figure out architecture type
-grep -q "^flags.*\blm\b" /proc/cpuinfo && archtype="x86_64" || archtype="i686"
+## figure ouqt architecture type
+archtype="$(uname -m)"
 
 if [ "$archtype" = "x86_64" ]; then
-    dialog --backtitle "pdq OS Installer for Arch Linux" --title "Information" --msgbox "Your architecture type is x86_64, this installer assumes you are using the x86_64 livecd option...\nproceeding (press ESC to exit)" 20 70
+    dialog --backtitle "mooOS Installer" --title "Information" --msgbox "Your architecture type is x86_64, this installer assumes you are using the x86_64 livecd option...\nproceeding (press ESC to exit)" 20 70
     archtype="x86_64"
     not_archtype="i686"
 else
-    dialog --backtitle "pdq OS Installer for Arch Linux" --title "Information" --msgbox "Your architecture type is i686, this installer assumes you are using the i686 livecd option... proceeding\n(press ESC to exit)" 20 70
+    dialog --backtitle "mooOS Installer" --title "Information" --msgbox "Your architecture type is i686, this installer assumes you are using the i686 livecd option... proceeding\n(press ESC to exit)" 20 70
     archtype="i686"
     not_archtype="x86_64"
 fi
@@ -36,7 +32,7 @@ if [ $? = 0 ] ; then
         archtype=$not_archtype
 fi
 
-upper_title="pdqOS Installer for Arch Linux $archtype"
+upper_title="mooOS Installer $archtype"
 setterm -blank 0
 
 ## root script
@@ -54,7 +50,7 @@ if [ $(id -u) -eq 0 ]; then
     exiting_installer() {
         clear
         rm -f $_TEMP
-        dialog --clear --backtitle "$upper_title" --title "Exiting Script" --msgbox "type: rs.sh to re-run" 10 40
+        dialog --clear --backtitle "$upper_title" --title "Exiting Script" --msgbox "type: install_mooOS to re-run" 10 40
         exit 0
     }
 
@@ -68,8 +64,8 @@ if [ $(id -u) -eq 0 ]; then
             4 $clr"Create internet connection" \
             5 $clr"Initial install" \
             6 $clr"Generate fstab" \
-            7 $clr"Configure" \
-            8 $clr"Unmount install partitions" \
+            7 $clr"Configure system" \
+            8 $clr"Install mooOS" \
             9 $clr"Finish and reboot. (Remove livecd after poweroff)" \
             10 $clr"Exit" 2>$_TEMP
 
@@ -378,11 +374,145 @@ if [ $(id -u) -eq 0 ]; then
     }
 
     cleanup() {
-        dialog --clear --backtitle "$upper_title" --title "Cleaning up" --msgbox "Unmount /mnt/*" 10 30
+        dialog --clear --backtitle "$upper_title" --msgbox "Installing packges, configuring and cleaning up" --title "Install mooOS" 10 30
         if [ $? = 255 ] ; then
             installer_menu
             return 0 
         fi
+
+        ##
+        PWD=$(pwd)
+
+        ##  copy root files
+        # cp -v /etc/pacman.conf /mnt/etc/pacman.conf
+
+        # sed -i "s/#Server/Server/g" /mnt/etc/pacman.conf
+        # sed -i "s/[mooOS-pkgs/#[mooOS-pkgs/g" /mnt/etc/pacman.conf
+        # sed -i "s/SigLevel = Never/#SigLevel = Never/g" /mnt/etc/pacman.conf
+        # sed -i "s/Server = http:\/\/repo.mooOS/#Server = http:\/\/repo.mooOS/g" /mnt/etc/pacman.conf
+
+        cp -v /etc/psd.conf /mnt/etc/psd.conf
+        cp -v /etc/issue /mnt/etc/issue
+        cp -v /etc/lsb-release /mnt/etc/lsb-release
+        cp -v /etc/os-release /mnt/etc/os-release
+        mkdir -vp /mnt/etc/tor
+        cp -vr /etc/tor/* /mnt/etc/tor/
+        cp -vr /etc/systemd/system/* /mnt/etc/systemd/system/
+        
+        mkdir -vp /mnt/etc/privoxy
+        sh -c "echo 'forward-socks5 / localhost:9050 .' > /mnt/etc/privoxy/config"
+
+        mkdir -vp /mnt/etc/dansguardian
+        cp -v /etc/dansguardian/dansguardian.conf /mnt/etc/dansguardian/dansguardian.conf
+
+        mkdir -vp /mnt/etc/squid
+        cp -v /etc/squid/squid.conf /mnt/etc/squid/squid.conf
+        cp -vr /etc/skel /mnt/etc/
+
+        mkdir -vp /mnt/etc/pacserve
+        cp -vr /etc/pacserve/* /mnt/etc/pacserve/
+
+        ## todo
+        mkdir -vp /mnt/etc/pacman.d
+        cp -vr /etc/pacman.d/* /mnt/etc/pacman.d/
+        cp -v /etc/pacman.conf /mnt/etc/pacman.conf
+        
+        mkdir -vp /mnt/etc/modules-load.d
+        cp -vr /etc/modules-load.d/* /mnt/etc/modules-load.d/
+
+        mkdir -vp /mnt/etc/grub.d
+        cp -vr /etc/grub.d/* /mnt/etc/grub.d/
+
+        mkdir -vp /mnt/etc/default
+        cp -vr /etc/default/* /mnt/etc/default/
+
+        mkdir -vp /mnt/usr/share/nano
+        cp -v /usr/share/nano/pkgbuild.nanorc /mnt/usr/share/nano/pkgbuild.nanorc
+
+        mkdir -vp /mnt/usr/share/enlightenment/data/backgrounds
+        cp -v /usr/share/enlightenment/data/backgrounds/* /mnt/usr/share/enlightenment/data/backgrounds
+
+
+        #mv -v /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
+        #cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
+        #cp -v ${dev_directory}etc/httpd-phpmyadmin.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
+        #mv -v /etc/php/php.ini /etc/php/php.ini.bak
+        #cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
+
+        # copy over custom .desktop files
+        mkdir -vp /mnt/usr/share/applications
+        cp -v /usr/share/applications/*.desktop /mnt/usr/share/applications/
+        
+        ## https://github.com/dmatarazzo/Sublime-Text-2-Icon
+        echo "Updating Sublime Text 3 icons"
+        cp -v /usr/share/icons/HighContrast/16x16/apps/sublime-text.png /mnt/usr/share/icons/HighContrast/16x16/apps/sublime-text.png
+        cp -v /usr/share/icons/HighContrast/256x256/apps/sublime-text.png /mnt/usr/share/icons/HighContrast/256x256/apps/sublime-text.png
+        cp -v /usr/share/icons/HighContrast/32x32/apps/sublime-text.png /mnt/usr/share/icons/HighContrast/32x32/apps/sublime-text.png
+        cp -v /usr/share/icons/HighContrast/48x48/apps/sublime-text.png /mnt/usr/share/icons/HighContrast/48x48/apps/sublime-text.png
+        cp -v /usr/share/icons/gnome/16x16/apps/sublime-text.png /mnt/usr/share/icons/gnome/16x16/apps/sublime-text.png
+        cp -v /usr/share/icons/gnome/256x256/apps/sublime-text.png /mnt/usr/share/icons/gnome/256x256/apps/sublime-text.png
+        cp -v /usr/share/icons/gnome/32x32/apps/sublime-text.png /mnt/usr/share/icons/gnome/32x32/apps/sublime-text.png
+        cp -v /usr/share/icons/gnome/48x48/apps/sublime-text.png /mnt/usr/share/icons/gnome/48x48/apps/sublime-text.png
+        cp -v /usr/share/icons/hicolor/128x128/apps/sublime-text.png /mnt/usr/share/icons/hicolor/128x128/apps/sublime-text.png
+        cp -v /usr/share/icons/hicolor/16x16/apps/sublime-text.png /mnt/usr/share/icons/hicolor/16x16/apps/sublime-text.png
+        cp -v /usr/share/icons/hicolor/256x256/apps/sublime-text.png /mnt/usr/share/icons/hicolor/256x256/apps/sublime-text.png
+        cp -v /usr/share/icons/hicolor/32x32/apps/sublime-text.png /mnt/usr/share/icons/hicolor/32x32/apps/sublime-text.png
+        cp -v /usr/share/icons/hicolor/48x48/apps/sublime-text.png /mnt/usr/share/icons/hicolor/48x48/apps/sublime-text.png
+        cp -v /usr/share/icons/oxygen/128x128/apps/sublime-text.png /mnt/usr/share/icons/oxygen/128x128/apps/sublime-text.png
+        cp -v /usr/share/icons/oxygen/16x16/apps/sublime-text.png /mnt/usr/share/icons/oxygen/16x16/apps/sublime-text.png
+        cp -v /usr/share/icons/oxygen/256x256/apps/sublime-text.png /mnt/usr/share/icons/oxygen/256x256/apps/sublime-text.png
+        cp -v /usr/share/icons/oxygen/32x32/apps/sublime-text.png /mnt/usr/share/icons/oxygen/32x32/apps/sublime-text.png
+        cp -v /usr/share/icons/oxygen/48x48/apps/sublime-text.png /mnt/usr/share/icons/oxygen/48x48/apps/sublime-text.png
+
+        ## mooOS icon
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-16.png /mnt/usr/share/icons/HighContrast/16x16/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-256.png /mnt/usr/share/icons/HighContrast/256x256/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-32.png /mnt/usr/share/icons/HighContrast/32x32/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-48.png /mnt/usr/share/icons/HighContrast/48x48/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-16.png /mnt/usr/share/icons/gnome/16x16/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-256.png /mnt/usr/share/icons/gnome/256x256/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-32.png /mnt/usr/share/icons/gnome/32x32/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-48.png /mnt/usr/share/icons/gnome/48x48/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-128.png /mnt/usr/share/icons/hicolor/128x128/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-16.png /mnt/usr/share/icons/hicolor/16x16/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-256.png /mnt/usr/share/icons/hicolor/256x256/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-32.png /mnt/usr/share/icons/hicolor/32x32/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-48.png /mnt/usr/share/icons/hicolor/48x48/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-128.png /mnt/usr/share/icons/oxygen/128x128/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-16.png /mnt/usr/share/icons/oxygen/16x16/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-256.png /mnt/usr/share/icons/oxygen/256x256/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-32.png /mnt/usr/share/icons/oxygen/32x32/apps/mooOS.png
+        cp -v /home/moo/github/mooOS-dev-tools/images/mooOS-48.png /mnt/usr/share/icons/oxygen/48x48/apps/mooOS.png
+        
+        # create ~/Github and all repos
+        cd /mnt/etc/skel/Github
+        git clone git://github.com/idk/pdq.git
+        git clone git://github.com/idk/bin.git
+        git clone git://github.com/idk/awesomewm-X.git
+        git clone git://github.com/idk/zsh.git
+        git clone git://github.com/idk/bin.git
+        git clone git://github.com/idk/php.git
+        git clone git://github.com/idk/systemd.git
+        git clone git://github.com/idk/eggdrop-scripts.git
+        git clone git://github.com/idk/gh.git
+        git clone git://github.com/idk/vb-pdq.git
+        git clone git://github.com/idk/mooOS-dev-tools.git
+        git clone git://github.com/idk/mooOS-wallpapers.git
+        cd "$PWD"
+
+
+        install -Dm644 "/mnt/etc/skel/Github/mooOS-dev-tools/misc/man.1" "/mnt/usr/local/man/man1/mooOS.1"
+        gzip -f /mnt/usr/local/man/man1/mooOS.1
+
+        ##
+
+        systemctl enable multi-user.target pacman-init.service choose-mirror.service
+        systemctl enable ntpd.service
+        systemctl enable tor.service
+        systemctl enable privoxy.service
+        systemctl enable preload.service
+        systemctl enable polipo.service
+        systemctl enable cronie.service
      
         umount /mnt/* 2>/dev/null
 
@@ -412,12 +542,28 @@ if [ $(id -u) -eq 0 ]; then
             return 0 
         fi
          
-        #if [ ! -f /mnt/chroot-rs.sh ]; then
-            wget https://raw.github.com/idk/pdq/master/chroot-rs.sh -O chroot-rs.sh
-            chmod +x chroot-rs.sh
+        #if [ ! -f /mnt/chroot-install_mooOS ]; then
+            wget https://raw.github.com/idk/pdq/master/chroot-install_mooOS -O chroot-install_mooOS
+            chmod +x chroot-install_mooOS
             cp /etc/resolv.conf /mnt/etc/resolv.conf
-            mv chroot-rs.sh /mnt/chroot-rs.sh
-            arch-chroot /mnt /bin/sh -c "./chroot-rs.sh"
+
+            mv -v mnt//etc/pacman.conf /mnt/etc/pacman.conf.bak
+            cp /etc/pacman.conf /mnt/etc/pacman.conf
+
+
+            Server = file:///var/cache/pacman/pkg
+
+
+
+
+
+
+
+
+
+
+            mv chroot-install_mooOS /mnt/chroot-install_mooOS
+            arch-chroot /mnt /bin/sh -c "./chroot-install_mooOS"
     }
 
     generate_fstab() {
@@ -442,8 +588,10 @@ if [ $(id -u) -eq 0 ]; then
             installer_menu
             return 0 
         fi
+
+    cp /etc/resolv.conf /mnt/etc/resolv.conf
         
-        dialog --clear --backtitle "$upper_title" --title "Finishing up" --msgbox "Arch Linux has been installed!\n\nAfter reboot, to complete install of pdqOS:\n\nlogin as your created user and run: sh rs.sh\n\nAlternatively, do not run rs.sh and setup your system to your own liking.\n\nSee ya!" 30 60
+        dialog --clear --backtitle "$upper_title" --title "Finishing up" --msgbox "mooOS has been installed!\n\nAfter reboot, to complete install of mooOS:\n\nlogin as your created user.\n\nSee ya!" 30 60
         reboot
     }
 
@@ -452,667 +600,7 @@ if [ $(id -u) -eq 0 ]; then
     do
         installer_menu
     done
-else
-    ## user script
 
-    if [ $(id -u) -eq 0 ]; then
-        dialog --backtitle "$upper_title" --title "Oopsie" --msgbox "Do not run me as root!" 10 30
-        exit 1
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Here we go!" --yesno "Do you wish to run pdqOS installer Step 2?\n\nDefault: yes" 20 30
-    if [ $? = 1 ] || [ $? = 255 ] ; then
-        exit 1
-    fi
-
-      local net_list mynet
-            for mynet in $(ip link show | awk '/: / {print $2}' | tr -d :) ; do
-                net_list+="${mynet} - "
-            done
-
-            my_networks=$(dialog --stdout --backtitle "$upper_title" --title 'Internet' --cancel-label "Go Back" \
-            --default-item "${my_networks}" --menu "Choose network or <Go Back> to return" 16 45 23 ${net_list} "Exit" "-" || echo "${my_networks}")
-
-            if [ "$my_networks" = "" ] || [ $? = 255 ] || [ "$my_networks" = "Exit" ] ; then
-                installer_menu
-                return 0
-            fi
-
-            if [ "$my_networks" ] ; then # some better check should be here / placeholder
-                #dhcpcd $my_networks
-                if [ -f /usr/bin/netctl ]; then
-                    dhcpcd $my_networks
-                    cd
-                    mkdir create_network && cd create_network
-                    wget http://www.opennicproject.org/nearest-servers/
-                    dns_ip1=$(grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' index.html | sort -r | head -1)
-                    dns_ip2=$(grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' index.html | sort -rg | head -1)
-                    cp /etc/netctl/examples/ethernet-static /etc/netctl/ethernetstatic
-                    sed -i "s/eth0/$my_networks/g" /etc/netctl/ethernetstatic
-                    echo "DNS=('$dns_ip1' '$dns_ip2')" >> /etc/netctl/ethernetstatic
-                    netctl start ethernetstatic
-                    netctl enable ethernetstatic
-                    cd .. && rm -r create_network
-                else
-                    dhcpcd $my_networks
-                fi
-
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Set network to $my_networks using netctl (enabled/started)" 10 30
-            else
-                dialog --clear --backtitle "$upper_title" --title "Internet" --msgbox "Failed to set network...network does not exist/null?" 10 30
-            fi
-
-    my_home="$HOME/"
-    dev_directory="${my_home}github/"
-
-    ## create config, dev directory, pacman pkg dir and pacaur tmp dir
-    mkdir -p ${my_home}.config
-    mkdir -p ${dev_directory}
-    mkdir -p ${my_home}vital/pkg
-    mkdir -p ${my_home}vital/tmp
-    export TMPDIR=${my_home}vital/tmp
-
-    sudo locale-gen
-    # wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
-    # if [ ! -s /tmp/index.google ] ; then
-    #     sudo dhcpcd eth0
-    #     sudo systemctl enable dhcpcd@eth0.service
-    # fi
-
-    #if [ ! -f /usr/bin/hub ]; then
-    #    sudo pacman -S --noconfirm --needed hub
-    #fi
-
-    if [ ! -f /usr/bin/pacaur ]; then
-        #dialog --title "$upper_title" --msgbox "Installing pacaur" 20 70
-        sudo pacman -S --noconfirm --needed yajl
-        sudo pacman -S --noconfirm --needed jshon
-        sudo pacman -S --noconfirm --needed jansson
-        wget https://aur.archlinux.org/packages/pa/packer/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U --noconfirm --needed packer* && cd
-        packer -S --noconfirm pacaur
-    fi
-
-    if [ ! -f /usr/bin/powerpill ]; then
-        #dialog --title "$upper_title" --msgbox "Installing powerpill" 20 70
-        sudo pacman -S --noconfirm --needed python3
-        packer -S --noconfirm powerpill
-    fi
-
-    sleep 3s
-    if [ ! -d "${dev_directory}pdq" ]; then
-        dialog --backtitle "$upper_title" --title "Initial clone" --msgbox "Cloning initial repo to ${dev_directory}pdq/" 10 30
-        cd ${dev_directory}
-        git clone https://github.com/idk/pdq.git
-        git clone idk/etc
-        cd
-        sudo mv -v /etc/pacman.conf /etc/pacman.conf.bak
-        if [ "$archtype" = "x86_64" ]; then
-            sudo cp -v ${dev_directory}etc/pacman.conf /etc/pacman.conf
-        else
-            sudo cp -v ${dev_directory}etc/pacman.i686.conf /etc/pacman.conf
-        fi
-        sudo sed -i "s/pdq/$USER/g" /etc/pacman.conf
-        sudo mv -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-        sudo cp -v ${dev_directory}etc/mirrorlist /etc/pacman.d/mirrorlist
-        sudo mv -v /etc/powerpill/powerpill.json /etc/powerpill/powerpill.json.bak
-        sudo cp -v ${dev_directory}etc/powerpill.json /etc/powerpill/powerpill.json
-        cp -rv ${dev_directory}pdq/.config/pacaur ${my_home}.config/pacaur
-        sudo pacman -Syy
-    fi
-
-    if [ ! -f /usr/bin/rsync ]; then
-        sudo pacman -S --noconfirm rsync
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Is this a VirtualBox install?" 10 30
-    if [ $? = 0 ] ; then
-        sudo powerpill -S --noconfirm --needed virtualbox-guest-utils
-        sudo sh -c "echo 'vboxguest
-vboxsf
-vboxvideo' > /etc/modules-load.d/virtualbox.conf"
-    fi
-
-    ## sanity checks
-    if [ ! -f /usr/bin/rsync ] || [ ! -f /usr/bin/pacaur ] || [ ! -f /usr/bin/pacman ] || [ ! -f /usr/bin/powerpill ]; then
-        dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "Hmmm. An ERROR has occured...\n\nPackage depends not met, this installer failed to install one of the following:\nrsync, git, hub, packer, pacaur, pacman or powerpill.\n\nExiting..." 30 70
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install main packages?" 10 30
-    if [ $? = 0 ] ; then
-        dialog --backtitle "$upper_title" --title "$upper_title" --msgbox "When it askes if install 1) phonon-gstreamer or 2) phonon-vlc\nchose 2\n\nWhen it asks if replace foo with bar chose y for everyone" 20 70
-        sudo powerpill -Syy
-
-        if [ "$archtype" = "x86_64" ]; then
-            mainpkgs="main.lst"
-        else
-            mainpkgs="main-i686.lst"
-        fi
-
-        sudo pacman -S --needed $(cat ${dev_directory}pdq/$mainpkgs)
-    fi
-
-    if [ "$archtype" = "x86_64" ]; then
-        localpkgs="local.lst"
-    else
-        localpkgs="local-i686.lst"
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install AUR packages (no confirm)\n[This may take a while]?" 10 30
-
-    if [ $? = 0 ] ; then
-        sudo powerpill -Syy
-        pacaur --noconfirm -S $(cat ${dev_directory}pdq/$localpkgs | grep -vx "$(pacman -Qqm)")
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Packages" --yesno "Install AUR packages (with confirm)\n[Use this option if the prior one failed, otherwise skip it]" 10 40
-    if [ $? = 0 ] ; then
-        sudo powerpill -Syy
-        pacaur -S $(cat ${dev_directory}pdq/$localpkgs | grep -vx "$(pacman -Qqm)")
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Configuration files" --yesno "Clone all repos?" 10 30
-    if [ $? = 0 ] ; then
-        cd ${dev_directory}
-        git clone https://github.com/idk/awesomewm-X.git
-        git clone https://github.com/idk/conky-X.git
-        git clone https://github.com/idk/zsh.git
-        git clone https://github.com/idk/bin.git
-        git clone https://github.com/idk/php.git
-        git clone https://github.com/idk/systemd.git
-        git clone https://github.com/idk/eggdrop-scripts.git
-        git clone https://github.com/idk/gh.git
-        cd
-    fi
-
-    dialog --clear --backtitle "$upper_title" --title "Configuration files" --yesno "Install all repos?" 10 30
-    if [ $? = 0 ] ; then
-        wget https://raw.github.com/idk/pdq-utils/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U pdq-utils* && cd
-        wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman --noconfirm -U gh* && cd
-        
-        #dialog --clear --title "$upper_title" --msgbox "Backing up and copying root configs" 10 30
-        sudo cp -v ${dev_directory}etc/custom.conf /etc/X11/xorg.conf.d/custom.conf
-
-        #dialog --title "$upper_title" --msgbox "Backing up and copying user configs" 10 30
-        mv -v ${my_home}.gmail_symlink ${my_home}.gmail_symlink.bak
-        cp -v ${dev_directory}pdq/.gmail_symlink ${my_home}.gmail_symlink
-        mv -v ${my_home}.gtkrc-2.0 ${my_home}.gtkrc-2.0.bak
-        cp -v ${dev_directory}pdq/.gtkrc-2.0 ${my_home}.gtkrc-2.0
-        mv -v ${my_home}.bashrc ${my_home}.bashrc.bak
-        cp -v ${dev_directory}pdq/.bashrc ${my_home}.bashrc
-        mv -v ${my_home}.bash_profile ${my_home}.bash_profile.bak
-        cp -v ${dev_directory}pdq/.bash_profile ${my_home}.bash_profile
-        mv -v ${my_home}.xinitrc ${my_home}.xinitrc.bak
-        cp -v ${dev_directory}pdq/.xinitrc ${my_home}.xinitrc
-        cp -v ${dev_directory}pdq/.excludes-usb ${my_home}.excludes-usb
-        cp -v ${dev_directory}pdq/.excludes-crypt ${my_home}.excludes-crypt
-        cp -rv ${dev_directory}bin ${my_home}bin
-        mkdir -p ${my_home}.vimperator
-        cp -rv ${dev_directory}pdq/.vimperator/plugin ${my_home}.vimperator/plugin
-        mkdir -p ${my_home}.moc
-        cp -rv ${dev_directory}pdq/.moc/themes ${my_home}.moc/themes
-        cp -v ${dev_directory}pdq/.moc/config ${my_home}.moc/config
-        mkdir -p ${my_home}.kde4/share/config
-        cp -v ${dev_directory}pdq/.kde4/dolphinrc ${my_home}.kde4/share/config/dolphinrc
-        mkdir -p ${my_home}.kde4/share/apps/dolphin
-        cp -v ${dev_directory}pdq/.kde4/dolphinui.rc ${my_home}.kde4/share/apps/dolphin/dolphinui.rc
-        cp -rv ${dev_directory}pdq/.mozilla ${my_home}.mozilla
-
-        #dialog --clear --title "$upper_title" --msgbox "awesomewm-X, zsh, eggdrop-scripts, php, etc, bin, gh and conky-X... Installing..." 10 40
-        mkdir -p ${my_home}.config/gh && cp /etc/xdg/gh/gh.conf ${my_home}.config/gh/gh.conf
-        mv -v ${my_home}.config/nitrogen ${my_home}.config/nitrogen.bak
-        cp -rv ${dev_directory}pdq/.config/nitrogen ${my_home}.config/nitrogen
-        mv -v ${my_home}.config/conky ${my_home}.config/conky.original
-        cp -rv ${dev_directory}conky-X ${my_home}.config/conky
-        mv -v ${my_home}.config/awesome ${my_home}.config/awesome.original
-        cp -rv ${dev_directory}awesomewm-X ${my_home}.config/awesome
-        mkdir -p ${my_home}.config/awesome/Xdefaults/$USER
-        mv -v ${my_home}.Xdefaults ${my_home}.config/awesome/Xdefaults/$USER/.Xdefaults
-        ln -sfn ${my_home}.config/awesome/Xdefaults/default/.Xdefaults ${my_home}.Xdefaults
-        ln -sfn ${my_home}.config/awesome/themes/dunzor ${my_home}.config/awesome/themes/current
-        ln -sfn ${my_home}.config/awesome/icons/AwesomeLight.png ${my_home}.config/awesome/icons/menu_icon.png
-        ln -sfn ${my_home}.config/awesome/themes/current/theme.lua ${my_home}.config/luakit/awesometheme.lua
-        mkdir -p ${my_home}.cache/awesome
-        touch ${my_home}.cache/awesome/stderr
-        touch ${my_home}.cache/awesome/stdout
-        mkdir -p ${my_home}.config/conky/arch/.cache
-        cp -rv ${dev_directory}zsh/.zsh ${my_home}.zsh
-        cp -v ${dev_directory}zsh/.zshrc ${my_home}.zshrc
-        cp -v ${dev_directory}zsh/.zprofile ${my_home}.zprofile
-        cp -rv ${dev_directory}php ${my_home}php
-        mkdir -p ${my_home}Down
-        mkdir -p ${my_home}Downloads/.torrents
-        sed -i "s/pdq/$USER/g" ${my_home}.config/transmission-daemon/settings.json
-        sed -i "s/pdq/$USER/g" ${my_home}.moc/config
-        sed -i "s/pdq/$USER/g" ${my_home}.kde4/share/config/dolphinrc
-        sed -i "s/pdq/$USER/g" ${my_home}.config/nitrogen/nitrogen.cfg
-        sed -i "s/pdq/$USER/g" ${my_home}.config/nitrogen/bg-saved.cfg
-        sudo cp -rv ${dev_directory}systemd/* /etc/systemd/system
-        sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/autologin@.service
-        sudo sed -i "s/pdq/$USER/g" /etc/systemd/system/transmission.service
-        sudo chmod -R 777 /run/transmission
-        sudo chown -R $USER /run/transmission
-        sudo mkdir -p /usr/share/tor/hidden_service1
-        sudo mkdir -p /usr/share/tor/hidden_service2
-        sudo mkdir -p /usr/share/tor/hidden_service3
-        sudo mkdir -p /usr/share/tor/hidden_service4
-        sudo chown -R tor:tor /usr/share/tor/hidden_service1
-        sudo chown -R tor:tor /usr/share/tor/hidden_service2
-        sudo chown -R tor:tor /usr/share/tor/hidden_service3
-        sudo chown -R tor:tor /usr/share/tor/hidden_service4
-        sudo cp ${dev_directory}bin/lamp.sh /usr/bin/lamp
-        sudo systemctl enable dhcpcd@eth0.service
-        sudo systemctl enable NetworkManager.service
-        sudo systemctl enable ntpd.service
-        sudo systemctl enable tor.service
-        sudo systemctl enable privoxy.service
-        sudo systemctl enable preload.service
-        sudo systemctl enable polipo.service
-        sudo systemctl enable vnstat.sevice
-        sudo systemctl enable cronie.service
-
-        dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Download Wallpapers [size: 260 MB]?" 10 30
-        if [ $? = 0 ] ; then
-            mkdir -p ${my_home}Pictures
-            cd ${my_home}Pictures
-            wget https://dl.dropbox.com/u/9702684/wallpaper.tar.gz
-            rm -v wallpaper.tar.gz
-            cd
-        fi
-
-        dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Install Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files?" 10 30
-        if [ $? = 0 ] ; then
-            #dialog --clear --title "$upper_title" --msgbox "Installing Apache/MySQL/PHP/PHPMyAdmin/mpd/tor/privoxy configuration files" 10 30
-            sudo mv -v /etc/tor/torrc /etc/tor/torrc.bak
-            sudo cp -v ${dev_directory}etc/torrc /etc/tor/torrc
-            sudo mkdir -p /etc/privoxy
-            sudo sh -c "echo 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config"
-            sudo mv -v /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
-            sudo cp -v ${dev_directory}etc/httpd.conf /etc/httpd/conf/httpd.conf
-            sudo cp -v ${dev_directory}etc/httpd-phpmyadmin.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
-            sudo mv -v /etc/php/php.ini /etc/php/php.ini.bak
-            sudo cp -v ${dev_directory}etc/php.ini /etc/php/php.ini
-        
-            sudo sh -c "echo '#
-            # /etc/hosts: static lookup table for host names
-            #
-
-            #<ip-address>  <hostname.domain.org>   <hostname>
-            127.0.0.1   localhost.localdomain   localhost $HOSTNAME
-            ::1      localhost.localdomain   localhost
-            127.0.0.1 $USER.c0m www.$USER.c0m
-            127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-            127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-            127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
-            127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
-            127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
-            127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
-
-            # End of file' > /etc/hosts"
-
-            sudo sh -c "echo 'NameVirtualHost *:80
-            NameVirtualHost *:444
-
-            #this first virtualhost enables: http://127.0.0.1, or: http://localhost, 
-            #to still go to /srv/http/*index.html(otherwise it will 404_error).
-            #the reason for this: once you tell httpd.conf to include extra/httpd-vhosts.conf, 
-            #ALL vhosts are handled in httpd-vhosts.conf(including the default one),
-            # E.G. the default virtualhost in httpd.conf is not used and must be included here, 
-            #otherwise, only domainname1.dom & domainname2.dom will be accessible
-            #from your web browser and NOT http://127.0.0.1, or: http://localhost, etc.
-            #
-
-            <VirtualHost *:80>
-            DocumentRoot \"/srv/http/root\"
-            ServerAdmin root@localhost
-            #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
-            #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
-            <Directory /srv/http/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            DocumentRoot \"/srv/http/root\"
-            ServerAdmin root@localhost
-            #ErrorLog \"/var/log/httpd/127.0.0.1-error_log\"
-            #CustomLog \"/var/log/httpd/127.0.0.1-access_log\" common
-            <Directory /srv/http/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/$USER.c0m/public_html\"
-            ServerName $USER.c0m
-            ServerAlias $USER.c0m www.$USER.c0m
-            <Directory /srv/http/$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/$USER.c0m/public_html\"
-            ServerName $USER.c0m
-            ServerAlias $USER.c0m www.$USER.c0m
-            <Directory /srv/http/$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
-            ServerName $USER.$HOSTNAME.c0m
-            ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-            <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/$USER.$HOSTNAME.c0m/public_html\"
-            ServerName $USER.$HOSTNAME.c0m
-            ServerAlias $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-            <Directory /srv/http/$USER.$HOSTNAME.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
-            ServerName phpmyadmin.$USER.c0m
-            ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-            <Directory /usr/share/webapps/phpMyAdmin/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/usr/share/webapps/phpMyAdmin\"
-            ServerName phpmyadmin.$USER.c0m
-            ServerAlias phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-            <Directory /usr/share/webapps/phpMyAdmin/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
-            ServerName torrent.$USER.c0m
-            ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
-            <Directory /srv/http/torrent.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/torrent.$USER.c0m/public_html\"
-            ServerName torrent.$USER.c0m
-            ServerAlias torrent.$USER.c0m www.torrent.$USER.c0m
-            <Directory /srv/http/torrent.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
-            ServerName admin.$USER.c0m
-            ServerAlias admin.$USER.c0m www.admin.$USER.c0m
-            <Directory /srv/http/admin.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/admin.$USER.c0m/public_html\"
-            ServerName admin.$USER.c0m
-            ServerAlias admin.$USER.c0m www.admin.$USER.c0m
-            <Directory /srv/http/admin.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
-            ServerName stats.$USER.c0m
-            ServerAlias stats.$USER.c0m www.stats.$USER.c0m
-            <Directory /srv/http/stats.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/stats.$USER.c0m/public_html\"
-            ServerName stats.$USER.c0m
-            ServerAlias stats.$USER.c0m www.stats.$USER.c0m
-            <Directory /srv/http/stats.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:80>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
-            ServerName mail.$USER.c0m
-            ServerAlias mail.$USER.c0m www.mail.$USER.c0m
-            <Directory /srv/http/mail.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>
-
-            <VirtualHost *:444>
-            ServerAdmin $USER@$HOSTNAME
-            DocumentRoot \"/srv/http/mail.$USER.c0m/public_html\"
-            ServerName mail.$USER.c0m
-            ServerAlias mail.$USER.c0m www.mail.$USER.c0m
-            <Directory /srv/http/mail.$USER.c0m/public_html/>
-            DirectoryIndex index.htm index.html
-            AddHandler cgi-script .cgi .pl
-            Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            </Directory>
-            </VirtualHost>' > /etc/httpd/conf/extra/httpd-vhosts.conf"
-
-            echo sh -c "sudo echo '#
-            # /etc/hosts: static lookup table for host names
-            #
-
-            #<ip-address>  <hostname.domain.org>   <hostname>
-            127.0.0.1   localhost.localdomain   localhost $HOSTNAME
-            ::1      localhost.localdomain   localhost
-            127.0.0.1 $USER.c0m www.$USER.c0m
-            127.0.0.1 $USER.$HOSTNAME.c0m www.$USER.$HOSTNAME.c0m
-            127.0.0.1 phpmyadmin.$USER.c0m www.phpmyadmin.$USER.c0m
-            127.0.0.1 torrent.$USER.c0m www.torrent.$USER.c0m
-            127.0.0.1 admin.$USER.c0m www.admin.$USER.c0m
-            127.0.0.1 stats.$USER.c0m www.stats.$USER.c0m
-            127.0.0.1 mail.$USER.c0m www.mail.$USER.c0m
-
-            # End of file' > /etc/hosts"
-
-            #TODO
-            # dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Creating self-signed certificate" 10 30
-            cd /etc/httpd/conf
-            sudo openssl genrsa -des3 -out server.key 1024
-            sudo openssl req -new -key server.key -out server.csr
-            sudo cp -v server.key server.key.org
-            sudo openssl rsa -in server.key.org -out server.key
-            sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-
-            sudo mkdir -p /srv/http/root/public_html
-            sudo chmod g+xr-w /srv/http/root
-            sudo chmod -R g+xr-w /srv/http/root/public_html
-
-            sudo mkdir -p /srv/http/$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/$USER.c0m/public_html
-
-            sudo mkdir -p /srv/http/$USER.$HOSTNAME.c0m/public_html
-            sudo chmod g+xr-w /srv/http/$USER.$HOSTNAME.c0m
-            sudo chmod -R g+xr-w /srv/http/$USER.$HOSTNAME.c0m/public_html
-
-            sudo mkdir -p /srv/http/phpmyadmin.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/phpmyadmin.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/phpmyadmin.$USER.c0m/public_html
-
-            sudo mkdir -p /srv/http/torrent.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/torrent.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/torrent.$USER.c0m/public_html
-
-            sudo mkdir -p /srv/http/admin.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/admin.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/admin.$USER.c0m/public_html
-
-            sudo mkdir -p /srv/http/stats.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/stats.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/stats.$USER.c0m/public_html
-
-            sudo mkdir -p /srv/http/mail.$USER.c0m/public_html
-            sudo chmod g+xr-w /srv/http/mail.$USER.c0m
-            sudo chmod -R g+xr-w /srv/http/mail.$USER.c0m/public_html
-
-            dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "w00t!! You're just flying through this stuff you hacker you!! :p" 10 30
-            dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "rah rah $USER rah rah $USER!!!" 10 30
-            sudo systemctl start httpd
-            sudo systemctl start mysqld
-            sleep 1s
-            dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok... starting MySQL and setting a root password for MySQL...." 10 30
-            rand=$RANDOM
-            sudo mysqladmin -u root password $USER-$rand
-            dialog --backtitle "$upper_title" --title "Extra" --msgbox "You're mysql root password is $USER-$rand\nWrite this down before proceeding..." 10 30
-            dialog --backtitle "$upper_title" --title "Extra" --msgbox "If you want to change/update the above root password (AT A LATER TIME), then you need to use the following command:\n$ mysqladmin -u root -p'$USER-$rand' password newpasswordhere\nFor example, you can set the new password to 123456, enter:\n$ mysqladmin -u root -p'$USER-$rand' password '123456'" 20 40
-            sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/phpmyadmin.$USER.c0m
-            sudo ln -s /srv/http ${my_home}localhost
-            sudo chown -R $USER /srv/http
-
-            dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "Your LAMP setup is set to be started manually via the Awesome menu->Services-> LAMP On/Off" 10 30
-
-            dialog --clear --backtitle "$upper_title" --title "Extra" --msgbox "If you want LAMP to start at boot, run these commands ay any time as root user:\n\nsystemctl enable httpd.service\nsystemctl enable mysqld.service\nsystemctl enable memcached.service" 10 40
-            
-            dialog --clear --backtitle "$upper_title" --title "Extra" --yesno "Do you want this to be done now? [default=No]?" 10 30
-            if [ $? = 0 ] ; then
-                sudo systemctl enable httpd.service
-                sudo systemctl enable mysqld.service
-                sudo systemctl enable memcached.service
-            fi
-        fi
-        sudo systemctl daemon-reload
-        
-        dialog --clear --backtitle "$upper_title" --title "pdqOS" --yesno "Enable automatic login to virtual console?" 10 30
-        if [ $? = 0 ] ; then
-            sudo systemctl disable getty@tty1
-            sudo systemctl enable autologin@tty1
-            sudo systemctl start autologin@tty1
-        fi
-        
-        # not needed anymore since zsh shell is set via chroot script run previously
-        # dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "Ok, setup is complete... the next screen will prompt you for your user password..." 10 40
-        # chsh -s $(which zsh)
-
-        if [ "$archtype" = "x86_64" ]; then
-        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\npacaur XXXX\n\nReplacing XXXX with:\n'lib32-ati-dri: for open source ATI driver users'
-  'lib32-catalyst-utils: for AMD Catalyst users'
-  'lib32-intel-dri: for open source Intel driver users'
-  'lib32-nouveau-dri: for Nouveau users'
-  'lib32-nvidia-utils-bumblebee: for NVIDIA + Bumblebee users'
-  'lib32-nvidia-utils: for NVIDIA proprietary blob users'" 30 70
-        else
-        dialog --clear --backtitle "$upper_title" --title "pdqOS" --msgbox "exiting install script...\n\nIf complete, type: sudo reboot (you may also want to search, chose and install a video driver now.\n\npacaur XXXX\n\nReplacing XXXX with:\n'ati-dri: for open source ATI driver users'
-  'catalyst-utils: for AMD Catalyst users'
-  'intel-dri: for open source Intel driver users'
-  'nouveau-dri: for Nouveau users'
-  'nvidia-utils-bumblebee: for NVIDIA + Bumblebee users'
-  'nvidia-utils: for NVIDIA proprietary blob users'" 30 70
-        fi
-    fi
 fi
 
 #DEBUG

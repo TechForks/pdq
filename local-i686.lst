@@ -33,6 +33,7 @@ libtiff4
 linux-pdq
 linux-pdq-docs
 linux-pdq-headers
+llvm-amdgpu-lib-snapshot
 logstalgia
 lwks
 mediadownloader
@@ -49,6 +50,7 @@ pkgcacheclean
 preload
 profile-sync-daemon
 ps_mem
+pulseaudio-mixer-cli-git
 pulseaudio_ctl
 pyradio-git
 python3-threaded_servers
