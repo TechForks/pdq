@@ -146,7 +146,6 @@ pv
 python
 python-feedparser
 python-gobject
-python2-beautifulsoup4
 rsync
 rtmpdump
 rxvt-unicode

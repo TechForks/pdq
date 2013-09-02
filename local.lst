@@ -22,6 +22,7 @@ elementary_test-git-debug
 enlightenment17-git
 enlightenment17-git-debug
 faenza-green-icon-theme
+flexget
 fslint
 grake
 hotshots
@@ -37,6 +38,7 @@ llvm-amdgpu-lib-snapshot
 logstalgia
 lwks
 mediadownloader
+mod_evasive
 mooOS-wallpapers
 nast
 omg-suite
@@ -53,7 +55,17 @@ ps_mem
 pulseaudio-mixer-cli-git
 pulseaudio_ctl
 pyradio-git
+python2-beautifulsoup4-4.1
+python2-certifi
+python2-jsonschema
+python2-pynzb
+python2-pyrss2gen
+python2-sqlalchemy-0.7.9
+python2-tvrage
+python2-xynehttpserver
+python3-aur
 python3-threaded_servers
+python3-xynexdg
 roccat-dkms
 secure-delete
 simplescreenrecorder
