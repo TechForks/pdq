@@ -21,6 +21,8 @@ if [ -f /usr/bin/autocutsel ]; then
     autocutsel -selection PRIMARY -fork &
 fi
 
+eval $(gpg-agent --daemon) &
+
 ## export some variables
 [ -z "$EDITOR" ] && export EDITOR=nano      # if not set default to nano
 [ -z "$BROWSER" ] && export BROWSER=firefox # if not set default to firefox
