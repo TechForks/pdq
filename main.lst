@@ -35,7 +35,6 @@ dnsutils
 dosfstools
 dvd+rw-tools
 encfs
-epdfview
 fakeroot
 feh
 ffmpeg
@@ -206,6 +205,7 @@ xorg-server-utils
 xorg-utils
 xorg-xinit
 xorg-xkill
+xpdf
 xterm
 xvkbd
 yajl
