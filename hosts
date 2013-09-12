@@ -1,0 +1,16 @@
+#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>  <hostname.domain.org>   <hostname>
+127.0.0.1   localhost.localdomain   localhost alice
+#            ::1      localhost.localdomain   localhost
+192.168.0.10 pdq-linux www.pdq-linux
+192.168.0.10 static-site1.net www.static-site1.net
+192.168.0.10 site1.net www.site1.net
+192.168.0.10 rss.pdq www.rss.pdq
+192.168.0.10 repo.mooos.pdq www.repo.mooos.pdq
+192.168.0.10 blog.pdq www.blog.pdq
+65.39.205.54 athlon.com www.athlon.com
+
+# End of file
