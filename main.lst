@@ -203,7 +203,6 @@ xorg-server-utils
 xorg-utils
 xorg-xinit
 xorg-xkill
-xpdf
 xterm
 xvkbd
 yajl

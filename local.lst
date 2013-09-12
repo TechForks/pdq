@@ -7,10 +7,8 @@ cower
 cursetheweather
 dansguardian
 dmenu_mocp
-dolphin-box-plugin-git
 downgrade
-dropbox
-dropbox-cli
+dropbox-uploader-git
 dtrx
 efl-git
 efl-git-debug
@@ -54,7 +52,6 @@ ps_mem
 pulseaudio-mixer-cli-git
 pulseaudio_ctl
 pyradio-git
-python2-beautifulsoup4-4.1
 python2-certifi
 python2-jsonschema
 python2-pynzb
@@ -84,6 +81,7 @@ vb-pdq
 virtualbox-ext-oracle
 xcursor-shere-khan-x
 xflux
+xpdf
 yad
 yeahconsole
 youtube-viewer-git
