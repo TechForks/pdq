@@ -46,6 +46,7 @@ pcre-old
 perl-clipboard
 perl-umph-prompt
 pkgcacheclean
+pngcrush
 preload
 profile-sync-daemon
 ps_mem
