@@ -19,8 +19,6 @@ elementary_test-git
 elementary_test-git-debug
 enlightenment17-git
 enlightenment17-git-debug
-faenza-green-icon-theme
-freenet
 fslint
 grake
 hotshots
@@ -29,9 +27,6 @@ kdesudo
 key-mon
 libqxt
 libtiff4
-linux-pdq
-linux-pdq-docs
-linux-pdq-headers
 llvm-amdgpu-lib-snapshot
 logstalgia
 lwks
@@ -39,6 +34,7 @@ mediadownloader
 mod_evasive
 mooOS-wallpapers
 nast
+ninvaders
 omg-suite
 pacaur
 pacserve
@@ -67,6 +63,7 @@ python3-xynexdg
 roccat-dkms
 secure-delete
 simplescreenrecorder
+stardork
 sublime-text-dev
 tcplay
 tcptraceroute
@@ -80,7 +77,6 @@ tty-clock-patched
 update-mirrorlist
 urxvt-font-size-git
 vb-pdq
-virtualbox-ext-oracle
 xcursor-shere-khan-x
 xflux
 xpdf
