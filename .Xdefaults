@@ -20,9 +20,10 @@ URxvt*cursorBlink:				true
 URxvt*cursorUnderline:				true
 URxvt*scrollColor:				#0FFF00
 URxvt*internalborder: 6
+URxvt*inheritPixmap: true
 
 yeahconsole*inheritPixmap: true
-yeahconsole*term:urxvtc
+yeahconsole*term:urxvt
 yeahconsole*transparent:false
 !yeahconsole*background: rgba:0000/0000/0000/dddd
 !yeahconsole*foreground: green
@@ -83,10 +84,10 @@ URxvt*colorUL:      #87afd7
 URxvt*font: xft:terminus:pixelsize=13:antialias=false
 !URxvt*font: xft:Envy Code R-10
 URxvt*iconFile: /usr/share/icons/Faenza/apps/32/terminal.png
-!URxvt*background: rgba:0000/0000/0000/dddd
-URxvt*background: rgba:0190/0200/0210/dddd
+URxvt*background: rgba:0000/0000/0000/dddd
+!URxvt*background: rgba:0190/0200/0210/dddd
 URxvt*foreground: #d3d3d3
-URxvt*transparent: false
+URxvt*transparent: true
 !Urxvt*fading: 10
 !Urxvt*fadeColor: #a146ff
 URxvt*perl-ext-common:  default,clipboard,matcher,font-size

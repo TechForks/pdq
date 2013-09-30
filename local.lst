@@ -35,6 +35,7 @@ mod_evasive
 mooOS-wallpapers
 nast
 ninvaders
+nonfree
 omg-suite
 pacaur
 pacserve
@@ -77,6 +78,7 @@ tty-clock-patched
 update-mirrorlist
 urxvt-font-size-git
 vb-pdq
+xboxdrv
 xcursor-shere-khan-x
 xflux
 xpdf
