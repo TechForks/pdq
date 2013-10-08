@@ -25,3 +25,85 @@
 input, select, textarea {
     color: #000000 !important; background: #FFFFFF !important;
 }
+
+body {color: #FFFFFF !important;}
+input, textarea, select {color: #FFFFFF;background-color: #141414;border-color: #494439;-moz-appearance: none !important;}
+SPAN[style='color: #1AAF36;'] {color: #50E56C !important;}
+SPAN[style='color: #2932B8;'] {color: #4750D6 !important;}
+SPAN[style='color: #40B3CD;'] {color: #32A5BF !important;}
+body {background-color: #232323 !important;color: #FFFFFF !important;}
+a:link {color: #4EB8FD !important;}
+a:visited {color: #4EB8FD !important;}
+a:hover, a:active {color: #FFFFFF !important;}
+#container {background-color: #141414 !important;border-top-color: #1B1B1B !important;border-right-color: #1B1B1B !important;border-bottom-color: #1B1B1B !important;border-left-color: #1B1B1B !important;color: #FFFFFF !important;}
+.menu ul {color: #FFFFFF !important;}
+.menu ul a:link {color: #FFFFFF !important;}
+.menu ul a:visited {color: #FFFFFF !important;}
+.menu ul a:hover, .menu ul a:active {color: #5C88B7 !important;}
+#panel {background-color: #232323 !important;color: #FFFFFF !important;border-top-color: #2B2B2B !important;border-right-color: #2B2B2B !important;border-bottom-color: #2B2B2B !important;border-left-color: #2B2B2B !important;}
+table {color: #FFFFFF !important;}
+.tborder {background-color: #436990 !important;border-top-color: #71BEF0 !important;border-right-color: #71BEF0 !important;border-bottom-color: #71BEF0 !important;border-left-color: #71BEF0 !important;}
+.thead {background-color: #5CBEFD !important;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAYCAYAAAAoG9cuAAABOklEQVQokY2Na27CMBCE96CF8qYIEUAVUAiU0oM1kARIIEey2Y69doIQUvvj8zw8Tui7UPwX9K/RDsfuCrw+8fQFYymceu/yFtAW4fP6iHZIpg2O9UWxV+83hYZqXptRCBNeQK44RBFiZH1eeVrBrDBc5ppXKJZ4YDvjM1FawCwyzR+5UcF4SybQDIM5vjJHmJ1Vqab3Su8nxSVnfYfLZjSFmWJQgjw5STdJwRG/G6OoUDw+6grTmVGAY4QiQDFKHUcHfAClYaJ5mD5gukSVngYwA5i32GkiakklUx9HL75x7wBNnMaV78NTB6YE424s2tlr7iaSqb2XQftwY+NtjsX7h9TCZRO0UFriyjf3uINSA0cDwfDqVLoKqttLzfUIuKHNd55quKxFNxZ9wg9GLzgskVO8tuCh738BbB6xorucN94AAAAASUVORK5CYII=") !important;background-repeat: repeat-x !important;color: #000000 !important;}
+.thead a:link {color: #000000 !important;}
+.thead a:visited {color: #000000 !important;}
+.thead a:hover, .thead a:active {color: #000000 !important;}
+.tcat {background-color: #1F466B !important;color: #FFFFFF !important;}
+.tcat a:link {color: #FFFFFF !important;}
+.tcat a:visited {color: #FFFFFF !important;}
+.tcat a:hover, .tcat a:active {color: #FFFFFF !important;}
+.trow1 {background-color: #1E1E1E !important;}
+.trow2 {background-color: #232323 !important;}
+.trow_shaded {background-color: #480006 !important;}
+.trow_selected td {background-color: #4C4400 !important;}
+.trow_sep {background-color: #2C2C2C !important;color: #FFFFFF !important;}
+.tfoot {background-color: #5CBEFD !important;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAYCAYAAAAoG9cuAAABOklEQVQokY2Na27CMBCE96CF8qYIEUAVUAiU0oM1kARIIEey2Y69doIQUvvj8zw8Tui7UPwX9K/RDsfuCrw+8fQFYymceu/yFtAW4fP6iHZIpg2O9UWxV+83hYZqXptRCBNeQK44RBFiZH1eeVrBrDBc5ppXKJZ4YDvjM1FawCwyzR+5UcF4SybQDIM5vjJHmJ1Vqab3Su8nxSVnfYfLZjSFmWJQgjw5STdJwRG/G6OoUDw+6grTmVGAY4QiQDFKHUcHfAClYaJ5mD5gukSVngYwA5i32GkiakklUx9HL75x7wBNnMaV78NTB6YE424s2tlr7iaSqb2XQftwY+NtjsX7h9TCZRO0UFriyjf3uINSA0cDwfDqVLoKqttLzfUIuKHNd55quKxFNxZ9wg9GLzgskVO8tuCh738BbB6xorucN94AAAAASUVORK5CYII=") !important;background-repeat: repeat-x !important;color: #000000 !important;}
+.tfoot a:link {color: #000000 !important;}
+.tfoot a:visited {color: #000000 !important;}
+.tfoot a:hover, .tfoot a:active {color: #000000 !important;}
+.bottommenu {background-color: #232323 !important;color: #FFFFFF !important;border-top-color: #5C88B7 !important;border-right-color: #5C88B7 !important;border-bottom-color: #5C88B7 !important;border-left-color: #5C88B7 !important;}
+.navigation {color: #FFFFFF !important;}
+.navigation .active {color: #FFFFFF !important;}
+input.textbox {background-color: #141414 !important;color: #FFFFFF !important;border-top-color: #71BEF0 !important;border-right-color: #71BEF0 !important;border-bottom-color: #71BEF0 !important;border-left-color: #71BEF0 !important;}
+textarea {background-color: #141414 !important;color: #FFFFFF !important;border-top-color: #71BEF0 !important;border-right-color: #71BEF0 !important;border-bottom-color: #71BEF0 !important;border-left-color: #71BEF0 !important;}
+select {background-color: #141414 !important;border-top-color: #71BEF0 !important;border-right-color: #71BEF0 !important;border-bottom-color: #71BEF0 !important;border-left-color: #71BEF0 !important;}
+.editor {background-color: #212121 !important;border-top-color: #333333 !important;border-right-color: #333333 !important;border-bottom-color: #333333 !important;border-left-color: #333333 !important;}
+.editor_control_bar {background-color: #141414 !important;border-top-color: #71BEF0 !important;border-right-color: #71BEF0 !important;border-bottom-color: #71BEF0 !important;border-left-color: #71BEF0 !important;}
+.autocomplete {background-color: #141414 !important;border-top-color: #FFFFFF !important;border-right-color: #FFFFFF !important;border-bottom-color: #FFFFFF !important;border-left-color: #FFFFFF !important;color: #FFFFFF !important;}
+.autocomplete_selected {background-color: #1F4A6B !important;color: #FFFFFF !important;}
+.popup_menu {background-color: #434343 !important;border-top-color: #FFFFFF !important;border-right-color: #FFFFFF !important;border-bottom-color: #FFFFFF !important;border-left-color: #FFFFFF !important;}
+.popup_menu .popup_item {background-color: #141414 !important;color: #FFFFFF !important;}
+.popup_menu .popup_item:hover {background-color: #193753 !important;color: #FFFFFF !important;}
+.trow_reputation_positive {background-color: #005800 !important;}
+.trow_reputation_negative {background-color: #580000 !important;}
+.reputation_positive {color: #7FFF7F !important;}
+.reputation_neutral {color: #BBBBBB !important;}
+.valid_field {border-top-color: #33FF33 !important;border-right-color: #33FF33 !important;border-bottom-color: #33FF33 !important;border-left-color: #33FF33 !important;}
+.validation_success {color: #4DFF4D !important;}
+.validation_loading {color: #AAAAAA !important;}
+.selectall {background-color: #4C4400 !important;}
+img.attachment {border-top-color: #282416 !important;border-right-color: #282416 !important;border-bottom-color: #282416 !important;border-left-color: #282416 !important;}
+hr {background-color: #FFFFFF !important;color: #FFFFFF !important;}
+blockquote {border-top-color: #333333 !important;border-right-color: #333333 !important;border-bottom-color: #333333 !important;border-left-color: #333333 !important;background-color: #141414 !important;}
+blockquote cite {border-bottom-color: #333333 !important;}
+.codeblock {background-color: #141414 !important;border-top-color: #333333 !important;border-right-color: #333333 !important;border-bottom-color: #333333 !important;border-left-color: #333333 !important;}
+.codeblock .title {border-bottom-color: #333333 !important;}
+.highlight {background-color: #585800 !important;}
+.pm_alert {background-color: #645600 !important;border-top-color: #DBAF00 !important;border-right-color: #DBAF00 !important;border-bottom-color: #DBAF00 !important;border-left-color: #DBAF00 !important;}
+.red_alert {background-color: #3D090B !important;border-top-color: #E95A5E !important;border-right-color: #E95A5E !important;border-bottom-color: #E95A5E !important;border-left-color: #E95A5E !important;color: #E95A5E !important;}
+.high_warning {color: #FF3333 !important;}
+.moderate_warning {color: #E4520C !important;}
+.low_warning {color: #FFA851 !important;}
+div.error {border-top-color: #DBAF00 !important;border-bottom-color: #DBAF00 !important;background-color: #645600 !important;}
+div.error p {color: #FFFFFF !important;}
+div.error p em {color: #FF3333 !important;}
+.online {color: #5FEA62 !important;}
+.offline {color: #383838 !important;}
+.pagination a {border-top-color: #3B5C7E !important;border-right-color: #3B5C7E !important;border-bottom-color: #3B5C7E !important;border-left-color: #3B5C7E !important;}
+.pagination .pagination_current {background-color: #1E1E1E !important;border-top-color: #3B5C7E !important;border-right-color: #3B5C7E !important;border-bottom-color: #3B5C7E !important;border-left-color: #3B5C7E !important;color: #FFFFFF !important;}
+.pagination a:hover {background-color: #1E1E1E !important;}
+.success_message {color: #4DFF4D !important;}
+.error_message {color: #FF3333 !important;}
+._neutral {background-color: #191919 !important;color: #666666 !important;border-top-color: #333333 !important;border-right-color: #333333 !important;border-bottom-color: #333333 !important;border-left-color: #333333 !important;}
+._minus {background-color: #510504 !important;color: #FF3634 !important;border-top-color: #FE6867 !important;border-right-color: #FE6867 !important;border-bottom-color: #FE6867 !important;border-left-color: #FE6867 !important;}
+._plus {background-color: #1E4606 !important;color: #77FF77 !important;border-top-color: #77FF77 !important;border-right-color: #77FF77 !important;border-bottom-color: #77FF77 !important;border-left-color: #77FF77 !important;}
+.pagination_breadcrumb {background-color: #1E1E1E !important;border-top-color: #000000 !important;border-right-color: #000000 !important;border-bottom-color: #000000 !important;border-left-color: #000000 !important;outline-color: #333333 !important;}
