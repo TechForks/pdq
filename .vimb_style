@@ -23,6 +23,5 @@
     opacity: 1
 }
 input, select, textarea {
-    color: #000000 !important; background: #AAAAAA !important;
+    color: #000000 !important; background: #FFFFFF !important;
 }
-

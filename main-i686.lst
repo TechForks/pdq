@@ -1,5 +1,6 @@
 abs
 acpi
+aide
 alsa-oss
 alsa-plugins
 alsa-utils
@@ -16,6 +17,7 @@ bitcoin-qt
 bitlbee-libre
 blender-libre
 cairo
+ccache
 cclive
 cdrdao
 cmatrix
@@ -50,6 +52,7 @@ gdb
 getmail
 git
 gkrellm
+glances
 gpac
 gparted
 groff
@@ -127,10 +130,8 @@ nethogs
 nmap
 ntfs-3g
 ntp
-nvidia
-nvidia-libgl
-nvidia-utils
 openssh
+p7zip-libre
 pacmatic
 patch
 pavucontrol
@@ -139,6 +140,7 @@ phonon-vlc
 php
 pkg-config
 pkgfile
+playonlinux
 polipo
 ppp
 privoxy
@@ -148,11 +150,14 @@ pv
 python
 python-feedparser
 python-gobject
+python2-sensors
+rkhunter
 rsync
 rtmpdump
 rxvt-unicode
 schroot
 scrot
+secure-delete
 squashfs-tools
 squid
 sshfs
@@ -183,7 +188,6 @@ w3m
 wavpack
 wayland
 webkitgtk2
-weechat
 wget
 wgetpaste
 wireshark-cli

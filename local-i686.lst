@@ -8,7 +8,6 @@ cursetheweather
 dansguardian
 dmenu_mocp
 downgrade
-dropbox-uploader-git
 dtrx
 efl-git
 efl-git-debug
@@ -25,6 +24,9 @@ hotshots
 kde-servicemenus-meld-menu-extended
 kdesudo
 key-mon
+nvidia-libgl-full-beta
+nvidia-utils-full-beta
+opencl-nvidia-full-beta
 libqxt
 libtiff4
 llvm-amdgpu-lib-snapshot
@@ -35,8 +37,11 @@ mod_evasive
 mooOS-wallpapers
 nast
 ninvaders
-nonfree
+nvidia-full-beta-all
+nvidia-libgl-full-beta
+nvidia-utils-full-beta
 omg-suite
+opencl-nvidia-full-beta
 pacaur
 pacserve
 pbget
@@ -62,7 +67,6 @@ python3-aur
 python3-threaded_servers
 python3-xynexdg
 roccat-dkms
-secure-delete
 simplescreenrecorder
 stardork
 sublime-text-dev
@@ -78,6 +82,7 @@ tty-clock-patched
 update-mirrorlist
 urxvt-font-size-git
 vb-pdq
+weechat-git
 xboxdrv
 xcursor-shere-khan-x
 xflux
