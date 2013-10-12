@@ -1,7 +1,9 @@
+archiso-git
+emotion_generic_players-git
+emotion_generic_players-git-debug
 lib32-nvidia-libgl-full-beta
 lib32-nvidia-utils-full-beta
 lib32-opencl-nvidia-full-beta
-llvm-amdgpu-lib-snapshot
 lwks
 nvidia-full-beta-all
 nvidia-libgl-full-beta
