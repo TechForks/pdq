@@ -56,8 +56,6 @@ nvidia-utils-full-beta
 omg-suite
 opencl-nvidia-full-beta
 pacaur
-package-query
-pacmanxg4-bin
 pacserve
 pbget
 pcre-old
@@ -72,7 +70,6 @@ ps_mem
 pulseaudio-mixer-cli-git
 pulseaudio_ctl
 pyradio-git
-python-specbar
 python2-certifi
 python2-jsonschema
 python2-pynzb
@@ -83,14 +80,11 @@ python2-xynehttpserver
 python3-aur
 python3-threaded_servers
 python3-xynexdg
-rar
-repacman
 roccat-dkms
 secure-delete
 simplescreenrecorder
 sqlmap
 ssldump
-ssx
 stardork
 sublime-text-dev
 tcplay
@@ -105,14 +99,12 @@ ttf-stylebats
 tty-clock-patched
 update-mirrorlist
 urxvt-font-size-git
-vala0.16
 vb-pdq
 xboxdrv
 xcursor-shere-khan-x
 xflux
 xpdf
 yad
-yaourt
 yeahconsole
 youtube-viewer-git
 zsh-completions
