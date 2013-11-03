@@ -5,6 +5,8 @@ alsa-oss
 alsa-plugins
 alsa-utils
 arch-install-scripts
+archiso
+atop
 audio-convert-libre
 autoconf
 autocutsel
@@ -37,6 +39,7 @@ dosfstools
 dvd+rw-tools
 elementary-icon-theme
 encfs
+etherape
 fakeroot
 feh
 ffmpeg
@@ -50,6 +53,7 @@ gcc
 gcolor2
 gdb
 getmail
+gimp
 git
 gkrellm
 glances
@@ -135,10 +139,10 @@ openssh
 p7zip-libre
 pacmatic
 patch
+pavucontrol
 perl-lwp-protocol-https
 phonon-vlc
 php
-pinta
 pkg-config
 pkgfile
 polipo
@@ -157,7 +161,7 @@ rtmpdump
 rxvt-unicode
 schroot
 scrot
-secure-delete
+spectrwm-libre
 squashfs-tools
 squid
 sshfs
@@ -182,6 +186,7 @@ unzip-libre
 upx
 urxvt-perls
 vim
+virtualbox
 vlc
 vorbis-tools
 w3m
@@ -191,6 +196,7 @@ webkitgtk2
 weechat
 wget
 wgetpaste
+whois
 wireshark-cli
 wireshark-gtk
 wmctrl
