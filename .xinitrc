@@ -50,7 +50,7 @@ case $1 in
     blackbox) exec blackbox;;
     fluxbox) exec fluxbox;;
     openbox) exec openbox-session;;
-    cinnamon) exec gnome-session-cinnamon;;
+    cinnamon) exec cinnamon-session;;
     mate) exec mate-session;;
     xterm) exec xterm;;
     *) exec enlightenment_start;;

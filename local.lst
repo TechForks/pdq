@@ -1,5 +1,6 @@
 aarchup
 alarm-clock
+audiothumbs
 autopsy
 canto-curses
 canto-daemon
@@ -86,11 +87,15 @@ simplescreenrecorder
 sqlmap
 ssldump
 stardork
+steam-skin-manager
 sublime-text-dev
 tcplay
 tcptraceroute
 teamviewer
-terminology
+terminology-git-0.4.0
+tksqlite
+tktable
+tktreectrl
 tmsu-bin
 transcoder
 ttf-envy-code-r

@@ -97,6 +97,7 @@ libavc1394
 libisoburn
 libmodplug
 libpng12
+libpulse
 libtool
 libtxc_dxtn
 libunique
@@ -155,12 +156,15 @@ python
 python-feedparser
 python-gobject
 python2-sensors
+qmc2
 rkhunter
 rsync
 rtmpdump
 rxvt-unicode
 schroot
 scrot
+sdlmame
+spectrwm-libre
 squashfs-tools
 squid
 sshfs
@@ -175,6 +179,7 @@ tls
 tor
 torsocks
 traceroute
+transcode
 transmission-qt
 transmission-remote-cli
 ttf-bitstream-vera
