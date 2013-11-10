@@ -67,7 +67,6 @@ pkgcacheclean
 pngcrush
 preload
 profile-sync-daemon
-ps_mem
 pulseaudio-mixer-cli-git
 pulseaudio_ctl
 pyradio-git
