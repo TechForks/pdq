@@ -26,7 +26,6 @@ emotion_generic_players-git-debug
 enlightenment17-git
 enlightenment17-git-debug
 etrophy
-fragroute
 fslint
 go-fuse
 go-sqlite3
@@ -86,11 +85,13 @@ simplescreenrecorder
 sqlmap-git
 ssldump
 stardork
+steam-skin-ambiance
+steam-skin-manager
+steam-skin-radiance
 sublime-text-dev
 tcplay
 tcptraceroute
 teamviewer
-terminology-git
 tmsu-bin
 transcoder
 ttf-envy-code-r

@@ -50,7 +50,7 @@ ViewPropsTimestamp=2013,2,25,17,48,35
 [IconsMode]
 FontWeight=50
 IconSize=64
-PreviewSize=192
+PreviewSize=80
 TextWidthIndex=0
 UseSystemFont=false
 
@@ -105,7 +105,7 @@ ShowVcsRestartInformation=false
 
 [Open-with settings]
 CompletionMode=5
-History=/usr/bin/vlc --started-from-file %U,subl3 %F,sudo_subl3,sudo subl3,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4,ark -caption "%c" %U
+History=/usr/lib/iceweasel/iceweasel %u,/usr/bin/vlc --started-from-file %U,subl3 %F,sudo_subl3,sudo subl3,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4
 
 [PreviewSettings]
 Plugins=audiothumbs,comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
