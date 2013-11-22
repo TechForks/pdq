@@ -52,6 +52,7 @@ fuseiso
 gcc
 gcolor2
 gdb
+geeqie
 getmail
 gimp
 git
@@ -109,6 +110,7 @@ linux-firmware
 linux-headers
 livestreamer
 lm_sensors
+lxappearance
 lxtask
 lzop
 m4
@@ -135,6 +137,7 @@ nethogs
 nmap
 ntfs-3g
 ntp
+nvidia
 nvidia-cg-toolkit
 openssh
 p7zip-libre
@@ -175,6 +178,7 @@ syslinux
 tcpdump
 terminus-font
 tig
+tint2
 tls
 tor
 torsocks
