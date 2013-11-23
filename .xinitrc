@@ -14,8 +14,8 @@ fi
 ## start urxvt daemon
 [ -z "$(pidof urxvtd)" ] && [ -f /usr/bin/urxvtd ] && urxvtd -q -o -f
 
-tint2 &
-urxvtc &
+#tint2 &
+#urxvtc &
 
 ## start clipboard manager
 if [ -f /usr/bin/autocutsel ]; then
@@ -58,5 +58,5 @@ case $1 in
     cinnamon) exec cinnamon-session;;
     mate) exec mate-session;;
     xterm) exec xterm;;
-    *) exec fusion-icon;;
+    *) exec enlightenment_start;;
 esac

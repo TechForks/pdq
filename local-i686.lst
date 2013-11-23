@@ -1,7 +1,6 @@
 aarchup
 alarm-clock
 audiothumbs
-autopsy
 canto-curses
 canto-daemon
 ccsm
@@ -36,7 +35,6 @@ enlightenment17-git
 enlightenment17-git-debug
 etrophy
 fslint
-fusion-icon
 go-fuse
 go-sqlite3
 grake
@@ -64,7 +62,6 @@ moka-theme
 mooOS-wallpapers
 nast
 netsniff-ng
-newhope-darkmod-emerald-theme
 ninvaders
 omg-suite
 opencl-nvidia-full-beta
