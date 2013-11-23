@@ -1,16 +1,11 @@
 aarchup
 alarm-clock
 audiothumbs
+brutaldoom
 canto-curses
 canto-daemon
-ccsm
 cheser-icon-theme
 codecs64
-compiz-bcop
-compiz-core
-compiz-fusion-plugins-extra
-compiz-fusion-plugins-main
-compizconfig-python
 cower
 cursetheweather
 dansguardian
@@ -28,7 +23,6 @@ elementary-git
 elementary-git-debug
 elementary_test-git
 elementary_test-git-debug
-emerald
 emotion_generic_players-git
 emotion_generic_players-git-debug
 enlightenment17-git
@@ -39,7 +33,6 @@ go-fuse
 go-sqlite3
 grake
 gtmsu_servicemenu
-gzdoom
 hotshots
 intrace
 johnny
@@ -48,8 +41,6 @@ kdesudo
 key-mon
 nvidia-libgl-full-beta
 nvidia-utils-full-beta
-opencl-nvidia-full-beta
-libcompizconfig
 libjpeg6
 libqxt
 libtiff4
@@ -58,13 +49,11 @@ lwks
 md5deep
 mediadownloader
 mod_evasive
-moka-theme
 mooOS-wallpapers
 nast
 netsniff-ng
 ninvaders
 omg-suite
-opencl-nvidia-full-beta
 pacaur
 pacserve
 pbget
