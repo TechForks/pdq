@@ -12,7 +12,6 @@ cursetheweather
 dansguardian
 dmenu_mocp
 dmitry
-dockbarx
 doomseeker
 downgrade
 dtrx
@@ -92,7 +91,8 @@ sublime-text-dev
 tcplay
 tcptraceroute
 teamviewer
-terminology
+terminology-git
+terminology-git-debug
 transcoder
 ttf-envy-code-r
 ttf-ms-fonts
