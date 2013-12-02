@@ -14,7 +14,6 @@ dmenu_mocp
 doomseeker
 downgrade
 dtrx
-echievements
 efl-git
 efl-git-debug
 eggdrop
@@ -22,13 +21,8 @@ elementary-git
 elementary-git-debug
 elementary_test-git
 elementary_test-git-debug
-emotion_generic_players-git
-emotion_generic_players-git-debug
 enlightenment17-git
 enlightenment17-git-debug
-etrophy
-evas_generic_loaders-git
-evas_generic_loaders-git-debug
 fslint
 go-fuse
 go-sqlite3
