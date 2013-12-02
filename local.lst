@@ -14,6 +14,7 @@ dmenu_mocp
 doomseeker
 downgrade
 dtrx
+echievements
 efl-git
 efl-git-debug
 eggdrop
@@ -23,6 +24,9 @@ elementary_test-git
 elementary_test-git-debug
 enlightenment17-git
 enlightenment17-git-debug
+etrophy
+evas_generic_loaders-git
+evas_generic_loaders-git-debug
 fslint
 go-fuse
 go-sqlite3
