@@ -110,7 +110,9 @@ History=subl3 %F,/usr/lib/iceweasel/iceweasel %u,/usr/bin/vlc --started-from-fil
 Plugins=audiothumbs,comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
 
 [Search]
+Location=Everywhere
 ShowFacetsWidget=true
+What=Content
 
 [SettingsDialog]
 Height 1080=590
