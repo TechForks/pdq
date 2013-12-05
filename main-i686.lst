@@ -30,7 +30,6 @@ cclive
 cdrdao
 cheser-icon-theme
 cmatrix
-codecs64
 cower
 cowsay
 cpupower-libre
@@ -80,6 +79,7 @@ gcc
 gcolor2
 gdb
 getmail
+gh
 gimp
 git
 gkrellm
@@ -90,6 +90,7 @@ gpac
 gparted
 grake
 groff
+grub
 gst-plugins-bad-libre
 gstreamer0.10-bad-libre-plugins
 gstreamer0.10-base-plugins
@@ -113,7 +114,6 @@ iceweasel-libre
 iftop
 intrace
 iotop
-j4-dmenu-desktop-git
 jhead
 johnny
 k3b
@@ -244,7 +244,6 @@ squid
 sshfs
 ssldump
 stardork
-steam
 steam-skin-ambiance
 steam-skin-manager
 steam-skin-radiance
