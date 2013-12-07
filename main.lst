@@ -9,6 +9,7 @@ alsa-utils
 arch-install-scripts
 archiso
 atop
+audacious
 audio-convert-libre
 audiothumbs
 autoconf
@@ -183,8 +184,12 @@ nmap
 ntfs-3g
 ntp
 nvidia-cg-toolkit
+nvidia-full-beta-all
+nvidia-libgl-full-beta
+nvidia-utils-full-beta
 ocenaudio
 omg-suite
+opencl-nvidia-full-beta
 openssh
 p7zip-libre
 pacaur
