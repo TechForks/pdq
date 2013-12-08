@@ -8,6 +8,7 @@ arch-install-scripts
 archiso
 aria2
 atop
+audio-convert-libre
 autoconf
 autocutsel
 automake
@@ -15,6 +16,8 @@ baobab
 binutils
 bison
 bitcoin-qt
+bitlbee-libre
+blender-libre
 bsd-games
 cairo
 ccache
@@ -22,6 +25,7 @@ cclive
 cdrdao
 cmatrix
 cowsay
+cpupower-libre
 cvs
 ddd
 devede
@@ -59,6 +63,8 @@ gpac
 gparted
 groff
 grub
+gst-plugins-bad-libre
+gstreamer0.10-bad-libre-plugins
 gstreamer0.10-base-plugins
 gstreamer0.10-ffmpeg
 gstreamer0.10-good
@@ -74,6 +80,7 @@ htop
 hub
 hwinfo
 i7z
+iceweasel-libre
 iftop
 iotop
 jhead
@@ -81,11 +88,12 @@ k3b
 kdebase-dolphin
 kdebase-kdialog
 kdebase-konsole
-kdelibs
+kdelibs-libre
 kdemultimedia-ffmpegthumbs
 kdenlive
 kdesdk-dolphin-plugins
 kdesdk-thumbnailers
+kdeutils-ark-libre
 keepassx
 keychain
 nvidia-libgl
@@ -110,14 +118,18 @@ lxtask
 lzop
 m4
 make
+mc-libre
+mcomix-libre
 mediainfo
 meld
 memcached
 memtest86+
+mencoder-libre
 mlocate
 mlt
 mlt-python-bindings
 moc
+mplayer-libre
 mtools
 multitail
 mumble
@@ -131,6 +143,7 @@ ntfs-3g
 ntp
 nvidia-cg-toolkit
 openssh
+p7zip-libre
 pacmatic
 patch
 pavucontrol
@@ -151,12 +164,14 @@ python-gobject
 python2-sensors
 qmc2
 rkhunter
+rp-pppoe-libre
 rsync
 rtmpdump
 rxvt-unicode
 schroot
 scrot
 sdlmame
+spectrwm-libre
 squashfs-tools
 squid
 sshfs
@@ -176,6 +191,8 @@ transmission-remote-cli
 ttf-bitstream-vera
 ttf-liberation
 udevil
+unar
+unzip-libre
 upx
 urxvt-perls
 vim
