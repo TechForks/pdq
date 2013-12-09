@@ -28,7 +28,7 @@ eval $(gpg-agent --daemon) &
 
 ## export some variables
 [ -z "$EDITOR" ] && export EDITOR=nano      # if not set default to nano
-[ -z "$BROWSER" ] && export BROWSER=firefox # if not set default to firefox
+[ -z "$BROWSER" ] && export BROWSER=iceweasel # if not set default to firefox
 [ -f "$HOME/.gtkrc-2.0" ] && export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 ## truecrypt mounted success file
