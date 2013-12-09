@@ -114,6 +114,7 @@ linux-firmware
 linux-headers
 livestreamer
 lm_sensors
+lsb-release
 lxtask
 lzop
 m4
