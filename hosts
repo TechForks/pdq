@@ -12,6 +12,7 @@
 192.168.0.10 repo.mooos.pdq www.repo.mooos.pdq
 192.168.0.10 blog.pdq www.blog.pdq
 192.168.0.10 thekernel.pdq www.thekernel.pdq
-65.39.205.54 athlon.com www.athlon.com
+#65.39.205.54 athlon.com www.athlon.com
+208.98.9.240 athlon.chpass.com www.athlon.chpass.com
 
 # End of file
