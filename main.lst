@@ -16,7 +16,7 @@ baobab
 binutils
 bison
 bitcoin-qt
-bitlbee-libre
+bitlbee-libre-nonprism
 blender-libre
 bsd-games
 cairo
@@ -45,6 +45,7 @@ fakeroot
 feh
 ffmpeg
 filezilla
+flashplugin
 flex
 fontconfig
 fortune-mod
@@ -180,6 +181,7 @@ strace
 sudo
 syslinux
 tcpdump
+tcplay
 terminus-font
 tig
 tls
