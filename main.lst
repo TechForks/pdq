@@ -88,9 +88,12 @@ k3b
 kdebase-dolphin
 kdebase-kdialog
 kdebase-konsole
+kdebase-workspace
 kdelibs-libre
 kdemultimedia-ffmpegthumbs
 kdenlive
+kdepim-runtime
+kdepimlibs
 kdesdk-dolphin-plugins
 kdesdk-thumbnailers
 kdeutils-ark-libre
@@ -100,6 +103,9 @@ lib32-nvidia-libgl
 lib32-opencl-nvidia
 libavc1394
 libisoburn
+libkfbapi
+libkgapi
+libkolab
 libmodplug
 libpng12
 libpulse
