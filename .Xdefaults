@@ -83,6 +83,7 @@ URxvt*colorUL:      #87afd7
 ! include font and bg/fg colors
 URxvt*font: xft:terminus:pixelsize=13:antialias=false
 !URxvt*font: xft:Envy Code R-10
+URxvt*boldFont: xft:terminus:bold:pixelsize=13:antialias=false
 URxvt*iconFile: /usr/share/icons/Cheser/32x32/apps/terminal.png
 URxvt*background: rgba:0000/0000/0000/dddd
 !URxvt*background: rgba:0190/0200/0210/dddd
