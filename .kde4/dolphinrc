@@ -107,7 +107,7 @@ CompletionMode=5
 History=subl3 %F,/usr/lib/iceweasel/iceweasel %u,/usr/bin/vlc --started-from-file %U,sudo_subl3,sudo subl3,mplayer,/usr/bin/vlc %U,meld %F,mcomix %f,foxitreader,subl %F,playonlinux,epdfview,/home/pdq/bin/browse_images %f -F -Z,avidemux2_qt4
 
 [PreviewSettings]
-Plugins=audiothumbs,comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
+Plugins=comicbookthumbnail,cursorthumbnail,desktopthumbnail,directorythumbnail,htmlthumbnail,imagethumbnail,jpegthumbnail,westleypreview,windowsexethumbnail,windowsimagethumbnail,svgthumbnail,textthumbnail,ffmpegthumbs
 
 [Search]
 Location=Everywhere
@@ -131,7 +131,7 @@ Current Scheme=Default
 ToolButtonStyle=IconOnly
 
 [VersionControl]
-enabledPlugins=Bazaar,Git,Mercurial,Perforce,Subversion
+enabledPlugins=Bazaar,Git,Mercurial,Subversion
 
 [ViewPropertiesDialog]
 Height 1080=598
